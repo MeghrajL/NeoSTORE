@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View, Button, SafeAreaView} from 'react-native';
 import React from 'react';
-
+import {colors} from '../../assets/colors';
 const Register = ({navigation}) => {
   return (
     <SafeAreaView>
