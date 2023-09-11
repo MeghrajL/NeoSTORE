@@ -10,6 +10,8 @@
 		<string>Gilroy-Light.ttf</string>
 		<string>Gilroy-Medium.ttf</string>
 		<string>Gilroy-Regular.ttf</string>
+		<string>MaterialIcons.ttf</string>
+  		<string>MaterialCommunityIcons.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
