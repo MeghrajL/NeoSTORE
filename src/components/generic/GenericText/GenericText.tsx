@@ -3,7 +3,7 @@ import React from 'react';
 
 interface IGenericText {
   children: string;
-  textType?: 'regular' | 'bold' | 'light';
+  textType?: 'regular' | 'bold' | 'light' | 'medium' | 'heavy';
   style?: TextStyle | TextStyle[];
 }
 

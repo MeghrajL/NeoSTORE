@@ -6,6 +6,7 @@ export type RootStackParamList = {
   MainNav: undefined;
   Home: undefined;
   Explore: undefined;
+  SignIn:undefined
 };
 
 export type OnboardingScreenNavigationProp = NativeStackScreenProps<
@@ -31,4 +32,9 @@ export type HomeScreenNavigationProp = NativeStackScreenProps<
 export type ExploreScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
   'Explore'
+>;
+
+export type SignInScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'SignIn'
 >;

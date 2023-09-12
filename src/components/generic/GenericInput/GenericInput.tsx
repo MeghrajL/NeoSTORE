@@ -41,7 +41,7 @@ export default function GenericInput({
         left={
           <TextInput.Icon
             icon={icon}
-            color={focus ? colors.VIVID_GAMBOGE : '#ccc'}
+            color={focus ? colors.VIVID_GAMBOGE : colors.MIDNIGHT}
           />
         }
         right={
@@ -49,6 +49,7 @@ export default function GenericInput({
             <TextInput.Icon
               onPress={() => setIsVisible(!isVisible)}
               icon={isVisible ? 'eye' : 'eye-off'}
+              color={colors.MIDNIGHT}
             />
           ) : null
         }
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Gilroy-Bold',
   },
   inputStyle: {
-    fontSize: 22,
+    fontSize: 16,
     width: '100%',
     color: 'black',
     // borderWidth: 0.1,
@@ -98,5 +99,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Gilroy-Regular',
     alignItems: 'center',
     justifyContent: 'center',
+    fontSize: 22,
   },
 });

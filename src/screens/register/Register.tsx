@@ -29,8 +29,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
   console.log('male', isMale, 'female', isFemale);
 
   function onSignInPress() {
-    // navigation.navigate()
-    console.log('signin');
+    navigation.navigate('SignIn');
   }
   function maleHandler() {
     setIsMale(true);
@@ -229,12 +228,12 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
               color="white"
             />
 
-            <View style={styles.signInStyle}>
+            <View style={styles.footerStyle}>
               <GenericText textType="regular">
                 Already have an account?
               </GenericText>
-              <TouchableOpacity onPress={onSignInPress}>
-                <GenericText textType="regular" style={styles.signinStyle}>
+              <TouchableOpacity onPress={() => onSignInPress()}>
+                <GenericText textType="regular" style={styles.signinTextStyle}>
                   Sign In
                 </GenericText>
               </TouchableOpacity>

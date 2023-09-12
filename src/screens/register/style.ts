@@ -44,9 +44,9 @@ export const styles = StyleSheet.create({
     gap: 5,
     // borderWidth: 0.5,
     borderRadius: 50,
-    padding: 20,
-    height: 90,
-    width: 90,
+    padding: 10,
+    height: 70,
+    width: 70,
   },
   checkStyle: {
     height: 30,
@@ -77,10 +77,10 @@ export const styles = StyleSheet.create({
     gap: 10,
     marginTop: 5,
   },
-  signinStyle: {
-    color: colors.MIDNIGHT,
+  signinTextStyle: {
+    color: colors.VIVID_GAMBOGE,
   },
-  signInStyle: {
+  footerStyle: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
