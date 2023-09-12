@@ -22,7 +22,7 @@ export default function GenericInput({
   value,
 }: IGenericInput) {
   const [focus, setFocus] = useState(false);
-
+  const [isVisible, setIsVisible] = useState(false);
   return (
     <View
       style={[
@@ -36,12 +36,8 @@ export default function GenericInput({
             <Text style={{fontFamily: 'Gilroy-Regular'}}>{placeholder}</Text>
           </>
         }
-        contentStyle={{fontFamily: 'Gilroy-Regular'}}
-        outlineStyle={{
-          borderWidth: 0,
-          backgroundColor: 'transparent',
-          borderBottomWidth: 0.3,
-        }}
+        contentStyle={styles.content}
+        outlineStyle={styles.outline}
         left={
           <TextInput.Icon
             icon={icon}
@@ -50,7 +46,10 @@ export default function GenericInput({
         }
         right={
           placeholder === 'Password' || placeholder === 'Confirm Password' ? (
-            <TextInput.Icon icon="eye" />
+            <TextInput.Icon
+              onPress={() => setIsVisible(!isVisible)}
+              icon={isVisible ? 'eye' : 'eye-off'}
+            />
           ) : null
         }
         style={styles.inputStyle}
@@ -58,7 +57,8 @@ export default function GenericInput({
         activeOutlineColor={colors.VIVID_GAMBOGE}
         inputMode={inputMode}
         secureTextEntry={
-          placeholder === 'Password' || placeholder === 'Confirm Password'
+          !isVisible &&
+          (placeholder === 'Password' || placeholder === 'Confirm Password')
             ? true
             : false
         }
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     // borderBottomWidth: 1,
     width: '100%',
     height: 60,
-    paddingHorizontal: 10,
+    // paddingHorizontal: 10,
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
@@ -88,5 +88,15 @@ const styles = StyleSheet.create({
     width: '100%',
     color: 'black',
     // borderWidth: 0.1,
+  },
+  outline: {
+    borderWidth: 0,
+    backgroundColor: 'transparent',
+    borderBottomWidth: 0.3,
+  },
+  content: {
+    fontFamily: 'Gilroy-Regular',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

@@ -5,18 +5,16 @@ import {colors} from '../../assets/colors';
 export const styles = StyleSheet.create({
   safeAreaStyle: {
     flex: 1,
+    backgroundColor: 'white',
   },
   containerStyle: {
-    // flex: 1,
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'start',
-    gap: 10,
-
-    // backgroundColor: colors.VIVID_GAMBOGE,
+    justifyContent: 'center',
   },
   buttonStyle: {
     backgroundColor: colors.VIVID_GAMBOGE,
-    margin: 20,
+    margin: 15,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
@@ -38,9 +36,73 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    gap: 10,
+  },
+  genderElement: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 5,
+    // borderWidth: 0.5,
+    borderRadius: 50,
+    padding: 20,
+    height: 90,
+    width: 90,
   },
   checkStyle: {
-    height: 40,
-    width: 40,
+    height: 30,
+    width: 30,
+  },
+  titleStyleFirstHalf: {
+    color: colors.MIDNIGHT,
+    fontSize: 35,
+  },
+  titleStyleSecondHalf: {
+    color: colors.VIVID_GAMBOGE,
+    fontSize: 35,
+  },
+  titleStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 30,
+    // backgroundColor: 'white',
+  },
+  agreeText: {
+    fontSize: 15,
+  },
+  agreeView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10,
+    marginTop: 5,
+  },
+  signinStyle: {
+    color: colors.MIDNIGHT,
+  },
+  signInStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 8,
+  },
+  formView: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    // gap: 8,
+    marginBottom: 50,
+  },
+  elementView: {
+    paddingHorizontal: 10,
+  },
+  errorStyle: {
+    color: 'red',
+    paddingHorizontal: 5,
+    // marginHorizontal: 10,
+  },
+  genderText: {
+    fontSize: 18,
+    color: colors.MIDNIGHT,
+    marginTop: 5,
   },
 });

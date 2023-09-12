@@ -5,6 +5,7 @@ import {
   Button,
   StyleSheet,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import React from 'react';
 import Onboarding from 'react-native-onboarding-swiper';
@@ -27,6 +28,7 @@ const Done = ({...props}) => {
     </TouchableOpacity>
   );
 };
+const {height, width} = Dimensions.get('window');
 
 const OnboardingContainer = ({navigation}: OnboardingScreenNavigationProp) => {
   return (
@@ -41,6 +43,7 @@ const OnboardingContainer = ({navigation}: OnboardingScreenNavigationProp) => {
       bottomBarHeight={100}
       showSkip={false}
       titleStyles={styles.titleStyle}
+      containerStyles={styles.containerStyles}
       subTitleStyles={styles.subtitleStyle}
       pages={[
         {
@@ -93,14 +96,20 @@ const styles = StyleSheet.create({
   imageStyle: {
     height: 350,
     width: 350,
+    // backgroundColor: 'red',
     // paddingBottom: 130,
   },
   titleStyle: {
     fontFamily: 'Gilroy-Medium',
-    fontSize: 40,
+    fontSize: 30,
+    // backgroundColor: 'blue',
+
     // color: colors.VIVID_GAMBOGE,
   },
   subtitleStyle: {
     fontFamily: 'Gilroy-Regular',
+  },
+  containerStyles: {
+    padding: 15,
   },
 });
