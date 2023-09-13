@@ -28,30 +28,6 @@ export const styles = StyleSheet.create({
   gradient: {
     flex: 1,
   },
-  imageStyle: {
-    height: 40,
-    width: 40,
-  },
-  genderContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 10,
-  },
-  genderElement: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 5,
-    // borderWidth: 0.5,
-    borderRadius: 50,
-    padding: 10,
-    height: 70,
-    width: 70,
-  },
-  checkStyle: {
-    height: 30,
-    width: 30,
-  },
   titleStyleFirstHalf: {
     color: colors.MIDNIGHT,
     fontSize: 35,
@@ -67,42 +43,19 @@ export const styles = StyleSheet.create({
     paddingVertical: 30,
     // backgroundColor: 'white',
   },
-  agreeText: {
-    fontSize: 15,
-  },
-  agreeView: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 10,
-    marginTop: 5,
-  },
-  signinTextStyle: {
-    color: colors.VIVID_GAMBOGE,
-  },
-  footerStyle: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 8,
-  },
+
   formView: {
     justifyContent: 'flex-start',
     alignItems: 'center',
-    // gap: 8,
+    gap: 3,
     marginBottom: 50,
   },
-  elementView: {
-    paddingHorizontal: 10,
-  },
-  errorStyle: {
-    color: 'red',
-    paddingHorizontal: 5,
-    // marginHorizontal: 10,
-  },
-  genderText: {
-    fontSize: 18,
-    color: colors.MIDNIGHT,
-    marginTop: 5,
-  },
+  // elementView: {
+  //   paddingHorizontal: 10,
+  // },
+  // errorStyle: {
+  //   color: 'red',
+  //   paddingHorizontal: 5,
+  //   // marginHorizontal: 10,
+  // },
 });

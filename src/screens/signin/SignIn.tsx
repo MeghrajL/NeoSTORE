@@ -10,62 +10,72 @@ import React, {useState} from 'react';
 import {SignInScreenNavigationProp} from '../../navigation/type';
 import {styles} from './style';
 import GenericText from '../../components/generic/GenericText/GenericText';
-import GenericInput from '../../components/generic/GenericInput/GenericInput';
 import GenericButton from '../../components/generic/GenericButton/GenericButton';
-import {colors} from '../../assets/colors';
+import Title from '../../components/generic/Title/Title';
+import InputWithError from '../../components/generic/InputWithError/InputWithError';
+import Footer from '../../components/RegisterComponents/Footer/Footer';
+import {validateEmail, validatePassword} from '../../helpers/validators';
 const SignIn = ({navigation}: SignInScreenNavigationProp) => {
   const [err, setErr] = useState(false);
+  const [showErr, setShowErr] = useState(false);
+
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
+
+  function emailHandler(email: string) {
+    setUser({...user, email: email.toLowerCase()});
+  }
+
+  function passwordHandler(password: string) {
+    setUser({...user, password});
+  }
+
   function onRegisterPress() {
     navigation.navigate('Register');
   }
+
+  function onSignInPress() {
+    console.log(user);
+    setShowErr(true);
+  }
+
   return (
     <SafeAreaView style={styles.safeAreaStyle}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.containerStyle}>
-        <View style={styles.titleStyle}>
-          <GenericText textType="bold" style={styles.titleStyleFirstHalf}>
-            Neo
-          </GenericText>
-          <GenericText textType="bold" style={styles.titleStyleSecondHalf}>
-            STORE
-          </GenericText>
-        </View>
         <View style={styles.formView}>
-          <View style={styles.elementView}>
-            <GenericInput
-              placeholder={'Email'}
-              maxLength={20}
-              inputMode={'email'}
-              // onChangeText={onChangeEmail}
-              icon={'email'}
-              // value={signInUser.email}
-            />
-            {err && (
-              <GenericText textType="medium" style={styles.errorStyle}>
-                Error
-              </GenericText>
-            )}
-          </View>
+          <Title />
 
-          <View style={styles.elementView}>
-            <GenericInput
-              placeholder={'Password'}
-              maxLength={20}
-              inputMode={'text'}
-              // onChangeText={onChangeEmail}
-              icon={'account-lock-open'}
-              // value={signInUser.email}
-            />
-            {err && (
-              <GenericText textType="medium" style={styles.errorStyle}>
-                Error
-              </GenericText>
-            )}
-          </View>
+          <InputWithError
+            placeholder={'Email'}
+            maxLength={20}
+            inputMode={'email'}
+            icon={'email'}
+            onChangeText={emailHandler}
+            value={user.email}
+            validator={validateEmail}
+            showErr={showErr}
+            errorText={'Please enter correct email address'}
+          />
+
+          <InputWithError
+            placeholder={'Password'}
+            maxLength={20}
+            inputMode={'text'}
+            icon={'account-lock-open'}
+            onChangeText={passwordHandler}
+            value={user.password}
+            validator={validatePassword}
+            showErr={showErr}
+            errorText={'Please enter correct password'}
+          />
 
           <GenericButton
-            title="Register"
+            onPress={onSignInPress}
+            title="Sign In"
             fontSize={26}
             fontFamily="Gilroy-Bold"
             style={styles.buttonStyle}
@@ -78,14 +88,12 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
               </GenericText>
             </TouchableOpacity>
           </View>
-          <View style={styles.signInStyle}>
-            <GenericText textType="regular">Don't have an account?</GenericText>
-            <TouchableOpacity onPress={onRegisterPress}>
-              <GenericText textType="regular" style={styles.signInStyle}>
-                Register
-              </GenericText>
-            </TouchableOpacity>
-          </View>
+
+          <Footer
+            dialogueText="Don't have an account?"
+            clickText="Register"
+            onClickPress={onRegisterPress}
+          />
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>

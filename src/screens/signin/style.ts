@@ -11,20 +11,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  titleStyle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 30,
-  },
-  titleStyleFirstHalf: {
-    color: colors.MIDNIGHT,
-    fontSize: 35,
-  },
-  titleStyleSecondHalf: {
-    color: colors.VIVID_GAMBOGE,
-    fontSize: 35,
-  },
+
   signInStyle: {
     flexDirection: 'row',
     justifyContent: 'center',

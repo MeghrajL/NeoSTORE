@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import {
   View,
   SafeAreaView,
@@ -12,43 +13,92 @@ import {
   Pressable,
   Text,
 } from 'react-native';
-import React, {useState} from 'react';
-import GenericButton from '../../components/generic/GenericButton/GenericButton';
-import {styles} from './style';
-import {RegisterScreenNavigationProp} from '../../navigation/type';
 
-import GenericInput from '../../components/generic/GenericInput/GenericInput';
-import GenericText from '../../components/generic/GenericText/GenericText';
-import {colors} from '../../assets/colors';
+import {RegisterScreenNavigationProp} from '../../navigation/type';
+import {styles} from './style';
+import Title from '../../components/generic/Title/Title';
+import Gender from '../../components/RegisterComponents/Gender/Gender';
+import Agree from '../../components/RegisterComponents/Agree/Agree';
+import InputWithError from '../../components/generic/InputWithError/InputWithError';
+import Footer from '../../components/RegisterComponents/Footer/Footer';
+import GenericButton from '../../components/generic/GenericButton/GenericButton';
+import {
+  validateName,
+  validateEmail,
+  validatePassword,
+  validatePhone,
+} from '../../helpers/validators';
 const Register = ({navigation}: RegisterScreenNavigationProp) => {
   const [checkBoxChecked, setCheckBoxChecked] = useState(false);
-  const [isMale, setIsMale] = useState(false);
-  const [isFemale, setIsFemale] = useState(false);
   const keyboardVerticalOffset = 10;
-  // console.log(checkBoxChecked);
-  console.log('male', isMale, 'female', isFemale);
+
+  const [user, setUser] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+    gender: '',
+    phone_no: '',
+  });
+
+  const [showErr, setShowErr] = useState(false);
+
+  function fnameHandler(first_name: string) {
+    setUser({...user, first_name});
+  }
+
+  function lnameHandler(last_name: string) {
+    setUser({...user, last_name});
+  }
+
+  function emailHandler(email: string) {
+    setUser({...user, email: email.toLowerCase()});
+  }
+
+  function passwordHandler(password: string) {
+    setUser({...user, password});
+  }
+
+  function confirmPasswordHandler(confirm_password: string) {
+    setUser({...user, confirm_password});
+    validateConfirmPassword();
+
+    // console.log('>', confirm_password);
+  }
+
+  function phoneNumberHandler(phone_no: string) {
+    setUser({...user, phone_no});
+  }
+  // console.log(user.gender);
+  // console.log('male', isMale, 'female', isFemale);
 
   function onSignInPress() {
     navigation.navigate('SignIn');
   }
   function maleHandler() {
-    setIsMale(true);
-    setIsFemale(false);
+    setUser({...user, gender: 'M'});
   }
 
   function femaleHandler() {
-    setIsFemale(true);
-    setIsMale(false);
+    setUser({...user, gender: 'F'});
   }
 
   function checkboxHandler() {
     setCheckBoxChecked(!checkBoxChecked);
   }
 
+  function onRegisterPress() {
+    console.log(user);
+    setShowErr(true);
+  }
+
+  function validateConfirmPassword() {
+    console.log(user.password, user.confirm_password);
+    return user.password === user.confirm_password;
+  }
+
   return (
-    // <LinearGradient
-    //   colors={['#f5ff85', colors.VIVID_GAMBOGE]}
-    //   style={styles.gradient}>
     <SafeAreaView style={styles.safeAreaStyle}>
       {/* <Pressable onPress={() => navigation.navigate('MainNav')}>
           <Text>nav</Text>
@@ -63,164 +113,95 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
         // keyboardVerticalOffset={keyboardVerticalOffset}
         style={styles.containerStyle}>
         <ScrollView>
-          <View style={styles.titleStyle}>
-            <GenericText textType="bold" style={styles.titleStyleFirstHalf}>
-              Neo
-            </GenericText>
-            <GenericText textType="bold" style={styles.titleStyleSecondHalf}>
-              STORE
-            </GenericText>
-          </View>
-          <View style={[styles.formView, {gap: checkBoxChecked ? 0 : 5}]}>
-            <View style={styles.elementView}>
-              <GenericInput
-                placeholder={'First Name'}
-                maxLength={20}
-                inputMode={'text'}
-                // onChangeText={onChangeEmail}
-                icon={'human-greeting-variant'}
-                // value={signInUser.email}
-              />
-              {checkBoxChecked && (
-                <GenericText textType="medium" style={styles.errorStyle}>
-                  Error
-                </GenericText>
-              )}
-            </View>
-            <View style={styles.elementView}>
-              <GenericInput
-                placeholder={'Last Name'}
-                maxLength={20}
-                inputMode={'text'}
-                // onChangeText={onChangeEmail}
-                icon={'human-queue'}
-                // value={signInUser.email}
-              />
-              {checkBoxChecked && (
-                <GenericText textType="medium" style={styles.errorStyle}>
-                  Error
-                </GenericText>
-              )}
-            </View>
-            <View style={styles.elementView}>
-              <GenericInput
-                placeholder={'Email'}
-                maxLength={20}
-                inputMode={'email'}
-                // onChangeText={onChangeEmail}
-                icon={'email'}
-                // value={signInUser.email}
-              />
-              {checkBoxChecked && (
-                <GenericText textType="medium" style={styles.errorStyle}>
-                  Error
-                </GenericText>
-              )}
-            </View>
-            <View style={styles.elementView}>
-              <GenericInput
-                placeholder={'Password'}
-                maxLength={20}
-                inputMode={'text'}
-                // onChangeText={onChangeEmail}
-                icon={'account-lock-open'}
-                // value={signInUser.email}
-              />
-              {checkBoxChecked && (
-                <GenericText textType="medium" style={styles.errorStyle}>
-                  Error
-                </GenericText>
-              )}
-            </View>
-            <View style={styles.elementView}>
-              <GenericInput
-                placeholder={'Confirm Password'}
-                maxLength={20}
-                inputMode={'text'}
-                // onChangeText={onChangeEmail}
-                icon={'account-lock'}
-                // value={signInUser.email}
-              />
-              {checkBoxChecked && (
-                <GenericText textType="medium" style={styles.errorStyle}>
-                  Error
-                </GenericText>
-              )}
-            </View>
+          <Title />
+          <View style={styles.formView}>
+            <InputWithError
+              placeholder={'First Name'}
+              maxLength={20}
+              inputMode={'text'}
+              icon={'human-greeting-variant'}
+              onChangeText={fnameHandler}
+              value={user.first_name}
+              validator={validateName}
+              showErr={showErr}
+              errorText={'Please do not use spaces'}
+            />
 
-            <GenericText textType="regular" style={styles.genderText}>
-              Select Your Gender
-            </GenericText>
-            <View style={styles.genderContainer}>
-              <TouchableWithoutFeedback onPress={maleHandler}>
-                <View
-                  style={[
-                    styles.genderElement,
-                    {borderWidth: isMale === true ? 1 : 0},
-                  ]}>
-                  <Image
-                    source={require('../../assets/images/man.png')}
-                    style={styles.imageStyle}
-                  />
-                  <GenericText textType="regular">Male</GenericText>
-                </View>
-              </TouchableWithoutFeedback>
+            <InputWithError
+              placeholder={'Last Name'}
+              maxLength={20}
+              inputMode={'text'}
+              icon={'human-queue'}
+              onChangeText={lnameHandler}
+              value={user.last_name}
+              validator={validateName}
+              showErr={showErr}
+              errorText={'Please do not use spaces'}
+            />
 
-              <TouchableWithoutFeedback onPress={femaleHandler}>
-                <View
-                  style={[
-                    styles.genderElement,
-                    {borderWidth: isFemale ? 1 : 0},
-                  ]}>
-                  <Image
-                    source={require('../../assets/images/woman.png')}
-                    style={styles.imageStyle}
-                  />
-                  <GenericText textType="regular">Female</GenericText>
-                </View>
-              </TouchableWithoutFeedback>
-            </View>
-            <View style={styles.elementView}>
-              <GenericInput
-                placeholder={'Phone Number'}
-                maxLength={20}
-                inputMode={'text'}
-                // onChangeText={onChangeEmail}
-                icon={'phone-classic'}
-                // value={signInUser.email}
-              />
-              {checkBoxChecked && (
-                <GenericText textType="medium" style={styles.errorStyle}>
-                  Error
-                </GenericText>
-              )}
-            </View>
-            <View style={styles.elementView}>
-              <View style={styles.agreeView}>
-                <TouchableOpacity onPress={checkboxHandler}>
-                  <Image
-                    style={styles.checkStyle}
-                    source={
-                      checkBoxChecked !== true
-                        ? require('../../assets/images/unchecked.png')
-                        : require('../../assets/images/checked.png')
-                    }
-                  />
-                </TouchableOpacity>
-                <GenericText textType="regular" style={styles.agreeText}>
-                  I agree the Terms & Conditions
-                </GenericText>
-              </View>
+            <InputWithError
+              placeholder={'Email'}
+              maxLength={20}
+              inputMode={'email'}
+              icon={'email'}
+              onChangeText={emailHandler}
+              value={user.email}
+              validator={validateEmail}
+              showErr={showErr}
+              errorText={'Please enter correct email address'}
+            />
 
-              {checkBoxChecked && (
-                <GenericText textType="medium" style={styles.errorStyle}>
-                  Error
-                </GenericText>
-              )}
-            </View>
+            <InputWithError
+              placeholder={'Password'}
+              maxLength={20}
+              inputMode={'text'}
+              icon={'account-lock-open'}
+              onChangeText={passwordHandler}
+              value={user.password}
+              validator={validatePassword}
+              showErr={showErr}
+              errorText={'Please enter correct password'}
+            />
+
+            <InputWithError
+              placeholder={'Confirm Password'}
+              maxLength={20}
+              inputMode={'text'}
+              icon={'account-lock'}
+              onChangeText={confirmPasswordHandler}
+              value={user.confirm_password}
+              validator={() => validateConfirmPassword()}
+              showErr={showErr}
+              errorText={'Both passwords should match'}
+            />
+
+            <InputWithError
+              placeholder={'Phone Number'}
+              maxLength={20}
+              inputMode={'numeric'}
+              icon={'phone-classic'}
+              onChangeText={phoneNumberHandler}
+              value={user.phone_no}
+              validator={validatePhone}
+              showErr={showErr}
+              errorText={'Please enter 10 digit phone number'}
+            />
+
+            <Gender
+              gender={user.gender}
+              maleHandler={maleHandler}
+              femaleHandler={femaleHandler}
+              showErr={showErr}
+            />
+
+            <Agree
+              checkBoxChecked={checkBoxChecked}
+              checkboxHandler={checkboxHandler}
+              showErr={showErr}
+            />
 
             <GenericButton
-              // onPress={() => navigation.navigate('MainNav')}
+              onPress={onRegisterPress}
               title="Register"
               fontSize={26}
               fontFamily="Gilroy-Bold"
@@ -228,21 +209,15 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
               color="white"
             />
 
-            <View style={styles.footerStyle}>
-              <GenericText textType="regular">
-                Already have an account?
-              </GenericText>
-              <TouchableOpacity onPress={() => onSignInPress()}>
-                <GenericText textType="regular" style={styles.signinTextStyle}>
-                  Sign In
-                </GenericText>
-              </TouchableOpacity>
-            </View>
+            <Footer
+              dialogueText="Already have an account?"
+              clickText="Sign In"
+              onClickPress={onSignInPress}
+            />
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
-    // </LinearGradient>
   );
 };
 
