@@ -1,5 +1,5 @@
 import {InputModeOptions, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import GenericInput from '../GenericInput/GenericInput';
 import GenericText from '../GenericText/GenericText';
 
@@ -13,6 +13,7 @@ interface IInputWithError {
   validator: Function;
   showErr: boolean;
   errorText: string;
+  samePass?: boolean;
 }
 
 const InputWithError = ({
@@ -25,27 +26,47 @@ const InputWithError = ({
   validator,
   showErr,
   errorText,
+  samePass,
 }: IInputWithError) => {
   const [err, setErr] = useState('');
+  const [inputText, setInputText] = useState('');
 
-  function handler(text: string) {
-    onChangeText(text);
-
+  useEffect(() => {
     if (placeholder === 'Confirm Password') {
-      console.log(validator());
+      console.log('Validator fn-______', validator());
       if (validator()) {
-        setErr(errorText);
-      } else {
         setErr('');
+      } else {
+        setErr(errorText);
+      }
+    } else {
+      if (validator(inputText)) {
+        setErr('');
+      } else {
+        setErr(errorText);
       }
     }
-    if (validator(text)) {
-      setErr('');
-    } else {
-      setErr(errorText);
-    }
+  }, [samePass, inputText]);
 
-    console.log('>', text);
+  function handler(text: string) {
+    onChangeText(text.trim());
+    setInputText(text.trim());
+    // if (placeholder === 'Confirm Password') {
+    //   console.log('Validator fn-______', validator());
+    //   if (validator()) {
+    //     setErr('');
+    //   } else {
+    //     setErr(errorText);
+    //   }
+    // } else {
+    //   if (validator(text)) {
+    //     setErr('');
+    //   } else {
+    //     setErr(errorText);
+    //   }
+    // }
+
+    // console.log('>', text);
   }
 
   return (
@@ -58,11 +79,11 @@ const InputWithError = ({
         icon={icon}
         value={value}
       />
-      {showErr && err !== '' && (
+      {(value === '' && showErr) || (showErr && err !== '') ? (
         <GenericText textType="medium" style={styles.errorStyle}>
           {errorText}
         </GenericText>
-      )}
+      ) : null}
     </View>
   );
 };

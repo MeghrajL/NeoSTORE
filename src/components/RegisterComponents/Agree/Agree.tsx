@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import GenericText from '../../generic/GenericText/GenericText';
+import {colors} from '../../../assets/colors';
 
 interface IAgree {
   checkBoxChecked: boolean;
@@ -46,6 +47,8 @@ export default Agree;
 
 const styles = StyleSheet.create({
   agreeText: {
+    color: colors.MIDNIGHT,
+
     fontSize: 15,
   },
   agreeView: {

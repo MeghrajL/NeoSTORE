@@ -18,7 +18,9 @@ interface IFooter {
 const Footer = ({dialogueText, clickText, onClickPress}: IFooter) => {
   return (
     <View style={styles.footerStyle}>
-      <GenericText textType="regular">{dialogueText}</GenericText>
+      <GenericText style={styles.textStyle} textType="regular">
+        {dialogueText}
+      </GenericText>
       <TouchableOpacity onPress={onClickPress}>
         <GenericText textType="regular" style={styles.signinTextStyle}>
           {clickText}
@@ -39,5 +41,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 8,
+  },
+  textStyle: {
+    color: colors.MIDNIGHT,
   },
 });

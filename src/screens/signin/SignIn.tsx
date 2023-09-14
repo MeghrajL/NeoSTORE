@@ -5,6 +5,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import {SignInScreenNavigationProp} from '../../navigation/type';
@@ -15,14 +16,17 @@ import Title from '../../components/generic/Title/Title';
 import InputWithError from '../../components/generic/InputWithError/InputWithError';
 import Footer from '../../components/RegisterComponents/Footer/Footer';
 import {validateEmail, validatePassword} from '../../helpers/validators';
+import {useAppDispatch} from '../../redux/store';
+import {signInUser} from '../../redux/slices/authSlice';
+
 const SignIn = ({navigation}: SignInScreenNavigationProp) => {
   const [err, setErr] = useState(false);
   const [showErr, setShowErr] = useState(false);
-
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
+  const dispatch = useAppDispatch();
 
   function emailHandler(email: string) {
     setUser({...user, email: email.toLowerCase()});
@@ -39,6 +43,16 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
   function onSignInPress() {
     console.log(user);
     setShowErr(true);
+    if (
+      !user.email.trim() ||
+      !user.password.trim() ||
+      !validateEmail(user.email) ||
+      !validatePassword(user.password)
+    ) {
+      Alert.alert('Please enter correct details');
+    } else {
+      dispatch(signInUser(user));
+    }
   }
 
   return (

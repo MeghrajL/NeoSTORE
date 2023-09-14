@@ -34,7 +34,9 @@ const Gender = ({gender, maleHandler, femaleHandler, showErr}: IGender) => {
               source={require('../../../assets/images/man.png')}
               style={styles.imageStyle}
             />
-            <GenericText textType="regular">Male</GenericText>
+            <GenericText style={styles.textStyle} textType="regular">
+              Male
+            </GenericText>
           </View>
         </TouchableWithoutFeedback>
 
@@ -48,7 +50,9 @@ const Gender = ({gender, maleHandler, femaleHandler, showErr}: IGender) => {
               source={require('../../../assets/images/woman.png')}
               style={styles.imageStyle}
             />
-            <GenericText textType="regular">Female</GenericText>
+            <GenericText style={styles.textStyle} textType="regular">
+              Female
+            </GenericText>
           </View>
         </TouchableWithoutFeedback>
       </View>
@@ -92,5 +96,8 @@ const styles = StyleSheet.create({
   errorStyle: {
     color: 'red',
     paddingHorizontal: 5,
+  },
+  textStyle: {
+    color: colors.MIDNIGHT,
   },
 });

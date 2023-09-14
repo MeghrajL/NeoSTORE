@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   SafeAreaView,
@@ -12,6 +12,7 @@ import {
   TouchableWithoutFeedback,
   Pressable,
   Text,
+  Alert,
 } from 'react-native';
 
 import {RegisterScreenNavigationProp} from '../../navigation/type';
@@ -28,10 +29,14 @@ import {
   validatePassword,
   validatePhone,
 } from '../../helpers/validators';
+import {registerUser} from '../../redux/slices/authSlice';
+
+import {useAppDispatch, useAppSelector} from '../../redux/store';
+
 const Register = ({navigation}: RegisterScreenNavigationProp) => {
   const [checkBoxChecked, setCheckBoxChecked] = useState(false);
   const keyboardVerticalOffset = 10;
-
+  const [samePass, setSamePass] = useState(false);
   const [user, setUser] = useState({
     first_name: '',
     last_name: '',
@@ -43,6 +48,17 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
   });
 
   const [showErr, setShowErr] = useState(false);
+  const dispatch = useAppDispatch();
+
+  // useEffect(()=>const status = useAppSelector(state => state.auth.user[0].status);)
+  const status = useAppSelector(state => state.auth.user[0].status);
+
+  console.log('registeredUser>>>>>>>>>>>>>>>>', status);
+  // console.log('registeredUser>>>>>>>>>>>>>>>>',  state.auth);
+  // useEffect(
+  //   () => console.log('registeredUser>>>>>>>>>>>>>>>>', status),
+  //   [status],
+  // );
 
   function fnameHandler(first_name: string) {
     setUser({...user, first_name});
@@ -62,9 +78,14 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
 
   function confirmPasswordHandler(confirm_password: string) {
     setUser({...user, confirm_password});
-    validateConfirmPassword();
+    // validateConfirmPassword();
 
-    // console.log('>', confirm_password);
+    console.log(user.password, '>', confirm_password);
+    if (user.password === confirm_password) {
+      setSamePass(true);
+    } else {
+      setSamePass(false);
+    }
   }
 
   function phoneNumberHandler(phone_no: string) {
@@ -91,11 +112,26 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
   function onRegisterPress() {
     console.log(user);
     setShowErr(true);
-  }
+    if (
+      !user.first_name.trim() ||
+      !user.last_name.trim ||
+      !user.email.trim() ||
+      !user.password.trim() ||
+      !user.confirm_password.trim() ||
+      !user.phone_no.trim() ||
+      !validateName(user.first_name) ||
+      !validateEmail(user.email) ||
+      !validatePassword(user.password) ||
+      !validatePhone(user.phone_no) ||
+      user.gender === '' ||
+      !checkBoxChecked
+    ) {
+      Alert.alert('Please enter correct details');
+    } else {
+      dispatch(registerUser(user));
 
-  function validateConfirmPassword() {
-    console.log(user.password, user.confirm_password);
-    return user.password === user.confirm_password;
+      console.log('registeredUser>>>>>>>>>>>>>>>>', status);
+    }
   }
 
   return (
@@ -170,7 +206,8 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
               icon={'account-lock'}
               onChangeText={confirmPasswordHandler}
               value={user.confirm_password}
-              validator={() => validateConfirmPassword()}
+              validator={() => samePass}
+              samePass={samePass}
               showErr={showErr}
               errorText={'Both passwords should match'}
             />
