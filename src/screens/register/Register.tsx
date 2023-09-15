@@ -29,7 +29,7 @@ import {
   validatePassword,
   validatePhone,
 } from '../../helpers/validators';
-import {registerUser} from '../../redux/slices/authSlice';
+import {cleanState, registerUser} from '../../redux/slices/authSlice';
 
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 
@@ -50,16 +50,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
   const dispatch = useAppDispatch();
 
-  // useEffect(()=>const status = useAppSelector(state => state.auth.user[0].status);)
-  const status = useAppSelector(state => state.auth.user[0].status);
-
-  console.log('registeredUser>>>>>>>>>>>>>>>>', status);
-  // console.log('registeredUser>>>>>>>>>>>>>>>>',  state.auth);
-  // useEffect(
-  //   () => console.log('registeredUser>>>>>>>>>>>>>>>>', status),
-  //   [status],
-  // );
-
+  // const status = useAppSelector(state => state.auth.user[0].status);
   function fnameHandler(first_name: string) {
     setUser({...user, first_name});
   }
@@ -78,9 +69,6 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
 
   function confirmPasswordHandler(confirm_password: string) {
     setUser({...user, confirm_password});
-    // validateConfirmPassword();
-
-    console.log(user.password, '>', confirm_password);
     if (user.password === confirm_password) {
       setSamePass(true);
     } else {
@@ -91,8 +79,6 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
   function phoneNumberHandler(phone_no: string) {
     setUser({...user, phone_no});
   }
-  // console.log(user.gender);
-  // console.log('male', isMale, 'female', isFemale);
 
   function onSignInPress() {
     navigation.navigate('SignIn');
@@ -109,8 +95,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
     setCheckBoxChecked(!checkBoxChecked);
   }
 
-  function onRegisterPress() {
-    console.log(user);
+  async function onRegisterPress() {
     setShowErr(true);
     if (
       !user.first_name.trim() ||
@@ -128,9 +113,12 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
     ) {
       Alert.alert('Please enter correct details');
     } else {
-      dispatch(registerUser(user));
-
-      console.log('registeredUser>>>>>>>>>>>>>>>>', status);
+      try {
+        await dispatch(registerUser(user)).unwrap();
+        navigation.navigate('MainNav');
+      } catch {
+        console.log('some error');
+      }
     }
   }
 

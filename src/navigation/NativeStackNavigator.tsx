@@ -7,10 +7,13 @@ import {RootStackParamList} from './type';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const storage = new MMKV();
+import {useAppSelector} from '../redux/store';
 const NativeStackNavigator = () => {
   let routeName;
   const [isFirstLaunch, setIsFirstLaunch] = useState(-1);
-
+  const authState = useAppSelector(state => state.auth);
+  //state.auth.user.data.access_token
+  console.log('from native stack', authState);
   useEffect(() => {
     if (storage.getBoolean('alreadyLaunched') === undefined) {
       storage.set('alreadyLaunched', true);
@@ -23,10 +26,12 @@ const NativeStackNavigator = () => {
 
   if (isFirstLaunch === -1) {
     return null; // This is the 'tricky' part: The query to AsyncStorage is not finished, but we have to present something to the user. Null will just render nothing, so you can also put a placeholder of some sort, but effectively the interval between the first mount and AsyncStorage retrieving your data won't be noticeable to the user. But if you want to display anything then you can use a LOADER here
-  } else if (isFirstLaunch == 0) {
+  } else if (isFirstLaunch === 0) {
     routeName = 'Onboarding';
-  } else {
+  } else if (authState.user.length === 0) {
     routeName = 'SignIn';
+  } else if (authState.user.data.access_token) {
+    routeName = 'MainNav';
   }
 
   return (

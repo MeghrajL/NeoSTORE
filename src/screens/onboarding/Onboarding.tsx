@@ -33,7 +33,7 @@ const {height, width} = Dimensions.get('window');
 const OnboardingContainer = ({navigation}: OnboardingScreenNavigationProp) => {
   return (
     <Onboarding
-      onDone={() => navigation.navigate('Register')}
+      onDone={() => navigation.navigate('SignIn')}
       //   onSkip={() => navigation.navigate('Register')}
       bottomBarColor="white"
       bottomBarHighlight={false}

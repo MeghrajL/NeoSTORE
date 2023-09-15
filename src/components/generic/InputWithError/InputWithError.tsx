@@ -33,7 +33,7 @@ const InputWithError = ({
 
   useEffect(() => {
     if (placeholder === 'Confirm Password') {
-      console.log('Validator fn-______', validator());
+      // console.log('Validator fn-______', validator());
       if (validator()) {
         setErr('');
       } else {

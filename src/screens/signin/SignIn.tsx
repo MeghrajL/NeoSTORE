@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SignInScreenNavigationProp} from '../../navigation/type';
 import {styles} from './style';
 import GenericText from '../../components/generic/GenericText/GenericText';
@@ -16,17 +16,20 @@ import Title from '../../components/generic/Title/Title';
 import InputWithError from '../../components/generic/InputWithError/InputWithError';
 import Footer from '../../components/RegisterComponents/Footer/Footer';
 import {validateEmail, validatePassword} from '../../helpers/validators';
-import {useAppDispatch} from '../../redux/store';
+import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {signInUser} from '../../redux/slices/authSlice';
 
 const SignIn = ({navigation}: SignInScreenNavigationProp) => {
   const [err, setErr] = useState(false);
   const [showErr, setShowErr] = useState(false);
+  const [isErr, setIsErr] = useState(false);
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
   const dispatch = useAppDispatch();
+  let status = useAppSelector(state => state.auth);
+  console.log(status);
 
   function emailHandler(email: string) {
     setUser({...user, email: email.toLowerCase()});
@@ -40,7 +43,7 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
     navigation.navigate('Register');
   }
 
-  function onSignInPress() {
+  async function onSignInPress() {
     console.log(user);
     setShowErr(true);
     if (
@@ -51,7 +54,12 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
     ) {
       Alert.alert('Please enter correct details');
     } else {
-      dispatch(signInUser(user));
+      try {
+        await dispatch(signInUser(user)).unwrap();
+        navigation.navigate('MainNav');
+      } catch {
+        console.log('some error');
+      }
     }
   }
 

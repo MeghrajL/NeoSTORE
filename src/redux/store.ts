@@ -4,7 +4,7 @@ import {
   getDefaultMiddleware,
 } from '@reduxjs/toolkit';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
-import authReducer, {authSlice} from './slices/authSlice';
+import authSlice from './slices/authSlice';
 import {
   persistStore,
   persistReducer,
@@ -18,11 +18,12 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const reducers = combineReducers({
-  auth: authReducer,
+  auth: authSlice,
 });
 
 const persistConfig = {
   key: 'root',
+  version: 1,
   storage: AsyncStorage,
 };
 

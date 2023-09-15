@@ -1,14 +1,17 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {IInitialState} from './type';
 import axios from 'axios';
+import Toast from 'react-native-simple-toast';
+
 const initialState = {
   user: [],
+  isLoading: false,
+  isError: false,
 };
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
-  async (user: any) => {
-    console.log('>', user);
+  async (user: any, thunkAPI) => {
     var formData = new FormData();
     formData.append('first_name', user.first_name);
     formData.append('last_name', user.last_name);
@@ -27,20 +30,18 @@ export const registerUser = createAsyncThunk(
           },
         },
       );
-
-      console.log('res', response.data);
-
+      Toast.show('Registration successful', Toast.SHORT);
       return response.data;
     } catch (error) {
-      return error;
+      Toast.show('try again', Toast.SHORT);
+      return thunkAPI.rejectWithValue(error.message);
     }
   },
 );
 
 export const signInUser = createAsyncThunk(
   'auth/signInUser',
-  async (user: any) => {
-    console.log('>', user);
+  async (user: any, thunkAPI) => {
     var formData = new FormData();
     formData.append('email', user.email);
     formData.append('password', user.password);
@@ -55,12 +56,13 @@ export const signInUser = createAsyncThunk(
           },
         },
       );
-
-      console.log('res', response.data);
+      Toast.show('sign in successful', Toast.SHORT);
 
       return response.data;
     } catch (error) {
-      return error;
+      Toast.show('try again', Toast.SHORT);
+
+      return thunkAPI.rejectWithValue(error.message);
     }
   },
 );
@@ -68,24 +70,36 @@ export const signInUser = createAsyncThunk(
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    cleanState: state => {
+      state = initialState;
+    },
+  },
   extraReducers(builder) {
     builder
+      .addCase(registerUser.pending, (state, action) => {
+        state.isLoading = true;
+      })
       .addCase(registerUser.fulfilled, (state, action) => {
-        console.log('from builder', action.payload);
-        // console.log('state', state);
-        state.user.length = 0;
-        state.user.push(action.payload);
-        console.log('my state', state.user);
+        state.user = action.payload;
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.isError = true;
+      })
+      .addCase(signInUser.pending, (state, action) => {
+        state.isLoading = true;
       })
       .addCase(signInUser.fulfilled, (state, action) => {
-        console.log('from sign in builder', action.payload);
-        // console.log('state', state);
-        state.user.length = 0;
-        state.user.push(action.payload);
-        console.log('sign in state', state.user);
+        state.user = action.payload;
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(signInUser.rejected, (state, action) => {
+        state.isError = true;
       });
   },
 });
-
 export default authSlice.reducer;
+export const {cleanState} = authSlice.actions;
