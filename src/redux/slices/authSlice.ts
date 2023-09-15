@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {IInitialState} from './type';
 import axios from 'axios';
 import Toast from 'react-native-simple-toast';
-
+import {baseUrl, register, signin} from '../../url';
 const initialState = {
   user: [],
   isLoading: false,
@@ -21,15 +21,11 @@ export const registerUser = createAsyncThunk(
     formData.append('gender', user.gender);
     formData.append('phone_no', Number(user.phone_no));
     try {
-      const response = await axios.post(
-        'http://staging.php-dev.in:8844/trainingapp/api/users/register',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+      const response = await axios.post(`${baseUrl}/${register}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
         },
-      );
+      });
       Toast.show('Registration successful', Toast.SHORT);
       return response.data;
     } catch (error) {
@@ -45,17 +41,12 @@ export const signInUser = createAsyncThunk(
     var formData = new FormData();
     formData.append('email', user.email);
     formData.append('password', user.password);
-
     try {
-      const response = await axios.post(
-        'http://staging.php-dev.in:8844/trainingapp/api/users/login',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+      const response = await axios.post(`${baseUrl}/${signin}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
         },
-      );
+      });
       Toast.show('sign in successful', Toast.SHORT);
 
       return response.data;
@@ -87,6 +78,7 @@ export const authSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isError = true;
+        state.isLoading = false;
       })
       .addCase(signInUser.pending, (state, action) => {
         state.isLoading = true;
@@ -97,6 +89,7 @@ export const authSlice = createSlice({
         state.isError = false;
       })
       .addCase(signInUser.rejected, (state, action) => {
+        state.isLoading = false;
         state.isError = true;
       });
   },
