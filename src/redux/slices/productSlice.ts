@@ -33,9 +33,9 @@ export const getCategoryList = createAsyncThunk(
         url += `&page=${params.page}`;
       }
 
-      console.log(url);
+      // console.log(url);
       const response = await axios.get(url);
-      //   console.log(response.data.data);
+      console.log(response.data.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -49,7 +49,7 @@ export const getProduct = createAsyncThunk(
     try {
       const url = `${baseUrl}/${getDetail}?product_id=${params.product_id}`;
 
-      console.log(url);
+      // console.log(url);
       const response = await axios.get(url);
       //   console.log(response.data.data);
       return response.data;

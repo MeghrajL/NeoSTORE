@@ -14,7 +14,7 @@ import GenericText from '../../components/generic/GenericText/GenericText';
 import GenericButton from '../../components/generic/GenericButton/GenericButton';
 import Title from '../../components/generic/Title/Title';
 import InputWithError from '../../components/generic/InputWithError/InputWithError';
-import Footer from '../../components/RegisterComponents/Footer/Footer';
+import Footer from '../../components/registerComponents/Footer/Footer';
 import {validateEmail, validatePassword} from '../../helpers/validators';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {signInUser} from '../../redux/slices/authSlice';

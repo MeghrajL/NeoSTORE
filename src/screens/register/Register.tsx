@@ -18,10 +18,10 @@ import {
 import {RegisterScreenNavigationProp} from '../../navigation/type';
 import {styles} from './style';
 import Title from '../../components/generic/Title/Title';
-import Gender from '../../components/RegisterComponents/Gender/Gender';
-import Agree from '../../components/RegisterComponents/Agree/Agree';
+import Gender from '../../components/registerComponents/Gender/Gender';
+import Agree from '../../components/registerComponents/Agree/Agree';
 import InputWithError from '../../components/generic/InputWithError/InputWithError';
-import Footer from '../../components/RegisterComponents/Footer/Footer';
+import Footer from '../../components/registerComponents/Footer/Footer';
 import GenericButton from '../../components/generic/GenericButton/GenericButton';
 import {
   validateName,

@@ -12,8 +12,9 @@ const NativeStackNavigator = () => {
   let routeName;
   const [isFirstLaunch, setIsFirstLaunch] = useState(-1);
   const authState = useAppSelector(state => state.auth);
+  // const prod = useAppSelector(state => state);
   //state.auth.user.data.access_token
-  console.log('from native stack', authState);
+  // console.log('from native stack', prod);
   useEffect(() => {
     if (storage.getBoolean('alreadyLaunched') === undefined) {
       storage.set('alreadyLaunched', true);

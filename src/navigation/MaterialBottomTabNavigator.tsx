@@ -1,5 +1,6 @@
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {Home, Explore} from '../screens/index';
+import HomeStack from './HomeStack';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -8,8 +9,8 @@ const MaterialBottomTabNavigator = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="HomeStack"
+        component={HomeStack}
         options={{
           tabBarIcon: () => <Icon name="home" size={26} color={'black'} />,
         }}
