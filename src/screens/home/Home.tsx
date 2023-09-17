@@ -32,25 +32,37 @@ const Home = ({navigation}: HomeScreenNavigationProp) => {
         <Button
           title="Table"
           onPress={() =>
-            navigation.navigate('Category', {product_category_id: 1})
+            navigation.navigate('Category', {
+              product_category_id: 1,
+              categoryName: 'Tables',
+            })
           }
         />
         <Button
           title="chair"
           onPress={() =>
-            navigation.navigate('Category', {product_category_id: 2})
+            navigation.navigate('Category', {
+              product_category_id: 2,
+              categoryName: 'Chairs',
+            })
           }
         />
         <Button
           title="sofa"
           onPress={() =>
-            navigation.navigate('Category', {product_category_id: 3})
+            navigation.navigate('Category', {
+              product_category_id: 3,
+              categoryName: 'Sofas',
+            })
           }
         />
         <Button
           title="bed"
           onPress={() =>
-            navigation.navigate('Category', {product_category_id: 4})
+            navigation.navigate('Category', {
+              product_category_id: 4,
+              categoryName: 'Beds',
+            })
           }
         />
       </View>

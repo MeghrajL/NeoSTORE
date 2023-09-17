@@ -1,0 +1,75 @@
+import React from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import IconButton from '../../generic/IconButton/IconButton';
+import {colors} from '../../../assets/colors';
+import GenericText from '../../generic/GenericText/GenericText';
+
+const QuantityControl = ({quantity, onIncrease, onDecrease}) => {
+  return (
+    <View style={styles.container}>
+      <GenericText style={styles.textStyle}>Quantity</GenericText>
+      <View style={styles.controlCon}>
+        <View style={styles.iconContainer}>
+          <IconButton
+            color="white"
+            onPressCustom={onDecrease}
+            icon="remove-outline"
+            size={20}
+          />
+        </View>
+
+        <GenericText textType="medium" style={styles.quantityText}>
+          {quantity}
+        </GenericText>
+        <View style={styles.iconContainer}>
+          <IconButton
+            color="white"
+            onPressCustom={onIncrease}
+            icon="add-outline"
+            size={20}
+          />
+        </View>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderWidth: 0.5,
+    borderColor: '#797979',
+    padding: 10,
+    borderRadius: 30,
+    width: '100%',
+    height: 50,
+  },
+  quantityText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginHorizontal: 10,
+  },
+  controlCon: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 8,
+  },
+  iconContainer: {
+    backgroundColor: colors.VIVID_GAMBOGE,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
+    width: 30,
+    height: 30,
+  },
+  textStyle: {
+    paddingLeft: 5,
+    fontSize: 20,
+    color: colors.RICH_BLACK,
+  },
+});
+
+export default QuantityControl;

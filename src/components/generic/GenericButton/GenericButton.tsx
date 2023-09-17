@@ -38,8 +38,4 @@ const GenericButton = ({
 
 export default GenericButton;
 
-// const styles = StyleSheet.create({
-//     textStyle:{
 
-//     }
-// })

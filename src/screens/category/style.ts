@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../assets/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -12,5 +13,13 @@ export const styles = StyleSheet.create({
   wrapperStyle: {
     flex: 1,
     justifyContent: 'space-between',
+  },
+  footerStyle: {
+    color: colors.VIVID_GAMBOGE,
+    fontSize: 16,
+  },
+  footerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
