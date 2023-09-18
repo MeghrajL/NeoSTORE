@@ -10,7 +10,7 @@ const ViewCount = ({count}) => {
 
   return (
     <View style={styles.container}>
-      <Icon name="eye" size={20} color={colors.MIDNIGHT} />
+      <Icon name="eye" size={20} color={colors.PLATINUM_GRAY} />
       <GenericText style={styles.text}>{formattedCount}</GenericText>
     </View>
   );
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 5,
     fontSize: 16,
-    color: colors.VIVID_GAMBOGE,
+    color: colors.MIDNIGHT,
   },
 });
 

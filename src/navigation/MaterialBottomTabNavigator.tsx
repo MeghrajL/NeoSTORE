@@ -1,5 +1,5 @@
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import {Home, Explore} from '../screens/index';
+import {Home, Cart} from '../screens/index';
 import HomeStack from './HomeStack';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -16,8 +16,8 @@ const MaterialBottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Explore"
-        component={Explore}
+        name="Cart"
+        component={Cart}
         options={{
           tabBarIcon: () => <Icon name="search" size={26} color={'black'} />,
         }}

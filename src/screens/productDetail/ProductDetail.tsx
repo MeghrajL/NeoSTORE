@@ -5,8 +5,12 @@ import {
   Button,
   ScrollView,
   FlatList,
+  TouchableOpacity,
+  Vibration,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Toast from 'react-native-simple-toast';
 
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {getProduct} from '../../redux/slices/productSlice';
@@ -22,12 +26,16 @@ import ViewCount from '../../components/productDetailComponents/ViewCount/ViewCo
 import QuantityControl from '../../components/productDetailComponents/QualityControl/QualityControl';
 import ProductItem from '../../components/categoryComponents/productItem/ProductItem';
 import ReadMore from '@fawazahmed/react-native-read-more';
+import IconButton from '../../components/generic/IconButton/IconButton';
+import {colors} from '../../assets/colors';
+import LottieView from 'lottie-react-native';
 
 const ProductDetail = ({navigation, route}) => {
   const {product_id} = route.params;
   const [prod_id, setProdId] = useState(product_id);
   const [dataLoaded, setDataLoaded] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -40,6 +48,10 @@ const ProductDetail = ({navigation, route}) => {
         console.error(error);
       });
   }, [dispatch, prod_id, setDataLoaded]);
+  const access_token = useAppSelector(
+    state => state.auth.user?.data.access_token,
+  );
+
   const isLoading = useAppSelector(state => state.product.isLoading);
 
   const productData = useAppSelector(state => state.product.productData);
@@ -48,24 +60,30 @@ const ProductDetail = ({navigation, route}) => {
   const category = useAppSelector(state => state.product.category);
   const updatedCategory = category?.data?.filter(item => item.id !== prod_id);
 
-  console.log('>>>>>>>>', updatedCategory);
-  const cartStatus = useAppSelector(state => state.cart?.status);
-  console.log('😀',cartStatus)
-  function handleAddToCart() {
-    dispatch(
-      addToCart({
-        access_token: '65028a8dbbe96',
-        product_id: prod_id,
-        quantity: quantity,
-      }),
-    )
-      .then(() => {
-        // setDataLoaded(true);
-        console.log('adddessdsdsdsdsddsds');
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  console.log('>>>>>>>>', access_token);
+  const cartLoading = useAppSelector(state => state.cart?.isLoading);
+  // console.log('😀', cartStatus);
+  async function handleAddToCart() {
+    try {
+      await dispatch(
+        addToCart({
+          access_token: access_token,
+          product_id: prod_id,
+          quantity: quantity,
+        }),
+      ).unwrap();
+      setAddedToCart(true);
+      console.log('adddessdsdsdsdsddsds');
+      setTimeout(() => {
+        setAddedToCart(false);
+      }, 1300);
+      Vibration.vibrate(1000);
+    } catch (error) {
+      Toast.show('Something went wrong, Please try again.', Toast.SHORT);
+      setAddedToCart(false);
+
+      // console.error('from detail', error);
+    }
   }
 
   const increaseQuantity = () => {
@@ -86,6 +104,12 @@ const ProductDetail = ({navigation, route}) => {
         <Loading />
       ) : (
         <ScrollView style={styles.container}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.back}>
+            <Icon name="arrow-back-outline" color={colors.MIDNIGHT} size={25} />
+          </TouchableOpacity>
+
           <View style={styles.carouselContainer}>
             <ImageCarousel product_images={productItem.product_images} />
           </View>
@@ -122,14 +146,26 @@ const ProductDetail = ({navigation, route}) => {
                 onIncrease={increaseQuantity}
                 onDecrease={decreaseQuantity}
               />
-              <GenericButton
-                onPress={handleAddToCart}
-                title="Add to Cart"
-                fontSize={26}
-                fontFamily="Gilroy-Bold"
-                style={styles.cartButtonStyle}
-                color="white"
-              />
+              {!addedToCart ? (
+                <GenericButton
+                  disabled={cartLoading}
+                  onPress={handleAddToCart}
+                  title="Add to Cart"
+                  fontSize={26}
+                  fontFamily="Gilroy-Medium"
+                  style={styles.cartButtonStyle}
+                  color="white"
+                />
+              ) : (
+                <View style={styles.cartButtonStyle}>
+                  <LottieView
+                    style={styles.imageStyle}
+                    source={require('../../assets/gif/tick.json')}
+                    autoPlay
+                    loop
+                  />
+                </View>
+              )}
             </View>
             <View style={styles.similar}>
               <GenericText textType="medium" style={styles.costText}>

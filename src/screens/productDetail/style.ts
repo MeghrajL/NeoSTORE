@@ -3,14 +3,19 @@ import {colors} from '../../assets/colors';
 
 export const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: 'white'},
-  carouselContainer: {height: 275, width: '100%'},
+  carouselContainer: {
+    height: 350,
+    width: '100%',
+    marginTop: 20,
+    // marginBottom: 10,
+  },
   infoContainer: {
     height: '40%',
     width: '100%',
     // paddingTop: 15,
     // paddingHorizontal: 15,
     gap: 30,
-    marginTop: 10,
+    // marginTop: 10,
   },
   innerInfo: {
     gap: 10,
@@ -71,4 +76,26 @@ export const styles = StyleSheet.create({
   },
   seeMoreStyle: {color: colors.VIVID_GAMBOGE},
   similar: {paddingHorizontal: 20, gap: 10},
+  back: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    zIndex: 1,
+    height: 35,
+    width: 35,
+    borderRadius: 30,
+    backgroundColor: '#ffffff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#ccc',
+    shadowOpacity: 1,
+    shadowRadius: 2,
+    shadowOffset: {height: 4, width: 2},
+    elevation: 4,
+  },
+  imageStyle: {
+    height: '100%',
+    width: '100%',
+    // resizeMode: 'center',
+  },
 });

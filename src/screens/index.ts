@@ -1,5 +1,5 @@
 import Home from './home/index';
-import Explore from './explore/index';
+import Cart from './cart/index';
 import Register from './register/index';
 import OnboardingContainer from './onboarding/index';
 import SignIn from './signin/index';
@@ -8,7 +8,7 @@ import ProductDetail from './productDetail/index';
 export {
   Home,
   Category,
-  Explore,
+  Cart,
   Register,
   OnboardingContainer,
   SignIn,

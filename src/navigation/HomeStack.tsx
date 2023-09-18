@@ -37,14 +37,15 @@ const HomeStack = ({navigation}) => {
           name="ProductDetail"
           component={ProductDetail}
           options={{
-            headerLeft: () => (
-              <IconButton
-                icon="arrow-back-outline"
-                size={28}
-                onPressCustom={() => navigation.goBack()}
-                color="white"
-              />
-            ),
+            // headerLeft: () => (
+            //   <IconButton
+            //     icon="arrow-back-outline"
+            //     size={28}
+            //     onPressCustom={() => navigation.goBack()}
+            //     color="white"
+            //   />
+            // ),
+            headerShown: false,
           }}
         />
       </Stack.Navigator>

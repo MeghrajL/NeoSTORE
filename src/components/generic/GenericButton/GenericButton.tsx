@@ -17,6 +17,7 @@ interface IGenericButton {
   fontFamily: String;
   style: ViewStyle;
   color: String;
+  disabled?: boolean;
 }
 
 const GenericButton = ({
@@ -26,9 +27,13 @@ const GenericButton = ({
   fontFamily,
   style,
   color,
+  disabled,
 }: IGenericButton): React.JSX.Element => {
   return (
-    <TouchableOpacity style={style} onPress={onPress}>
+    <TouchableOpacity
+      disabled={disabled}
+      style={[style, {opacity: disabled ? 0.2 : 1}]}
+      onPress={onPress}>
       <Text style={{fontSize: fontSize, fontFamily: fontFamily, color: color}}>
         {title}
       </Text>
@@ -37,5 +42,3 @@ const GenericButton = ({
 };
 
 export default GenericButton;
-
-

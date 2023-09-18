@@ -29,7 +29,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  blacklist: ['product'],
+  blacklist: ['product', 'cart'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
