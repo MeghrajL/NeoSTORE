@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 5,
     fontSize: 16,
-    color: colors.RICH_BLACK,
+    color: colors.VIVID_GAMBOGE,
   },
 });
 

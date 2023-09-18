@@ -4,11 +4,15 @@ import {colors} from '../../assets/colors';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#eaeaea',
   },
   contentStyle: {
-    gap: 20,
+    gap: 10,
     paddingVertical: 10,
     // marginHorizontal: 20,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   wrapperStyle: {
     flex: 1,

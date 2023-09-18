@@ -32,7 +32,7 @@ const ImageCarousel = ({product_images}) => {
             <Image
               source={{uri: item.item.image}}
               style={styles.imageStyle}
-              resizeMode="stretch"
+              resizeMode="contain"
             />
             {/* <Pagination
               activeIndex={activeIndex}
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 10,
     position: 'absolute',
-    top: '96%',
+    top: '90%',
     left: 0,
     right: 0,
     bottom: 0,
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   active: {
-    color: '#797979',
+    color: colors.PLATINUM_GRAY,
     margin: 3,
     opacity: 1,
     size: 8,

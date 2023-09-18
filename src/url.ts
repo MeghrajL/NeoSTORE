@@ -3,3 +3,4 @@ export const register = 'users/register';
 export const signin = 'users/login';
 export const getList = 'products/getList';
 export const getDetail = 'products/getDetail';
+export const addCart = 'addToCart';

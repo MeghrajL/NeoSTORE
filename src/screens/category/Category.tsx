@@ -14,6 +14,7 @@ import ProductItem from '../../components/categoryComponents/productItem/Product
 import {styles} from './style';
 import GenericText from '../../components/generic/GenericText/GenericText';
 import Loading from '../../components/generic/Loading/Loading';
+import ProductItemHorizontal from '../../components/categoryComponents/productItemHorizontal/productItemHorizontal';
 const Category = ({navigation, route}) => {
   const isLoading = useAppSelector(state => state.product.isLoading);
   const dispatch = useAppDispatch();
@@ -79,12 +80,15 @@ const Category = ({navigation, route}) => {
           <FlatList
             data={category?.data}
             renderItem={({item}) => (
-              <ProductItem item={item} onPress={navigateToProductDetail} />
+              <ProductItemHorizontal
+                item={item}
+                onPress={navigateToProductDetail}
+              />
             )}
             keyExtractor={item => item.id.toString()}
-            numColumns={2}
+            // numColumns={2}
             contentContainerStyle={styles.contentStyle}
-            columnWrapperStyle={styles.wrapperStyle}
+            // columnWrapperStyle={styles.wrapperStyle}
             ListFooterComponent={<Footer />}
           />
         </View>

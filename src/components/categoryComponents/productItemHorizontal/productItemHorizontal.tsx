@@ -3,24 +3,24 @@ import React from 'react';
 import GenericText from '../../generic/GenericText/GenericText';
 import {colors} from '../../../assets/colors';
 import StarRating from '../starRating/StarRating';
+import ViewCount from '../../productDetailComponents/ViewCount/ViewCount';
 
-const ProductItem = ({item, onPress}) => {
+const ProductItemHorizontal = ({item, onPress}) => {
   //   console.log(item.product_images.toString());
   return (
     <TouchableOpacity onPress={() => onPress(item.id)} style={styles.container}>
       <View style={styles.innerContainer}>
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.imageStyle}
-            source={{
-              uri: item.product_images,
-            }}
-          />
-        </View>
+        {/* <View style={styles.imageContainer}> */}
+        <Image
+          style={styles.imageStyle}
+          source={{
+            uri: item.product_images,
+          }}
+        />
+        {/* </View> */}
         <View style={styles.textContainer}>
           {/* <GenericText>{item.rating}</GenericText> */}
-          <StarRating rating={item.rating} />
-          <GenericText numberOfLines={1} style={styles.producerStyle}>
+          <GenericText style={styles.producerStyle}>
             {item.producer}
           </GenericText>
           <GenericText
@@ -30,87 +30,100 @@ const ProductItem = ({item, onPress}) => {
             {item.name}
           </GenericText>
 
-          {/* <GenericText style={styles.costStyle}>₹{item.cost}</GenericText> */}
+          <StarRating rating={item.rating} />
+          <ViewCount count={item.view_count} />
           <View style={styles.costView}>
             <GenericText textType="medium" style={styles.discountStyle}>
               ₹{item.cost}
             </GenericText>
             <GenericText style={styles.costStyle}>₹{item.cost}</GenericText>
+            <GenericText textType="medium" style={styles.offStyle}>
+              0% off
+            </GenericText>
           </View>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={styles.descriptionText}>
+            {item.description}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
   );
 };
 
-export default ProductItem;
+export default ProductItemHorizontal;
 
 const styles = StyleSheet.create({
   container: {
-    height: 260,
-    width: '45%',
-    // marginHorizontal: 10,
-    margin: 5,
+    height: 200,
+    width: '95%',
     backgroundColor: 'white',
-    borderRadius: 10,
+    // borderRadius: 10,
     // overflow: Platform === 'android' ? 'hidden' : 'visible',
+
+    flexDirection: 'row',
     shadowColor: '#ccc',
     shadowOpacity: 0.5,
-    shadowRadius: 2,
-    shadowOffset: {height: 5, width: 5},
+    shadowRadius: 4,
+    shadowOffset: {height: 10, width: 0},
     elevation: 4,
-    borderWidth: 0.4,
+    borderRadius: 30,
+    borderWidth: 0.8,
     borderColor: '#ccc',
   },
   innerContainer: {
-    borderRadius: 10,
     overflow: 'hidden',
+    flexDirection: 'row',
   },
-  imageContainer: {
-    height: '60%',
-    width: '100%',
-    // backgroundColor: 'blue',
-    justifyContent: 'center',
-    alignItems: 'center',
+
+  imageStyle: {
+    height: '100%',
+    width: '40%',
+    resizeMode: 'contain',
+    marginHorizontal: 10,
   },
-  imageStyle: {height: '90%', width: '90%', resizeMode: 'stretch'},
   textContainer: {
-    height: '40%',
+    width: '55%',
+    height: '100%',
     justifyContent: 'center',
-    paddingHorizontal: 10,
-    paddingBottom: 5,
+    paddingRight: 8,
+    // marginVertical: 5,
     gap: 10,
-    // backgroundColor: 'red',
   },
   nameStyle: {
-    fontSize: 18,
+    fontSize: 20,
+
     color: colors.RICH_BLACK,
   },
   producerStyle: {
+    fontSize: 16,
+
     color: colors.RICH_BLACK,
   },
-  // costStyle: {
-  //   fontSize: 18,
-  //   color: colors.RICH_BLACK,
-  // },
   costStyle: {
-    fontSize: 14,
+    fontSize: 18,
     color: colors.PLATINUM_GRAY,
     textDecorationLine: 'line-through',
   },
   discountStyle: {
-    fontSize: 18,
+    fontSize: 22,
     color: colors.RICH_BLACK,
   },
   costView: {
-    // paddingHorizontal: 10
     flexDirection: 'row',
-    gap: 5,
+    gap: 10,
     // justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },
   offStyle: {
-    fontSize: 14,
+    fontSize: 18,
     color: '#00de82',
+  },
+  descriptionText: {
+    fontFamily: 'Gilroy-Regular',
+    fontSize: 16,
+    color: colors.PLATINUM_GRAY,
   },
 });

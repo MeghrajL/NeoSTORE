@@ -6,6 +6,7 @@ import {
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import authSlice from './slices/authSlice';
 import productSlice from './slices/productSlice';
+import cartSlice from './slices/cartSlice';
 import {
   persistStore,
   persistReducer,
@@ -21,6 +22,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const reducers = combineReducers({
   auth: authSlice,
   product: productSlice,
+  cart: cartSlice,
 });
 
 const persistConfig = {

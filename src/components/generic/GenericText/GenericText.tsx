@@ -6,9 +6,16 @@ interface IGenericText {
   textType?: 'regular' | 'bold' | 'light' | 'medium' | 'heavy';
   style?: TextStyle | TextStyle[];
   props?: TextStyle | TextStyle[];
+  numberOfLines?: number;
 }
 
-const GenericText = ({children, textType, style, props}: IGenericText) => {
+const GenericText = ({
+  children,
+  textType,
+  style,
+  props,
+  numberOfLines,
+}: IGenericText) => {
   let textStyle: {};
   switch (textType) {
     case 'regular':
@@ -30,7 +37,13 @@ const GenericText = ({children, textType, style, props}: IGenericText) => {
       textStyle = styles.regular;
       break;
   }
-  return <Text style={[textStyle, {...style}, {...props}]}>{children}</Text>;
+  return (
+    <Text
+      numberOfLines={numberOfLines}
+      style={[textStyle, {...style}, {...props}]}>
+      {children}
+    </Text>
+  );
 };
 
 export default GenericText;

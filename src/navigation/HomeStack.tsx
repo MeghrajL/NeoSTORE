@@ -27,7 +27,7 @@ const HomeStack = ({navigation}) => {
               <IconButton
                 icon="arrow-back-outline"
                 size={28}
-                onPressCustom={() => navigation.goBack()}
+                onPressCustom={() => navigation.navigate('Home')}
                 color="white"
               />
             ),
