@@ -1,9 +1,20 @@
-import {StyleSheet, Text, View, Button, SafeAreaView} from 'react-native';
-import React, {useEffect} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  SafeAreaView,
+  FlatList,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {SwipeListView} from 'react-native-swipe-list-view';
+
 import {ExploreScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {getCartList} from '../../redux/slices/cartSlice';
 import Loading from '../../components/generic/Loading/Loading';
+import CartItem from '../../components/cartComponents/CartItem/CartItem';
+import EmptyCart from '../../components/cartComponents/emptyCart/EmptyCart';
 
 const Cart = ({navigation}: ExploreScreenNavigationProp) => {
   const dispatch = useAppDispatch();
@@ -11,7 +22,7 @@ const Cart = ({navigation}: ExploreScreenNavigationProp) => {
     state => state.auth.user?.data.access_token,
   );
 
-  const isLoading = useAppSelector(state => state.cart.isLoading);
+  const [initialDataLoaded, setInitialDataLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(getCartList({access_token: access_token}))
@@ -23,14 +34,48 @@ const Cart = ({navigation}: ExploreScreenNavigationProp) => {
         console.error(error);
       });
   }, [dispatch, access_token]);
-  const cart = useAppSelector(state => state.cart.cart);
+
+  const {cart, isLoading} = useAppSelector(state => state.cart);
+
+  useEffect(() => {
+    if (cart?.length !== 0) setInitialDataLoaded(true);
+  }, []);
+
   console.log('+++++++++++++', cart);
   return (
-    <SafeAreaView>
-      <View>
-        {isLoading ? <Loading /> : <Text>Explore</Text>}
+    <SafeAreaView style={{flex: 1}}>
+      <View style={{flex: 1}}>
+        {isLoading && !initialDataLoaded ? (
+          <Loading />
+        ) : cart.message === 'Cart Empty' ? (
+          <EmptyCart />
+        ) : (
+          <>
+            <SwipeListView
+              data={cart?.data}
+              renderItem={({item}) => <CartItem item={item} />}
+              keyExtractor={item => item.id.toString()}
+              renderHiddenItem={(data, rowMap) => (
+                <View
+                  style={{
+                    alignItems: 'flex-end',
+                    backgroundColor: 'white',
+                    flex: 1,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                  }}>
+                  <Text>Left</Text>
+                  <Text>Right</Text>
+                </View>
+              )}
+              leftOpenValue={75}
+              rightOpenValue={-75}
+              disableRightSwipe={true}
+            />
+          </>
+        )}
 
-        <Button onPress={() => navigation.navigate('Register')} title="Nav" />
+        {/* <Button onPress={() => navigation.navigate('Register')} title="Nav" /> */}
       </View>
     </SafeAreaView>
   );

@@ -86,9 +86,7 @@ const Category = ({navigation, route}) => {
               />
             )}
             keyExtractor={item => item.id.toString()}
-            // numColumns={2}
             contentContainerStyle={styles.contentStyle}
-            // columnWrapperStyle={styles.wrapperStyle}
             ListFooterComponent={<Footer />}
           />
         </View>

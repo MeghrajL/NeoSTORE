@@ -14,7 +14,7 @@ import Toast from 'react-native-simple-toast';
 
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {getProduct} from '../../redux/slices/productSlice';
-import {addToCart} from '../../redux/slices/cartSlice';
+import {addToCart, getCartList} from '../../redux/slices/cartSlice';
 
 import Loading from '../../components/generic/Loading/Loading';
 import ImageCarousel from '../../components/productDetailComponents/ImageCarousel/ImageCarousel';
@@ -74,6 +74,7 @@ const ProductDetail = ({navigation, route}) => {
       ).unwrap();
       setAddedToCart(true);
       console.log('adddessdsdsdsdsddsds');
+      dispatch(getCartList({access_token: access_token}));
       setTimeout(() => {
         setAddedToCart(false);
       }, 1300);

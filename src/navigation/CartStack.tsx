@@ -1,11 +1,11 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {Home, Category, ProductDetail} from '../screens/index';
+import {Cart} from '../screens/index';
 import {colors} from '../assets/colors';
 import {StatusBar, Text, TouchableOpacity} from 'react-native';
 import IconButton from '../components/generic/IconButton/IconButton';
 const Stack = createNativeStackNavigator();
-const HomeStack = ({navigation}) => {
+const CartStack = ({navigation}) => {
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -18,10 +18,9 @@ const HomeStack = ({navigation}) => {
             fontSize: 20,
           },
         }}>
-        <Stack.Screen name="Home" component={Home} />
         <Stack.Screen
-          name="Category"
-          component={Category}
+          name="Cart"
+          component={Cart}
           options={{
             headerLeft: () => (
               <IconButton
@@ -33,16 +32,9 @@ const HomeStack = ({navigation}) => {
             ),
           }}
         />
-        <Stack.Screen
-          name="ProductDetail"
-          component={ProductDetail}
-          options={{
-            headerShown: false,
-          }}
-        />
       </Stack.Navigator>
     </>
   );
 };
 
-export default HomeStack;
+export default CartStack;

@@ -5,3 +5,5 @@ export const getList = 'products/getList';
 export const getDetail = 'products/getDetail';
 export const addCart = 'addToCart';
 export const getCart = 'cart';
+export const editCartItem = 'editCart';
+export const deleteCartItem = 'deleteCart';

@@ -1,24 +1,19 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import LottieView from 'lottie-react-native';
-const Loading = () => {
+import GenericText from '../../generic/GenericText/GenericText';
+const EmptyCart = () => {
   return (
     <View style={styles.container}>
-      {/* <Image
+      <Image
         style={styles.imageStyle}
-        source={require('../../../assets/images/Woodworker.png')}
-      /> */}
-      <LottieView
-        style={styles.imageStyle}
-        source={require('../../../assets/gif/hammer2.json')}
-        autoPlay
-        loop
+        source={require('../../../assets/images/cart.jpg')}
       />
+      <GenericText>Your Cart is Empty</GenericText>
     </View>
   );
 };
 
-export default Loading;
+export default EmptyCart;
 
 const styles = StyleSheet.create({
   container: {
@@ -30,6 +25,6 @@ const styles = StyleSheet.create({
   imageStyle: {
     height: '70%',
     width: '70%',
-    // resizeMode: 'center',
+    resizeMode: 'center',
   },
 });
