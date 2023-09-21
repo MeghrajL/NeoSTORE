@@ -4,8 +4,9 @@ import {Cart} from '../screens/index';
 import {colors} from '../assets/colors';
 import {StatusBar, Text, TouchableOpacity} from 'react-native';
 import IconButton from '../components/generic/IconButton/IconButton';
-const Stack = createNativeStackNavigator();
-const CartStack = ({navigation}) => {
+import {CartStackScreenNavigationProp, RootStackParamList} from './type';
+const Stack = createNativeStackNavigator<RootStackParamList>();
+const CartStack = ({navigation}: CartStackScreenNavigationProp) => {
   return (
     <>
       <StatusBar barStyle="light-content" />

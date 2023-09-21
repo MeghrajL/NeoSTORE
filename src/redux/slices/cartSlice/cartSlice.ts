@@ -7,9 +7,15 @@ import {
   getCart,
   editCartItem,
   deleteCartItem,
-} from '../../url';
-const initialState = {
-  cart: [],
+} from '../../../url';
+import {
+  IAddToCartParams,
+  IDeleteCartParams,
+  IGetCartListParams,
+  IInitialState,
+} from './type';
+const initialState: IInitialState = {
+  cart: null,
   status: null,
   data: false,
   total_carts: 0,
@@ -21,36 +27,21 @@ const initialState = {
   isError: false,
 };
 
-interface IAddToCartParams {
-  access_token: string;
-  product_id: number;
-  quantity: number;
-}
-
-interface IGetCartListParams {
-  access_token: string;
-}
-
-interface IDeleteCartParams {
-  access_token: string;
-  product_id: number;
-}
-
 export const getCartList = createAsyncThunk(
   'cart/getCartList',
   async (params: IGetCartListParams, thunkAPI) => {
     try {
       // console.log('😀', params);
       const headers = {
-        access_token: params.access_token, // Add your access token to the custom header
-        'Content-Type': 'multipart/form-data', // Important for FormData
+        access_token: params.access_token,
+        'Content-Type': 'multipart/form-data',
       };
       const response = await axios.get(`${baseUrl}/${getCart}`, {
         headers,
       });
       // console.log(response.data);
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -73,7 +64,7 @@ export const addToCart = createAsyncThunk(
       });
       console.log(response.data);
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -100,7 +91,7 @@ export const editCart = createAsyncThunk(
       );
       console.log(response.data);
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -126,7 +117,7 @@ export const deleteCart = createAsyncThunk(
       );
       console.log(response.data);
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
   },

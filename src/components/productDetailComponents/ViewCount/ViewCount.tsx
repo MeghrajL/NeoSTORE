@@ -4,7 +4,11 @@ import Icon from 'react-native-vector-icons/Ionicons'; // Import an eye icon fro
 import {colors} from '../../../assets/colors';
 import GenericText from '../../generic/GenericText/GenericText';
 
-const ViewCount = ({count}) => {
+interface IViewCount {
+  count?: number | undefined;
+}
+
+const ViewCount = ({count = 0}: IViewCount) => {
   const formattedCount =
     count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count.toString();
 

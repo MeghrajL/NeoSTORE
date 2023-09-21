@@ -4,8 +4,9 @@ import {Home, Category, ProductDetail} from '../screens/index';
 import {colors} from '../assets/colors';
 import {StatusBar, Text, TouchableOpacity} from 'react-native';
 import IconButton from '../components/generic/IconButton/IconButton';
-const Stack = createNativeStackNavigator();
-const HomeStack = ({navigation}) => {
+import {HomeStackScreenNavigationProp, RootStackParamList} from './type';
+const Stack = createNativeStackNavigator<RootStackParamList>();
+const HomeStack = ({navigation}: HomeStackScreenNavigationProp) => {
   return (
     <>
       <StatusBar barStyle="light-content" />

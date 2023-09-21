@@ -29,7 +29,7 @@ import {
   validatePassword,
   validatePhone,
 } from '../../helpers/validators';
-import {cleanState, registerUser} from '../../redux/slices/authSlice';
+import {cleanState, registerUser} from '../../redux/slices/authSlice/authSlice';
 
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 

@@ -3,8 +3,13 @@ import React, {useState} from 'react';
 import Carousel from 'react-native-reanimated-carousel';
 import AnimatedDotsCarousel from 'react-native-animated-dots-carousel';
 import {colors} from '../../../assets/colors';
+import {IProductImage} from '../../../redux/slices/productSlice/type';
 
-const ImageCarousel = ({product_images}) => {
+interface IProductImages {
+  product_images: IProductImage[];
+}
+
+const ImageCarousel = ({product_images}: IProductImages) => {
   const [activeIndex, setActiveIndex] = useState(0);
   // console.log('+++++', product_images);
   const width = Dimensions.get('window').width;

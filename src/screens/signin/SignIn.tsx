@@ -17,12 +17,12 @@ import InputWithError from '../../components/generic/InputWithError/InputWithErr
 import Footer from '../../components/registerComponents/Footer/Footer';
 import {validateEmail, validatePassword} from '../../helpers/validators';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {signInUser} from '../../redux/slices/authSlice';
+import {signInUser} from '../../redux/slices/authSlice/authSlice';
 
 const SignIn = ({navigation}: SignInScreenNavigationProp) => {
-  const [err, setErr] = useState(false);
+  // const [err, setErr] = useState(false);
   const [showErr, setShowErr] = useState(false);
-  const [isErr, setIsErr] = useState(false);
+  // const [isErr, setIsErr] = useState(false);
   const [user, setUser] = useState({
     email: '',
     password: '',

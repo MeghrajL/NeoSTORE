@@ -1,10 +1,26 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  GestureResponderEvent,
+} from 'react-native';
 import IconButton from '../../generic/IconButton/IconButton';
 import {colors} from '../../../assets/colors';
 import GenericText from '../../generic/GenericText/GenericText';
 
-const QuantityControl = ({quantity, onIncrease, onDecrease}) => {
+interface IQuantityControl {
+  quantity: number;
+  onIncrease: (event: GestureResponderEvent) => void;
+  onDecrease: (event: GestureResponderEvent) => void;
+}
+
+const QuantityControl = ({
+  quantity,
+  onIncrease,
+  onDecrease,
+}: IQuantityControl) => {
   return (
     <View style={styles.container}>
       <GenericText style={styles.textStyle}>Quantity</GenericText>

@@ -6,7 +6,7 @@ import {
   deleteCart,
   editCart,
   getCartList,
-} from '../../../redux/slices/cartSlice';
+} from '../../../redux/slices/cartSlice/cartSlice';
 
 const CartItem = ({item}) => {
   //   const [quantity, setQuantity] = useState(item.quantity);

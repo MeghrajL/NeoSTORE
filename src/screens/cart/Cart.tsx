@@ -11,7 +11,7 @@ import {SwipeListView} from 'react-native-swipe-list-view';
 
 import {ExploreScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {getCartList} from '../../redux/slices/cartSlice';
+import {getCartList} from '../../redux/slices/cartSlice/cartSlice';
 import Loading from '../../components/generic/Loading/Loading';
 import CartItem from '../../components/cartComponents/CartItem/CartItem';
 import EmptyCart from '../../components/cartComponents/emptyCart/EmptyCart';

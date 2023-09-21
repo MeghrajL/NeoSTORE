@@ -11,11 +11,12 @@ import {
 import React from 'react';
 
 interface IGenericButton {
-  title: String;
+  title: string;
   onPress: (event: GestureResponderEvent) => void;
-  fontSize: Number;
-  fontFamily: String;
+  fontSize: number;
+  fontFamily: string;
   style: ViewStyle;
+
   color: String;
   disabled?: boolean;
 }

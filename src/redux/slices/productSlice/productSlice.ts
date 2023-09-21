@@ -1,28 +1,19 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios, {AxiosResponse} from 'axios';
-import Toast from 'react-native-simple-toast';
-import {baseUrl, getList, getDetail} from '../../url';
-const initialState = {
-  category: [],
-  productData: [],
+import {baseUrl, getList, getDetail} from '../../../url';
+import {IInitialState, IGetCategoryListParams, IGetProductParams} from './type';
+
+const initialState: IInitialState = {
+  category: null,
+  productData: null,
   rating: [],
   isLoading: false,
   isError: false,
 };
 
-interface getCategoryListParams {
-  product_category_id: string;
-  limit?: Number;
-  page?: Number;
-}
-
-interface getProductParams {
-  product_id: string;
-}
-
 export const getCategoryList = createAsyncThunk(
   'product/getCategoryList',
-  async (params: getCategoryListParams, thunkAPI) => {
+  async (params: IGetCategoryListParams, thunkAPI) => {
     try {
       let url = `${baseUrl}/${getList}?product_category_id=${params.product_category_id}`;
 
@@ -37,7 +28,7 @@ export const getCategoryList = createAsyncThunk(
       const response = await axios.get(url);
       console.log(response.data.data);
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -45,7 +36,7 @@ export const getCategoryList = createAsyncThunk(
 
 export const getProduct = createAsyncThunk(
   'product/getProduct',
-  async (params: getProductParams, thunkAPI) => {
+  async (params: IGetProductParams, thunkAPI) => {
     try {
       const url = `${baseUrl}/${getDetail}?product_id=${params.product_id}`;
 
@@ -53,7 +44,7 @@ export const getProduct = createAsyncThunk(
       const response = await axios.get(url);
       //   console.log(response.data.data);
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
   },

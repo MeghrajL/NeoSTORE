@@ -12,9 +12,10 @@ import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Toast from 'react-native-simple-toast';
 
+import {ProductDetailScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {getProduct} from '../../redux/slices/productSlice';
-import {addToCart, getCartList} from '../../redux/slices/cartSlice';
+import {getProduct} from '../../redux/slices/productSlice/productSlice';
+import {addToCart, getCartList} from '../../redux/slices/cartSlice/cartSlice';
 
 import Loading from '../../components/generic/Loading/Loading';
 import ImageCarousel from '../../components/productDetailComponents/ImageCarousel/ImageCarousel';
@@ -30,7 +31,10 @@ import IconButton from '../../components/generic/IconButton/IconButton';
 import {colors} from '../../assets/colors';
 import LottieView from 'lottie-react-native';
 
-const ProductDetail = ({navigation, route}) => {
+const ProductDetail = ({
+  navigation,
+  route,
+}: ProductDetailScreenNavigationProp) => {
   const {product_id} = route.params;
   const [prod_id, setProdId] = useState(product_id);
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -40,6 +44,7 @@ const ProductDetail = ({navigation, route}) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    console.log(product_id, prod_id);
     dispatch(getProduct({product_id: prod_id}))
       .then(() => {
         setDataLoaded(true);
@@ -49,13 +54,13 @@ const ProductDetail = ({navigation, route}) => {
       });
   }, [dispatch, prod_id, setDataLoaded]);
   const access_token = useAppSelector(
-    state => state.auth.user?.data.access_token,
+    state => state.auth.user?.data?.access_token,
   );
 
   const isLoading = useAppSelector(state => state.product.isLoading);
 
   const productData = useAppSelector(state => state.product.productData);
-  const productItem = productData.data;
+  const productItem = productData?.data;
 
   const category = useAppSelector(state => state.product.category);
   const updatedCategory = category?.data?.filter(item => item.id !== prod_id);
@@ -112,25 +117,25 @@ const ProductDetail = ({navigation, route}) => {
           </TouchableOpacity>
 
           <View style={styles.carouselContainer}>
-            <ImageCarousel product_images={productItem.product_images} />
+            <ImageCarousel product_images={productItem?.product_images} />
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.innerInfo}>
               <View style={styles.visual}>
-                <StarRating rating={productItem.rating} />
-                <ViewCount count={productItem.view_count} />
+                <StarRating rating={productItem?.rating} />
+                <ViewCount count={productItem?.view_count} />
               </View>
 
               <View>
                 <GenericText style={styles.producer}>
-                  {productItem.producer}
+                  {productItem?.producer}
                 </GenericText>
               </View>
               <GenericText textType="medium" style={styles.nameText}>
-                {productItem.name}
+                {productItem?.name}
               </GenericText>
               <GenericText style={styles.costText}>
-                ₹{productItem.cost}
+                ₹{productItem?.cost}
               </GenericText>
               {/* <GenericText style={styles.descriptionText}>
                 Details : {productItem.description}
@@ -138,7 +143,7 @@ const ProductDetail = ({navigation, route}) => {
               <ReadMore
                 seeMoreStyle={styles.seeMoreStyle}
                 style={styles.descriptionText}>
-                {productItem.description}
+                {productItem?.description}
               </ReadMore>
             </View>
             <View style={styles.buttonsContainer}>

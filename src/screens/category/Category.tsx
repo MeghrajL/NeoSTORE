@@ -4,18 +4,18 @@ import {
   Button,
   SafeAreaView,
   FlatList,
-  ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {CategoryScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {getCategoryList} from '../../redux/slices/productSlice';
+import {getCategoryList} from '../../redux/slices/productSlice/productSlice';
 import ProductItem from '../../components/categoryComponents/productItem/ProductItem';
 import {styles} from './style';
 import GenericText from '../../components/generic/GenericText/GenericText';
 import Loading from '../../components/generic/Loading/Loading';
 import ProductItemHorizontal from '../../components/categoryComponents/productItemHorizontal/productItemHorizontal';
-const Category = ({navigation, route}) => {
+const Category = ({navigation, route}: CategoryScreenNavigationProp) => {
   const isLoading = useAppSelector(state => state.product.isLoading);
   const dispatch = useAppDispatch();
   const category = useAppSelector(state => state.product.category);

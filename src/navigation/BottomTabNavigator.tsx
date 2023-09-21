@@ -6,12 +6,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../assets/colors';
 import {useIsFocused} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {RootStackParamList} from './type';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<RootStackParamList>();
 
-const MaterialBottomTabNavigator = () => {
-  const isHomeScreenFocused = useIsFocused(); // Check if HomeScreen is focused
-  const isProfileScreenFocused = useIsFocused();
+const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -21,8 +20,19 @@ const MaterialBottomTabNavigator = () => {
         tabBarItemStyle: {borderRadius: 30},
         tabBarStyle: {
           backgroundColor: 'white',
-          paddingVertical: 5,
+          height: 80,
+          paddingVertical: 10,
           paddingHorizontal: 10,
+          borderStartStartRadius: 30,
+          borderStartEndRadius: 30,
+          // overflow: 'hidden',
+          position: 'absolute',
+          borderTopWidth: 0,
+          elevation: 4,
+          shadowRadius: 20,
+          shadowColor: '#ccc',
+          shadowOpacity: 0.4,
+          shadowOffset: {height: -10, width: 0},
         },
         headerShown: false,
         // tabBarLabelPosition: 'below-icon',
@@ -44,7 +54,7 @@ const MaterialBottomTabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Cart2"
         component={CartStack}
         options={{
@@ -61,8 +71,8 @@ const MaterialBottomTabNavigator = () => {
             <Icon name="search" size={26} color={color} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };
-export default MaterialBottomTabNavigator;
+export default BottomTabNavigator;

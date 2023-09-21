@@ -1,17 +1,18 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {IInitialState} from './type';
+import {IInitialState, IRegistrationFormData, ISignInFormData} from './type';
 import axios from 'axios';
 import Toast from 'react-native-simple-toast';
-import {baseUrl, register, signin} from '../../url';
-const initialState = {
-  user: [],
+import {baseUrl, register, signin} from '../../../url';
+
+const initialState: IInitialState = {
+  user: null,
   isLoading: false,
   isError: false,
 };
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
-  async (user: any, thunkAPI) => {
+  async (user: IRegistrationFormData, thunkAPI) => {
     var formData = new FormData();
     formData.append('first_name', user.first_name);
     formData.append('last_name', user.last_name);
@@ -28,7 +29,7 @@ export const registerUser = createAsyncThunk(
       });
       Toast.show('Registration successful', Toast.SHORT);
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       Toast.show('try again', Toast.SHORT);
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -37,7 +38,7 @@ export const registerUser = createAsyncThunk(
 
 export const signInUser = createAsyncThunk(
   'auth/signInUser',
-  async (user: any, thunkAPI) => {
+  async (user: ISignInFormData, thunkAPI) => {
     var formData = new FormData();
     formData.append('email', user.email);
     formData.append('password', user.password);
@@ -50,7 +51,7 @@ export const signInUser = createAsyncThunk(
       Toast.show('sign in successful', Toast.SHORT);
 
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       Toast.show('try again', Toast.SHORT);
 
       return thunkAPI.rejectWithValue(error.message);
