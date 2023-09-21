@@ -9,17 +9,17 @@ import {
 import React, {useEffect, useState} from 'react';
 import {SwipeListView} from 'react-native-swipe-list-view';
 
-import {ExploreScreenNavigationProp} from '../../navigation/type';
+import {CartScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {getCartList} from '../../redux/slices/cartSlice/cartSlice';
 import Loading from '../../components/generic/Loading/Loading';
 import CartItem from '../../components/cartComponents/CartItem/CartItem';
 import EmptyCart from '../../components/cartComponents/emptyCart/EmptyCart';
 
-const Cart = ({navigation}: ExploreScreenNavigationProp) => {
+const Cart = ({navigation}: CartScreenNavigationProp) => {
   const dispatch = useAppDispatch();
   const access_token = useAppSelector(
-    state => state.auth.user?.data.access_token,
+    state => state.auth.user?.data?.access_token,
   );
 
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
@@ -47,7 +47,7 @@ const Cart = ({navigation}: ExploreScreenNavigationProp) => {
       <View style={{flex: 1}}>
         {isLoading && !initialDataLoaded ? (
           <Loading />
-        ) : cart.message === 'Cart Empty' ? (
+        ) : cart?.message === 'Cart Empty' ? (
           <EmptyCart />
         ) : (
           <>
