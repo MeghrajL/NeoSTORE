@@ -6,8 +6,12 @@ import {
   Platform,
   TouchableOpacity,
   Alert,
+  TouchableWithoutFeedback,
+  Modal,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+// import BottomSheet from '@gorhom/bottom-sheet';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {SignInScreenNavigationProp} from '../../navigation/type';
 import {styles} from './style';
 import GenericText from '../../components/generic/GenericText/GenericText';
@@ -18,6 +22,9 @@ import Footer from '../../components/registerComponents/Footer/Footer';
 import {validateEmail, validatePassword} from '../../helpers/validators';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {signInUser} from '../../redux/slices/authSlice/authSlice';
+import {Button} from 'react-native';
+import BottomNavigationBar from 'react-native-paper/lib/typescript/components/BottomNavigation/BottomNavigationBar';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
 
 const SignIn = ({navigation}: SignInScreenNavigationProp) => {
   // const [err, setErr] = useState(false);
@@ -27,6 +34,7 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
     email: '',
     password: '',
   });
+
   const dispatch = useAppDispatch();
   let status = useAppSelector(state => state.auth);
   console.log(status);
@@ -41,6 +49,10 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
 
   function onRegisterPress() {
     navigation.navigate('Register');
+  }
+
+  function onForgotPress() {
+    navigation.navigate('ForgotPassword');
   }
 
   async function onSignInPress() {
@@ -73,7 +85,7 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
 
           <InputWithError
             placeholder={'Email'}
-            maxLength={20}
+            maxLength={30}
             inputMode={'email'}
             icon={'email'}
             onChangeText={emailHandler}
@@ -104,7 +116,7 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
             color="white"
           />
           <View style={styles.signInStyle}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onForgotPress}>
               <GenericText textType="regular" style={styles.signInStyle}>
                 Forgot Password?
               </GenericText>
@@ -118,6 +130,7 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
           />
         </View>
       </KeyboardAvoidingView>
+      <Button title="home" onPress={() => navigation.navigate('Home')} />
     </SafeAreaView>
   );
 };

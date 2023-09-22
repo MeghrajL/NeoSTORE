@@ -53,7 +53,7 @@ export const signInUser = createAsyncThunk(
       return response.data;
     } catch (error: any) {
       Toast.show('try again', Toast.SHORT);
-
+      console.log(error);
       return thunkAPI.rejectWithValue(error.message);
     }
   },

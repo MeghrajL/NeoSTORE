@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     margin: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 30,
     minHeight: 30,
     minWidth: 50,
     maxHeight: 60,

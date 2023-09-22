@@ -2,6 +2,7 @@
 import {Home, Cart} from '../screens/index';
 import HomeStack from './HomeStack';
 import CartStack from './CartStack';
+import ProfileStack from './ProfileStack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../assets/colors';
 import {useIsFocused} from '@react-navigation/native';
@@ -54,16 +55,16 @@ const BottomTabNavigator = () => {
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="Cart2"
-        component={CartStack}
+      <Tab.Screen
+        name="ProfileStack"
+        component={ProfileStack}
         options={{
           tabBarIcon: ({color}) => (
             <Icon name="search" size={26} color={color} />
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Cart3"
         component={CartStack}
         options={{
@@ -71,7 +72,7 @@ const BottomTabNavigator = () => {
             <Icon name="search" size={26} color={color} />
           ),
         }}
-      /> */}
+      />  */}
     </Tab.Navigator>
   );
 };

@@ -12,6 +12,9 @@ export type RootStackParamList = {
   ProductDetail: {product_id: number};
   HomeStack: undefined;
   CartStack: undefined;
+  ForgotPassword: undefined;
+  ProfileStack: undefined;
+  ChangePassword: undefined;
 };
 
 export type OnboardingScreenNavigationProp = NativeStackScreenProps<
@@ -22,6 +25,11 @@ export type OnboardingScreenNavigationProp = NativeStackScreenProps<
 export type RegisterScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
   'Register'
+>;
+
+export type ForgotPasswordScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'ForgotPassword'
 >;
 
 export type MainNavScreenNavigationProp = NativeStackScreenProps<
@@ -36,6 +44,11 @@ export type HomeStackScreenNavigationProp = NativeStackScreenProps<
 export type CartStackScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
   'CartStack'
+>;
+
+export type ProfileStackScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'ProfileStack'
 >;
 
 export type HomeScreenNavigationProp = NativeStackScreenProps<
@@ -63,4 +76,9 @@ export type CategoryScreenRouteProp = RouteProp<RootStackParamList, 'Category'>;
 export type ProductDetailScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
   'ProductDetail'
+>;
+
+export type ChangePasswordScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'ChangePassword'
 >;

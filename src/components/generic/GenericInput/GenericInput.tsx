@@ -45,7 +45,9 @@ export default function GenericInput({
           />
         }
         right={
-          placeholder === 'Password' || placeholder === 'Confirm Password' ? (
+          placeholder === 'Password' ||
+          placeholder === 'Confirm Password' ||
+          placeholder === 'Old Password' ? (
             <TextInput.Icon
               onPress={() => setIsVisible(!isVisible)}
               icon={isVisible ? 'eye' : 'eye-off'}
@@ -59,7 +61,9 @@ export default function GenericInput({
         inputMode={inputMode}
         secureTextEntry={
           !isVisible &&
-          (placeholder === 'Password' || placeholder === 'Confirm Password')
+          (placeholder === 'Password' ||
+            placeholder === 'Confirm Password' ||
+            placeholder === 'Old Password')
             ? true
             : false
         }

@@ -1,6 +1,11 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {MMKV} from 'react-native-mmkv';
-import {Register, OnboardingContainer, SignIn} from '../screens/index';
+import {
+  Register,
+  OnboardingContainer,
+  SignIn,
+  ForgotPassword,
+} from '../screens/index';
 import BottomTabNavigator from './BottomTabNavigator';
 import {useEffect, useState} from 'react';
 import {RootStackParamList} from './type';
@@ -43,6 +48,7 @@ const NativeStackNavigator = () => {
       <Stack.Screen name="Onboarding" component={OnboardingContainer} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="MainNav" component={BottomTabNavigator} />
     </Stack.Navigator>
   );

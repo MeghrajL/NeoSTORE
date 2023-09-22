@@ -165,7 +165,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
 
             <InputWithError
               placeholder={'Email'}
-              maxLength={20}
+              maxLength={30}
               inputMode={'email'}
               icon={'email'}
               onChangeText={emailHandler}
@@ -196,13 +196,13 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
               value={user.confirm_password}
               validator={() => samePass}
               samePass={samePass}
-              showErr={showErr}
+              showErr={true}
               errorText={'Both passwords should match'}
             />
 
             <InputWithError
               placeholder={'Phone Number'}
-              maxLength={20}
+              maxLength={10}
               inputMode={'numeric'}
               icon={'phone-classic'}
               onChangeText={phoneNumberHandler}

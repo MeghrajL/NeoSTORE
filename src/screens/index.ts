@@ -5,6 +5,8 @@ import OnboardingContainer from './onboarding/index';
 import SignIn from './signin/index';
 import Category from './category/index';
 import ProductDetail from './productDetail/index';
+import ForgotPassword from './forgotPassword/index';
+import ChangePassword from './changePassword/index';
 export {
   Home,
   Category,
@@ -13,4 +15,6 @@ export {
   OnboardingContainer,
   SignIn,
   ProductDetail,
+  ForgotPassword,
+  ChangePassword,
 };

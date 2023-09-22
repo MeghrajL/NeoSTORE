@@ -51,22 +51,6 @@ const InputWithError = ({
   function handler(text: string) {
     onChangeText(text.trim());
     setInputText(text.trim());
-    // if (placeholder === 'Confirm Password') {
-    //   console.log('Validator fn-______', validator());
-    //   if (validator()) {
-    //     setErr('');
-    //   } else {
-    //     setErr(errorText);
-    //   }
-    // } else {
-    //   if (validator(text)) {
-    //     setErr('');
-    //   } else {
-    //     setErr(errorText);
-    //   }
-    // }
-
-    // console.log('>', text);
   }
 
   return (
