@@ -98,6 +98,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
   async function onRegisterPress() {
     setShowErr(true);
     if (
+      !samePass ||
       !user.first_name.trim() ||
       !user.last_name.trim ||
       !user.email.trim() ||

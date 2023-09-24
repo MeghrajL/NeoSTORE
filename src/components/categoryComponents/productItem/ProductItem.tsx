@@ -1,10 +1,23 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  GestureResponderEvent,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import GenericText from '../../generic/GenericText/GenericText';
 import {colors} from '../../../assets/colors';
 import StarRating from '../starRating/StarRating';
+import {IProduct} from '../../../redux/slices/productSlice/type';
 
-const ProductItem = ({item, onPress}) => {
+interface IProductItem {
+  item: IProduct;
+  onPress: Function;
+}
+const rupee = '₹';
+const ProductItem = ({item, onPress}: IProductItem) => {
   //   console.log(item.product_images.toString());
   return (
     <TouchableOpacity onPress={() => onPress(item.id)} style={styles.container}>

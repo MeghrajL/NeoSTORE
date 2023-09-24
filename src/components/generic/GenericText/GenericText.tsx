@@ -2,7 +2,7 @@ import {StyleSheet, Text, TextStyle, View} from 'react-native';
 import React from 'react';
 
 interface IGenericText {
-  children: string | number | undefined;
+  children: any;
   textType?: 'regular' | 'bold' | 'light' | 'medium' | 'heavy';
   style?: TextStyle | TextStyle[];
   props?: TextStyle | TextStyle[];

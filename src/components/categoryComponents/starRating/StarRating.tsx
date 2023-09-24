@@ -3,7 +3,17 @@ import {View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../../../assets/colors';
 
-const StarRating = ({rating, starSize = 20, color = 'gold'}) => {
+interface IStarRating {
+  rating?: number;
+  starSize?: number;
+  color?: string;
+}
+
+const StarRating = ({
+  rating = 0,
+  starSize = 20,
+  color = 'gold',
+}: IStarRating) => {
   const starIcons = [];
 
   for (let i = 0; i < 5; i++) {

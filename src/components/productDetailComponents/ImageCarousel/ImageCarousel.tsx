@@ -6,7 +6,7 @@ import {colors} from '../../../assets/colors';
 import {IProductImage} from '../../../redux/slices/productSlice/type';
 
 interface IProductImages {
-  product_images: IProductImage[];
+  product_images: IProductImage[] | undefined;
 }
 
 const ImageCarousel = ({product_images}: IProductImages) => {

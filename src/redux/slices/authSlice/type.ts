@@ -23,10 +23,47 @@ export interface IUser {
   user_msg: string;
 }
 
+export interface IForgotPassData {
+  status: number;
+  message: string;
+  user_msg: string;
+}
+
+export interface IChangePassData {
+  status: number;
+  data: [] | null;
+  message: string;
+  user_msg: string;
+}
+
+interface IProductCategory {
+  id: number;
+  name: string;
+  icon_image: string;
+  created: string;
+  modified: string;
+}
+
+interface IData {
+  user_data: IUserData;
+  product_categories: IProductCategory[];
+  total_carts: number;
+  total_orders: number;
+}
+
+export interface IUserAccountDetails {
+  status: number;
+  data: IData | null;
+}
+
 export interface IInitialState {
   user: IUser | null;
   isLoading: boolean;
   isError: boolean;
+  forgotPassData: IForgotPassData | null;
+  changePassData: IChangePassData | null;
+  updateDetailsData: null;
+  userAccountDetails: IUserAccountDetails | null;
 }
 
 export interface IRegistrationFormData {
@@ -38,7 +75,19 @@ export interface IRegistrationFormData {
   gender: string;
   phone_no: string;
 }
+
 export interface ISignInFormData {
   email: string;
+  password: string;
+}
+
+export interface IChangePasswordParams {
+  access_token: string | undefined;
+  old_password: string;
+  password: string;
+  confirm_password: string;
+}
+
+export interface IForgotPasswordParams {
   password: string;
 }

@@ -18,15 +18,21 @@ const BottomTabNavigator = () => {
         tabBarActiveBackgroundColor: colors.VIVID_GAMBOGE,
         tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: '#ccc',
-        tabBarItemStyle: {borderRadius: 30},
+        tabBarItemStyle: {borderRadius: 30, margin: 10},
+
         tabBarStyle: {
+          justifyContent: 'center',
+          alignItems: 'center',
           backgroundColor: 'white',
-          height: 80,
-          paddingVertical: 10,
-          paddingHorizontal: 10,
+          height: '10%',
+          // padding: 10,
+          // paddingVertical: 10,
+          // paddingHorizontal: 10,
+          // borderRadius: 30,
           borderStartStartRadius: 30,
           borderStartEndRadius: 30,
           // overflow: 'hidden',
+          // marginBottom: 3,
           position: 'absolute',
           borderTopWidth: 0,
           elevation: 4,
@@ -50,9 +56,7 @@ const BottomTabNavigator = () => {
         name="CartStack"
         component={CartStack}
         options={{
-          tabBarIcon: ({color}) => (
-            <Icon name="search" size={26} color={color} />
-          ),
+          tabBarIcon: ({color}) => <Icon name="cart" size={26} color={color} />,
         }}
       />
       <Tab.Screen
@@ -60,7 +64,7 @@ const BottomTabNavigator = () => {
         component={ProfileStack}
         options={{
           tabBarIcon: ({color}) => (
-            <Icon name="search" size={26} color={color} />
+            <Icon name="person" size={26} color={color} />
           ),
         }}
       />

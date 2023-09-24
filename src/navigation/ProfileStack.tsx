@@ -23,6 +23,7 @@ const ProfileStack = ({navigation}: ProfileStackScreenNavigationProp) => {
           name="ChangePassword"
           component={ChangePassword}
           options={{
+            headerTitle: 'Change Password',
             headerLeft: () => (
               <IconButton
                 icon="arrow-back-outline"

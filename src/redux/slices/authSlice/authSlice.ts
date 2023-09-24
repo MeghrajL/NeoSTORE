@@ -1,13 +1,23 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {IInitialState, IRegistrationFormData, ISignInFormData} from './type';
+import {
+  IChangePasswordParams,
+  IForgotPasswordParams,
+  IInitialState,
+  IRegistrationFormData,
+  ISignInFormData,
+} from './type';
 import axios from 'axios';
 import Toast from 'react-native-simple-toast';
-import {baseUrl, register, signin} from '../../../url';
+import {baseUrl, change, forgot, register, signin} from '../../../url';
 
 const initialState: IInitialState = {
   user: null,
   isLoading: false,
   isError: false,
+  forgotPassData: null,
+  changePassData: null,
+  updateDetailsData: null,
+  userAccountDetails: null,
 };
 
 export const registerUser = createAsyncThunk(
@@ -59,6 +69,55 @@ export const signInUser = createAsyncThunk(
   },
 );
 
+export const changePassword = createAsyncThunk(
+  'auth/changePassword',
+  async (params: IChangePasswordParams, thunkAPI) => {
+    console.log(params);
+
+    var formData = new FormData();
+    formData.append('old_password', params.old_password);
+    formData.append('password', params.password);
+    formData.append('confirm_password', params.confirm_password);
+    const headers = {
+      access_token: params.access_token,
+      'Content-Type': 'multipart/form-data',
+    };
+    try {
+      const response = await axios.post(`${baseUrl}/${change}`, formData, {
+        headers,
+      });
+      Toast.show('password changed succesfully', Toast.SHORT);
+      console.log(response.data);
+      return response.data;
+    } catch (error: any) {
+      Toast.show('try again', Toast.SHORT);
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
+export const forgotPassword = createAsyncThunk(
+  'auth/forgotPassword',
+  async (email: string, thunkAPI) => {
+    console.log(email);
+
+    var formData = new FormData();
+    formData.append('email', email);
+
+    try {
+      const response = await axios.post(`${baseUrl}/${forgot}`, formData);
+      Toast.show('A mail has been sent to you', Toast.SHORT);
+      // console.log('>>>', response.data);
+      return response.data;
+    } catch (error: any) {
+      Toast.show('try again', Toast.SHORT);
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -90,6 +149,30 @@ export const authSlice = createSlice({
         state.isError = false;
       })
       .addCase(signInUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+      })
+      .addCase(changePassword.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.changePassData = action.payload;
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+      })
+      .addCase(forgotPassword.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(forgotPassword.fulfilled, (state, action) => {
+        state.forgotPassData = action.payload;
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(forgotPassword.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
       });

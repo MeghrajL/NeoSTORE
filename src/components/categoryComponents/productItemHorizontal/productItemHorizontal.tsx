@@ -4,8 +4,14 @@ import GenericText from '../../generic/GenericText/GenericText';
 import {colors} from '../../../assets/colors';
 import StarRating from '../starRating/StarRating';
 import ViewCount from '../../productDetailComponents/ViewCount/ViewCount';
+import {IProduct} from '../../../redux/slices/productSlice/type';
 
-const ProductItemHorizontal = ({item, onPress}) => {
+interface IProductItemHorizontal {
+  item: IProduct;
+  onPress: Function;
+}
+
+const ProductItemHorizontal = ({item, onPress}: IProductItemHorizontal) => {
   //   console.log(item.product_images.toString());
   return (
     <TouchableOpacity onPress={() => onPress(item.id)} style={styles.container}>
@@ -113,7 +119,7 @@ const styles = StyleSheet.create({
   },
   costView: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 6,
     // justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },

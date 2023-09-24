@@ -75,6 +75,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   seeMoreStyle: {color: colors.VIVID_GAMBOGE},
+  seeLessStyle: {color: colors.MIDNIGHT},
   similar: {paddingHorizontal: 20, gap: 10},
   back: {
     position: 'absolute',

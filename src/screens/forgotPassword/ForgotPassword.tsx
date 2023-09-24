@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -14,22 +15,44 @@ import GenericText from '../../components/generic/GenericText/GenericText';
 import InputWithError from '../../components/generic/InputWithError/InputWithError';
 import {styles} from './style';
 import {ForgotPasswordScreenNavigationProp} from '../../navigation/type';
+import {useAppDispatch, useAppSelector} from '../../redux/store';
+import {forgotPassword} from '../../redux/slices/authSlice/authSlice';
+import Tick from '../../components/generic/Tick/Tick';
 const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
-  const [emailForgot, setEmailForgot] = useState('');
+  const [email, setEmail] = useState('');
+  const [emailSubmit, setEmailSubmit] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const forgotLoading = useAppSelector(state => state.auth.isLoading);
 
   function emailForgotHandler(emailForgot: string): void {
-    setEmailForgot(emailForgot);
+    setEmail(emailForgot);
     console.log(emailForgot);
   }
 
-  function press() {
+  async function press() {
     //   dis(emailForgot);
     setShowErr(true);
     console.log('submit');
-    navigation.navigate('SignIn');
+
+    if (!email.trim() || !validateEmail(email)) {
+      Alert.alert('Please enter correct details');
+    } else {
+      try {
+        await dispatch(forgotPassword(email)).unwrap();
+        setEmailSubmit(true);
+        setTimeout(() => {
+          setEmailSubmit(false);
+          setEmail('');
+          navigation.navigate('SignIn');
+        }, 1300);
+      } catch {
+        console.log('some error');
+      }
+    }
   }
-  console.log(emailForgotHandler, emailForgot);
+  console.log(emailForgotHandler, email);
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -50,19 +73,27 @@ const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
           inputMode={'email'}
           icon={'email'}
           onChangeText={emailForgotHandler}
-          value={emailForgot}
+          value={email}
           validator={validateEmail}
           showErr={showErr}
           errorText={'Please enter correct email address'}
         />
-        <GenericButton
-          onPress={press}
-          title="Submit"
-          fontSize={26}
-          fontFamily="Gilroy-Bold"
-          style={styles.buttonStyle}
-          color="white"
-        />
+
+        <View style={styles.buttonContainer}>
+          {!emailSubmit ? (
+            <GenericButton
+              disabled={forgotLoading}
+              onPress={press}
+              title="Submit"
+              fontSize={26}
+              fontFamily="Gilroy-Bold"
+              style={styles.buttonStyle}
+              color="white"
+            />
+          ) : (
+            <Tick />
+          )}
+        </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

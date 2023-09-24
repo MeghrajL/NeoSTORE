@@ -105,8 +105,8 @@ export const deleteCart = createAsyncThunk(
       const formData = new FormData();
       formData.append('product_id', params.product_id);
       const headers = {
-        access_token: params.access_token, // Add your access token to the custom header
-        'Content-Type': 'multipart/form-data', // Important for FormData
+        access_token: params.access_token,
+        'Content-Type': 'multipart/form-data',
       };
       const response = await axios.post(
         `${baseUrl}/${deleteCartItem}`,

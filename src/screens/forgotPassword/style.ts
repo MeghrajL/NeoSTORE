@@ -29,13 +29,19 @@ export const styles = StyleSheet.create({
     minWidth: 50,
     maxHeight: 60,
     maxWidth: 400,
-    height: 60,
-    width: '90%',
+    height: 50,
+    width: '100%',
     fontFamily: 'Gilroy-Bold',
   },
   imageStyle: {
     height: 200,
     width: 200,
     resizeMode: 'cover',
+  },
+  buttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+    width: '90%',
   },
 });

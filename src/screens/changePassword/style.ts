@@ -6,9 +6,10 @@ export const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     // alignItems: 'center',
-    // // justifyContent: 'flex-start',
-    // paddingTop: 50,
-    // gap: 20,
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    // paddingTop: 180,
+    gap: 20,
   },
   title: {
     fontSize: 25,
@@ -29,13 +30,24 @@ export const styles = StyleSheet.create({
     minWidth: 50,
     maxHeight: 60,
     maxWidth: 400,
-    height: 60,
-    width: '90%',
+    height: 50,
+    width: '100%',
     fontFamily: 'Gilroy-Bold',
   },
   imageStyle: {
     height: 200,
     width: 200,
     resizeMode: 'cover',
+  },
+  innerContainer: {
+    gap: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+    width: '90%',
   },
 });

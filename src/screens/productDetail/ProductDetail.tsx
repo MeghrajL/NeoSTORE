@@ -30,6 +30,7 @@ import ReadMore from '@fawazahmed/react-native-read-more';
 import IconButton from '../../components/generic/IconButton/IconButton';
 import {colors} from '../../assets/colors';
 import LottieView from 'lottie-react-native';
+import Tick from '../../components/generic/Tick/Tick';
 
 const ProductDetail = ({
   navigation,
@@ -142,6 +143,7 @@ const ProductDetail = ({
               </GenericText> */}
               <ReadMore
                 seeMoreStyle={styles.seeMoreStyle}
+                seeLessStyle={styles.seeLessStyle}
                 style={styles.descriptionText}>
                 {productItem?.description}
               </ReadMore>
@@ -163,14 +165,7 @@ const ProductDetail = ({
                   color="white"
                 />
               ) : (
-                <View style={styles.cartButtonStyle}>
-                  <LottieView
-                    style={styles.imageStyle}
-                    source={require('../../assets/gif/tick.json')}
-                    autoPlay
-                    loop
-                  />
-                </View>
+                <Tick />
               )}
             </View>
             <View style={styles.similar}>
