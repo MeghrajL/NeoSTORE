@@ -4,6 +4,8 @@ export const register = 'users/register';
 export const signin = 'users/login';
 export const forgot = 'users/forgot';
 export const change = 'users/change';
+export const update = 'users/update';
+export const getUserData = 'users/getUserData';
 
 export const getList = 'products/getList';
 export const getDetail = 'products/getDetail';

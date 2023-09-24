@@ -54,6 +54,8 @@ interface IData {
 export interface IUserAccountDetails {
   status: number;
   data: IData | null;
+  message: string;
+  user_msg: string;
 }
 
 export interface IInitialState {
@@ -62,7 +64,7 @@ export interface IInitialState {
   isError: boolean;
   forgotPassData: IForgotPassData | null;
   changePassData: IChangePassData | null;
-  updateDetailsData: null;
+  updateDetailsData: IUser | null;
   userAccountDetails: IUserAccountDetails | null;
 }
 
@@ -90,4 +92,14 @@ export interface IChangePasswordParams {
 
 export interface IForgotPasswordParams {
   password: string;
+}
+
+export interface IUpdateDetailsFormData {
+  first_name: string;
+  last_name: string;
+  email: string;
+  dob: string;
+  profile_pic: string;
+  phone_no: string;
+  access_token: string | undefined;
 }

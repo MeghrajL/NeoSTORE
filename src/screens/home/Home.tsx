@@ -12,14 +12,19 @@ import {useAppSelector, useAppDispatch} from '../../redux/store';
 import {getProduct} from '../../redux/slices/productSlice/productSlice';
 import Product from '../../components/homeComponents/ProductWithApi/ProductWithApi';
 import CategoryTypes from '../../components/homeComponents/CategoryTypes/CategoryTypes';
+import {getUserAccountDetails} from '../../redux/slices/authSlice/authSlice';
 const Home = ({navigation}: HomeScreenNavigationProp) => {
   const dispatch = useAppDispatch();
-  // const product = useAppSelector(state => state.product.productData);
-  // console.log('from home', product);
-
-  // useEffect(() => {
-  //   dispatch(getProduct({product_id: '1'}));
-  // }, [dispatch]);
+  // const userData = useAppSelector(
+  //   state => state.auth.userAccountDetails?.data?.user_data,
+  // );
+  // console.log('from home', userData);
+  const access_token = useAppSelector(
+    state => state.auth.user?.data?.access_token,
+  );
+  useEffect(() => {
+    dispatch(getUserAccountDetails(access_token));
+  }, [dispatch, access_token]);
 
   return (
     <SafeAreaView>

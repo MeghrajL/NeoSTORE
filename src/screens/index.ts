@@ -7,6 +7,7 @@ import Category from './category/index';
 import ProductDetail from './productDetail/index';
 import ForgotPassword from './forgotPassword/index';
 import ChangePassword from './changePassword/index';
+import UpdateDetails from './updateDeatils/index';
 export {
   Home,
   Category,
@@ -17,4 +18,5 @@ export {
   ProductDetail,
   ForgotPassword,
   ChangePassword,
+  UpdateDetails,
 };

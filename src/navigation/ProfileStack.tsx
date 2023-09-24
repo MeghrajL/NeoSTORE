@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {ChangePassword} from '../screens/index';
+import {ChangePassword, UpdateDetails} from '../screens/index';
 import {colors} from '../assets/colors';
 import {StatusBar, Text, TouchableOpacity} from 'react-native';
 import IconButton from '../components/generic/IconButton/IconButton';
@@ -29,6 +29,21 @@ const ProfileStack = ({navigation}: ProfileStackScreenNavigationProp) => {
                 icon="arrow-back-outline"
                 size={28}
                 onPressCustom={() => navigation.navigate('Home')}
+                color="white"
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="UpdateDetails"
+          component={UpdateDetails}
+          options={{
+            headerTitle: 'Update Details',
+            headerLeft: () => (
+              <IconButton
+                icon="arrow-back-outline"
+                size={28}
+                onPressCustom={() => navigation.navigate('ChangePassword')}
                 color="white"
               />
             ),

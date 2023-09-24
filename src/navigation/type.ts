@@ -15,6 +15,7 @@ export type RootStackParamList = {
   ForgotPassword: undefined;
   ProfileStack: undefined;
   ChangePassword: undefined;
+  UpdateDetails: undefined;
 };
 
 export type OnboardingScreenNavigationProp = NativeStackScreenProps<
@@ -81,4 +82,8 @@ export type ProductDetailScreenNavigationProp = NativeStackScreenProps<
 export type ChangePasswordScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
   'ChangePassword'
+>;
+export type UpdateDetailsScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'UpdateDetails'
 >;

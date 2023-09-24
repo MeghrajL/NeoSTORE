@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
   Alert,
+  Button,
 } from 'react-native';
 import React, {useState} from 'react';
 import {ChangePasswordScreenNavigationProp} from '../../navigation/type';
@@ -101,6 +102,10 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
         <GenericText>Enter your old password.</GenericText>
         <GenericText>Create new password and confirm it.</GenericText>
       </View>
+      <Button
+        title="update"
+        onPress={() => navigation.navigate('UpdateDetails')}
+      />
       <View style={styles.innerContainer}>
         <InputWithError
           placeholder={'Old Password'}

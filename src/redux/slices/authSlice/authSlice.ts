@@ -5,10 +5,19 @@ import {
   IInitialState,
   IRegistrationFormData,
   ISignInFormData,
+  IUpdateDetailsFormData,
 } from './type';
 import axios from 'axios';
 import Toast from 'react-native-simple-toast';
-import {baseUrl, change, forgot, register, signin} from '../../../url';
+import {
+  baseUrl,
+  change,
+  forgot,
+  getUserData,
+  register,
+  signin,
+  update,
+} from '../../../url';
 
 const initialState: IInitialState = {
   user: null,
@@ -118,6 +127,59 @@ export const forgotPassword = createAsyncThunk(
   },
 );
 
+export const getUserAccountDetails = createAsyncThunk(
+  'auth/getUserAccountDetails',
+  async (access_token: string | undefined, thunkAPI) => {
+    console.log(access_token);
+
+    const headers = {
+      access_token: access_token,
+    };
+    try {
+      const response = await axios.get(`${baseUrl}/${getUserData}`, {
+        headers,
+      });
+      // Toast.show('password changed succesfully', Toast.SHORT);
+      console.log('user data', response.data);
+      return response.data;
+    } catch (error: any) {
+      Toast.show('try again', Toast.SHORT);
+      console.log(error.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
+export const updateDetails = createAsyncThunk(
+  'auth/updateDetails',
+  async (user: IUpdateDetailsFormData, thunkAPI) => {
+    console.log(user);
+    var formData = new FormData();
+    formData.append('first_name', user.first_name);
+    formData.append('last_name', user.last_name);
+    formData.append('email', user.email);
+    formData.append('dob', user.dob);
+    formData.append('profile_pic', user.profile_pic);
+    formData.append('phone_no', Number(user.phone_no));
+    const headers = {
+      access_token: user.access_token,
+      'Content-Type': 'multipart/form-data',
+    };
+    try {
+      const response = await axios.post(`${baseUrl}/${update}`, formData, {
+        headers,
+      });
+      Toast.show('Details updated successfully', Toast.SHORT);
+      console.log(response.data);
+
+      return response.data;
+    } catch (error: any) {
+      Toast.show('try again', Toast.SHORT);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -173,6 +235,33 @@ export const authSlice = createSlice({
         state.isError = false;
       })
       .addCase(forgotPassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+      })
+      .addCase(getUserAccountDetails.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getUserAccountDetails.fulfilled, (state, action) => {
+        state.userAccountDetails = action.payload;
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(getUserAccountDetails.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+      })
+      .addCase(updateDetails.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(updateDetails.fulfilled, (state, action) => {
+        state.user = action.payload;
+        if (state.userAccountDetails?.data) {
+          state.userAccountDetails.data.user_data = action.payload.data;
+        }
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(updateDetails.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
       });
