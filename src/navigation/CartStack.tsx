@@ -13,6 +13,8 @@ const CartStack = ({navigation}: CartStackScreenNavigationProp) => {
       <Stack.Navigator
         screenOptions={{
           headerStyle: {backgroundColor: colors.MIDNIGHT},
+          headerTitleAlign: 'center',
+
           headerTitleStyle: {
             fontFamily: 'Gilroy-Bold',
             color: 'white',

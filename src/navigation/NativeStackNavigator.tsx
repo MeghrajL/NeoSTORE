@@ -58,6 +58,7 @@ const NativeStackNavigator = () => {
       <Stack.Screen
         options={{
           headerShown: true,
+          headerTitleAlign: 'center',
           headerStyle: {backgroundColor: colors.MIDNIGHT},
           headerTitleStyle: {
             fontFamily: 'Gilroy-Bold',

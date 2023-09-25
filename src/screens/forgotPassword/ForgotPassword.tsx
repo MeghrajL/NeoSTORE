@@ -64,8 +64,12 @@ const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
           source={require('../../assets/images/forgotpass.png')}
         />
         <View style={styles.instruction}>
-          <GenericText>Enter your email for verification process.</GenericText>
-          <GenericText>We will mail you the new password.</GenericText>
+          <GenericText style={styles.textStyle}>
+            Enter your email for verification process.
+          </GenericText>
+          <GenericText style={styles.textStyle}>
+            We will mail you the new password.
+          </GenericText>
         </View>
         <InputWithError
           placeholder={'Email'}

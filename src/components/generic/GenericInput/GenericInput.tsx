@@ -10,7 +10,7 @@ interface IGenericInput {
   inputMode: InputModeOptions | undefined;
   onChangeText: (text: string) => void;
   icon: string;
-  value: string;
+  value: string | undefined;
 }
 
 export default function GenericInput({

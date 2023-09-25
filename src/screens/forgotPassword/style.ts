@@ -44,4 +44,7 @@ export const styles = StyleSheet.create({
     height: 50,
     width: '90%',
   },
+  textStyle: {
+    color: colors.MIDNIGHT,
+  },
 });

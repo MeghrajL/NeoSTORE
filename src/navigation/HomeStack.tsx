@@ -13,6 +13,7 @@ const HomeStack = ({navigation}: HomeStackScreenNavigationProp) => {
       <Stack.Navigator
         screenOptions={{
           headerStyle: {backgroundColor: colors.MIDNIGHT},
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontFamily: 'Gilroy-Bold',
             color: 'white',

@@ -12,6 +12,7 @@ const ProfileStack = ({navigation}: ProfileStackScreenNavigationProp) => {
       <StatusBar barStyle="light-content" />
       <Stack.Navigator
         screenOptions={{
+          headerTitleAlign: 'center',
           headerStyle: {backgroundColor: colors.MIDNIGHT},
           headerTitleStyle: {
             fontFamily: 'Gilroy-Bold',
@@ -19,13 +20,7 @@ const ProfileStack = ({navigation}: ProfileStackScreenNavigationProp) => {
             fontSize: 20,
           },
         }}>
-        <Stack.Screen
-          name="Profile"
-          component={Profile}
-          options={{
-            headerTitle: 'Update Details',
-          }}
-        />
+        <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen
           name="ChangePassword"
           component={ChangePassword}

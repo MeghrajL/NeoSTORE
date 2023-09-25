@@ -8,7 +8,7 @@ interface IInputWithError {
   maxLength: number;
   inputMode: InputModeOptions | undefined;
   icon: string;
-  value: string;
+  value: string | undefined;
   onChangeText: (text: string) => void;
   validator: Function;
   showErr: boolean;

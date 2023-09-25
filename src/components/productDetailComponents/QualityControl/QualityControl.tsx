@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginHorizontal: 10,
+    color: colors.RICH_BLACK,
   },
   controlCon: {
     flexDirection: 'row',

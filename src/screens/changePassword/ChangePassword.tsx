@@ -62,7 +62,7 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
             password: '',
             confirm_password: '',
           });
-          navigation.navigate('Home');
+          navigation.navigate('Profile');
         }, 1300);
 
         // navigation.navigate('Home');
@@ -91,21 +91,29 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
   // console.log(emailForgotHandler, emailForgot);
   return (
     // <SafeAreaView style={styles.container}>
-    //   <ScrollView style={{flex: 1}}>
+    // <ScrollView style={{flex: 1}}>
     <KeyboardAvoidingView
       keyboardVerticalOffset={Platform.OS === 'ios' ? -70 : 70}
       enabled
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust behavior for iOS or Android
       style={styles.contentContainer}>
       {/* <KeyboardAvoidingScrollView scrollEventThrottle={1} style={{flex: 1}}> */}
+      {/* <Image
+        style={styles.imageStyle}
+        source={require('../../assets/images/forgotpass.png')}
+      /> */}
       <View style={styles.instruction}>
-        <GenericText>Enter your old password.</GenericText>
-        <GenericText>Create new password and confirm it.</GenericText>
+        <GenericText style={styles.textStyle}>
+          Enter your old password.
+        </GenericText>
+        <GenericText style={styles.textStyle}>
+          Create new password and confirm it.
+        </GenericText>
       </View>
-      <Button
+      {/* <Button
         title="update"
         onPress={() => navigation.navigate('UpdateDetails')}
-      />
+      /> */}
       <View style={styles.innerContainer}>
         <InputWithError
           placeholder={'Old Password'}
@@ -159,9 +167,10 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
           )}
         </View>
       </View>
+      <View style={{flex: 1}} />
       {/* </KeyboardAvoidingScrollView> */}
     </KeyboardAvoidingView>
-    //   </ScrollView>
+
     // </SafeAreaView>
   );
 };

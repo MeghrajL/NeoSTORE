@@ -8,6 +8,7 @@ import {colors} from '../assets/colors';
 import {useIsFocused} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {RootStackParamList} from './type';
+import {Platform} from 'react-native';
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
@@ -15,26 +16,36 @@ const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        tabBarHideOnKeyboard: true,
         tabBarActiveBackgroundColor: colors.VIVID_GAMBOGE,
         tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: '#ccc',
         tabBarItemStyle: {borderRadius: 30, margin: 10},
 
         tabBarStyle: {
+          // justifyContent: 'center',
+          // alignItems: 'center',
+          // backgroundColor: 'white',
+          // height: Platform.OS === 'android' ? '8%' : '10%',
+          // borderTopLeftRadius: 30,
+          // borderTopRightRadius: 30,
+          // overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+          // position: 'absolute',
+          // borderTopWidth: 0,
+          // elevation: 100,
+          // shadowRadius: 20,
+          // shadowColor: 'black',
+          // shadowOpacity: 0.4,
+          // shadowOffset: {height: -10, width: 0},
+
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: 'white',
-          height: '10%',
-          // padding: 10,
-          // paddingVertical: 10,
-          // paddingHorizontal: 10,
-          // borderRadius: 30,
+          height: Platform.OS === 'android' ? '8%' : '10%',
           borderStartStartRadius: 30,
           borderStartEndRadius: 30,
-          // overflow: 'hidden',
-          // marginBottom: 3,
           position: 'absolute',
-          borderTopWidth: 0,
+          borderTopWidth: Platform.OS === 'android' ? 1 : 0,
           elevation: 4,
           shadowRadius: 20,
           shadowColor: '#ccc',

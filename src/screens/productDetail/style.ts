@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {colors} from '../../assets/colors';
 
 export const styles = StyleSheet.create({
@@ -23,13 +23,16 @@ export const styles = StyleSheet.create({
     shadowColor: '#ccc',
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    shadowOffset: {height: -5, width: 0},
-    elevation: 4,
+    shadowOffset: {height: 5, width: 0},
+    elevation: 15,
     paddingHorizontal: 20,
-    borderStartStartRadius: 30,
-    borderStartEndRadius: 30,
+    borderEndStartRadius: 30,
+    borderEndEndRadius: 30,
+    borderBottomLeftRadius: Platform.OS === 'android' ? 30 : undefined,
+    borderBottomRightRadius: Platform.OS === 'android' ? 30 : undefined,
     paddingTop: 30,
-    // paddingBottom: 15,
+    paddingBottom: 15,
+    overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
   },
   visual: {flexDirection: 'row', justifyContent: 'space-between'},
   producer: {

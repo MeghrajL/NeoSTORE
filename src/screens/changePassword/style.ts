@@ -8,8 +8,8 @@ export const styles = StyleSheet.create({
     // alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
-    // paddingTop: 180,
-    gap: 20,
+    paddingTop: 80,
+    // gap: 10,
   },
   title: {
     fontSize: 25,
@@ -35,9 +35,12 @@ export const styles = StyleSheet.create({
     fontFamily: 'Gilroy-Bold',
   },
   imageStyle: {
-    height: 200,
-    width: 200,
+    height: 150,
+    width: 150,
     resizeMode: 'cover',
+    alignSelf: 'center',
+    // marginHorizontal: 100,
+    // marginBottom: 50,
   },
   innerContainer: {
     gap: 20,
@@ -49,5 +52,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     height: 50,
     width: '90%',
+  },
+  textStyle: {
+    color: colors.MIDNIGHT,
   },
 });
