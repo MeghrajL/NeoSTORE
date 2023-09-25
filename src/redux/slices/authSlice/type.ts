@@ -36,7 +36,7 @@ export interface IChangePassData {
   user_msg: string;
 }
 
-interface IProductCategory {
+export interface IProductCategory {
   id: number;
   name: string;
   icon_image: string;

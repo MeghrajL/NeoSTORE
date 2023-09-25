@@ -58,7 +58,7 @@ const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust behavior for iOS or Android
         style={styles.contentContainer}>
-        <GenericText style={styles.title}>Forgot Password</GenericText>
+        {/* <GenericText style={styles.title}>Forgot Password</GenericText> */}
         <Image
           style={styles.imageStyle}
           source={require('../../assets/images/forgotpass.png')}

@@ -8,12 +8,19 @@ import {
 } from '../screens/index';
 import BottomTabNavigator from './BottomTabNavigator';
 import {useEffect, useState} from 'react';
-import {RootStackParamList} from './type';
+import {
+  NativeStackNavigatorScreenNavigationProp,
+  RootStackParamList,
+} from './type';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const storage = new MMKV();
 import {useAppSelector} from '../redux/store';
+import {colors} from '../assets/colors';
+import IconButton from '../components/generic/IconButton/IconButton';
+import {useNavigation} from '@react-navigation/native';
 const NativeStackNavigator = () => {
+  const navigation = useNavigation();
   let routeName: keyof RootStackParamList = 'Onboarding';
   const [isFirstLaunch, setIsFirstLaunch] = useState(-1);
   const authState = useAppSelector(state => state.auth);
@@ -48,7 +55,28 @@ const NativeStackNavigator = () => {
       <Stack.Screen name="Onboarding" component={OnboardingContainer} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          headerStyle: {backgroundColor: colors.MIDNIGHT},
+          headerTitleStyle: {
+            fontFamily: 'Gilroy-Bold',
+            color: 'white',
+            fontSize: 20,
+          },
+          headerTitle: 'Forgot Password',
+          headerLeft: () => (
+            <IconButton
+              icon="arrow-back-outline"
+              size={28}
+              onPressCustom={() => navigation.navigate('SignIn')}
+              color="white"
+            />
+          ),
+        }}
+        name="ForgotPassword"
+        component={ForgotPassword}
+      />
       <Stack.Screen name="MainNav" component={BottomTabNavigator} />
     </Stack.Navigator>
   );

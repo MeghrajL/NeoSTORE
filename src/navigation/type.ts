@@ -2,6 +2,7 @@ import {RouteProp} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
+  NativeStackNavigator:undefined;
   Onboarding: undefined;
   Register: undefined;
   MainNav: undefined;
@@ -16,6 +17,7 @@ export type RootStackParamList = {
   ProfileStack: undefined;
   ChangePassword: undefined;
   UpdateDetails: undefined;
+  Profile: undefined;
 };
 
 export type OnboardingScreenNavigationProp = NativeStackScreenProps<
@@ -36,6 +38,11 @@ export type ForgotPasswordScreenNavigationProp = NativeStackScreenProps<
 export type MainNavScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
   'MainNav'
+>;
+
+export type NativeStackNavigatorScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'NativeStackNavigator'
 >;
 export type HomeStackScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
@@ -77,6 +84,11 @@ export type CategoryScreenRouteProp = RouteProp<RootStackParamList, 'Category'>;
 export type ProductDetailScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
   'ProductDetail'
+>;
+
+export type ProfileScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'Profile'
 >;
 
 export type ChangePasswordScreenNavigationProp = NativeStackScreenProps<

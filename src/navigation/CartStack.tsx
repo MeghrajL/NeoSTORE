@@ -22,16 +22,16 @@ const CartStack = ({navigation}: CartStackScreenNavigationProp) => {
         <Stack.Screen
           name="Cart"
           component={Cart}
-          options={{
-            headerLeft: () => (
-              <IconButton
-                icon="arrow-back-outline"
-                size={28}
-                onPressCustom={() => navigation.navigate('Home')}
-                color="white"
-              />
-            ),
-          }}
+          // options={{
+          //   headerLeft: () => (
+          //     <IconButton
+          //       icon="arrow-back-outline"
+          //       size={28}
+          //       onPressCustom={() => navigation.navigate('Home')}
+          //       color="white"
+          //     />
+          //   ),
+          // }}
         />
       </Stack.Navigator>
     </>

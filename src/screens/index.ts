@@ -8,6 +8,7 @@ import ProductDetail from './productDetail/index';
 import ForgotPassword from './forgotPassword/index';
 import ChangePassword from './changePassword/index';
 import UpdateDetails from './updateDeatils/index';
+import Profile from './Profile/index';
 export {
   Home,
   Category,
@@ -19,4 +20,5 @@ export {
   ForgotPassword,
   ChangePassword,
   UpdateDetails,
+  Profile,
 };

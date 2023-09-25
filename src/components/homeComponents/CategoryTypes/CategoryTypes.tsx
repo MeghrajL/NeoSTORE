@@ -12,8 +12,13 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import GenericText from '../../generic/GenericText/GenericText';
 import {colors} from '../../../assets/colors';
 import {RootStackParamList} from '../../../navigation/type';
+import {IProductCategory} from '../../../redux/slices/authSlice/type';
 
-const CategoryTypes = () => {
+interface ICategoryTypes {
+  product_categories: IProductCategory[];
+}
+
+const CategoryTypes = ({product_categories}: ICategoryTypes) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const onPressHandler = (
@@ -26,52 +31,45 @@ const CategoryTypes = () => {
     });
   };
 
-  const Data = [
-    {
-      product_category_id: 1,
-      image: require('../../../assets/images/table.jpg'),
-      name: 'Tables',
-    },
-    {
-      product_category_id: 2,
-      image: require('../../../assets/images/chair.jpg'),
-      name: 'Chairs',
-    },
-    {
-      product_category_id: 3,
-      image: require('../../../assets/images/sofa.jpeg'),
-      name: 'Sofas',
-    },
-    {
-      product_category_id: 4,
-      image: require('../../../assets/images/bed.jpeg'),
-      name: 'Beds',
-    },
-  ];
+  const imageData = {
+    Table: require('../../../assets/images/table.jpg'),
+    Chairs: require('../../../assets/images/chair.jpg'),
+    Sofa: require('../../../assets/images/sofa.jpeg'),
+    Beds: require('../../../assets/images/bed.jpeg'),
+  };
 
   return (
     <View style={styles.container}>
       <Text>Shop by Category</Text>
 
-      {Data?.map(item => {
+      {product_categories?.map(item => {
         return (
           <TouchableOpacity
-            key={item.product_category_id}
+            key={item.id}
             activeOpacity={0.9}
             style={styles.imageContainer}
-            onPress={() => onPressHandler(item.product_category_id, item.name)}>
+            onPress={() => onPressHandler(item.id, item.name)}>
             <View
               style={{
                 flex: 1,
-                borderRadius: 30, // Adjust the border radius as needed
+                borderRadius: 30,
                 overflow: 'hidden',
                 height: '100%',
                 width: '100%',
+                // alignItems: 'flex-start',
               }}>
-              <ImageBackground
-                imageStyle={styles.imageStyle}
-                source={item?.image}
-              />
+              {imageData[item.name] ? (
+                <ImageBackground
+                  imageStyle={styles.imageStyle}
+                  source={imageData[item.name]}
+                />
+              ) : (
+                <ImageBackground
+                  imageStyle={styles.imageStyle}
+                  source={{uri: item.icon_image}}
+                />
+              )}
+
               <GenericText textType="medium" style={styles.text}>
                 {item.name}
               </GenericText>
@@ -93,6 +91,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     // borderRadius: 30,
+
     height: 150,
     width: '95%',
   },
@@ -102,12 +101,16 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   text: {
-    height: 150,
-    width: '100%',
     color: colors.MIDNIGHT,
     fontSize: 35,
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingTop: 10,
+    paddingTop: 20,
+    paddingLeft: 20,
+    shadowColor: 'white',
+    shadowRadius: 3,
+    shadowOpacity: 0.5,
+    shadowOffset: {height: 1, width: 1},
+    elevation: 4,
   },
 });

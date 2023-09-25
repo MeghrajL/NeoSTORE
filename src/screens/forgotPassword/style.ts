@@ -6,8 +6,8 @@ export const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    paddingTop: '20%',
+    justifyContent: 'center',
+    // paddingTop: '20%',
     gap: 20,
   },
   title: {

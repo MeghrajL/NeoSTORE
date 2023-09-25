@@ -13,22 +13,33 @@ import {getProduct} from '../../redux/slices/productSlice/productSlice';
 import Product from '../../components/homeComponents/ProductWithApi/ProductWithApi';
 import CategoryTypes from '../../components/homeComponents/CategoryTypes/CategoryTypes';
 import {getUserAccountDetails} from '../../redux/slices/authSlice/authSlice';
+import Loading from '../../components/generic/Loading/Loading';
 const Home = ({navigation}: HomeScreenNavigationProp) => {
   const dispatch = useAppDispatch();
-  // const userData = useAppSelector(
-  //   state => state.auth.userAccountDetails?.data?.user_data,
-  // );
-  // console.log('from home', userData);
+
   const access_token = useAppSelector(
     state => state.auth.user?.data?.access_token,
   );
+  const isLoading = useAppSelector(state => state.auth.isLoading);
+  console.log(isLoading);
   useEffect(() => {
-    dispatch(getUserAccountDetails(access_token));
+    try {
+      dispatch(getUserAccountDetails(access_token));
+      console.log('😎dis');
+    } catch (error) {
+      console.log('some error');
+    }
   }, [dispatch, access_token]);
 
+  const userData = useAppSelector(state => state.auth.userAccountDetails?.data);
+  console.log('from home', userData);
+
   return (
-    <SafeAreaView>
-      <ScrollView>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+      <ScrollView style={{flex: 1}}>
+        {/* {isLoading ? (
+          <Loading />
+        ) : ( */}
         <View>
           {/* <Product product_id={10} />
         <Product product_id={11} />
@@ -38,8 +49,9 @@ const Home = ({navigation}: HomeScreenNavigationProp) => {
             title="signin"
             onPress={() => navigation.navigate('SignIn')}
           />
-          <CategoryTypes />
+          <CategoryTypes product_categories={userData?.product_categories} />
         </View>
+        {/* )} */}
       </ScrollView>
     </SafeAreaView>
   );
