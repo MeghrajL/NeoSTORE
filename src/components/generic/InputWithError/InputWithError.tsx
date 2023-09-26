@@ -29,7 +29,7 @@ const InputWithError = ({
   samePass,
 }: IInputWithError) => {
   const [err, setErr] = useState('');
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState(value);
 
   useEffect(() => {
     if (placeholder === 'Confirm Password') {

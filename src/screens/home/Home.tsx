@@ -35,25 +35,22 @@ const Home = ({navigation}: HomeScreenNavigationProp) => {
   console.log('from home', userData);
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <ScrollView style={{flex: 1}}>
-        {/* {isLoading ? (
+    // <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+    <ScrollView contentContainerStyle={{paddingBottom: 60}}>
+      {/* {isLoading ? (
           <Loading />
         ) : ( */}
-        <View>
-          {/* <Product product_id={10} />
+      <View>
+        {/* <Product product_id={10} />
         <Product product_id={11} />
         <Product product_id={12} />
         <Product product_id={13} /> */}
-          <Button
-            title="signin"
-            onPress={() => navigation.navigate('SignIn')}
-          />
-          <CategoryTypes product_categories={userData?.product_categories} />
-        </View>
-        {/* )} */}
-      </ScrollView>
-    </SafeAreaView>
+        <Button title="signin" onPress={() => navigation.navigate('SignIn')} />
+        <CategoryTypes product_categories={userData?.product_categories} />
+      </View>
+      {/* )} */}
+    </ScrollView>
+    // </SafeAreaView>
   );
 };
 

@@ -31,6 +31,7 @@ import IconButton from '../../components/generic/IconButton/IconButton';
 import {colors} from '../../assets/colors';
 import LottieView from 'lottie-react-native';
 import Tick from '../../components/generic/Tick/Tick';
+import Load from '../../components/generic/Load/Load';
 
 const ProductDetail = ({
   navigation,
@@ -83,8 +84,8 @@ const ProductDetail = ({
       dispatch(getCartList({access_token: access_token}));
       setTimeout(() => {
         setAddedToCart(false);
-      }, 1300);
-      Vibration.vibrate(1000);
+      }, 2000);
+      // Vibration.vibrate(1000);
     } catch (error) {
       Toast.show('Something went wrong, Please try again.', Toast.SHORT);
       setAddedToCart(false);
@@ -110,7 +111,9 @@ const ProductDetail = ({
       {isLoading || !dataLoaded ? (
         <Loading />
       ) : (
-        <ScrollView style={styles.container}>
+        <ScrollView
+          contentContainerStyle={{paddingBottom: 60}}
+          style={styles.container}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             style={styles.back}>
@@ -154,9 +157,11 @@ const ProductDetail = ({
                 onIncrease={increaseQuantity}
                 onDecrease={decreaseQuantity}
               />
-              {!addedToCart ? (
+              {cartLoading ? (
+                <Load />
+              ) : !addedToCart ? (
                 <GenericButton
-                  disabled={cartLoading}
+                  // disabled={cartLoading}
                   onPress={handleAddToCart}
                   title="Add to Cart"
                   fontSize={26}

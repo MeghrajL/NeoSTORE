@@ -101,16 +101,18 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   text: {
+    backgroundColor: 'transparent',
     color: colors.MIDNIGHT,
     fontSize: 35,
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingTop: 20,
-    paddingLeft: 20,
-    shadowColor: 'white',
-    shadowRadius: 3,
-    shadowOpacity: 0.5,
-    shadowOffset: {height: 1, width: 1},
-    elevation: 4,
+    paddingTop: 15,
+    // shadowOpacity: 0.5,
+    textShadowColor: 'white', // Text shadow color
+    textShadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    textShadowRadius: 5, // Text shadow radius
   },
 });

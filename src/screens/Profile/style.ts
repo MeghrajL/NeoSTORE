@@ -23,18 +23,24 @@ export const styles = StyleSheet.create({
   imageStyle: {
     height: '70%',
     width: '70%',
-    resizeMode: 'cover',
+    resizeMode: 'contain',
     // backgroundColor: 'pink',
   },
   imageContainer: {
-    // backgroundColor: 'red',
+    backgroundColor: 'white',
     height: 100,
     // width: 100,
     borderWidth: 0.5,
-    borderRadius: 50,
+    borderRadius: 90,
     justifyContent: 'center',
     alignItems: 'center',
     width: '30%',
+
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   infoContainer: {
     gap: 10,

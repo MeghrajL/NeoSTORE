@@ -11,6 +11,7 @@ interface IGenericInput {
   onChangeText: (text: string) => void;
   icon: string;
   value: string | undefined;
+  disabled?: boolean;
 }
 
 export default function GenericInput({
@@ -19,6 +20,7 @@ export default function GenericInput({
   inputMode,
   onChangeText,
   icon,
+  disabled,
   value,
 }: IGenericInput) {
   const [focus, setFocus] = useState(false);
@@ -73,6 +75,7 @@ export default function GenericInput({
         autoCorrect={false}
         autoCapitalize="none"
         value={value}
+        disabled={disabled}
       />
     </View>
   );

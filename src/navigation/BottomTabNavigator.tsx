@@ -20,7 +20,7 @@ const BottomTabNavigator = () => {
         tabBarActiveBackgroundColor: colors.VIVID_GAMBOGE,
         tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: '#ccc',
-        tabBarItemStyle: {borderRadius: 30, margin: 10},
+        tabBarItemStyle: {borderRadius: 30, margin: 5},
 
         tabBarStyle: {
           // justifyContent: 'center',
@@ -41,11 +41,11 @@ const BottomTabNavigator = () => {
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: 'white',
-          height: Platform.OS === 'android' ? '8%' : '10%',
+          height: 55,
           borderStartStartRadius: 30,
           borderStartEndRadius: 30,
           position: 'absolute',
-          borderTopWidth: Platform.OS === 'android' ? 1 : 0,
+          borderTopWidth: Platform.OS === 'android' ? 0.5 : 0,
           elevation: 4,
           shadowRadius: 20,
           shadowColor: '#ccc',
@@ -79,7 +79,7 @@ const BottomTabNavigator = () => {
           ),
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Cart3"
         component={CartStack}
         options={{
@@ -87,7 +87,7 @@ const BottomTabNavigator = () => {
             <Icon name="search" size={26} color={color} />
           ),
         }}
-      />  */}
+      />
     </Tab.Navigator>
   );
 };

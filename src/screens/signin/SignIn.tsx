@@ -8,6 +8,7 @@ import {
   Alert,
   TouchableWithoutFeedback,
   Modal,
+  Keyboard,
 } from 'react-native';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 // import BottomSheet from '@gorhom/bottom-sheet';
@@ -76,62 +77,64 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
   }
 
   return (
-    <SafeAreaView style={styles.safeAreaStyle}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.containerStyle}>
-        <View style={styles.formView}>
-          <Title />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <SafeAreaView style={styles.safeAreaStyle}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.containerStyle}>
+          <View style={styles.formView}>
+            <Title />
 
-          <InputWithError
-            placeholder={'Email'}
-            maxLength={30}
-            inputMode={'email'}
-            icon={'email'}
-            onChangeText={emailHandler}
-            value={user.email}
-            validator={validateEmail}
-            showErr={showErr}
-            errorText={'Please enter correct email address'}
-          />
+            <InputWithError
+              placeholder={'Email'}
+              maxLength={30}
+              inputMode={'email'}
+              icon={'email'}
+              onChangeText={emailHandler}
+              value={user.email}
+              validator={validateEmail}
+              showErr={showErr}
+              errorText={'Please enter correct email address'}
+            />
 
-          <InputWithError
-            placeholder={'Password'}
-            maxLength={20}
-            inputMode={'text'}
-            icon={'account-lock-open'}
-            onChangeText={passwordHandler}
-            value={user.password}
-            validator={validatePassword}
-            showErr={showErr}
-            errorText={'Please enter correct password'}
-          />
+            <InputWithError
+              placeholder={'Password'}
+              maxLength={20}
+              inputMode={'text'}
+              icon={'account-lock-open'}
+              onChangeText={passwordHandler}
+              value={user.password}
+              validator={validatePassword}
+              showErr={showErr}
+              errorText={'Please enter correct password'}
+            />
 
-          <GenericButton
-            onPress={onSignInPress}
-            title="Sign In"
-            fontSize={26}
-            fontFamily="Gilroy-Bold"
-            style={styles.buttonStyle}
-            color="white"
-          />
-          <View style={styles.signInStyle}>
-            <TouchableOpacity onPress={onForgotPress}>
-              <GenericText textType="regular" style={styles.signInStyle}>
-                Forgot Password?
-              </GenericText>
-            </TouchableOpacity>
+            <GenericButton
+              onPress={onSignInPress}
+              title="Sign In"
+              fontSize={26}
+              fontFamily="Gilroy-Bold"
+              style={styles.buttonStyle}
+              color="white"
+            />
+            <View style={styles.signInStyle}>
+              <TouchableOpacity onPress={onForgotPress}>
+                <GenericText textType="regular" style={styles.signInStyle}>
+                  Forgot Password?
+                </GenericText>
+              </TouchableOpacity>
+            </View>
+
+            <Footer
+              dialogueText="Don't have an account?"
+              clickText="Register"
+              onClickPress={onRegisterPress}
+            />
           </View>
-
-          <Footer
-            dialogueText="Don't have an account?"
-            clickText="Register"
-            onClickPress={onRegisterPress}
-          />
-        </View>
-      </KeyboardAvoidingView>
-      <Button title="home" onPress={() => navigation.navigate('Home')} />
-    </SafeAreaView>
+        </KeyboardAvoidingView>
+        <Button title="home" onPress={() => navigation.navigate('Home')} />
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 

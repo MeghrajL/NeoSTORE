@@ -1,11 +1,13 @@
 import {
   Alert,
   Image,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
   StyleSheet,
   Text,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
@@ -54,52 +56,54 @@ const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
   }
   console.log(emailForgotHandler, email);
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust behavior for iOS or Android
-        style={styles.contentContainer}>
-        {/* <GenericText style={styles.title}>Forgot Password</GenericText> */}
-        <Image
-          style={styles.imageStyle}
-          source={require('../../assets/images/forgotpass.png')}
-        />
-        <View style={styles.instruction}>
-          <GenericText style={styles.textStyle}>
-            Enter your email for verification process.
-          </GenericText>
-          <GenericText style={styles.textStyle}>
-            We will mail you the new password.
-          </GenericText>
-        </View>
-        <InputWithError
-          placeholder={'Email'}
-          maxLength={30}
-          inputMode={'email'}
-          icon={'email'}
-          onChangeText={emailForgotHandler}
-          value={email}
-          validator={validateEmail}
-          showErr={showErr}
-          errorText={'Please enter correct email address'}
-        />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <SafeAreaView style={styles.container}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust behavior for iOS or Android
+          style={styles.contentContainer}>
+          {/* <GenericText style={styles.title}>Forgot Password</GenericText> */}
+          <Image
+            style={styles.imageStyle}
+            source={require('../../assets/images/forgotpass.png')}
+          />
+          <View style={styles.instruction}>
+            <GenericText style={styles.textStyle}>
+              Enter your email for verification process.
+            </GenericText>
+            <GenericText style={styles.textStyle}>
+              We will mail you the new password.
+            </GenericText>
+          </View>
+          <InputWithError
+            placeholder={'Email'}
+            maxLength={30}
+            inputMode={'email'}
+            icon={'email'}
+            onChangeText={emailForgotHandler}
+            value={email}
+            validator={validateEmail}
+            showErr={showErr}
+            errorText={'Please enter correct email address'}
+          />
 
-        <View style={styles.buttonContainer}>
-          {!emailSubmit ? (
-            <GenericButton
-              disabled={forgotLoading}
-              onPress={press}
-              title="Submit"
-              fontSize={26}
-              fontFamily="Gilroy-Bold"
-              style={styles.buttonStyle}
-              color="white"
-            />
-          ) : (
-            <Tick />
-          )}
-        </View>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+          <View style={styles.buttonContainer}>
+            {!emailSubmit ? (
+              <GenericButton
+                disabled={forgotLoading}
+                onPress={press}
+                title="Submit"
+                fontSize={26}
+                fontFamily="Gilroy-Bold"
+                style={styles.buttonStyle}
+                color="white"
+              />
+            ) : (
+              <Tick />
+            )}
+          </View>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 

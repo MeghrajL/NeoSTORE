@@ -4,9 +4,10 @@ import {colors} from '../../assets/colors';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eaeaea',
+    backgroundColor: 'white',
   },
   contentStyle: {
+    paddingBottom: 100,
     gap: 10,
     paddingVertical: 10,
     // marginHorizontal: 20,

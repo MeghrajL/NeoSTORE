@@ -91,11 +91,12 @@ export const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#ccc',
-    shadowOpacity: 1,
-    shadowRadius: 2,
-    shadowOffset: {height: 4, width: 2},
-    elevation: 4,
+
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   imageStyle: {
     height: '100%',

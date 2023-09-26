@@ -27,6 +27,7 @@ const ImageCarousel = ({product_images}: IProductImages) => {
         autoPlay={false}
         data={product_images}
         scrollAnimationDuration={1000}
+        snapEnabled={true}
         onProgressChange={(_, absoluteProgress) => {
           handleIndex(Math.round(absoluteProgress));
         }}

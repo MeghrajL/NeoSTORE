@@ -76,7 +76,7 @@ const Category = ({navigation, route}: CategoryScreenNavigationProp) => {
       {isLoading || !dataLoaded ? (
         <Loading />
       ) : (
-        <View style={styles.container}>
+        <View style={{flex: 1}}>
           <FlatList
             data={category?.data}
             renderItem={({item}) => (

@@ -13,6 +13,7 @@ import {
   Pressable,
   Text,
   Alert,
+  Keyboard,
 } from 'react-native';
 
 import {RegisterScreenNavigationProp} from '../../navigation/type';
@@ -106,6 +107,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
       !user.confirm_password.trim() ||
       !user.phone_no.trim() ||
       !validateName(user.first_name) ||
+      !validateName(user.last_name) ||
       !validateEmail(user.email) ||
       !validatePassword(user.password) ||
       !validatePhone(user.phone_no) ||
@@ -124,126 +126,128 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
   }
 
   return (
-    <SafeAreaView style={styles.safeAreaStyle}>
-      {/* <Pressable onPress={() => navigation.navigate('MainNav')}>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <SafeAreaView style={styles.safeAreaStyle}>
+        {/* <Pressable onPress={() => navigation.navigate('MainNav')}>
           <Text>nav</Text>
         </Pressable>
         */}
-      {/* <Pressable onPress={() => navigation.navigate('Onboarding')}>
+        {/* <Pressable onPress={() => navigation.navigate('Onboarding')}>
         <Text>ob</Text>
       </Pressable> */}
 
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        // keyboardVerticalOffset={keyboardVerticalOffset}
-        style={styles.containerStyle}>
-        <ScrollView>
-          <Title />
-          <View style={styles.formView}>
-            <InputWithError
-              placeholder={'First Name'}
-              maxLength={20}
-              inputMode={'text'}
-              icon={'human-greeting-variant'}
-              onChangeText={fnameHandler}
-              value={user.first_name}
-              validator={validateName}
-              showErr={showErr}
-              errorText={'Please do not use spaces'}
-            />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          // keyboardVerticalOffset={keyboardVerticalOffset}
+          style={styles.containerStyle}>
+          <ScrollView>
+            <Title />
+            <View style={styles.formView}>
+              <InputWithError
+                placeholder={'First Name'}
+                maxLength={20}
+                inputMode={'text'}
+                icon={'human-greeting-variant'}
+                onChangeText={fnameHandler}
+                value={user.first_name}
+                validator={validateName}
+                showErr={showErr}
+                errorText={'Please do not use spaces'}
+              />
 
-            <InputWithError
-              placeholder={'Last Name'}
-              maxLength={20}
-              inputMode={'text'}
-              icon={'human-queue'}
-              onChangeText={lnameHandler}
-              value={user.last_name}
-              validator={validateName}
-              showErr={showErr}
-              errorText={'Please do not use spaces'}
-            />
+              <InputWithError
+                placeholder={'Last Name'}
+                maxLength={20}
+                inputMode={'text'}
+                icon={'human-queue'}
+                onChangeText={lnameHandler}
+                value={user.last_name}
+                validator={validateName}
+                showErr={showErr}
+                errorText={'Please do not use spaces'}
+              />
 
-            <InputWithError
-              placeholder={'Email'}
-              maxLength={30}
-              inputMode={'email'}
-              icon={'email'}
-              onChangeText={emailHandler}
-              value={user.email}
-              validator={validateEmail}
-              showErr={showErr}
-              errorText={'Please enter correct email address'}
-            />
+              <InputWithError
+                placeholder={'Email'}
+                maxLength={30}
+                inputMode={'email'}
+                icon={'email'}
+                onChangeText={emailHandler}
+                value={user.email}
+                validator={validateEmail}
+                showErr={showErr}
+                errorText={'Please enter correct email address'}
+              />
 
-            <InputWithError
-              placeholder={'Password'}
-              maxLength={20}
-              inputMode={'text'}
-              icon={'account-lock-open'}
-              onChangeText={passwordHandler}
-              value={user.password}
-              validator={validatePassword}
-              showErr={showErr}
-              errorText={'Please enter correct password'}
-            />
+              <InputWithError
+                placeholder={'Password'}
+                maxLength={20}
+                inputMode={'text'}
+                icon={'account-lock-open'}
+                onChangeText={passwordHandler}
+                value={user.password}
+                validator={validatePassword}
+                showErr={showErr}
+                errorText={'Please enter correct password'}
+              />
 
-            <InputWithError
-              placeholder={'Confirm Password'}
-              maxLength={20}
-              inputMode={'text'}
-              icon={'account-lock'}
-              onChangeText={confirmPasswordHandler}
-              value={user.confirm_password}
-              validator={() => samePass}
-              samePass={samePass}
-              showErr={true}
-              errorText={'Both passwords should match'}
-            />
+              <InputWithError
+                placeholder={'Confirm Password'}
+                maxLength={20}
+                inputMode={'text'}
+                icon={'account-lock'}
+                onChangeText={confirmPasswordHandler}
+                value={user.confirm_password}
+                validator={() => samePass}
+                samePass={samePass}
+                showErr={true}
+                errorText={'Both passwords should match'}
+              />
 
-            <InputWithError
-              placeholder={'Phone Number'}
-              maxLength={10}
-              inputMode={'numeric'}
-              icon={'phone-classic'}
-              onChangeText={phoneNumberHandler}
-              value={user.phone_no}
-              validator={validatePhone}
-              showErr={showErr}
-              errorText={'Please enter 10 digit phone number'}
-            />
+              <InputWithError
+                placeholder={'Phone Number'}
+                maxLength={10}
+                inputMode={'numeric'}
+                icon={'phone-classic'}
+                onChangeText={phoneNumberHandler}
+                value={user.phone_no}
+                validator={validatePhone}
+                showErr={showErr}
+                errorText={'Please enter 10 digit phone number'}
+              />
 
-            <Gender
-              gender={user.gender}
-              maleHandler={maleHandler}
-              femaleHandler={femaleHandler}
-              showErr={showErr}
-            />
+              <Gender
+                gender={user.gender}
+                maleHandler={maleHandler}
+                femaleHandler={femaleHandler}
+                showErr={showErr}
+              />
 
-            <Agree
-              checkBoxChecked={checkBoxChecked}
-              checkboxHandler={checkboxHandler}
-              showErr={showErr}
-            />
+              <Agree
+                checkBoxChecked={checkBoxChecked}
+                checkboxHandler={checkboxHandler}
+                showErr={showErr}
+              />
 
-            <GenericButton
-              onPress={onRegisterPress}
-              title="Register"
-              fontSize={26}
-              fontFamily="Gilroy-Bold"
-              style={styles.buttonStyle}
-              color="white"
-            />
+              <GenericButton
+                onPress={onRegisterPress}
+                title="Register"
+                fontSize={26}
+                fontFamily="Gilroy-Bold"
+                style={styles.buttonStyle}
+                color="white"
+              />
 
-            <Footer
-              dialogueText="Already have an account?"
-              clickText="Sign In"
-              onClickPress={onSignInPress}
-            />
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+              <Footer
+                dialogueText="Already have an account?"
+                clickText="Sign In"
+                onClickPress={onSignInPress}
+              />
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 

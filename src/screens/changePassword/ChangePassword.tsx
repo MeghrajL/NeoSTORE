@@ -8,6 +8,8 @@ import {
   ScrollView,
   Alert,
   Button,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import React, {useState} from 'react';
 import {ChangePasswordScreenNavigationProp} from '../../navigation/type';
@@ -92,85 +94,86 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
   return (
     // <SafeAreaView style={styles.container}>
     // <ScrollView style={{flex: 1}}>
-    <KeyboardAvoidingView
-      keyboardVerticalOffset={Platform.OS === 'ios' ? -70 : 70}
-      enabled
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust behavior for iOS or Android
-      style={styles.contentContainer}>
-      {/* <KeyboardAvoidingScrollView scrollEventThrottle={1} style={{flex: 1}}> */}
-      {/* <Image
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <KeyboardAvoidingView
+        keyboardVerticalOffset={Platform.OS === 'ios' ? -70 : 70}
+        enabled
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust behavior for iOS or Android
+        style={styles.contentContainer}>
+        {/* <KeyboardAvoidingScrollView scrollEventThrottle={1} style={{flex: 1}}> */}
+        {/* <Image
         style={styles.imageStyle}
         source={require('../../assets/images/forgotpass.png')}
       /> */}
-      <View style={styles.instruction}>
-        <GenericText style={styles.textStyle}>
-          Enter your old password.
-        </GenericText>
-        <GenericText style={styles.textStyle}>
-          Create new password and confirm it.
-        </GenericText>
-      </View>
-      {/* <Button
+        <View style={styles.instruction}>
+          <GenericText style={styles.textStyle}>
+            Enter your old password.
+          </GenericText>
+          <GenericText style={styles.textStyle}>
+            Create new password and confirm it.
+          </GenericText>
+        </View>
+        {/* <Button
         title="update"
         onPress={() => navigation.navigate('UpdateDetails')}
       /> */}
-      <View style={styles.innerContainer}>
-        <InputWithError
-          placeholder={'Old Password'}
-          maxLength={20}
-          inputMode={'text'}
-          icon={'account-lock-open'}
-          onChangeText={old_passwordHandler}
-          value={pass.old_password}
-          validator={validatePassword}
-          showErr={showErr}
-          errorText={'Please enter correct old password'}
-        />
+        <View style={styles.innerContainer}>
+          <InputWithError
+            placeholder={'Old Password'}
+            maxLength={20}
+            inputMode={'text'}
+            icon={'account-lock-open'}
+            onChangeText={old_passwordHandler}
+            value={pass.old_password}
+            validator={validatePassword}
+            showErr={showErr}
+            errorText={'Please enter correct old password'}
+          />
 
-        <InputWithError
-          placeholder={'Password'}
-          maxLength={20}
-          inputMode={'text'}
-          icon={'account-lock-open'}
-          onChangeText={passwordHandler}
-          value={pass.password}
-          validator={validatePassword}
-          showErr={showErr}
-          errorText={'Please enter new password in correct format'}
-        />
+          <InputWithError
+            placeholder={'Password'}
+            maxLength={20}
+            inputMode={'text'}
+            icon={'account-lock-open'}
+            onChangeText={passwordHandler}
+            value={pass.password}
+            validator={validatePassword}
+            showErr={showErr}
+            errorText={'Please enter new password in correct format'}
+          />
 
-        <InputWithError
-          placeholder={'Confirm Password'}
-          maxLength={20}
-          inputMode={'text'}
-          icon={'account-lock'}
-          onChangeText={confirmPasswordHandler}
-          value={pass.confirm_password}
-          validator={() => samePass}
-          samePass={samePass}
-          showErr={showErr}
-          errorText={'Both passwords should match'}
-        />
-        <View style={styles.buttonContainer}>
-          {!passChanged ? (
-            <GenericButton
-              disabled={changeLoading}
-              onPress={press}
-              title="Submit"
-              fontSize={26}
-              fontFamily="Gilroy-Bold"
-              style={styles.buttonStyle}
-              color="white"
-            />
-          ) : (
-            <Tick />
-          )}
+          <InputWithError
+            placeholder={'Confirm Password'}
+            maxLength={20}
+            inputMode={'text'}
+            icon={'account-lock'}
+            onChangeText={confirmPasswordHandler}
+            value={pass.confirm_password}
+            validator={() => samePass}
+            samePass={samePass}
+            showErr={showErr}
+            errorText={'Both passwords should match'}
+          />
+          <View style={styles.buttonContainer}>
+            {!passChanged ? (
+              <GenericButton
+                disabled={changeLoading}
+                onPress={press}
+                title="Submit"
+                fontSize={26}
+                fontFamily="Gilroy-Bold"
+                style={styles.buttonStyle}
+                color="white"
+              />
+            ) : (
+              <Tick />
+            )}
+          </View>
         </View>
-      </View>
-      <View style={{flex: 1}} />
-      {/* </KeyboardAvoidingScrollView> */}
-    </KeyboardAvoidingView>
-
+        <View style={{flex: 1}} />
+        {/* </KeyboardAvoidingScrollView> */}
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
     // </SafeAreaView>
   );
 };
