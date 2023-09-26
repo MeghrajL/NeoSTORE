@@ -12,6 +12,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import DatePicker from 'react-native-date-picker';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
 
 import {UpdateDetailsScreenNavigationProp} from '../../navigation/type';
 import {updateDetails} from '../../redux/slices/authSlice/authSlice';
@@ -119,141 +120,137 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <ScrollView contentContainerStyle={{flex: 1}} style={{flex: 0}}>
-        <KeyboardAvoidingView
-          // contentContainerStyle={{marginBottom: 0}}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust behavior for iOS or Android
-          style={styles.container}>
-          <View style={styles.picContainer}>
-            <View style={styles.imageContainer}>
-              <Image
-                source={require('../../assets/images/man.png')}
-                style={styles.imageStyle}
-              />
-            </View>
-            <TouchableOpacity onPress={() => {}} style={styles.cameraIcon}>
-              <Icon name="camera" size={25} color={colors.MIDNIGHT} />
-            </TouchableOpacity>
+      <KeyboardAvoidingScrollView
+        containerStyle={styles.container}
+        contentContainerStyle={{paddingTop: 20, paddingBottom: 30}}>
+        <View style={styles.picContainer}>
+          <View style={styles.imageContainer}>
+            <Image
+              source={require('../../assets/images/man.png')}
+              style={styles.imageStyle}
+            />
           </View>
+          <TouchableOpacity onPress={() => {}} style={styles.cameraIcon}>
+            <Icon name="camera" size={25} color={colors.MIDNIGHT} />
+          </TouchableOpacity>
+        </View>
 
-          <View style={styles.formView}>
-            <InputWithError
-              placeholder={'First Name'}
-              maxLength={20}
-              inputMode={'text'}
-              icon={'human-greeting-variant'}
-              onChangeText={fnameHandler}
-              value={user.first_name}
-              validator={validateName}
-              showErr={showErr}
-              errorText={'Please do not use spaces'}
-            />
+        <View style={styles.formView}>
+          <InputWithError
+            placeholder={'First Name'}
+            maxLength={20}
+            inputMode={'text'}
+            icon={'human-greeting-variant'}
+            onChangeText={fnameHandler}
+            value={user.first_name}
+            validator={validateName}
+            showErr={showErr}
+            errorText={'Please do not use spaces'}
+          />
 
-            <InputWithError
-              placeholder={'Last Name'}
-              maxLength={20}
-              inputMode={'text'}
-              icon={'human-queue'}
-              onChangeText={lnameHandler}
-              value={user.last_name}
-              validator={validateName}
-              showErr={showErr}
-              errorText={'Please do not use spaces'}
-            />
+          <InputWithError
+            placeholder={'Last Name'}
+            maxLength={20}
+            inputMode={'text'}
+            icon={'human-queue'}
+            onChangeText={lnameHandler}
+            value={user.last_name}
+            validator={validateName}
+            showErr={showErr}
+            errorText={'Please do not use spaces'}
+          />
 
-            <InputWithError
-              placeholder={'Email'}
-              maxLength={30}
-              inputMode={'email'}
-              icon={'email'}
-              onChangeText={emailHandler}
-              value={user.email}
-              validator={validateEmail}
-              showErr={showErr}
-              errorText={'Please enter correct email address'}
-            />
+          <InputWithError
+            placeholder={'Email'}
+            maxLength={30}
+            inputMode={'email'}
+            icon={'email'}
+            onChangeText={emailHandler}
+            value={user.email}
+            validator={validateEmail}
+            showErr={showErr}
+            errorText={'Please enter correct email address'}
+          />
 
-            <InputWithError
-              placeholder={'Phone Number'}
-              maxLength={10}
-              inputMode={'numeric'}
-              icon={'phone-classic'}
-              onChangeText={phoneNumberHandler}
-              value={user.phone_no}
-              validator={validatePhone}
-              showErr={showErr}
-              errorText={'Please enter 10 digit phone number'}
-            />
-            <View
-              style={{
-                alignItems: 'flex-start',
-                justifyContent: 'flex-start',
-                width: '93%',
-                height: 60,
-                gap: 10,
-                borderBottomColor: '#aaaaaa',
-                borderBottomWidth: 0.7,
-              }}>
-              <GenericText style={styles.titleFont}>Date of Birth</GenericText>
-              <TouchableOpacity
-                style={{paddingLeft: 10, width: '100%'}}
-                onPress={() => setOpen(true)}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    paddingLeft: 2,
-                    justifyContent: 'flex-start',
-                    alignItems: 'center',
-                    // paddingBottom: 10,s
-                  }}>
-                  <Icon
-                    size={25}
-                    name={'calendar-range'}
-                    color={colors.MIDNIGHT}
-                  />
-
-                  <GenericText style={styles.dateFont}>
-                    {user.dob === null ? `DD/MM/YYYY` : user.dob}
-                  </GenericText>
-                </View>
-              </TouchableOpacity>
-              <DatePicker
-                modal
-                open={open}
-                mode="date"
-                date={date}
-                onConfirm={date => {
-                  setOpen(false);
-                  console.log(date);
-                  setDate(date);
-                  formatDate(date);
-                }}
-                onCancel={() => {
-                  setOpen(false);
-                }}
-              />
-            </View>
-            <View style={styles.buttonContainer}>
-              {isLoading ? (
-                <Load />
-              ) : !profileUpdated ? (
-                <GenericButton
-                  // disabled={cartLoading}
-                  onPress={press}
-                  title="Submit"
-                  fontSize={26}
-                  fontFamily="Gilroy-Medium"
-                  style={styles.submitButtonStyle}
-                  color="white"
+          <InputWithError
+            placeholder={'Phone Number'}
+            maxLength={10}
+            inputMode={'numeric'}
+            icon={'phone-classic'}
+            onChangeText={phoneNumberHandler}
+            value={user.phone_no}
+            validator={validatePhone}
+            showErr={showErr}
+            errorText={'Please enter 10 digit phone number'}
+          />
+          <View
+            style={{
+              alignItems: 'flex-start',
+              justifyContent: 'flex-start',
+              width: '93%',
+              height: 60,
+              gap: 10,
+              borderBottomColor: '#aaaaaa',
+              borderBottomWidth: 0.7,
+            }}>
+            <GenericText style={styles.titleFont}>Date of Birth</GenericText>
+            <TouchableOpacity
+              style={{paddingLeft: 10, width: '100%'}}
+              onPress={() => setOpen(true)}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  paddingLeft: 2,
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                  // paddingBottom: 10,s
+                }}>
+                <Icon
+                  size={25}
+                  name={'calendar-range'}
+                  color={colors.MIDNIGHT}
                 />
-              ) : (
-                <Tick />
-              )}
-            </View>
-            {/* <Button title="dispatch" onPress={press} /> */}
+
+                <GenericText style={styles.dateFont}>
+                  {user.dob === null ? `DD/MM/YYYY` : user.dob}
+                </GenericText>
+              </View>
+            </TouchableOpacity>
+            <DatePicker
+              modal
+              open={open}
+              mode="date"
+              date={date}
+              onConfirm={date => {
+                setOpen(false);
+                console.log(date);
+                setDate(date);
+                formatDate(date);
+              }}
+              onCancel={() => {
+                setOpen(false);
+              }}
+            />
           </View>
-        </KeyboardAvoidingView>
-      </ScrollView>
+          <View style={styles.buttonContainer}>
+            {isLoading ? (
+              <Load />
+            ) : !profileUpdated ? (
+              <GenericButton
+                // disabled={cartLoading}
+                onPress={press}
+                title="Submit"
+                fontSize={26}
+                fontFamily="Gilroy-Medium"
+                style={styles.submitButtonStyle}
+                color="white"
+              />
+            ) : (
+              <Tick />
+            )}
+          </View>
+        </View>
+      </KeyboardAvoidingScrollView>
     </TouchableWithoutFeedback>
   );
 };

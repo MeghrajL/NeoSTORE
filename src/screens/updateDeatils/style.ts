@@ -3,10 +3,10 @@ import {colors} from '../../assets/colors';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: 'white',
-    justifyContent: 'center',
-    gap: 10,
+    // paddingTop: 20,
+    // gap: 10,
+    // paddingBottom: 60,
   },
   formView: {
     // backgroundColor: 'red',
@@ -79,7 +79,7 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   buttonContainer: {
-    paddingTop: 20,
+    paddingTop: 10,
     width: '90%',
     justifyContent: 'center',
     alignItems: 'center',

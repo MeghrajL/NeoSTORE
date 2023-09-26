@@ -92,19 +92,16 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
   }
   // console.log(emailForgotHandler, emailForgot);
   return (
-    // <SafeAreaView style={styles.container}>
-    // <ScrollView style={{flex: 1}}>
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <KeyboardAvoidingView
-        keyboardVerticalOffset={Platform.OS === 'ios' ? -70 : 70}
-        enabled
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust behavior for iOS or Android
-        style={styles.contentContainer}>
-        {/* <KeyboardAvoidingScrollView scrollEventThrottle={1} style={{flex: 1}}> */}
-        {/* <Image
-        style={styles.imageStyle}
-        source={require('../../assets/images/forgotpass.png')}
-      /> */}
+      {/* <View style={{flex: 1}}> */}
+      <KeyboardAvoidingScrollView
+        // style={{flex: 1}}
+        containerStyle={styles.contentContainer}
+        contentContainerStyle={{paddingTop: 20, paddingBottom: 60}}>
+        <Image
+          style={styles.imageStyle}
+          source={require('../../assets/images/forgotpass.png')}
+        />
         <View style={styles.instruction}>
           <GenericText style={styles.textStyle}>
             Enter your old password.
@@ -113,10 +110,7 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
             Create new password and confirm it.
           </GenericText>
         </View>
-        {/* <Button
-        title="update"
-        onPress={() => navigation.navigate('UpdateDetails')}
-      /> */}
+
         <View style={styles.innerContainer}>
           <InputWithError
             placeholder={'Old Password'}
@@ -170,11 +164,9 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
             )}
           </View>
         </View>
-        <View style={{flex: 1}} />
-        {/* </KeyboardAvoidingScrollView> */}
-      </KeyboardAvoidingView>
+      </KeyboardAvoidingScrollView>
+      {/* </View> */}
     </TouchableWithoutFeedback>
-    // </SafeAreaView>
   );
 };
 
