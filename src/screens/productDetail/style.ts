@@ -103,4 +103,19 @@ export const styles = StyleSheet.create({
     width: '100%',
     // resizeMode: 'center',
   },
+  costStyle: {
+    fontSize: 14,
+    color: colors.PLATINUM_GRAY,
+    textDecorationLine: 'line-through',
+  },
+  offStyle: {
+    fontSize: 20,
+    color: '#00de82',
+  },
+  costView: {
+    flexDirection: 'row',
+    gap: 8,
+    // justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+  },
 });

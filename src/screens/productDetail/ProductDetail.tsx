@@ -138,9 +138,17 @@ const ProductDetail = ({
               <GenericText textType="medium" style={styles.nameText}>
                 {productItem?.name}
               </GenericText>
-              <GenericText style={styles.costText}>
-                ₹{productItem?.cost}
-              </GenericText>
+              <View style={styles.costView}>
+                <GenericText style={styles.costText}>
+                  ₹{productItem?.cost}
+                </GenericText>
+                <GenericText textType="medium" style={styles.offStyle}>
+                  0% off
+                </GenericText>
+                <GenericText style={styles.costStyle}>
+                  ₹{productItem?.cost}
+                </GenericText>
+              </View>
               {/* <GenericText style={styles.descriptionText}>
                 Details : {productItem.description}
               </GenericText> */}

@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     borderRadius: 10,
     overflow: 'hidden',
+    paddingBottom: 5,
   },
   imageContainer: {
     height: '60%',

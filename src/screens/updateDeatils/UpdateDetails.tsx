@@ -122,7 +122,7 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingScrollView
         containerStyle={styles.container}
-        contentContainerStyle={{paddingTop: 20, paddingBottom: 30}}>
+        contentContainerStyle={{gap: 30, paddingTop: 15, paddingBottom: 30}}>
         <View style={styles.picContainer}>
           <View style={styles.imageContainer}>
             <Image

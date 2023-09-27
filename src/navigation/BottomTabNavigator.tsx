@@ -17,10 +17,10 @@ const BottomTabNavigator = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarHideOnKeyboard: true,
-        tabBarActiveBackgroundColor: colors.VIVID_GAMBOGE,
-        tabBarActiveTintColor: 'white',
+        // tabBarActiveBackgroundColor: colors.VIVID_GAMBOGE,
+        tabBarActiveTintColor: colors.VIVID_GAMBOGE,
         tabBarInactiveTintColor: '#ccc',
-        tabBarItemStyle: {borderRadius: 30, margin: 5},
+        // tabBarItemStyle: {borderRadius: 30, margin: 5},
 
         tabBarStyle: {
           // justifyContent: 'center',

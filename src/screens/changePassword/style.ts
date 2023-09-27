@@ -5,8 +5,8 @@ export const styles = StyleSheet.create({
   contentContainer: {
     // flex: 1,
     backgroundColor: 'white',
-    paddingTop: 20,
-    gap: 20,
+    // paddingTop: 20,
+    // gap: 20,
     // paddingBottom: 60,
   },
   title: {

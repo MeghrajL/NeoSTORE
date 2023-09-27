@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     color: colors.RICH_BLACK,
   },
   costStyle: {
-    fontSize: 18,
+    fontSize: 14,
     color: colors.PLATINUM_GRAY,
     textDecorationLine: 'line-through',
   },
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   offStyle: {
-    fontSize: 18,
+    fontSize: 14,
     color: '#00de82',
   },
   descriptionText: {

@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     // paddingTop: 20,
-    // gap: 10,
+    // gap: 30,
     // paddingBottom: 60,
   },
   formView: {

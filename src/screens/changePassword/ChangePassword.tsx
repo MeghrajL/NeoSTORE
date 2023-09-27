@@ -43,7 +43,6 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
   async function press() {
     setShowErr(true);
     console.log('submit', pass);
-    // navigation.navigate('Home');
     if (
       !samePass ||
       !pass.old_password.trim() ||
@@ -66,8 +65,6 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
           });
           navigation.navigate('Profile');
         }, 1300);
-
-        // navigation.navigate('Home');
       } catch {
         console.log('some error');
       }
@@ -90,14 +87,11 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
       setSamePass(false);
     }
   }
-  // console.log(emailForgotHandler, emailForgot);
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      {/* <View style={{flex: 1}}> */}
       <KeyboardAvoidingScrollView
-        // style={{flex: 1}}
         containerStyle={styles.contentContainer}
-        contentContainerStyle={{paddingTop: 20, paddingBottom: 60}}>
+        contentContainerStyle={{paddingTop: 15, paddingBottom: 10}}>
         <Image
           style={styles.imageStyle}
           source={require('../../assets/images/forgotpass.png')}
@@ -165,7 +159,6 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
           </View>
         </View>
       </KeyboardAvoidingScrollView>
-      {/* </View> */}
     </TouchableWithoutFeedback>
   );
 };
