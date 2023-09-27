@@ -8,11 +8,16 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  Dimensions,
+  PermissionsAndroid,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import DatePicker from 'react-native-date-picker';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
+import ImagePicker from 'react-native-image-crop-picker';
+
+import {androidCameraPermission} from '../../helpers/permission';
 
 import {UpdateDetailsScreenNavigationProp} from '../../navigation/type';
 import {updateDetails} from '../../redux/slices/authSlice/authSlice';
@@ -47,7 +52,9 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
     profile_pic: userData?.profile_pic,
     phone_no: userData?.phone_no,
   });
-
+  // useEffect(() => {
+  //   console.log('🥳🥳🥳🥳🥳🥳🥳🥳🥳', user), [user];
+  // });
   const access_token = useAppSelector(
     state => state.auth.user?.data?.access_token,
   );
@@ -72,6 +79,7 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
       Alert.alert('Please enter correct details');
     } else {
       try {
+        // console.log(user);
         await dispatch(updateDetails({...user, access_token})).unwrap();
         console.log('success');
         setUpdated(true);
@@ -80,7 +88,6 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
           navigation.navigate('Profile');
         }, 2000);
         // Vibration.vibrate(1000);
-        // navigation.navigate('Home');
       } catch {
         console.log('some error');
       }
@@ -113,10 +120,70 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
     setUser({...user, dob: dob});
     console.log(dob);
   }
+  function isUrl(profile_pic: any) {
+    try {
+      new URL(profile_pic);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+  let imageSource;
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  if (user.profile_pic === null || user.profile_pic === '') {
+    if (userData?.gender === 'M') {
+      imageSource = require('../../assets/images/man.png');
+    } else if (userData?.gender === 'F') {
+      imageSource = require('../../assets/images/woman.png');
+    }
+  } else {
+    // if (isUrl(user.profile_pic)) {
+    //   //convert
+    // } else {
+      imageSource = {uri: user.profile_pic};
+    // }
+  }
+
+  const onSelectImage = async () => {
+    const permissionStatus = await androidCameraPermission();
+    if (permissionStatus || Platform.OS == 'ios') {
+      Alert.alert('Profile Picture', 'Choose an option', [
+        {text: 'Camera', onPress: onCamera},
+        {text: 'Gallery', onPress: onGallery},
+        {text: 'Cancel', onPress: () => {}},
+      ]);
+    }
+  };
+
+  const onCamera = () => {
+    ImagePicker.openCamera({
+      includeBase64: true,
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      // console.log(image);
+      storeImage(image);
+    });
+  };
+
+  const onGallery = () => {
+    ImagePicker.openPicker({
+      includeBase64: true,
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(image => {
+      // console.log('selected Image', image);
+      storeImage(image);
+    });
+  };
+
+  function storeImage(imageData: any) {
+    const profile_pic = 'data:image/jpg;base64,' + imageData.data;
+    // console.log('🥳🥳🥳🥳🥳🥳🥳🥳🥳', profile_pic);
+    setUser({...user, profile_pic});
+  }
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -125,12 +192,9 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
         contentContainerStyle={{gap: 30, paddingTop: 15, paddingBottom: 30}}>
         <View style={styles.picContainer}>
           <View style={styles.imageContainer}>
-            <Image
-              source={require('../../assets/images/man.png')}
-              style={styles.imageStyle}
-            />
+            <Image source={imageSource} style={styles.imageStyle} />
           </View>
-          <TouchableOpacity onPress={() => {}} style={styles.cameraIcon}>
+          <TouchableOpacity onPress={onSelectImage} style={styles.cameraIcon}>
             <Icon name="camera" size={25} color={colors.MIDNIGHT} />
           </TouchableOpacity>
         </View>

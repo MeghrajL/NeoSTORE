@@ -27,6 +27,7 @@
     "react-native-animated-dots-carousel": "^1.0.2",
     "react-native-date-picker": "^4.3.3",
     "react-native-gesture-handler": "^2.12.1",
+    "react-native-image-crop-picker": "^0.40.0",
     "react-native-keyboard-avoiding-scroll-view": "^1.0.1",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-mmkv": "^2.10.2",

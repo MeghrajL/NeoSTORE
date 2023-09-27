@@ -26,9 +26,9 @@ export const styles = StyleSheet.create({
     color: colors.MIDNIGHT,
   },
   imageStyle: {
-    height: '70%',
-    width: '70%',
-    resizeMode: 'contain',
+    height: '100%',
+    width: '100%',
+    resizeMode: 'cover',
     // backgroundColor: 'pink',
   },
   picContainer: {
@@ -59,6 +59,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
+    overflow: 'hidden',
 
     elevation: 5,
     shadowColor: '#000',

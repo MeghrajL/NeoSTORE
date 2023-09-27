@@ -140,7 +140,7 @@ export const getUserAccountDetails = createAsyncThunk(
         headers,
       });
       // Toast.show('password changed succesfully', Toast.SHORT);
-      console.log('user data', response.data);
+      console.log('user data 😎', response.data);
       return response.data;
     } catch (error: any) {
       Toast.show('try again', Toast.SHORT);
@@ -153,7 +153,7 @@ export const getUserAccountDetails = createAsyncThunk(
 export const updateDetails = createAsyncThunk(
   'auth/updateDetails',
   async (user: IUpdateDetailsFormData, thunkAPI) => {
-    console.log(user);
+    console.log('😀😀😀😀😀', user);
     var formData = new FormData();
     formData.append('first_name', user.first_name);
     formData.append('last_name', user.last_name);

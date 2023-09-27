@@ -21,9 +21,9 @@ export const styles = StyleSheet.create({
     // maxWidth: '90%',
   },
   imageStyle: {
-    height: '70%',
-    width: '70%',
-    resizeMode: 'contain',
+    height: '100%',
+    width: '100%',
+    resizeMode: 'cover',
     // backgroundColor: 'pink',
   },
   imageContainer: {
@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '30%',
-
+    overflow: 'hidden',
     elevation: 5,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},

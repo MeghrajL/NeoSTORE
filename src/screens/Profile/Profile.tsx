@@ -1,15 +1,30 @@
 import {View, Text, Image} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {styles} from './style';
 import GenericText from '../../components/generic/GenericText/GenericText';
 import MenuItem from '../../components/profileComponents/menuItem/MenuItem';
 import {ProfileScreenNavigationProp} from '../../navigation/type';
-import {useAppSelector} from '../../redux/store';
+import {useAppDispatch, useAppSelector} from '../../redux/store';
+import {getUserAccountDetails} from '../../redux/slices/authSlice/authSlice';
 const Profile = ({navigation}: ProfileScreenNavigationProp) => {
+  const dispatch = useAppDispatch();
+
+  const access_token = useAppSelector(
+    state => state.auth.user?.data?.access_token,
+  );
+  useEffect(() => {
+    try {
+      dispatch(getUserAccountDetails(access_token));
+      console.log('😎dis');
+    } catch (error) {
+      console.log('some error');
+    }
+  }, [dispatch, access_token]);
+
   const userData = useAppSelector(
     state => state.auth.userAccountDetails?.data?.user_data,
   );
-  // console.log(userData);
+
   function onChangePasswordHandler() {
     navigation.navigate('ChangePassword');
   }
@@ -18,15 +33,26 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
     navigation.navigate('UpdateDetails');
   }
 
+  // let imageSource;
+  // if (userData?.profile_pic || userData?.profile_pic !== '') {
+  //   imageSource = {uri: userData?.profile_pic};
+  // } else {
+  //   if (userData?.gender === 'M') {
+  //     imageSource = require('../../assets/images/man.png');
+  //   } else if (userData?.gender === 'F') {
+  //     imageSource = require('../../assets/images/woman.png');
+  //   }
+  // }
+
   let imageSource;
-  if (userData?.profile_pic && userData?.profile_pic !== '') {
-    imageSource = {uri: userData?.profile_pic};
-  } else {
+  if (userData?.profile_pic === null || userData?.profile_pic === '') {
     if (userData?.gender === 'M') {
       imageSource = require('../../assets/images/man.png');
-    } else {
+    } else if (userData?.gender === 'F') {
       imageSource = require('../../assets/images/woman.png');
     }
+  } else {
+    imageSource = {uri: userData?.profile_pic};
   }
 
   return (
