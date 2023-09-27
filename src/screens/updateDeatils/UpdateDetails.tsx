@@ -16,7 +16,8 @@ import DatePicker from 'react-native-date-picker';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
 import ImagePicker from 'react-native-image-crop-picker';
-
+import RNFetchBlob from 'react-native-fetch-blob';
+import isURL from 'is-url';
 import {androidCameraPermission} from '../../helpers/permission';
 
 import {UpdateDetailsScreenNavigationProp} from '../../navigation/type';
@@ -120,14 +121,44 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
     setUser({...user, dob: dob});
     console.log(dob);
   }
-  function isUrl(profile_pic: any) {
+
+  async function imageUrlToBase64(imageUrl: any) {
     try {
-      new URL(profile_pic);
-      return true;
-    } catch (err) {
-      return false;
+      const response = await RNFetchBlob.config({
+        fileCache: true,
+      }).fetch('GET', imageUrl);
+
+      // Get the base64 string from the response
+      const base64String = await response.base64();
+
+      return base64String;
+    } catch (error) {
+      console.error('Error converting image URL to base64:', error);
+      return null;
     }
   }
+
+  // function isUrl(profile_pic: any) {
+  //   // if (profile_pic.contains('http')) {
+  //   //   return true;
+  //   // }
+  //   // return false;
+  //   // try {
+  //   //   new URL(profile_pic);
+  //   //   return true;
+  //   // } catch (err) {
+  //   //   return false;
+  //   // }
+  // }
+
+  const isValidUrl = urlString => {
+    try {
+      return Boolean(new URL(urlString));
+    } catch (e) {
+      return false;
+    }
+  };
+
   let imageSource;
 
   if (user.profile_pic === null || user.profile_pic === '') {
@@ -137,11 +168,25 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
       imageSource = require('../../assets/images/woman.png');
     }
   } else {
-    // if (isUrl(user.profile_pic)) {
-    //   //convert
-    // } else {
-      imageSource = {uri: user.profile_pic};
-    // }
+    imageSource = {uri: user.profile_pic};
+
+    if (isURL(user.profile_pic)) {
+      //convert
+      console.log('is url');
+      imageUrlToBase64(user.profile_pic)
+        .then(base64String => {
+          // console.log(base64String);
+          const f = 'data:image/jpg;base64,' + base64String;
+          console.log('>>>>>', f);
+          setUser({...user, profile_pic: f});
+          // imageSource = {uri: f};
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    } else {
+      console.log('is base');
+    }
   }
 
   const onSelectImage = async () => {
@@ -161,6 +206,7 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
       width: 300,
       height: 400,
       cropping: true,
+      compressImageQuality: 0.5,
     }).then(image => {
       // console.log(image);
       storeImage(image);
@@ -173,6 +219,7 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
       width: 300,
       height: 400,
       cropping: true,
+      compressImageQuality: 0.5,
     }).then(image => {
       // console.log('selected Image', image);
       storeImage(image);

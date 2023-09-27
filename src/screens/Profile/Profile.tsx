@@ -9,17 +9,17 @@ import {getUserAccountDetails} from '../../redux/slices/authSlice/authSlice';
 const Profile = ({navigation}: ProfileScreenNavigationProp) => {
   const dispatch = useAppDispatch();
 
-  const access_token = useAppSelector(
-    state => state.auth.user?.data?.access_token,
-  );
-  useEffect(() => {
-    try {
-      dispatch(getUserAccountDetails(access_token));
-      console.log('😎dis');
-    } catch (error) {
-      console.log('some error');
-    }
-  }, [dispatch, access_token]);
+  // const access_token = useAppSelector(
+  //   state => state.auth.user?.data?.access_token,
+  // );
+  // useEffect(() => {
+  //   try {
+  //     dispatch(getUserAccountDetails(access_token));
+  //     console.log('😎dis');
+  //   } catch (error) {
+  //     console.log('some error');
+  //   }
+  // }, [dispatch, access_token]);
 
   const userData = useAppSelector(
     state => state.auth.userAccountDetails?.data?.user_data,
