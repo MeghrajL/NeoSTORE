@@ -8,11 +8,12 @@ import {colors} from '../assets/colors';
 import {useIsFocused} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {RootStackParamList} from './type';
-import {Platform} from 'react-native';
+import {Dimensions, Platform, SafeAreaView} from 'react-native';
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
 const BottomTabNavigator = () => {
+  const {height} = Dimensions.get('window');
   return (
     <Tab.Navigator
       screenOptions={{
@@ -20,28 +21,13 @@ const BottomTabNavigator = () => {
         // tabBarActiveBackgroundColor: colors.VIVID_GAMBOGE,
         tabBarActiveTintColor: colors.VIVID_GAMBOGE,
         tabBarInactiveTintColor: '#ccc',
+
         // tabBarItemStyle: {borderRadius: 30, margin: 5},
-
         tabBarStyle: {
-          // justifyContent: 'center',
-          // alignItems: 'center',
-          // backgroundColor: 'white',
-          // height: Platform.OS === 'android' ? '8%' : '10%',
-          // borderTopLeftRadius: 30,
-          // borderTopRightRadius: 30,
-          // overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
-          // position: 'absolute',
-          // borderTopWidth: 0,
-          // elevation: 100,
-          // shadowRadius: 20,
-          // shadowColor: 'black',
-          // shadowOpacity: 0.4,
-          // shadowOffset: {height: -10, width: 0},
-
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: 'white',
-          height: 55,
+
           borderStartStartRadius: 30,
           borderStartEndRadius: 30,
           position: 'absolute',
@@ -53,7 +39,6 @@ const BottomTabNavigator = () => {
           shadowOffset: {height: -10, width: 0},
         },
         headerShown: false,
-        // tabBarLabelPosition: 'below-icon',
         tabBarShowLabel: false,
       }}>
       <Tab.Screen

@@ -4,16 +4,28 @@ import {colors} from '../../assets/colors';
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    // paddingTop: 20,
-    // gap: 30,
-    // paddingBottom: 60,
   },
   formView: {
-    // backgroundColor: 'red',
-
     justifyContent: 'flex-start',
     alignItems: 'center',
     gap: 8,
+  },
+  contentContainer: {gap: 30, paddingTop: 15, paddingBottom: 30},
+  dateView: {paddingLeft: 10, width: '100%'},
+  dateOuter: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    width: '93%',
+    height: 60,
+    gap: 10,
+    borderBottomColor: '#aaaaaa',
+    borderBottomWidth: 0.7,
+  },
+  dateInnerView: {
+    flexDirection: 'row',
+    paddingLeft: 2,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   titleFont: {
     paddingLeft: 13,

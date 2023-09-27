@@ -15,6 +15,7 @@ import {getCartList} from '../../redux/slices/cartSlice/cartSlice';
 import Loading from '../../components/generic/Loading/Loading';
 import CartItem from '../../components/cartComponents/CartItem/CartItem';
 import EmptyCart from '../../components/cartComponents/emptyCart/EmptyCart';
+import GenericText from '../../components/generic/GenericText/GenericText';
 
 const Cart = ({navigation}: CartScreenNavigationProp) => {
   const dispatch = useAppDispatch();
@@ -41,6 +42,10 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
     if (cart?.length !== 0) setInitialDataLoaded(true);
   }, []);
 
+  function navigateToProductDetail(product_id: number) {
+    navigation.navigate('ProductDetail', {product_id: product_id});
+  }
+
   console.log('+++++++++++++', cart);
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -53,24 +58,37 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
           <>
             <SwipeListView
               data={cart?.data}
-              renderItem={({item}) => <CartItem item={item} />}
-              keyExtractor={item => item.id.toString()}
-              renderHiddenItem={(data, rowMap) => (
-                <View
-                  style={{
-                    alignItems: 'flex-end',
-                    backgroundColor: 'white',
-                    flex: 1,
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                  }}>
-                  <Text>Left</Text>
-                  <Text>Right</Text>
-                </View>
+              contentContainerStyle={{
+                justifyContent: 'center',
+                gap: 10,
+                paddingTop: 10,
+                paddingBottom: 60,
+              }}
+              renderItem={({item}) => (
+                <CartItem onPress={navigateToProductDetail} item={item} />
               )}
-              leftOpenValue={75}
-              rightOpenValue={-75}
-              disableRightSwipe={true}
+              keyExtractor={item => item.id.toString()}
+              // renderHiddenItem={(data, rowMap) => (
+              //   <View
+              //     style={{
+              //       alignItems: 'flex-end',
+              //       backgroundColor: 'white',
+              //       flex: 1,
+              //       flexDirection: 'column',
+              //       justifyContent: 'center',
+              //     }}>
+              //     <Text>Left</Text>
+              //     <Text>Right</Text>
+              //   </View>
+              // )}
+              // leftOpenValue={75}
+              // rightOpenValue={-75}
+              // disableRightSwipe={true}
+              ListFooterComponent={
+                <View>
+                  <GenericText>{cart?.total}</GenericText>
+                </View>
+              }
             />
           </>
         )}

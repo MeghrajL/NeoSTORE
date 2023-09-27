@@ -138,27 +138,6 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
     }
   }
 
-  // function isUrl(profile_pic: any) {
-  //   // if (profile_pic.contains('http')) {
-  //   //   return true;
-  //   // }
-  //   // return false;
-  //   // try {
-  //   //   new URL(profile_pic);
-  //   //   return true;
-  //   // } catch (err) {
-  //   //   return false;
-  //   // }
-  // }
-
-  const isValidUrl = urlString => {
-    try {
-      return Boolean(new URL(urlString));
-    } catch (e) {
-      return false;
-    }
-  };
-
   let imageSource;
 
   if (user.profile_pic === null || user.profile_pic === '') {
@@ -236,7 +215,7 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingScrollView
         containerStyle={styles.container}
-        contentContainerStyle={{gap: 30, paddingTop: 15, paddingBottom: 30}}>
+        contentContainerStyle={styles.contentContainer}>
         <View style={styles.picContainer}>
           <View style={styles.imageContainer}>
             <Image source={imageSource} style={styles.imageStyle} />
@@ -306,16 +285,9 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
             }}>
             <GenericText style={styles.titleFont}>Date of Birth</GenericText>
             <TouchableOpacity
-              style={{paddingLeft: 10, width: '100%'}}
+              style={styles.dateView}
               onPress={() => setOpen(true)}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  paddingLeft: 2,
-                  justifyContent: 'flex-start',
-                  alignItems: 'center',
-                  // paddingBottom: 10,s
-                }}>
+              <View style={styles.dateInnerView}>
                 <Icon
                   size={25}
                   name={'calendar-range'}
