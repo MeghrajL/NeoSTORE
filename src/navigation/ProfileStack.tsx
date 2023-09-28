@@ -1,6 +1,12 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {ChangePassword, Profile, UpdateDetails} from '../screens/index';
+import {
+  ChangePassword,
+  OrderDetail,
+  OrderList,
+  Profile,
+  UpdateDetails,
+} from '../screens/index';
 import {colors} from '../assets/colors';
 import {StatusBar, Text, TouchableOpacity} from 'react-native';
 import IconButton from '../components/generic/IconButton/IconButton';
@@ -46,6 +52,36 @@ const ProfileStack = ({navigation}: ProfileStackScreenNavigationProp) => {
                 icon="arrow-back-outline"
                 size={28}
                 onPressCustom={() => navigation.navigate('Profile')}
+                color="white"
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="OrderList"
+          component={OrderList}
+          options={{
+            headerTitle: 'My Orders',
+            headerLeft: () => (
+              <IconButton
+                icon="arrow-back-outline"
+                size={28}
+                onPressCustom={() => navigation.navigate('Profile')}
+                color="white"
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="OrderDetail"
+          component={OrderDetail}
+          options={{
+            headerTitle: 'Order Details',
+            headerLeft: () => (
+              <IconButton
+                icon="arrow-back-outline"
+                size={28}
+                onPressCustom={() => navigation.navigate('OrderList')}
                 color="white"
               />
             ),

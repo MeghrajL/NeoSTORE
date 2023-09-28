@@ -9,6 +9,9 @@ import ForgotPassword from './forgotPassword/index';
 import ChangePassword from './changePassword/index';
 import UpdateDetails from './updateDeatils/index';
 import Profile from './Profile/index';
+import OrderList from './orderList/index';
+import OrderDetail from './orderDetail/index';
+
 export {
   Home,
   Category,
@@ -21,4 +24,6 @@ export {
   ChangePassword,
   UpdateDetails,
   Profile,
+  OrderList,
+  OrderDetail,
 };

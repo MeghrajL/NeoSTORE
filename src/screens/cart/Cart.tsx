@@ -21,6 +21,7 @@ import GenericText from '../../components/generic/GenericText/GenericText';
 import Load from '../../components/generic/Load/Load';
 import GenericButton from '../../components/generic/GenericButton/GenericButton';
 import Tick from '../../components/generic/Tick/Tick';
+import {placeOrder} from '../../redux/slices/orderSlice/orderSlice';
 
 const Cart = ({navigation}: CartScreenNavigationProp) => {
   const dispatch = useAppDispatch();
@@ -56,6 +57,20 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
       product_id: product_id,
       shouldLoadSimilarProducts: true,
     });
+  }
+
+  async function handleCheckOut() {
+    try {
+      await dispatch(
+        placeOrder({
+          access_token: access_token,
+          address: 'karjat',
+        }),
+      ).unwrap();
+      dispatch(getCartList({access_token: access_token}));
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -102,7 +117,7 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
                 ) : !checkedOut ? (
                   <GenericButton
                     // disabled={cartLoading}
-                    onPress={() => {}}
+                    onPress={handleCheckOut}
                     title="Proceed to Checkout"
                     fontSize={22}
                     fontFamily="Gilroy-Medium"

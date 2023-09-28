@@ -19,7 +19,7 @@ export interface IOrderList {
 
 export interface IOrderDetails {
   status: number;
-  data: IOrderDetailsData[];
+  data: IOrderDetailsData;
 }
 
 export interface IOrderDetailsData {
@@ -59,5 +59,5 @@ export interface IGetOrderListParams {
 
 export interface IGetOrderDetailsParams {
   access_token: string | undefined;
-  order_id: string;
+  order_id: number;
 }

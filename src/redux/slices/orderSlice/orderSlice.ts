@@ -32,6 +32,7 @@ export const placeOrder = createAsyncThunk(
         headers,
       });
       // console.log(response.data);
+      Toast.show('Order Placed Successfully', Toast.SHORT);
       return response.data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);

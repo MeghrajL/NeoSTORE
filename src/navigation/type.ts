@@ -2,7 +2,7 @@ import {RouteProp} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
-  NativeStackNavigator:undefined;
+  NativeStackNavigator: undefined;
   Onboarding: undefined;
   Register: undefined;
   MainNav: undefined;
@@ -10,7 +10,7 @@ export type RootStackParamList = {
   Cart: undefined;
   SignIn: undefined;
   Category: {product_category_id: number; categoryName: string};
-  ProductDetail: {product_id: number};
+  ProductDetail: {product_id: number; shouldLoadSimilarProducts: boolean};
   HomeStack: undefined;
   CartStack: undefined;
   ForgotPassword: undefined;
@@ -18,6 +18,8 @@ export type RootStackParamList = {
   ChangePassword: undefined;
   UpdateDetails: undefined;
   Profile: undefined;
+  OrderList: undefined;
+  OrderDetail: {order_id: number};
 };
 
 export type OnboardingScreenNavigationProp = NativeStackScreenProps<
@@ -98,4 +100,14 @@ export type ChangePasswordScreenNavigationProp = NativeStackScreenProps<
 export type UpdateDetailsScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
   'UpdateDetails'
+>;
+
+export type OrderListScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'OrderList'
+>;
+
+export type OrderDetailScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'OrderDetail'
 >;

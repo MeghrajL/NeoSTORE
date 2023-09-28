@@ -33,6 +33,9 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
     navigation.navigate('UpdateDetails');
   }
 
+  function onMyOrdersHandler() {
+    navigation.navigate('OrderList');
+  }
   // let imageSource;
   // if (userData?.profile_pic || userData?.profile_pic !== '') {
   //   imageSource = {uri: userData?.profile_pic};
@@ -81,9 +84,9 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
           onPress={onChangePasswordHandler}
         />
         <MenuItem
-          icon={'refresh'}
-          title="Change Password"
-          onPress={onChangePasswordHandler}
+          icon={'bag-handle-outline'}
+          title="My Orders"
+          onPress={onMyOrdersHandler}
         />
         <MenuItem
           icon={'refresh'}
@@ -91,7 +94,7 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
           onPress={onChangePasswordHandler}
         />
         <MenuItem
-          icon={'create'}
+          icon={'create-outline'}
           title="Update Details"
           onPress={onUpdateDetailsHandler}
           isLast={true}
