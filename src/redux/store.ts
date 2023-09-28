@@ -18,18 +18,20 @@ import {
   REGISTER,
 } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import orderSlice from './slices/orderSlice/orderSlice';
 
 const reducers = combineReducers({
   auth: authSlice,
   product: productSlice,
   cart: cartSlice,
+  order: orderSlice,
 });
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  blacklist: ['product', 'cart'],
+  blacklist: ['product', 'cart', 'order'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

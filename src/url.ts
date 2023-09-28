@@ -9,8 +9,13 @@ export const getUserData = 'users/getUserData';
 
 export const getList = 'products/getList';
 export const getDetail = 'products/getDetail';
+export const setRating = 'products/setRating';
 
 export const addCart = 'addToCart';
 export const getCart = 'cart';
 export const editCartItem = 'editCart';
 export const deleteCartItem = 'deleteCart';
+
+export const order = 'order';
+export const orderList = 'orderList';
+export const orderDetail = 'orderDetail';
