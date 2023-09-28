@@ -14,7 +14,10 @@ import Toast from 'react-native-simple-toast';
 
 import {ProductDetailScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {getProduct} from '../../redux/slices/productSlice/productSlice';
+import {
+  getCategoryList,
+  getProduct,
+} from '../../redux/slices/productSlice/productSlice';
 import {addToCart, getCartList} from '../../redux/slices/cartSlice/cartSlice';
 
 import Loading from '../../components/generic/Loading/Loading';
@@ -37,9 +40,11 @@ const ProductDetail = ({
   navigation,
   route,
 }: ProductDetailScreenNavigationProp) => {
-  const {product_id} = route.params;
+  console.log(route.params);
+  const {product_id, shouldLoadSimilarProducts} = route.params;
   const [prod_id, setProdId] = useState(product_id);
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [catDataLoaded, setCatDataLoaded] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
 
@@ -70,6 +75,26 @@ const ProductDetail = ({
   console.log('>>>>>>>>', access_token);
   const cartLoading = useAppSelector(state => state.cart?.isLoading);
   // console.log('😀', cartStatus);
+
+  useEffect(() => {
+    if (shouldLoadSimilarProducts === true) {
+      dispatch(
+        getCategoryList({
+          product_category_id: productItem?.product_category_id,
+        }),
+      )
+        .then(() => {
+          setCatDataLoaded(true);
+          // console.error('success');
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    } else {
+      setCatDataLoaded(true);
+    }
+  }, [shouldLoadSimilarProducts, dispatch, productItem?.product_category_id]);
+
   async function handleAddToCart() {
     try {
       await dispatch(
@@ -108,7 +133,7 @@ const ProductDetail = ({
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      {isLoading || !dataLoaded ? (
+      {isLoading || !dataLoaded || !catDataLoaded ? (
         <Loading />
       ) : (
         <ScrollView

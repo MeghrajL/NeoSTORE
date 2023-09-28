@@ -52,7 +52,10 @@ const Category = ({navigation, route}: CategoryScreenNavigationProp) => {
   }
 
   function navigateToProductDetail(product_id: number) {
-    navigation.navigate('ProductDetail', {product_id: product_id});
+    navigation.navigate('ProductDetail', {
+      product_id: product_id,
+      shouldLoadSimilarProducts: false,
+    });
   }
 
   const Footer = () => {

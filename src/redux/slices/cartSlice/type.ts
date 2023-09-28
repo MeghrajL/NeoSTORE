@@ -1,4 +1,4 @@
-interface Product {
+interface IProduct {
   id: number;
   name: string;
   cost: number;
@@ -7,16 +7,16 @@ interface Product {
   sub_total: number;
 }
 
-interface CartItem {
+export interface ICartItem {
   id: number;
   product_id: number;
   quantity: number;
-  product: Product;
+  product: IProduct;
 }
 
 interface ICart {
   status: number;
-  data: CartItem[] | null;
+  data: ICartItem[] | null;
   count: number;
   total: number;
 }

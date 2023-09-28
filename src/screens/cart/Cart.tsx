@@ -5,10 +5,12 @@ import {
   Button,
   SafeAreaView,
   FlatList,
+  Platform,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {SwipeListView} from 'react-native-swipe-list-view';
 
+import {styles} from './style';
 import {CartScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {getCartList} from '../../redux/slices/cartSlice/cartSlice';
@@ -16,6 +18,9 @@ import Loading from '../../components/generic/Loading/Loading';
 import CartItem from '../../components/cartComponents/CartItem/CartItem';
 import EmptyCart from '../../components/cartComponents/emptyCart/EmptyCart';
 import GenericText from '../../components/generic/GenericText/GenericText';
+import Load from '../../components/generic/Load/Load';
+import GenericButton from '../../components/generic/GenericButton/GenericButton';
+import Tick from '../../components/generic/Tick/Tick';
 
 const Cart = ({navigation}: CartScreenNavigationProp) => {
   const dispatch = useAppDispatch();
@@ -24,6 +29,7 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
   );
 
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
+  const [checkedOut, setCheckedOut] = useState(false);
 
   useEffect(() => {
     dispatch(getCartList({access_token: access_token}))
@@ -43,13 +49,16 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
   }, []);
 
   function navigateToProductDetail(product_id: number) {
-    navigation.navigate('ProductDetail', {product_id: product_id});
+    navigation.navigate('ProductDetail', {
+      product_id: product_id,
+      shouldLoadSimilarProducts: true,
+    });
   }
 
   console.log('+++++++++++++', cart);
   return (
     <SafeAreaView style={{flex: 1}}>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: 'white'}}>
         {isLoading && !initialDataLoaded ? (
           <Loading />
         ) : cart?.message === 'Cart Empty' ? (
@@ -58,47 +67,56 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
           <>
             <SwipeListView
               data={cart?.data}
-              contentContainerStyle={{
-                justifyContent: 'center',
-                gap: 10,
-                paddingTop: 10,
-                paddingBottom: 60,
-              }}
+              contentContainerStyle={styles.swipeView}
               renderItem={({item}) => (
                 <CartItem onPress={navigateToProductDetail} item={item} />
               )}
               keyExtractor={item => item.id.toString()}
-              // renderHiddenItem={(data, rowMap) => (
-              //   <View
-              //     style={{
-              //       alignItems: 'flex-end',
-              //       backgroundColor: 'white',
-              //       flex: 1,
-              //       flexDirection: 'column',
-              //       justifyContent: 'center',
-              //     }}>
-              //     <Text>Left</Text>
-              //     <Text>Right</Text>
-              //   </View>
-              // )}
-              // leftOpenValue={75}
-              // rightOpenValue={-75}
-              // disableRightSwipe={true}
-              ListFooterComponent={
-                <View>
-                  <GenericText>{cart?.total}</GenericText>
-                </View>
-              }
             />
+
+            <View style={styles.container}>
+              <View style={styles.topRounded}>
+                <View
+                  style={{
+                    gap: 10,
+                  }}>
+                  <View style={styles.textView}>
+                    <GenericText style={styles.costText}>
+                      Cart Total
+                    </GenericText>
+                    <GenericText style={styles.costText}>
+                      ₹{cart?.total}
+                    </GenericText>
+                  </View>
+                  <View style={styles.textView}>
+                    <GenericText style={styles.deliveryText}>
+                      Delivery
+                    </GenericText>
+                    <GenericText style={styles.freeText}>Free</GenericText>
+                  </View>
+                </View>
+                {isLoading ? (
+                  <Load />
+                ) : !checkedOut ? (
+                  <GenericButton
+                    // disabled={cartLoading}
+                    onPress={() => {}}
+                    title="Proceed to Checkout"
+                    fontSize={22}
+                    fontFamily="Gilroy-Medium"
+                    style={styles.checkoutButtonStyle}
+                    color="white"
+                  />
+                ) : (
+                  <Tick />
+                )}
+              </View>
+            </View>
           </>
         )}
-
-        {/* <Button onPress={() => navigation.navigate('Register')} title="Nav" /> */}
       </View>
     </SafeAreaView>
   );
 };
 
 export default Cart;
-
-const styles = StyleSheet.create({});
