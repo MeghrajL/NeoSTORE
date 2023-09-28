@@ -43,10 +43,13 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
   }, [dispatch, access_token]);
 
   const {cart, isLoading} = useAppSelector(state => state.cart);
+  console.log('+++++++++++++', cart);
 
   useEffect(() => {
-    if (cart?.length !== 0) setInitialDataLoaded(true);
-  }, []);
+    if (cart !== null) {
+      setInitialDataLoaded(true);
+    }
+  }, [cart]);
 
   function navigateToProductDetail(product_id: number) {
     navigation.navigate('ProductDetail', {
@@ -55,11 +58,10 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
     });
   }
 
-  console.log('+++++++++++++', cart);
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1, backgroundColor: 'white'}}>
-        {isLoading && !initialDataLoaded ? (
+        {!initialDataLoaded ? (
           <Loading />
         ) : cart?.message === 'Cart Empty' ? (
           <EmptyCart />
