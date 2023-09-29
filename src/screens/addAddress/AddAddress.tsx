@@ -26,26 +26,36 @@ import {
 } from '../../helpers/validators';
 import {styles} from './style';
 import {colors} from '../../assets/colors';
-import {useAppDispatch} from '../../redux/store';
-import {addAddress} from '../../redux/slices/authSlice/authSlice';
+import {useAppDispatch, useAppSelector} from '../../redux/store';
+import {
+  addAddress,
+  updateAddress,
+} from '../../redux/slices/authSlice/authSlice';
+import {AddAddressScreenNavigationProp} from '../../navigation/type';
 
-const AddAddress = () => {
+const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
+  const {id} = route.params;
+  const currAddress = useAppSelector(state =>
+    state.auth.addressData.addressList.find(
+      (address: {id: string}) => address.id === id,
+    ),
+  );
   const [address, setAddress] = useState({
-    firstLine: '',
-    secondLine: '',
-    city: '',
-    state: '',
-    pincode: '',
-    country: 'India',
-    type: 'Home',
+    firstLine: id === '' ? '' : currAddress?.address.firstLine,
+    secondLine: id === '' ? '' : currAddress?.address.secondLine,
+    city: id === '' ? '' : currAddress?.address.city,
+    state: id === '' ? '' : currAddress?.address.state,
+    pincode: id === '' ? '' : currAddress?.address.pincode,
+    country: id === '' ? 'India' : currAddress?.address.country,
+    countryCode: id === '' ? 'IN' : currAddress?.address.countryCode,
+    type: id === '' ? 'Home' : currAddress?.address.type,
   });
 
-  const [code, setCode] = useState<any>('IN');
   const [showErr, setShowErr] = useState(false);
   const dispatch = useAppDispatch();
   const onSelect = (country: any) => {
     setAddress({...address, country: country.name});
-    setCode(country.cca2);
+    setAddress({...address, countryCode: country.cca2});
     console.log(country);
   };
 
@@ -72,19 +82,24 @@ const AddAddress = () => {
   const onAddAddressPress = () => {
     setShowErr(true);
     if (
-      !validateAddressLine(address.firstLine) ||
-      !validateAddressLine(address.secondLine) ||
-      !validateAlpha(address.city) ||
-      !validateAlpha(address.state) ||
-      !validatePincode(address.pincode) ||
-      !address.firstLine.trim() ||
-      !address.secondLine.trim()
+      !validateAddressLine(address?.firstLine) ||
+      !validateAddressLine(address?.secondLine) ||
+      !validateAlpha(address?.city) ||
+      !validateAlpha(address?.state) ||
+      !validatePincode(address?.pincode) ||
+      !address.firstLine?.trim() ||
+      !address.secondLine?.trim()
     ) {
       Alert.alert('Please enter all details correctly');
     } else {
       //dipatch
-      dispatch(addAddress(address));
-      console.log(address);
+      if (id === '') {
+        dispatch(addAddress(address));
+        console.log(address);
+      } else {
+        const id = currAddress?.id;
+        dispatch(updateAddress({id, address}));
+      }
     }
   };
 
@@ -188,7 +203,7 @@ const AddAddress = () => {
                 withFilter={true}
                 withAlphaFilter={true}
                 onSelect={onSelect}
-                countryCode={code}
+                countryCode={address.countryCode}
                 withCountryNameButton={true}
               />
               {/* <Icon name="chevron-up" color={colors.MIDNIGHT} size={15} /> */}
@@ -205,6 +220,8 @@ const AddAddress = () => {
             <View style={styles.radioStyle}>
               <View style={styles.circle}>
                 <RadioButton
+                  color={colors.VIVID_GAMBOGE}
+                  uncheckedColor={colors.MIDNIGHT}
                   value="Home"
                   status={address.type === 'Home' ? 'checked' : 'unchecked'}
                   onPress={() => setAddress({...address, type: 'Home'})}
@@ -215,7 +232,8 @@ const AddAddress = () => {
             <View style={styles.radioStyle}>
               <View style={styles.circle}>
                 <RadioButton
-                  uncheckedColor="black"
+                  uncheckedColor={colors.MIDNIGHT}
+                  color={colors.VIVID_GAMBOGE}
                   value="Office"
                   status={address.type === 'Office' ? 'checked' : 'unchecked'}
                   onPress={() => setAddress({...address, type: 'Office'})}
@@ -226,6 +244,8 @@ const AddAddress = () => {
             <View style={styles.radioStyle}>
               <View style={styles.circle}>
                 <RadioButton
+                  uncheckedColor={colors.MIDNIGHT}
+                  color={colors.VIVID_GAMBOGE}
                   value="Other"
                   status={address.type === 'Other' ? 'checked' : 'unchecked'}
                   onPress={() => setAddress({...address, type: 'Other'})}

@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 8,
   },
-  contentContainer: {gap: 30, paddingTop: 15, paddingBottom: 30},
+  contentContainer: {gap: 30, paddingTop: 15, paddingBottom: 60},
 
   conFont: {
     fontSize: 16,

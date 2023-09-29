@@ -67,6 +67,7 @@ export interface IAddress {
     state: string;
     pincode: string;
     country: string;
+    countryCode: string;
     type: 'Home' | 'Office' | 'Other';
   };
 }

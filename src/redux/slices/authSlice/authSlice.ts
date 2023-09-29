@@ -202,9 +202,10 @@ export const authSlice = createSlice({
     },
 
     deleteAddress: (state, action) => {
+      console.log('<><><>', action.payload);
       if (state.addressData?.addressList) {
         state.addressData.addressList = state.addressData?.addressList.filter(
-          item => item.id !== action.payload.id,
+          item => item.id !== action.payload,
         );
       }
     },
@@ -214,6 +215,7 @@ export const authSlice = createSlice({
         state.addressData.addressList = state.addressData?.addressList.map(
           item => (item.id === action.payload.id ? action.payload : item),
         );
+        state.addressData.lastSelectedAddressId = action.payload.id;
       }
     },
   },
@@ -297,4 +299,5 @@ export const authSlice = createSlice({
   },
 });
 export default authSlice.reducer;
-export const {addAddress, updateAddress, deleteAddress} = authSlice.actions;
+export const {selectAddress, addAddress, updateAddress, deleteAddress} =
+  authSlice.actions;

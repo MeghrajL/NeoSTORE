@@ -93,7 +93,7 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
           onPress={onMyOrdersHandler}
         />
         <MenuItem
-          icon={'location-outline'}
+          icon={'create-outline'}
           title="Update Details"
           onPress={onUpdateDetailsHandler}
         />
