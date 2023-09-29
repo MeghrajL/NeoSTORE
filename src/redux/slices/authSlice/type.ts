@@ -58,6 +58,24 @@ export interface IUserAccountDetails {
   user_msg: string;
 }
 
+export interface IAddress {
+  id: string;
+  address: {
+    firstLine: string;
+    secondLine: string;
+    city: string;
+    state: string;
+    pincode: string;
+    country: string;
+    type: 'Home' | 'Office' | 'Other';
+  };
+}
+
+export interface IAddressList {
+  addressList: IAddress[] | [];
+  lastSelectedAddressId: string;
+}
+
 export interface IInitialState {
   user: IUser | null;
   isLoading: boolean;
@@ -66,6 +84,7 @@ export interface IInitialState {
   changePassData: IChangePassData | null;
   updateDetailsData: IUser | null;
   userAccountDetails: IUserAccountDetails | null;
+  addressData: IAddressList;
 }
 
 export interface IRegistrationFormData {

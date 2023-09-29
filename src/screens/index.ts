@@ -11,6 +11,9 @@ import UpdateDetails from './updateDeatils/index';
 import Profile from './Profile/index';
 import OrderList from './orderList/index';
 import OrderDetail from './orderDetail/index';
+import Address from './address/index';
+import Payment from './payment/index';
+import AddAddress from './addAddress/index';
 
 export {
   Home,
@@ -26,4 +29,7 @@ export {
   Profile,
   OrderList,
   OrderDetail,
+  Address,
+  Payment,
+  AddAddress,
 };

@@ -20,6 +20,9 @@ export type RootStackParamList = {
   Profile: undefined;
   OrderList: undefined;
   OrderDetail: {order_id: number};
+  Address: undefined;
+  AddAddress: undefined;
+  Payment: undefined;
 };
 
 export type OnboardingScreenNavigationProp = NativeStackScreenProps<
@@ -110,4 +113,16 @@ export type OrderListScreenNavigationProp = NativeStackScreenProps<
 export type OrderDetailScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
   'OrderDetail'
+>;
+export type AddressScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'Address'
+>;
+export type AddAddressScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'AddAddress'
+>;
+export type PaymentScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'Payment'
 >;

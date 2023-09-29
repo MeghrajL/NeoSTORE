@@ -36,6 +36,10 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
   function onMyOrdersHandler() {
     navigation.navigate('OrderList');
   }
+
+  function onAddressHandler() {
+    navigation.navigate('Address');
+  }
   // let imageSource;
   // if (userData?.profile_pic || userData?.profile_pic !== '') {
   //   imageSource = {uri: userData?.profile_pic};
@@ -89,14 +93,20 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
           onPress={onMyOrdersHandler}
         />
         <MenuItem
-          icon={'refresh'}
-          title="Change Password"
-          onPress={onChangePasswordHandler}
-        />
-        <MenuItem
-          icon={'create-outline'}
+          icon={'location-outline'}
           title="Update Details"
           onPress={onUpdateDetailsHandler}
+        />
+        {/* 
+        <MenuItem
+          icon={'location-outline'}
+          title="Payment"
+          onPress={onAddressHandler}
+        /> */}
+        <MenuItem
+          icon={'log-out-outline'}
+          title="Logout"
+          onPress={() => {}}
           isLast={true}
         />
       </View>

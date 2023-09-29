@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, nanoid} from '@reduxjs/toolkit';
 import {
   IChangePasswordParams,
   IForgotPasswordParams,
@@ -27,6 +27,7 @@ const initialState: IInitialState = {
   changePassData: null,
   updateDetailsData: null,
   userAccountDetails: null,
+  addressData: {addressList: [], lastSelectedAddressId: ''},
 };
 
 export const registerUser = createAsyncThunk(
@@ -184,8 +185,36 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    cleanState: state => {
-      state = initialState;
+    selectAddress: (state, action) => {
+      if (state.addressData?.lastSelectedAddressId) {
+        state.addressData.lastSelectedAddressId = action.payload;
+      }
+    },
+    addAddress: (state, action) => {
+      const newAddress = {
+        id: nanoid(),
+        address: action.payload,
+      };
+      console.log('>', state.addressData);
+      state.addressData?.addressList.push(newAddress as never);
+
+      state.addressData.lastSelectedAddressId = newAddress.id;
+    },
+
+    deleteAddress: (state, action) => {
+      if (state.addressData?.addressList) {
+        state.addressData.addressList = state.addressData?.addressList.filter(
+          item => item.id !== action.payload.id,
+        );
+      }
+    },
+
+    updateAddress: (state, action) => {
+      if (state.addressData?.addressList) {
+        state.addressData.addressList = state.addressData?.addressList.map(
+          item => (item.id === action.payload.id ? action.payload : item),
+        );
+      }
     },
   },
   extraReducers(builder) {
@@ -268,4 +297,4 @@ export const authSlice = createSlice({
   },
 });
 export default authSlice.reducer;
-export const {cleanState} = authSlice.actions;
+export const {addAddress, updateAddress, deleteAddress} = authSlice.actions;

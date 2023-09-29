@@ -14,6 +14,7 @@ interface IInputWithError {
   showErr: boolean;
   errorText: string;
   samePass?: boolean;
+  spacesAllowed?: boolean;
 }
 
 const InputWithError = ({
@@ -27,6 +28,7 @@ const InputWithError = ({
   showErr,
   errorText,
   samePass,
+  spacesAllowed = false,
 }: IInputWithError) => {
   const [err, setErr] = useState('');
   const [inputText, setInputText] = useState(value);
@@ -49,8 +51,13 @@ const InputWithError = ({
   }, [samePass, inputText]);
 
   function handler(text: string) {
-    onChangeText(text.trim());
-    setInputText(text.trim());
+    if (spacesAllowed) {
+      onChangeText(text);
+      setInputText(text);
+    } else {
+      onChangeText(text.trim());
+      setInputText(text.trim());
+    }
   }
 
   return (

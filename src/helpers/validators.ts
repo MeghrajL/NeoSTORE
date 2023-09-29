@@ -23,4 +23,25 @@ function validateName(name: string) {
   return nameRegex.test(name);
 }
 
-export {validateEmail, validatePassword, validatePhone, validateName};
+function validateAddressLine(addressLine: string) {
+  const addressLineRegex = /^[0-9A-Za-z\s\W]+$/;
+  return addressLineRegex.test(addressLine);
+}
+function validateAlpha(word: string) {
+  const alphabetRegex = /^[A-Za-z]+$/;
+  return alphabetRegex.test(word);
+}
+function validatePincode(pincode: string) {
+  const pincodeRegex = /^\d{6}$/;
+  return pincodeRegex.test(pincode);
+}
+
+export {
+  validateEmail,
+  validatePassword,
+  validatePhone,
+  validateName,
+  validateAddressLine,
+  validateAlpha,
+  validatePincode,
+};

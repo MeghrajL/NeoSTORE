@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {Cart} from '../screens/index';
+import {AddAddress, Address, Cart, Payment} from '../screens/index';
 import {colors} from '../assets/colors';
 import {StatusBar, Text, TouchableOpacity} from 'react-native';
 import IconButton from '../components/generic/IconButton/IconButton';
@@ -21,20 +21,36 @@ const CartStack = ({navigation}: CartStackScreenNavigationProp) => {
             fontSize: 20,
           },
         }}>
+        <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen
-          name="Cart"
-          component={Cart}
-          // options={{
-          //   headerLeft: () => (
-          //     <IconButton
-          //       icon="arrow-back-outline"
-          //       size={28}
-          //       onPressCustom={() => navigation.navigate('Home')}
-          //       color="white"
-          //     />
-          //   ),
-          // }}
+          name="Address"
+          component={Address}
+          options={{
+            headerLeft: () => (
+              <IconButton
+                icon="arrow-back-outline"
+                size={28}
+                onPressCustom={() => navigation.navigate('Cart')}
+                color="white"
+              />
+            ),
+          }}
         />
+        <Stack.Screen
+          name="AddAddress"
+          component={AddAddress}
+          options={{
+            headerLeft: () => (
+              <IconButton
+                icon="arrow-back-outline"
+                size={28}
+                onPressCustom={() => navigation.navigate('Address')}
+                color="white"
+              />
+            ),
+          }}
+        />
+        <Stack.Screen name="Payment" component={Payment} />
       </Stack.Navigator>
     </>
   );

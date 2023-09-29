@@ -1,2 +1,2 @@
-import Explore from './Cart';
-export default Explore;
+import Cart from './Cart';
+export default Cart;
