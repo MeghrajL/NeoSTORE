@@ -71,9 +71,9 @@ const CartItem = ({item, onPress}: ICartItemProps) => {
 
   return (
     <SwipeRow
-      // preview={true}
-      // previewOpenValue={-20}
-      // previewOpenDelay={300}
+      preview={true}
+      previewOpenValue={-20}
+      previewOpenDelay={300}
       leftOpenValue={75}
       rightOpenValue={-75}
       disableLeftSwipe={false}

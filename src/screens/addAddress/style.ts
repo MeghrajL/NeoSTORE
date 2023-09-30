@@ -10,9 +10,33 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 8,
   },
-  contentContainer: {gap: 30, paddingTop: 15, paddingBottom: 60},
+  contentContainer: {gap: 10, paddingTop: 20, paddingBottom: 60},
 
   conFont: {
+    fontSize: 16,
+    color: colors.RICH_BLACK,
+  },
+  countryContainer: {
+    width: '100%',
+    paddingHorizontal: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 100,
+  },
+  countryButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+    width: '100%',
+    borderWidth: 1,
+    borderColor: colors.MIDNIGHT,
+    borderRadius: 30,
+    overflow: 'hidden',
+    marginTop: 5,
+    paddingHorizontal: 10,
+  },
+  radioText: {
+    fontFamily: 'Gilroy-Regular',
     fontSize: 16,
     color: colors.RICH_BLACK,
   },
@@ -37,44 +61,13 @@ export const styles = StyleSheet.create({
   imageStyle: {
     height: '100%',
     width: '100%',
-    resizeMode: 'cover',
-    // backgroundColor: 'pink',
+    resizeMode: 'contain',
   },
-  picContainer: {
-    alignSelf: 'center',
-    width: 100, // Adjust the width and height as needed
-    height: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: 'red', // Background color for the container
-    // borderRadius: 100, // Make it a circle
-    overflow: 'hidden', // Clip child elements to the container's bounds
-  },
-  cameraIcon: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    padding: 5,
-    backgroundColor: 'white',
-    borderRadius: 30,
-    zIndex: 1,
-  },
-  imageContainer: {
-    backgroundColor: 'white',
-    height: 100,
-    // width: 100,
-    borderWidth: 0.5,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    overflow: 'hidden',
 
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+  imageContainer: {
+    alignSelf: 'center',
+    height: 100,
+    width: '100%',
   },
   submitButtonStyle: {
     backgroundColor: colors.VIVID_GAMBOGE,

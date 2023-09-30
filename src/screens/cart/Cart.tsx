@@ -22,6 +22,7 @@ import Load from '../../components/generic/Load/Load';
 import GenericButton from '../../components/generic/GenericButton/GenericButton';
 import Tick from '../../components/generic/Tick/Tick';
 import {placeOrder} from '../../redux/slices/orderSlice/orderSlice';
+import BottomCard from '../../components/generic/BottomCard/BottomCard';
 
 const Cart = ({navigation}: CartScreenNavigationProp) => {
   const dispatch = useAppDispatch();
@@ -92,44 +93,40 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
               keyExtractor={item => item.id.toString()}
             />
 
-            <View style={styles.container}>
-              <View style={styles.topRounded}>
-                <View
-                  style={{
-                    gap: 10,
-                  }}>
-                  <View style={styles.textView}>
-                    <GenericText style={styles.costText}>
-                      Cart Total
-                    </GenericText>
-                    <GenericText style={styles.costText}>
-                      ₹{cart?.total}
-                    </GenericText>
-                  </View>
-                  <View style={styles.textView}>
-                    <GenericText style={styles.deliveryText}>
-                      Delivery
-                    </GenericText>
-                    <GenericText style={styles.freeText}>Free</GenericText>
-                  </View>
+            <BottomCard>
+              <View
+                style={{
+                  gap: 10,
+                }}>
+                <View style={styles.textView}>
+                  <GenericText style={styles.costText}>Cart Total</GenericText>
+                  <GenericText style={styles.costText}>
+                    ₹{cart?.total}
+                  </GenericText>
                 </View>
-                {isLoading ? (
-                  <Load />
-                ) : !checkedOut ? (
-                  <GenericButton
-                    // disabled={cartLoading}
-                    onPress={handleCheckOut}
-                    title="Proceed to Checkout"
-                    fontSize={22}
-                    fontFamily="Gilroy-Medium"
-                    style={styles.checkoutButtonStyle}
-                    color="white"
-                  />
-                ) : (
-                  <Tick />
-                )}
+                <View style={styles.textView}>
+                  <GenericText style={styles.deliveryText}>
+                    Delivery
+                  </GenericText>
+                  <GenericText style={styles.freeText}>Free</GenericText>
+                </View>
               </View>
-            </View>
+              {isLoading ? (
+                <Load />
+              ) : !checkedOut ? (
+                <GenericButton
+                  // disabled={cartLoading}
+                  onPress={handleCheckOut}
+                  title="Proceed to Checkout"
+                  fontSize={22}
+                  fontFamily="Gilroy-Medium"
+                  style={styles.checkoutButtonStyle}
+                  color="white"
+                />
+              ) : (
+                <Tick />
+              )}
+            </BottomCard>
           </>
         )}
       </View>

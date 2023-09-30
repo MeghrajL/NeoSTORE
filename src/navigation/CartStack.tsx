@@ -26,11 +26,23 @@ const CartStack = ({navigation}: CartStackScreenNavigationProp) => {
           name="Address"
           component={Address}
           options={{
+            headerTitle: 'Select Address',
+
             headerLeft: () => (
               <IconButton
                 icon="arrow-back-outline"
                 size={28}
                 onPressCustom={() => navigation.navigate('Cart')}
+                color="white"
+              />
+            ),
+            headerRight: () => (
+              <IconButton
+                icon="add-outline"
+                size={28}
+                onPressCustom={() =>
+                  navigation.navigate('AddAddress', {id: ''})
+                }
                 color="white"
               />
             ),
@@ -40,6 +52,7 @@ const CartStack = ({navigation}: CartStackScreenNavigationProp) => {
           name="AddAddress"
           component={AddAddress}
           options={{
+            headerTitle: 'Add New Address',
             headerLeft: () => (
               <IconButton
                 icon="arrow-back-outline"

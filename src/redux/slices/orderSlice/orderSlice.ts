@@ -21,11 +21,13 @@ export const placeOrder = createAsyncThunk(
   'order/placeOrder',
   async (params: IPlaceOrderParams, thunkAPI) => {
     try {
-      // console.log('😀', params);
+      console.log('😀', params);
+      const {access_token, address} = params;
+      const formattedAddress = `${address.firstLine}, ${address.secondLine}, ${address.city}, ${address.state}, ${address.pincode}, ${address.country}`;
       const formData = new FormData();
-      formData.append('address', params.address);
+      formData.append('address', formattedAddress);
       const headers = {
-        access_token: params.access_token,
+        access_token: access_token,
         'Content-Type': 'multipart/form-data',
       };
       const response = await axios.post(`${baseUrl}/${order}`, formData, {

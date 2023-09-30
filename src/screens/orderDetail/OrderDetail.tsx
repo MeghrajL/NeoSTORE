@@ -28,6 +28,7 @@ const OrderDetail = ({navigation, route}: OrderDetailScreenNavigationProp) => {
     <View>
       <Text>{orderDetails?.id}</Text>
       <Text>{orderDetails?.cost}</Text>
+      <Text>{orderDetails?.address}</Text>
       <FlatList
         data={orderDetails?.order_details}
         renderItem={({item}) => {

@@ -59,21 +59,23 @@ export interface IUserAccountDetails {
 }
 
 export interface IAddress {
+  firstLine: string;
+  secondLine: string;
+  city: string;
+  state: string;
+  pincode: string;
+  country: string;
+  countryCode: string;
+  type: 'Home' | 'Office' | 'Other';
+}
+
+export interface IAddressObj {
   id: string;
-  address: {
-    firstLine: string;
-    secondLine: string;
-    city: string;
-    state: string;
-    pincode: string;
-    country: string;
-    countryCode: string;
-    type: 'Home' | 'Office' | 'Other';
-  };
+  address: IAddress;
 }
 
 export interface IAddressList {
-  addressList: IAddress[] | [];
+  addressList: IAddressObj[] | [];
   lastSelectedAddressId: string;
 }
 

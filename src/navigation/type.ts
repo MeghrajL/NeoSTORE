@@ -22,7 +22,7 @@ export type RootStackParamList = {
   OrderDetail: {order_id: number};
   Address: undefined;
   AddAddress: {id: string};
-  Payment: undefined;
+  Payment: {id: string};
 };
 
 export type OnboardingScreenNavigationProp = NativeStackScreenProps<

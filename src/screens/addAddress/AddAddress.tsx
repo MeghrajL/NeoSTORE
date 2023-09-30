@@ -1,19 +1,18 @@
 import {
   View,
-  Text,
   Keyboard,
   TouchableWithoutFeedback,
   Image,
-  TouchableOpacity,
-  GestureResponderEvent,
   Alert,
   Platform,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CountryPicker from 'react-native-country-picker-modal';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
-import {RadioButton} from 'react-native-paper';
+// import {RadioButton} from 'react-native-paper';
+import RadioGroup, {RadioButtonProps} from 'react-native-radio-buttons-group';
+import Toast from 'react-native-simple-toast';
 
 import InputWithError from '../../components/generic/InputWithError/InputWithError';
 import GenericText from '../../components/generic/GenericText/GenericText';
@@ -21,7 +20,6 @@ import GenericButton from '../../components/generic/GenericButton/GenericButton'
 import {
   validateAddressLine,
   validateAlpha,
-  validateName,
   validatePincode,
 } from '../../helpers/validators';
 import {styles} from './style';
@@ -54,8 +52,8 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
   const dispatch = useAppDispatch();
   const onSelect = (country: any) => {
-    setAddress({...address, country: country.name});
-    setAddress({...address, countryCode: country.cca2});
+    setAddress({...address, country: country.name, countryCode: country.cca2});
+    // setAddress({...address, countryCode: country.cca2});
     console.log(country);
   };
 
@@ -95,24 +93,66 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
       //dipatch
       if (id === '') {
         dispatch(addAddress(address));
-        console.log(address);
+        console.log('>', address);
+        Toast.show('Address added Successfully', Toast.SHORT);
+        navigation.navigate('Address');
       } else {
         const id = currAddress?.id;
         dispatch(updateAddress({id, address}));
+        console.log('>', address);
+        Toast.show('Address edited Successfully', Toast.SHORT);
+        navigation.navigate('Address');
       }
     }
   };
+  const [selectedId, setSelectedId] = useState<string | undefined>();
+  const radioButtons: RadioButtonProps[] = useMemo(
+    () => [
+      {
+        borderColor: colors.MIDNIGHT,
+        color: colors.VIVID_GAMBOGE,
+        borderSize: 1.5,
+        id: 'Home', // acts as primary key, should be unique and non-empty string
+        label: 'Home',
+        value: 'Home',
+        labelStyle: styles.radioText,
+      },
+      {
+        borderColor: colors.MIDNIGHT,
+        color: colors.VIVID_GAMBOGE,
+        borderSize: 1.5,
+        id: 'Office',
+        label: 'Office',
+        value: 'Office',
+        labelStyle: styles.radioText,
+      },
+      {
+        borderColor: colors.MIDNIGHT,
+        color: colors.VIVID_GAMBOGE,
+        borderSize: 1.5,
+        id: 'Other',
+        label: 'Other',
+        value: 'Other',
+        labelStyle: styles.radioText,
+      },
+    ],
+    [],
+  );
 
+  const onRadioPress = (id: string) => {
+    setAddress({...address, type: id});
+  };
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingScrollView
         containerStyle={styles.container}
         contentContainerStyle={styles.contentContainer}>
-        {/* <View style={styles.picContainer}>
-          <View style={styles.imageContainer}>
-            <Image source={imageSource} style={styles.imageStyle} />
-          </View>
-        </View> */}
+        <View style={styles.imageContainer}>
+          <Image
+            source={require('../../assets/images/Address2.png')}
+            style={styles.imageStyle}
+          />
+        </View>
 
         <View style={styles.formView}>
           <InputWithError
@@ -175,85 +215,26 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
             showErr={showErr}
             errorText={'Required'}
           />
-          <View
-            style={{
-              flexDirection: 'row',
-              width: '100%',
-              paddingHorizontal: 15,
-              justifyContent: 'center',
-              alignItems: 'center',
-              // backgroundColor: 'red',
-              gap: 10,
-              height: 60,
-            }}>
+          <View style={styles.countryContainer}>
             <GenericText style={styles.conFont}>Select Country : </GenericText>
-            <View
-              style={{
-                // flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderWidth: 0.25,
-                borderColor: colors.MIDNIGHT,
-                borderRadius: 20,
-                width: '40%',
-                height: '60%',
-                // backgroundColor: 'red',
-              }}>
-              <CountryPicker
-                withFilter={true}
-                withAlphaFilter={true}
-                onSelect={onSelect}
-                countryCode={address.countryCode}
-                withCountryNameButton={true}
-              />
-              {/* <Icon name="chevron-up" color={colors.MIDNIGHT} size={15} /> */}
-            </View>
+
+            <CountryPicker
+              withFilter={true}
+              withAlphaFilter={true}
+              onSelect={onSelect}
+              countryCode={address.countryCode}
+              withCountryNameButton={true}
+              withFlagButton={true}
+              containerButtonStyle={styles.countryButton}
+            />
           </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              // backgroundColor: 'red',
-              width: '75%',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <View style={styles.radioStyle}>
-              <View style={styles.circle}>
-                <RadioButton
-                  color={colors.VIVID_GAMBOGE}
-                  uncheckedColor={colors.MIDNIGHT}
-                  value="Home"
-                  status={address.type === 'Home' ? 'checked' : 'unchecked'}
-                  onPress={() => setAddress({...address, type: 'Home'})}
-                />
-              </View>
-              <GenericText style={styles.conFont}>Home</GenericText>
-            </View>
-            <View style={styles.radioStyle}>
-              <View style={styles.circle}>
-                <RadioButton
-                  uncheckedColor={colors.MIDNIGHT}
-                  color={colors.VIVID_GAMBOGE}
-                  value="Office"
-                  status={address.type === 'Office' ? 'checked' : 'unchecked'}
-                  onPress={() => setAddress({...address, type: 'Office'})}
-                />
-              </View>
-              <GenericText style={styles.conFont}>Office</GenericText>
-            </View>
-            <View style={styles.radioStyle}>
-              <View style={styles.circle}>
-                <RadioButton
-                  uncheckedColor={colors.MIDNIGHT}
-                  color={colors.VIVID_GAMBOGE}
-                  value="Other"
-                  status={address.type === 'Other' ? 'checked' : 'unchecked'}
-                  onPress={() => setAddress({...address, type: 'Other'})}
-                />
-              </View>
-              <GenericText style={styles.conFont}>Other</GenericText>
-            </View>
-          </View>
+
+          <RadioGroup
+            radioButtons={radioButtons}
+            onPress={id => onRadioPress(id)}
+            selectedId={address.type}
+            layout="row"
+          />
           <View style={styles.buttonContainer}>
             <GenericButton
               // disabled={cartLoading}

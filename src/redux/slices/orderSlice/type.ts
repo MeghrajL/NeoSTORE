@@ -1,3 +1,5 @@
+import {IAddress} from '../authSlice/type';
+
 export interface IOrder {
   status: number;
   message: string;
@@ -25,6 +27,7 @@ export interface IOrderDetails {
 export interface IOrderDetailsData {
   id: number;
   cost: number;
+  address: string;
   created: string;
   order_details: IOrderProductItem[];
 }
@@ -50,7 +53,7 @@ export interface IInitialState {
 
 export interface IPlaceOrderParams {
   access_token: string | undefined;
-  address: string;
+  address: IAddress;
 }
 
 export interface IGetOrderListParams {
