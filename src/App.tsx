@@ -17,6 +17,7 @@ import {store, persistor} from './redux/store';
 
 import SplashScreen from 'react-native-splash-screen';
 import Navigator from './navigation/Navigator';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 function App(): JSX.Element {
   useEffect(() => {
     SplashScreen.hide();
@@ -24,7 +25,9 @@ function App(): JSX.Element {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Navigator />
+        <GestureHandlerRootView style={{flex: 1}}>
+          <Navigator />
+        </GestureHandlerRootView>
       </PersistGate>
     </Provider>
   );

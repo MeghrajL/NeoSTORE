@@ -83,11 +83,6 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
       </View>
       <View style={styles.itemContainer}>
         <MenuItem
-          icon={'refresh'}
-          title="Change Password"
-          onPress={onChangePasswordHandler}
-        />
-        <MenuItem
           icon={'bag-handle-outline'}
           title="My Orders"
           onPress={onMyOrdersHandler}
@@ -97,12 +92,12 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
           title="Update Details"
           onPress={onUpdateDetailsHandler}
         />
-        {/* 
         <MenuItem
-          icon={'location-outline'}
-          title="Payment"
-          onPress={onAddressHandler}
-        /> */}
+          icon={'refresh'}
+          title="Change Password"
+          onPress={onChangePasswordHandler}
+        />
+
         <MenuItem
           icon={'log-out-outline'}
           title="Logout"

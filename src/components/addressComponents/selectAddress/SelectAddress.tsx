@@ -52,7 +52,8 @@ const SelectAddress = ({
 
           <View
             style={{
-              gap: 6,
+              rowGap: 4,
+              justifyContent: 'center',
             }}>
             <GenericText textType="medium" style={styles.typeText}>
               {address.type}
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
   touchView: {width: '75%'},
   selectView: {
     // backgroundColor: 'red',
-
+    // marginVertical: 20,
     flexDirection: 'row',
     width: '100%',
   },

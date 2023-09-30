@@ -64,7 +64,7 @@ const BottomTabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Cart3"
         component={CartStack}
         options={{
@@ -72,7 +72,7 @@ const BottomTabNavigator = () => {
             <Icon name="search" size={26} color={color} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };

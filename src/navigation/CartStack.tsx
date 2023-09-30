@@ -63,7 +63,22 @@ const CartStack = ({navigation}: CartStackScreenNavigationProp) => {
             ),
           }}
         />
-        <Stack.Screen name="Payment" component={Payment} />
+        <Stack.Screen
+          name="Payment"
+          component={Payment}
+          options={{
+            headerTitle: 'Checkout',
+
+            headerLeft: () => (
+              <IconButton
+                icon="arrow-back-outline"
+                size={28}
+                onPressCustom={() => navigation.navigate('Address')}
+                color="white"
+              />
+            ),
+          }}
+        />
       </Stack.Navigator>
     </>
   );
