@@ -7,6 +7,7 @@ import OrderListItem from '../../components/orderListComponents/OrderListItem/Or
 import {styles} from './style';
 import GenericText from '../../components/generic/GenericText/GenericText';
 import Nothing from '../../components/generic/nothing/Nothing';
+import Loading from '../../components/generic/Loading/Loading';
 
 const OrderList = ({navigation}: OrderListScreenNavigationProp) => {
   const dispatch = useAppDispatch();
@@ -26,14 +27,16 @@ const OrderList = ({navigation}: OrderListScreenNavigationProp) => {
   }, [dispatch, access_token]);
 
   const orderList = useAppSelector(state => state.order.orderList?.data);
-
+  console.log(orderList);
   const navigateToOrderDetail = (order_id: number, created: string) => {
     navigation.navigate('OrderDetail', {order_id: order_id, created: created});
   };
 
   return (
     <View style={styles.container}>
-      {orderList ? (
+      {orderList?.length === 0 ? (
+        <Nothing />
+      ) : (
         <FlatList
           contentContainerStyle={styles.content}
           data={orderList}
@@ -44,8 +47,6 @@ const OrderList = ({navigation}: OrderListScreenNavigationProp) => {
             />
           )}
         />
-      ) : (
-        <Nothing />
       )}
     </View>
   );

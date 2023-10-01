@@ -1,4 +1,4 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Alert} from 'react-native';
 import React, {useEffect} from 'react';
 import {styles} from './style';
 import GenericText from '../../components/generic/GenericText/GenericText';
@@ -37,13 +37,6 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
     navigation.navigate('UpdateDetails');
   }
 
-  function onMyOrdersHandler() {
-    navigation.navigate('OrderList');
-  }
-
-  function onAddressHandler() {
-    navigation.navigate('Address');
-  }
   // let imageSource;
   // if (userData?.profile_pic || userData?.profile_pic !== '') {
   //   imageSource = {uri: userData?.profile_pic};
@@ -71,6 +64,13 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
     dispatch(logoutAndClearPersistedData());
   };
 
+  const onLogoutPress = () => {
+    Alert.alert('Do really you want to logout?', '', [
+      {text: 'Yes', onPress: () => handleLogout},
+      {text: 'No', onPress: () => console.log('No Pressed'), style: 'cancel'},
+    ]);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
@@ -92,11 +92,6 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
       </View>
       <View style={styles.itemContainer}>
         <MenuItem
-          icon={'bag-handle-outline'}
-          title="My Orders"
-          onPress={onMyOrdersHandler}
-        />
-        <MenuItem
           icon={'create-outline'}
           title="Update Details"
           onPress={onUpdateDetailsHandler}
@@ -110,7 +105,7 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
         <MenuItem
           icon={'log-out-outline'}
           title="Logout"
-          onPress={handleLogout}
+          onPress={onLogoutPress}
           isLast={true}
         />
       </View>

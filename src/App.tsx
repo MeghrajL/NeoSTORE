@@ -20,7 +20,15 @@ import Navigator from './navigation/Navigator';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 function App(): JSX.Element {
   useEffect(() => {
-    SplashScreen.hide();
+    const ac = new AbortController();
+
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1000);
+
+    return function cleanup() {
+      ac.abort();
+    };
   }, []);
   return (
     <Provider store={store}>

@@ -12,6 +12,7 @@ import {
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {RootStackParamList} from './type';
 import {Dimensions, Platform, SafeAreaView} from 'react-native';
+import OrderStack from './OrderStack';
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
@@ -69,6 +70,15 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
+        name="OrderStack"
+        component={OrderStack}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Icon name="receipt" size={26} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="ProfileStack"
         component={ProfileStack}
         options={{
@@ -77,15 +87,6 @@ const BottomTabNavigator = () => {
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="Cart3"
-        component={CartStack}
-        options={{
-          tabBarIcon: ({color}) => (
-            <Icon name="search" size={26} color={color} />
-          ),
-        }}
-      /> */}
     </Tab.Navigator>
   );
 };

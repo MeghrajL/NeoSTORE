@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   imageStyle: {
     height: '70%',
     width: '70%',
-    resizeMode: 'center',
+    resizeMode: 'contain',
   },
   textStyle: {
     fontSize: 20,

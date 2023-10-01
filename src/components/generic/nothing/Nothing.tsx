@@ -24,9 +24,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   imageStyle: {
-    height: '70%',
+    height: '60%',
     width: '70%',
-    resizeMode: 'center',
+    resizeMode: 'contain',
   },
   textStyle: {
     fontSize: 20,

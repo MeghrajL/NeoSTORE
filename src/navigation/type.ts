@@ -15,6 +15,7 @@ export type RootStackParamList = {
   CartStack: undefined;
   ForgotPassword: undefined;
   ProfileStack: undefined;
+  OrderStack: undefined;
   ChangePassword: undefined;
   UpdateDetails: undefined;
   Profile: undefined;
@@ -62,6 +63,10 @@ export type CartStackScreenNavigationProp = NativeStackScreenProps<
 export type ProfileStackScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
   'ProfileStack'
+>;
+export type OrderStackScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'OrderStack'
 >;
 
 export type HomeScreenNavigationProp = NativeStackScreenProps<
