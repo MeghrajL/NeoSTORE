@@ -1,5 +1,6 @@
 import {
   Button,
+  FlatList,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -14,6 +15,10 @@ import Product from '../../components/homeComponents/ProductWithApi/ProductWithA
 import CategoryTypes from '../../components/homeComponents/CategoryTypes/CategoryTypes';
 import {getUserAccountDetails} from '../../redux/slices/authSlice/authSlice';
 import Loading from '../../components/generic/Loading/Loading';
+import ImageCarousel from '../../components/productDetailComponents/ImageCarousel/ImageCarousel';
+import Title from '../../components/generic/Title/Title';
+import ProductItemHorizontal from '../../components/categoryComponents/productItemHorizontal/productItemHorizontal';
+import ProductItem from '../../components/categoryComponents/productItem/ProductItem';
 const Home = ({navigation}: HomeScreenNavigationProp) => {
   const dispatch = useAppDispatch();
 
@@ -32,28 +37,40 @@ const Home = ({navigation}: HomeScreenNavigationProp) => {
   }, [dispatch, access_token]);
 
   const userData = useAppSelector(state => state.auth.userAccountDetails?.data);
-  console.log('from home', userData);
-
+  const authData = useAppSelector(state => state.auth);
+  console.log('from home', authData);
+  const product_images = userData?.product_categories.map(category => {
+    return {
+      image: category.icon_image,
+    };
+  });
   return (
-    // <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-    <ScrollView contentContainerStyle={{paddingBottom: 60}}>
-      {/* {isLoading ? (
-          <Loading />
-        ) : ( */}
-      <View>
-        {/* <Product product_id={10} />
-        <Product product_id={11} />
-        <Product product_id={12} />
-        <Product product_id={13} /> */}
-        <Button title="signin" onPress={() => navigation.navigate('SignIn')} />
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+      <ScrollView contentContainerStyle={{paddingBottom: 60}}>
+        {product_images && (
+          <View style={styles.carouselContainer}>
+            <ImageCarousel
+              product_images={product_images}
+              resizeMode="stretch"
+            />
+          </View>
+        )}
+
         <CategoryTypes product_categories={userData?.product_categories} />
-      </View>
-      {/* )} */}
-    </ScrollView>
-    // </SafeAreaView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 export default Home;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  carouselContainer: {
+    height: 160,
+    width: '95%',
+    alignSelf: 'center',
+    overflow: 'hidden',
+    borderRadius: 30,
+    marginTop: 20,
+  },
+});

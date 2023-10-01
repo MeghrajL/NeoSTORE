@@ -5,6 +5,7 @@ import {colors} from '../assets/colors';
 import {StatusBar, Text, TouchableOpacity} from 'react-native';
 import IconButton from '../components/generic/IconButton/IconButton';
 import {HomeStackScreenNavigationProp, RootStackParamList} from './type';
+import Title from '../components/generic/Title/Title';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const HomeStack = ({navigation}: HomeStackScreenNavigationProp) => {
   return (
@@ -20,7 +21,13 @@ const HomeStack = ({navigation}: HomeStackScreenNavigationProp) => {
             fontSize: 20,
           },
         }}>
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerTitle: 'NeoSTORE',
+          }}
+        />
         <Stack.Screen
           name="Category"
           component={Category}

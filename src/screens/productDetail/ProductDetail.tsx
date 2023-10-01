@@ -147,7 +147,10 @@ const ProductDetail = ({
           </TouchableOpacity>
 
           <View style={styles.carouselContainer}>
-            <ImageCarousel product_images={productItem?.product_images} />
+            <ImageCarousel
+              product_images={productItem?.product_images}
+              resizeMode="contain"
+            />
           </View>
           <View style={styles.infoContainer}>
             <View style={styles.innerInfo}>

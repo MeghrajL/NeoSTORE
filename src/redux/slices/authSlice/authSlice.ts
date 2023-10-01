@@ -18,6 +18,7 @@ import {
   signin,
   update,
 } from '../../../url';
+import {persistor, useAppDispatch} from '../../store';
 
 const initialState: IInitialState = {
   user: null,
@@ -144,7 +145,7 @@ export const getUserAccountDetails = createAsyncThunk(
       console.log('user data 😎', response.data);
       return response.data;
     } catch (error: any) {
-      Toast.show('try again', Toast.SHORT);
+      // Toast.show('try again', Toast.SHORT);
       console.log(error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -181,10 +182,22 @@ export const updateDetails = createAsyncThunk(
   },
 );
 
+export const logoutAndClearPersistedData = () => async dispatch => {
+  // Dispatch the logout action
+  dispatch(logout());
+
+  // Clear the persisted data
+  // Get the persistor from your setup
+  await persistor.purge();
+};
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    logout: () => {
+      return {...initialState};
+    },
     selectAddress: (state, action) => {
       if (state.addressData?.lastSelectedAddressId) {
         state.addressData.lastSelectedAddressId = action.payload;
@@ -299,5 +312,5 @@ export const authSlice = createSlice({
   },
 });
 export default authSlice.reducer;
-export const {selectAddress, addAddress, updateAddress, deleteAddress} =
+export const {logout, selectAddress, addAddress, updateAddress, deleteAddress} =
   authSlice.actions;

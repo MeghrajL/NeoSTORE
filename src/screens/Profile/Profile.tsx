@@ -4,8 +4,12 @@ import {styles} from './style';
 import GenericText from '../../components/generic/GenericText/GenericText';
 import MenuItem from '../../components/profileComponents/menuItem/MenuItem';
 import {ProfileScreenNavigationProp} from '../../navigation/type';
-import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {getUserAccountDetails} from '../../redux/slices/authSlice/authSlice';
+import {persistor, useAppDispatch, useAppSelector} from '../../redux/store';
+import {
+  getUserAccountDetails,
+  logout,
+  logoutAndClearPersistedData,
+} from '../../redux/slices/authSlice/authSlice';
 const Profile = ({navigation}: ProfileScreenNavigationProp) => {
   const dispatch = useAppDispatch();
 
@@ -62,6 +66,11 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
     imageSource = {uri: userData?.profile_pic};
   }
 
+  const handleLogout = async () => {
+    navigation.navigate('SignIn');
+    dispatch(logoutAndClearPersistedData());
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
@@ -101,7 +110,7 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
         <MenuItem
           icon={'log-out-outline'}
           title="Logout"
-          onPress={() => {}}
+          onPress={handleLogout}
           isLast={true}
         />
       </View>

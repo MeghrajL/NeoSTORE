@@ -40,7 +40,9 @@ const CategoryTypes = ({product_categories}: ICategoryTypes) => {
 
   return (
     <View style={styles.container}>
-      <Text>Shop by Category</Text>
+      <GenericText textType="medium" style={styles.titleStyle}>
+        Shop by Category
+      </GenericText>
 
       {product_categories?.map(item => {
         return (
@@ -88,6 +90,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 20,
+    paddingTop: 20,
   },
   imageContainer: {
     // borderRadius: 30,
@@ -114,5 +117,11 @@ const styles = StyleSheet.create({
       height: 1,
     },
     textShadowRadius: 5, // Text shadow radius
+  },
+  titleStyle: {
+    color: colors.MIDNIGHT,
+    fontSize: 22,
+    alignSelf: 'flex-start',
+    paddingLeft: 20,
   },
 });

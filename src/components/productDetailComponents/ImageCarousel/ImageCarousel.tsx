@@ -7,9 +7,10 @@ import {IProductImage} from '../../../redux/slices/productSlice/type';
 
 interface IProductImages {
   product_images: IProductImage[] | undefined;
+  resizeMode: string;
 }
 
-const ImageCarousel = ({product_images}: IProductImages) => {
+const ImageCarousel = ({product_images, resizeMode}: IProductImages) => {
   const [activeIndex, setActiveIndex] = useState(0);
   // console.log('+++++', product_images);
   const width = Dimensions.get('window').width;
@@ -33,12 +34,12 @@ const ImageCarousel = ({product_images}: IProductImages) => {
         }}
         // onSnapToItem={index => setActiveIndex(index)}
         // onSnapToItem={index => console.log('current index:', index)}
-        renderItem={item => (
+        renderItem={({item}) => (
           <View style={styles.item}>
             <Image
-              source={{uri: item.item.image}}
+              source={{uri: item.image}}
               style={styles.imageStyle}
-              resizeMode="contain"
+              resizeMode={resizeMode}
             />
             {/* <Pagination
               activeIndex={activeIndex}
