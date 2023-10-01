@@ -76,12 +76,15 @@ const Payment = ({navigation, route}: PaymentScreenNavigationProp) => {
     navigation.popToTop();
     navigation.navigate('Home');
   };
+
+  const formattedAddress = `${Address?.address.firstLine}, ${Address?.address.secondLine}, ${Address?.address.city}, ${Address?.address.state}, ${Address?.address.pincode}, ${Address?.address.country}`;
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView bounces={false} contentContainerStyle={{flexGrow: 1}}>
         <View style={styles.container}>
           <CheckoutProgress id={checkoutProgress} />
-          <DeliveryDetails userData={userData} address={Address?.address} />
+          <DeliveryDetails userData={userData} address={formattedAddress} />
 
           <FlatList
             scrollEnabled={false}
@@ -99,7 +102,11 @@ const Payment = ({navigation, route}: PaymentScreenNavigationProp) => {
             data={cart?.data}
             renderItem={({item}) => (
               <CartSummaryItem
-                item={item}
+                product_id={item.product.id}
+                sub_total={item.product.sub_total}
+                quantity={item.quantity}
+                name={item.product.name}
+                product_images={item.product.product_images}
                 rate={false}
                 onPress={navigateToProductDetail}
               />

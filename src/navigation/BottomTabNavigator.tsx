@@ -5,7 +5,10 @@ import CartStack from './CartStack';
 import ProfileStack from './ProfileStack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../assets/colors';
-import {useIsFocused} from '@react-navigation/native';
+import {
+  getFocusedRouteNameFromRoute,
+  useIsFocused,
+} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {RootStackParamList} from './type';
 import {Dimensions, Platform, SafeAreaView} from 'react-native';
@@ -51,6 +54,16 @@ const BottomTabNavigator = () => {
       <Tab.Screen
         name="CartStack"
         component={CartStack}
+        // options={({route}) => ({
+        //   tabBarStyle: (route => {
+        //     const routeName = getFocusedRouteNameFromRoute(route) ?? '';
+        //     console.log(routeName);
+        //     if (routeName === 'Payment' || routeName === 'Address') {
+        //       return {display: 'none', height: 0, width: 0, opacity: 0};
+        //     }
+        //     return;
+        //   })(route),
+        // })}
         options={{
           tabBarIcon: ({color}) => <Icon name="cart" size={26} color={color} />,
         }}

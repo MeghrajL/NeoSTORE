@@ -1,20 +1,20 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import GenericText from '../GenericText/GenericText';
 import {colors} from '../../../assets/colors';
-import GenericText from '../../generic/GenericText/GenericText';
-const EmptyCart = () => {
+const Nothing = () => {
   return (
     <View style={styles.container}>
       <Image
         style={styles.imageStyle}
-        source={require('../../../assets/images/cart.jpg')}
+        source={require('../../../assets/images/nothing.png')}
       />
-      <GenericText style={styles.textStyle}>Your Cart is Empty.</GenericText>
+      <GenericText style={styles.textStyle}>Nothing to see here.</GenericText>
     </View>
   );
 };
 
-export default EmptyCart;
+export default Nothing;
 
 const styles = StyleSheet.create({
   container: {

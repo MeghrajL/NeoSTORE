@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    // paddingBottom: 60,
+    paddingBottom: 40,
   },
   topRounded: {
     borderTopLeftRadius: 15,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     elevation: 10,
     paddingTop: 15,
     paddingHorizontal: 20,
-    paddingBottom: 60,
+    paddingBottom: 20,
     gap: 10,
   },
 });

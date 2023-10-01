@@ -8,46 +8,59 @@ import {
 } from 'react-native';
 import React from 'react';
 import GenericText from '../GenericText/GenericText';
-import {ICartItem} from '../../../redux/slices/cartSlice/type';
 import {colors} from '../../../assets/colors';
+import GenericButton from '../GenericButton/GenericButton';
 
 interface ICartSummaryItem {
-  item: ICartItem;
+  product_id: number;
+  quantity: number;
+  sub_total: number;
+  product_images: string;
+  name: string;
   rate: boolean;
   onPress: Function;
 }
 
-const CartSummaryItem = ({item, rate, onPress}: ICartSummaryItem) => {
+const CartSummaryItem = ({
+  product_id,
+  product_images,
+  name,
+  rate,
+  quantity,
+  sub_total,
+  onPress,
+}: ICartSummaryItem) => {
   return (
     <TouchableOpacity
-      onPress={() => onPress(item.product_id)}
+      onPress={() => onPress(product_id)}
       style={styles.container}>
       <View style={styles.imageContainer}>
         <Image
           style={styles.imageStyle}
           source={{
-            uri: item.product.product_images,
+            uri: product_images,
           }}
         />
       </View>
       <View style={styles.infoView}>
         <GenericText textType="medium" style={styles.nameText}>
-          {item.product.name}
+          {name}
         </GenericText>
 
         <GenericText style={styles.quantotal}>
-          Quantity : {item.quantity}
+          Quantity : {quantity}
         </GenericText>
         <GenericText style={styles.subtotal}>
-          Subtotal : ₹
-          {item.product.sub_total
-            ? item.product.sub_total
-            : item.product.cost * item.quantity}
+          Subtotal : ₹{sub_total}
         </GenericText>
       </View>
       {rate && (
         <View style={styles.rateView}>
-          <Button title="rate" onPress={() => {}} />
+          <TouchableOpacity style={styles.rateButtonStyle}>
+            <GenericText textType="medium" style={styles.rateText}>
+              Rate
+            </GenericText>
+          </TouchableOpacity>
         </View>
       )}
     </TouchableOpacity>
@@ -120,7 +133,20 @@ const styles = StyleSheet.create({
   rateView: {
     width: '20%',
     height: '100%',
-    backgroundColor: 'blue',
-    zIndex: 1,
+    // zIndex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  rateButtonStyle: {
+    backgroundColor: colors.VIVID_GAMBOGE,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
+    height: 30,
+    width: '100%',
+  },
+  rateText: {
+    color: 'white',
+    fontSize: 20,
   },
 });

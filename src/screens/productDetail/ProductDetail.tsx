@@ -52,6 +52,7 @@ const ProductDetail = ({
 
   useEffect(() => {
     console.log(product_id, prod_id);
+    setProdId(product_id);
     dispatch(getProduct({product_id: prod_id}))
       .then(() => {
         setDataLoaded(true);
@@ -59,7 +60,7 @@ const ProductDetail = ({
       .catch(error => {
         console.error(error);
       });
-  }, [dispatch, prod_id, setDataLoaded]);
+  }, [dispatch, prod_id, setDataLoaded, product_id]);
   const access_token = useAppSelector(
     state => state.auth.user?.data?.access_token,
   );

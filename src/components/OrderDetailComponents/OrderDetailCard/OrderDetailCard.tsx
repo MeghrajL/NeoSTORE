@@ -1,49 +1,46 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import GenericText from '../GenericText/GenericText';
 import {IAddress, IUserData} from '../../../redux/slices/authSlice/type';
 import {colors} from '../../../assets/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
+import GenericText from '../../generic/GenericText/GenericText';
 
-interface IDeliveryDetails {
-  address: string;
-  userData: IUserData;
+interface IOrderDetailCard {
+  order_id: number;
+  created: string;
+  cartTotal: number;
 }
 
-const DeliveryDetails = ({address, userData}: IDeliveryDetails) => {
+const OrderDetailCard = ({order_id, created, cartTotal}: IOrderDetailCard) => {
   return (
-    <>
+    <View style={{marginVertical: 20}}>
       <GenericText style={styles.titleText} textType="medium">
-        Delivery Details
+        Order Summary
       </GenericText>
       <View style={styles.container}>
         <Icon
-          name="person-circle-outline"
+          name="bag-handle-outline"
           color={colors.VIVID_GAMBOGE}
-          size={35}
+          size={33}
         />
 
         <View style={styles.addressView}>
-          <GenericText style={styles.nameText} textType="medium">
-            {userData?.first_name} {userData?.last_name}
+          <GenericText style={styles.nameText}>
+            Order Id : {order_id}
           </GenericText>
-          <View>
-            <GenericText style={styles.addressText}>
-              {address}
-              {/* {address.firstLine}, {address.secondLine}, {address.city},{' '}
-              {address.state}, {address.country}, {address.pincode} */}
-            </GenericText>
-          </View>
-          <GenericText style={styles.addressText} textType="medium">
-            {userData?.phone_no}
+          <GenericText style={styles.nameText}>
+            Order Date : {created}
+          </GenericText>
+          <GenericText style={styles.nameText}>
+            Order Total : ₹{cartTotal}
           </GenericText>
         </View>
       </View>
-    </>
+    </View>
   );
 };
 
-export default DeliveryDetails;
+export default OrderDetailCard;
 
 const styles = StyleSheet.create({
   container: {
@@ -68,8 +65,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
   },
   addressView: {gap: 8},
-  addressText: {color: colors.RICH_BLACK, fontSize: 16},
-  nameText: {color: colors.RICH_BLACK, fontSize: 20},
+  nameText: {color: colors.RICH_BLACK, fontSize: 18},
   titleText: {
     color: colors.RICH_BLACK,
     fontSize: 22,

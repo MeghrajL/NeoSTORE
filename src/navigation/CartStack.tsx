@@ -5,8 +5,24 @@ import {colors} from '../assets/colors';
 import {StatusBar, Text, TouchableOpacity} from 'react-native';
 import IconButton from '../components/generic/IconButton/IconButton';
 import {CartStackScreenNavigationProp, RootStackParamList} from './type';
+import {useEffect, useLayoutEffect} from 'react';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const CartStack = ({navigation}: CartStackScreenNavigationProp) => {
+const CartStack = ({navigation, route}: CartStackScreenNavigationProp) => {
+  // const tabHiddenRoutes = ['Address', 'Payment'];
+
+  // useLayoutEffect(() => {
+  //   if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
+  //     navigation.setOptions({
+  //       tabBarStyle: {display: 'none'},
+  //     });
+  //   } else {
+  //     navigation.setOptions({
+  //       tabBarStyle: {display: 'flex'},
+  //     });
+  //   }
+  // }, [navigation, route]);
+
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -27,7 +43,6 @@ const CartStack = ({navigation}: CartStackScreenNavigationProp) => {
           component={Address}
           options={{
             headerTitle: 'Select Address',
-
             headerLeft: () => (
               <IconButton
                 icon="arrow-back-outline"

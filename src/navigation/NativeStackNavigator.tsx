@@ -5,6 +5,7 @@ import {
   OnboardingContainer,
   SignIn,
   ForgotPassword,
+  Address,
 } from '../screens/index';
 import BottomTabNavigator from './BottomTabNavigator';
 import {useEffect, useState} from 'react';

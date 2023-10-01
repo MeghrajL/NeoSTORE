@@ -19,7 +19,7 @@ export type RootStackParamList = {
   UpdateDetails: undefined;
   Profile: undefined;
   OrderList: undefined;
-  OrderDetail: {order_id: number};
+  OrderDetail: {order_id: number; created: string};
   Address: undefined;
   AddAddress: {id: string};
   Payment: {id: string};
