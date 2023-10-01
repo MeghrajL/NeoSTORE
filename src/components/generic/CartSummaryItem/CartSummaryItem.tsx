@@ -1,5 +1,6 @@
 import {
   Button,
+  GestureResponderEvent,
   Image,
   StyleSheet,
   Text,
@@ -19,6 +20,7 @@ interface ICartSummaryItem {
   name: string;
   rate: boolean;
   onPress: Function;
+  onRatePress?: Function;
 }
 
 const CartSummaryItem = ({
@@ -29,6 +31,7 @@ const CartSummaryItem = ({
   quantity,
   sub_total,
   onPress,
+  onRatePress,
 }: ICartSummaryItem) => {
   return (
     <TouchableOpacity
@@ -56,7 +59,9 @@ const CartSummaryItem = ({
       </View>
       {rate && (
         <View style={styles.rateView}>
-          <TouchableOpacity style={styles.rateButtonStyle}>
+          <TouchableOpacity
+            onPress={() => onRatePress(product_id)}
+            style={styles.rateButtonStyle}>
             <GenericText textType="medium" style={styles.rateText}>
               Rate
             </GenericText>

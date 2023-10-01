@@ -1,14 +1,22 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios, {AxiosResponse} from 'axios';
-import {baseUrl, getList, getDetail} from '../../../url';
-import {IInitialState, IGetCategoryListParams, IGetProductParams} from './type';
+import {baseUrl, getList, getDetail, setRating} from '../../../url';
+import Toast from 'react-native-simple-toast';
+
+import {
+  IInitialState,
+  IGetCategoryListParams,
+  IGetProductParams,
+  ISetProductRatingParams,
+} from './type';
 
 const initialState: IInitialState = {
   category: null,
   productData: null,
-  rating: [],
+  rating: null,
   isLoading: false,
   isError: false,
+  isSettingRating: false,
 };
 
 export const getCategoryList = createAsyncThunk(
@@ -50,6 +58,30 @@ export const getProduct = createAsyncThunk(
   },
 );
 
+export const setProductRating = createAsyncThunk(
+  'product/setProductRating',
+  async (params: ISetProductRatingParams, thunkAPI) => {
+    try {
+      console.log('😀', params);
+      const {product_id, rating} = params;
+      const formData = new FormData();
+      formData.append('product_id', product_id);
+      formData.append('rating', rating);
+
+      const response = await axios.post(`${baseUrl}/${setRating}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      // console.log(response.data);
+      Toast.show('Rating set Successfully', Toast.SHORT);
+      return response.data;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
 export const productSlice = createSlice({
   name: 'product',
   initialState,
@@ -80,6 +112,19 @@ export const productSlice = createSlice({
       .addCase(getProduct.rejected, (state, action) => {
         state.isError = true;
         state.isLoading = false;
+      })
+      .addCase(setProductRating.pending, (state, action) => {
+        console.log('load');
+        state.isSettingRating = true;
+      })
+      .addCase(setProductRating.fulfilled, (state, action) => {
+        state.rating = action.payload;
+        state.isSettingRating = false;
+        state.isError = false;
+      })
+      .addCase(setProductRating.rejected, (state, action) => {
+        state.isError = true;
+        state.isSettingRating = false;
       });
   },
 });

@@ -54,10 +54,34 @@ export interface IGetProductParams {
   product_id: number;
 }
 
+export interface ISetProductRatingParams {
+  product_id: number;
+  rating: number;
+}
+
+export interface IProductRatingData {
+  status: number;
+  data: {
+    id: number;
+    product_category_id: number;
+    name: string;
+    producer: string;
+    description: string;
+    cost: number;
+    rating: number;
+    view_count: number;
+    created: string; // This should be a valid date string
+    modified: string; // This should be a valid date string
+  };
+  message: string;
+  user_msg: string;
+}
+
 export interface IInitialState {
   category: ICategory | null;
   productData: IProductData | null;
-  rating: [];
+  rating: IProductRatingData | null;
   isLoading: boolean;
   isError: boolean;
+  isSettingRating: boolean;
 }

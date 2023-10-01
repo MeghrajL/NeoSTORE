@@ -62,17 +62,6 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
 
   async function handleCheckOut() {
     navigation.navigate('Address');
-    // try {
-    //   await dispatch(
-    //     placeOrder({
-    //       access_token: access_token,
-    //       address: 'karjat',
-    //     }),
-    //   ).unwrap();
-    //   dispatch(getCartList({access_token: access_token}));
-    // } catch (error) {
-    //   console.error(error);
-    // }
   }
 
   return (
