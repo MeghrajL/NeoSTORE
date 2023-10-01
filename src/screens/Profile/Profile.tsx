@@ -37,6 +37,9 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
     navigation.navigate('UpdateDetails');
   }
 
+  function onOrderListHandler() {
+    navigation.navigate('OrderList');
+  }
   // let imageSource;
   // if (userData?.profile_pic || userData?.profile_pic !== '') {
   //   imageSource = {uri: userData?.profile_pic};
@@ -91,6 +94,11 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
         </View>
       </View>
       <View style={styles.itemContainer}>
+        <MenuItem
+          icon={'receipt-outline'}
+          title="My Orders"
+          onPress={onOrderListHandler}
+        />
         <MenuItem
           icon={'create-outline'}
           title="Update Details"

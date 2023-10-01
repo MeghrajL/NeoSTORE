@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   Modal,
   Keyboard,
+  Vibration,
 } from 'react-native';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 // import BottomSheet from '@gorhom/bottom-sheet';
@@ -26,19 +27,20 @@ import {signInUser} from '../../redux/slices/authSlice/authSlice';
 import {Button} from 'react-native';
 import BottomNavigationBar from 'react-native-paper/lib/typescript/components/BottomNavigation/BottomNavigationBar';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import Load from '../../components/generic/Load/Load';
+import Tick from '../../components/generic/Tick/Tick';
 
 const SignIn = ({navigation}: SignInScreenNavigationProp) => {
-  // const [err, setErr] = useState(false);
   const [showErr, setShowErr] = useState(false);
   // const [isErr, setIsErr] = useState(false);
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
+  const [isSignInDone, setSignInDone] = useState(false);
 
   const dispatch = useAppDispatch();
-  let status = useAppSelector(state => state.auth);
-  console.log(status);
+  const {isLoading} = useAppSelector(state => state.auth);
 
   function emailHandler(email: string) {
     setUser({...user, email: email.toLowerCase()});
@@ -69,7 +71,11 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
     } else {
       try {
         await dispatch(signInUser(user)).unwrap();
-        navigation.navigate('MainNav');
+        setSignInDone(true);
+        setTimeout(() => {
+          navigation.navigate('MainNav');
+        }, 1200);
+        Vibration.vibrate(200);
       } catch {
         console.log('some error');
       }
@@ -108,15 +114,22 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
               showErr={showErr}
               errorText={'Please enter correct password'}
             />
-
-            <GenericButton
-              onPress={onSignInPress}
-              title="Sign In"
-              fontSize={26}
-              fontFamily="Gilroy-Bold"
-              style={styles.buttonStyle}
-              color="white"
-            />
+            <View style={styles.buttonContainer}>
+              {isLoading ? (
+                <Load />
+              ) : !isSignInDone ? (
+                <GenericButton
+                  onPress={onSignInPress}
+                  title="Sign In"
+                  fontSize={26}
+                  fontFamily="Gilroy-Bold"
+                  style={styles.buttonStyle}
+                  color="white"
+                />
+              ) : (
+                <Tick />
+              )}
+            </View>
             <View style={styles.signInStyle}>
               <TouchableOpacity onPress={onForgotPress}>
                 <GenericText textType="regular" style={styles.signInStyle}>

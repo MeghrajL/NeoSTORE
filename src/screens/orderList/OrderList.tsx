@@ -8,6 +8,7 @@ import {styles} from './style';
 import GenericText from '../../components/generic/GenericText/GenericText';
 import Nothing from '../../components/generic/nothing/Nothing';
 import Loading from '../../components/generic/Loading/Loading';
+import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
 
 const OrderList = ({navigation}: OrderListScreenNavigationProp) => {
   const dispatch = useAppDispatch();
@@ -26,6 +27,7 @@ const OrderList = ({navigation}: OrderListScreenNavigationProp) => {
       });
   }, [dispatch, access_token]);
 
+  const {isError} = useAppSelector(state => state.order);
   const orderList = useAppSelector(state => state.order.orderList?.data);
   console.log(orderList);
   const navigateToOrderDetail = (order_id: number, created: string) => {
@@ -36,6 +38,8 @@ const OrderList = ({navigation}: OrderListScreenNavigationProp) => {
     <View style={styles.container}>
       {orderList?.length === 0 ? (
         <Nothing />
+      ) : isError ? (
+        <ErrorScreen />
       ) : (
         <FlatList
           contentContainerStyle={styles.content}

@@ -20,6 +20,7 @@ import {ForgotPasswordScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {forgotPassword} from '../../redux/slices/authSlice/authSlice';
 import Tick from '../../components/generic/Tick/Tick';
+import Load from '../../components/generic/Load/Load';
 const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
   const [email, setEmail] = useState('');
@@ -87,9 +88,10 @@ const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
           />
 
           <View style={styles.buttonContainer}>
-            {!emailSubmit ? (
+            {forgotLoading ? (
+              <Load />
+            ) : !emailSubmit ? (
               <GenericButton
-                disabled={forgotLoading}
                 onPress={press}
                 title="Submit"
                 fontSize={26}

@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
   Vibration,
+  StatusBar,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -35,6 +36,7 @@ import {colors} from '../../assets/colors';
 import LottieView from 'lottie-react-native';
 import Tick from '../../components/generic/Tick/Tick';
 import Load from '../../components/generic/Load/Load';
+import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
 
 const ProductDetail = ({
   navigation,
@@ -51,26 +53,29 @@ const ProductDetail = ({
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log(product_id, prod_id);
     setProdId(product_id);
-    dispatch(getProduct({product_id: prod_id}))
-      .then(() => {
-        setDataLoaded(true);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    if (prod_id !== productData?.data?.id) {
+      console.log(product_id, prod_id);
+
+      dispatch(getProduct({product_id: prod_id}))
+        .then(() => {
+          setDataLoaded(true);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
   }, [dispatch, prod_id, setDataLoaded, product_id]);
+
   const access_token = useAppSelector(
     state => state.auth.user?.data?.access_token,
   );
 
-  const isLoading = useAppSelector(state => state.product.isLoading);
+  const {isLoading, isError, productData, category} = useAppSelector(
+    state => state.product,
+  );
 
-  const productData = useAppSelector(state => state.product.productData);
   const productItem = productData?.data;
-
-  const category = useAppSelector(state => state.product.category);
   const updatedCategory = category?.data?.filter(item => item.id !== prod_id);
 
   console.log('>>>>>>>>', access_token);
@@ -111,7 +116,7 @@ const ProductDetail = ({
       setTimeout(() => {
         setAddedToCart(false);
       }, 2000);
-      // Vibration.vibrate(1000);
+      Vibration.vibrate(200);
     } catch (error) {
       Toast.show('Something went wrong, Please try again.', Toast.SHORT);
       setAddedToCart(false);
@@ -133,111 +138,123 @@ const ProductDetail = ({
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      {isLoading || !dataLoaded || !catDataLoaded ? (
-        <Loading />
-      ) : (
-        <ScrollView
-          contentContainerStyle={{paddingBottom: 60}}
-          style={styles.container}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={styles.back}>
-            <Icon name="arrow-back-outline" color={colors.MIDNIGHT} size={25} />
-          </TouchableOpacity>
+    <>
+      <StatusBar barStyle="default" />
+      <SafeAreaView style={{flex: 1}}>
+        {prod_id !== productData?.data?.id ||
+        isLoading ||
+        !dataLoaded ||
+        !catDataLoaded ? (
+          <Loading />
+        ) : isError ? (
+          <ErrorScreen />
+        ) : (
+          <ScrollView
+            contentContainerStyle={{paddingBottom: 60}}
+            style={styles.container}>
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={styles.back}>
+              <Icon
+                name="arrow-back-outline"
+                color={colors.MIDNIGHT}
+                size={25}
+              />
+            </TouchableOpacity>
 
-          <View style={styles.carouselContainer}>
-            <ImageCarousel
-              product_images={productItem?.product_images}
-              resizeMode="contain"
-            />
-          </View>
-          <View style={styles.infoContainer}>
-            <View style={styles.innerInfo}>
-              <View style={styles.visual}>
-                <StarRating rating={productItem?.rating} />
-                <ViewCount count={productItem?.view_count} />
-              </View>
+            <View style={styles.carouselContainer}>
+              <ImageCarousel
+                product_images={productItem?.product_images}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={styles.infoContainer}>
+              <View style={styles.innerInfo}>
+                <View style={styles.visual}>
+                  <StarRating rating={productItem?.rating} />
+                  <ViewCount count={productItem?.view_count} />
+                </View>
 
-              <View>
-                <GenericText style={styles.producer}>
-                  {productItem?.producer}
+                <View>
+                  <GenericText style={styles.producer}>
+                    {productItem?.producer}
+                  </GenericText>
+                </View>
+                <GenericText textType="medium" style={styles.nameText}>
+                  {productItem?.name}
                 </GenericText>
-              </View>
-              <GenericText textType="medium" style={styles.nameText}>
-                {productItem?.name}
-              </GenericText>
-              <View style={styles.costView}>
-                <GenericText style={styles.costText}>
-                  ₹{productItem?.cost}
-                </GenericText>
-                <GenericText textType="medium" style={styles.offStyle}>
-                  0% off
-                </GenericText>
-                <GenericText style={styles.costStyle}>
-                  ₹{productItem?.cost}
-                </GenericText>
-              </View>
-              {/* <GenericText style={styles.descriptionText}>
+                <View style={styles.costView}>
+                  <GenericText style={styles.costText}>
+                    ₹{productItem?.cost}
+                  </GenericText>
+                  <GenericText textType="medium" style={styles.offStyle}>
+                    0% off
+                  </GenericText>
+                  <GenericText style={styles.costStyle}>
+                    ₹{productItem?.cost}
+                  </GenericText>
+                </View>
+                {/* <GenericText style={styles.descriptionText}>
                 Details : {productItem.description}
               </GenericText> */}
-              <ReadMore
-                seeMoreStyle={styles.seeMoreStyle}
-                seeLessStyle={styles.seeLessStyle}
-                style={styles.descriptionText}>
-                {productItem?.description}
-              </ReadMore>
-            </View>
-            <View style={styles.buttonsContainer}>
-              <QuantityControl
-                quantity={quantity}
-                onIncrease={increaseQuantity}
-                onDecrease={decreaseQuantity}
-              />
-              {cartLoading ? (
-                <Load />
-              ) : !addedToCart ? (
-                <GenericButton
-                  // disabled={cartLoading}
-                  onPress={handleAddToCart}
-                  title="Add to Cart"
-                  fontSize={26}
-                  fontFamily="Gilroy-Medium"
-                  style={styles.cartButtonStyle}
-                  color="white"
+                <ReadMore
+                  seeMoreStyle={styles.seeMoreStyle}
+                  seeLessStyle={styles.seeLessStyle}
+                  style={styles.descriptionText}>
+                  {productItem?.description}
+                </ReadMore>
+              </View>
+              <View style={styles.buttonsContainer}>
+                <QuantityControl
+                  quantity={quantity}
+                  onIncrease={increaseQuantity}
+                  onDecrease={decreaseQuantity}
                 />
-              ) : (
-                <Tick />
-              )}
-            </View>
-            <View style={styles.similar}>
-              <GenericText textType="medium" style={styles.costText}>
-                Similar Products
-              </GenericText>
+                {cartLoading ? (
+                  <Load />
+                ) : !addedToCart ? (
+                  <GenericButton
+                    // disabled={cartLoading}
+                    onPress={handleAddToCart}
+                    title="Add to Cart"
+                    fontSize={26}
+                    fontFamily="Gilroy-Medium"
+                    style={styles.cartButtonStyle}
+                    color="white"
+                  />
+                ) : (
+                  <Tick />
+                )}
+              </View>
+              <View style={styles.similar}>
+                <GenericText textType="medium" style={styles.costText}>
+                  Similar Products
+                </GenericText>
 
-              <View style={{flex: 1}}>
-                <FlatList
-                  scrollEnabled={false}
-                  data={updatedCategory}
-                  renderItem={({item}) => (
-                    <ProductItem
-                      item={item}
-                      onPress={() => {
-                        setProdId(item.id);
-                      }}
-                    />
-                  )}
-                  keyExtractor={item => item.id.toString()}
-                  numColumns={2}
-                  contentContainerStyle={styles.contentStyle}
-                  columnWrapperStyle={styles.wrapperStyle}
-                />
+                <View style={{flex: 1}}>
+                  <FlatList
+                    scrollEnabled={false}
+                    data={updatedCategory}
+                    renderItem={({item}) => (
+                      <ProductItem
+                        item={item}
+                        onPress={() => {
+                          setProdId(item.id);
+                        }}
+                      />
+                    )}
+                    keyExtractor={item => item.id.toString()}
+                    numColumns={2}
+                    contentContainerStyle={styles.contentStyle}
+                    columnWrapperStyle={styles.wrapperStyle}
+                  />
+                </View>
               </View>
             </View>
-          </View>
-        </ScrollView>
-      )}
-    </SafeAreaView>
+          </ScrollView>
+        )}
+      </SafeAreaView>
+    </>
   );
 };
 

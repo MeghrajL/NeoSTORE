@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   formView: {
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 20,
+    gap: 30,
     width: '100%',
     // backgroundColor: 'red',
   },
@@ -31,16 +31,12 @@ export const styles = StyleSheet.create({
   },
   buttonStyle: {
     backgroundColor: colors.VIVID_GAMBOGE,
-    margin: 15,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,
-    minHeight: 30,
-    minWidth: 50,
-    maxHeight: 60,
-    maxWidth: 400,
-    height: 60,
-    width: '90%',
+    height: 50,
+    width: '100%',
     fontFamily: 'Gilroy-Bold',
   },
+  buttonContainer: {width: '90%', paddingTop: 10},
 });

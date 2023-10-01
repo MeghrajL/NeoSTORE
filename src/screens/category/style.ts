@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   contentStyle: {
     paddingBottom: 100,
     gap: 10,
-    paddingVertical: 10,
+    paddingVertical: 20,
     // marginHorizontal: 20,
     width: '100%',
     justifyContent: 'center',
@@ -20,8 +20,10 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   footerStyle: {
-    color: colors.VIVID_GAMBOGE,
-    fontSize: 16,
+    color: colors.MIDNIGHT,
+    fontSize: 18,
+    paddingTop: 6,
+    width: '100%',
   },
   footerContainer: {
     justifyContent: 'center',

@@ -14,6 +14,7 @@ import {
   Text,
   Alert,
   Keyboard,
+  Vibration,
 } from 'react-native';
 
 import {RegisterScreenNavigationProp} from '../../navigation/type';
@@ -30,11 +31,15 @@ import {
   validatePassword,
   validatePhone,
 } from '../../helpers/validators';
-import {cleanState, registerUser} from '../../redux/slices/authSlice/authSlice';
+import {registerUser} from '../../redux/slices/authSlice/authSlice';
 
 import {useAppDispatch, useAppSelector} from '../../redux/store';
+import Load from '../../components/generic/Load/Load';
+import Tick from '../../components/generic/Tick/Tick';
 
 const Register = ({navigation}: RegisterScreenNavigationProp) => {
+  const [isRegisterDone, setRegisterDone] = useState(false);
+
   const [checkBoxChecked, setCheckBoxChecked] = useState(false);
   const keyboardVerticalOffset = 10;
   const [samePass, setSamePass] = useState(false);
@@ -52,6 +57,8 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
   const dispatch = useAppDispatch();
 
   // const status = useAppSelector(state => state.auth.user[0].status);
+  const {isLoading} = useAppSelector(state => state.auth);
+
   function fnameHandler(first_name: string) {
     setUser({...user, first_name});
   }
@@ -119,6 +126,11 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
       try {
         await dispatch(registerUser(user)).unwrap();
         navigation.navigate('MainNav');
+        setRegisterDone(true);
+        setTimeout(() => {
+          navigation.navigate('MainNav');
+        }, 1200);
+        Vibration.vibrate(200);
       } catch {
         console.log('some error');
       }
@@ -229,14 +241,22 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
                 showErr={showErr}
               />
 
-              <GenericButton
-                onPress={onRegisterPress}
-                title="Register"
-                fontSize={26}
-                fontFamily="Gilroy-Bold"
-                style={styles.buttonStyle}
-                color="white"
-              />
+              <View style={styles.buttonContainer}>
+                {isLoading ? (
+                  <Load />
+                ) : !isRegisterDone ? (
+                  <GenericButton
+                    onPress={onRegisterPress}
+                    title="Register"
+                    fontSize={26}
+                    fontFamily="Gilroy-Bold"
+                    style={styles.buttonStyle}
+                    color="white"
+                  />
+                ) : (
+                  <Tick />
+                )}
+              </View>
 
               <Footer
                 dialogueText="Already have an account?"

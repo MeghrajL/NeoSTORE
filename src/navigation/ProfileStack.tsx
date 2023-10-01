@@ -57,7 +57,7 @@ const ProfileStack = ({navigation}: ProfileStackScreenNavigationProp) => {
             ),
           }}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="OrderList"
           component={OrderList}
           options={{
@@ -71,8 +71,8 @@ const ProfileStack = ({navigation}: ProfileStackScreenNavigationProp) => {
               />
             ),
           }}
-        /> */}
-        {/* <Stack.Screen
+        />
+        <Stack.Screen
           name="OrderDetail"
           component={OrderDetail}
           options={{
@@ -86,7 +86,7 @@ const ProfileStack = ({navigation}: ProfileStackScreenNavigationProp) => {
               />
             ),
           }}
-        /> */}
+        />
       </Stack.Navigator>
     </>
   );

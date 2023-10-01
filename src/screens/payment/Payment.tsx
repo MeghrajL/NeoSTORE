@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   ScrollView,
   FlatList,
+  Vibration,
 } from 'react-native';
 import React, {useState} from 'react';
 import {PaymentScreenNavigationProp} from '../../navigation/type';
@@ -53,8 +54,7 @@ const Payment = ({navigation, route}: PaymentScreenNavigationProp) => {
       setTimeout(() => {
         openModal();
       }, 2000);
-      // Vibration.vibrate(1000);
-      //sound
+      Vibration.vibrate(200);
     } catch (error) {
       console.error(error);
     }

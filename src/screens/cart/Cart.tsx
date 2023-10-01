@@ -23,6 +23,7 @@ import GenericButton from '../../components/generic/GenericButton/GenericButton'
 import Tick from '../../components/generic/Tick/Tick';
 import {placeOrder} from '../../redux/slices/orderSlice/orderSlice';
 import BottomCard from '../../components/generic/BottomCard/BottomCard';
+import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
 
 const Cart = ({navigation}: CartScreenNavigationProp) => {
   const dispatch = useAppDispatch();
@@ -44,7 +45,7 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
       });
   }, [dispatch, access_token]);
 
-  const {cart, isLoading} = useAppSelector(state => state.cart);
+  const {cart, isLoading, isError} = useAppSelector(state => state.cart);
   console.log('+++++++++++++', cart);
 
   useEffect(() => {
@@ -71,6 +72,8 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
           <Loading />
         ) : cart?.message === 'Cart Empty' ? (
           <EmptyCart />
+        ) : isError ? (
+          <ErrorScreen />
         ) : (
           <>
             <SwipeListView

@@ -10,6 +10,8 @@ import DeliveryDetails from '../../components/generic/DeliveryDetails/DeliveryDe
 import OrderDetailCard from '../../components/OrderDetailComponents/OrderDetailCard/OrderDetailCard';
 import RatingModal from '../../components/OrderDetailComponents/RatingModal/RatingModal';
 import {setProductRating} from '../../redux/slices/productSlice/productSlice';
+import Loading from '../../components/generic/Loading/Loading';
+import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
 
 const OrderDetail = ({navigation, route}: OrderDetailScreenNavigationProp) => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -37,6 +39,7 @@ const OrderDetail = ({navigation, route}: OrderDetailScreenNavigationProp) => {
   }, [dispatch, access_token]);
 
   const orderDetails = useAppSelector(state => state.order.orderDetails?.data);
+  const {isLoading, isError} = useAppSelector(state => state.order);
 
   function navigateToProductDetail(product_id: number) {
     navigation.navigate('ProductDetail', {
@@ -80,51 +83,59 @@ const OrderDetail = ({navigation, route}: OrderDetailScreenNavigationProp) => {
   };
   return (
     <View style={{backgroundColor: 'white', flex: 1}}>
-      <FlatList
-        contentContainerStyle={styles.content}
-        ListHeaderComponent={
-          <>
-            <OrderDetailCard
-              order_id={order_id}
-              created={created}
-              cartTotal={orderDetails?.cost}
-            />
-            <DeliveryDetails
-              userData={userData}
-              address={orderDetails?.address}
-            />
+      {isLoading ? (
+        <Loading />
+      ) : isError ? (
+        <ErrorScreen />
+      ) : (
+        <>
+          <FlatList
+            contentContainerStyle={styles.content}
+            ListHeaderComponent={
+              <>
+                <OrderDetailCard
+                  order_id={order_id}
+                  created={created}
+                  cartTotal={orderDetails?.cost}
+                />
+                <DeliveryDetails
+                  userData={userData}
+                  address={orderDetails?.address}
+                />
 
-            <View style={styles.header}>
-              <GenericText style={styles.titleText} textType="medium">
-                Cart Summary
-              </GenericText>
-              <GenericText style={styles.quanText}>
-                Total Items : {orderDetails?.order_details.length}
-              </GenericText>
-            </View>
-          </>
-        }
-        data={orderDetails?.order_details}
-        renderItem={({item}) => (
-          <CartSummaryItem
-            product_id={item.product_id}
-            sub_total={item.total}
-            quantity={item.quantity}
-            name={item.prod_name}
-            product_images={item.prod_image}
-            rate={true}
-            onPress={navigateToProductDetail}
-            onRatePress={openModal}
+                <View style={styles.header}>
+                  <GenericText style={styles.titleText} textType="medium">
+                    Cart Summary
+                  </GenericText>
+                  <GenericText style={styles.quanText}>
+                    Total Items : {orderDetails?.order_details.length}
+                  </GenericText>
+                </View>
+              </>
+            }
+            data={orderDetails?.order_details}
+            renderItem={({item}) => (
+              <CartSummaryItem
+                product_id={item.product_id}
+                sub_total={item.total}
+                quantity={item.quantity}
+                name={item.prod_name}
+                product_images={item.prod_image}
+                rate={true}
+                onPress={navigateToProductDetail}
+                onRatePress={openModal}
+              />
+            )}
           />
-        )}
-      />
-      <RatingModal
-        onClose={closeModal}
-        isVisible={isModalVisible}
-        onRatingSubmit={onRatingSubmit}
-        isSettingRating={isSettingRating}
-        ratingSubmitted={ratingSubmitted}
-      />
+          <RatingModal
+            onClose={closeModal}
+            isVisible={isModalVisible}
+            onRatingSubmit={onRatingSubmit}
+            isSettingRating={isSettingRating}
+            ratingSubmitted={ratingSubmitted}
+          />
+        </>
+      )}
     </View>
   );
 };

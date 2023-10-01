@@ -15,28 +15,39 @@ import {styles} from './style';
 import GenericText from '../../components/generic/GenericText/GenericText';
 import Loading from '../../components/generic/Loading/Loading';
 import ProductItemHorizontal from '../../components/categoryComponents/productItemHorizontal/productItemHorizontal';
+
+import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
 const Category = ({navigation, route}: CategoryScreenNavigationProp) => {
-  const isLoading = useAppSelector(state => state.product.isLoading);
+  const {isError, isLoading, category} = useAppSelector(state => state.product);
   const dispatch = useAppDispatch();
-  const category = useAppSelector(state => state.product.category);
 
   // console.log('from category>>>>>>>>', isLoading);
   const [dataLoaded, setDataLoaded] = useState(false);
   const [page, setPage] = useState(1);
+  const [initialDataLoaded, setInitialDataLoaded] = useState(false);
   const {product_category_id, categoryName} = route.params;
   useLayoutEffect(() => {
     navigation.setOptions({title: categoryName});
   }, [categoryName, navigation]);
 
   useEffect(() => {
-    dispatch(getCategoryList({product_category_id: product_category_id}))
-      .then(() => {
-        setDataLoaded(true);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, [dispatch, product_category_id, setDataLoaded]);
+    if (category !== null) {
+      setInitialDataLoaded(true);
+    }
+  }, [category]);
+
+  useEffect(() => {
+    if (category?.data[0].product_category_id !== product_category_id) {
+      dispatch(getCategoryList({product_category_id: product_category_id}))
+        .then(() => {
+          setDataLoaded(true);
+          setInitialDataLoaded(true);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  }, [dispatch, product_category_id]);
 
   function seeMore(page: number) {
     setPage(page);
@@ -76,8 +87,13 @@ const Category = ({navigation, route}: CategoryScreenNavigationProp) => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      {isLoading || !dataLoaded ? (
+      {category?.data[0].product_category_id !== product_category_id ||
+      isLoading ||
+      !dataLoaded ||
+      !initialDataLoaded ? (
         <Loading />
+      ) : isError ? (
+        <ErrorScreen />
       ) : (
         <View style={{flex: 1}}>
           <FlatList
