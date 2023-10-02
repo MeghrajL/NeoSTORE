@@ -18,11 +18,11 @@ import InputWithError from '../../components/generic/InputWithError/InputWithErr
 import {styles} from './style';
 import {ForgotPasswordScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {forgotPassword} from '../../redux/slices/authSlice/authSlice';
 import Tick from '../../components/generic/Tick/Tick';
 import Load from '../../components/generic/Load/Load';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
 import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
+import { forgotPassword } from '../../redux/slices/authSlice/actions';
 const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
   const [email, setEmail] = useState('');

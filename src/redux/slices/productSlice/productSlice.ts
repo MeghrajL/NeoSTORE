@@ -1,14 +1,8 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import axios, {AxiosResponse} from 'axios';
-import {baseUrl, getList, getDetail, setRating} from '../../../url';
-import Toast from 'react-native-simple-toast';
+import {createSlice} from '@reduxjs/toolkit';
 
-import {
-  IInitialState,
-  IGetCategoryListParams,
-  IGetProductParams,
-  ISetProductRatingParams,
-} from './type';
+import {IInitialState} from './type';
+
+import {getCategoryList, getProduct, setProductRating} from './actions';
 
 const initialState: IInitialState = {
   category: null,
@@ -18,69 +12,6 @@ const initialState: IInitialState = {
   isError: false,
   isSettingRating: false,
 };
-
-export const getCategoryList = createAsyncThunk(
-  'product/getCategoryList',
-  async (params: IGetCategoryListParams, thunkAPI) => {
-    try {
-      let url = `${baseUrl}/${getList}?product_category_id=${params.product_category_id}`;
-
-      if (params.limit !== undefined) {
-        url += `&limit=${params.limit}`;
-      }
-      if (params.page !== undefined) {
-        url += `&page=${params.page}`;
-      }
-
-      // console.log(url);
-      const response = await axios.get(url);
-      console.log(response.data.data);
-      return response.data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-);
-
-export const getProduct = createAsyncThunk(
-  'product/getProduct',
-  async (params: IGetProductParams, thunkAPI) => {
-    try {
-      const url = `${baseUrl}/${getDetail}?product_id=${params.product_id}`;
-
-      console.log(params.product_id);
-      const response = await axios.get(url);
-      //   console.log(response.data.data);
-      return response.data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-);
-
-export const setProductRating = createAsyncThunk(
-  'product/setProductRating',
-  async (params: ISetProductRatingParams, thunkAPI) => {
-    try {
-      console.log('😀', params);
-      const {product_id, rating} = params;
-      const formData = new FormData();
-      formData.append('product_id', product_id);
-      formData.append('rating', rating);
-
-      const response = await axios.post(`${baseUrl}/${setRating}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      // console.log(response.data);
-      Toast.show('Rating set Successfully', Toast.SHORT);
-      return response.data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-);
 
 export const productSlice = createSlice({
   name: 'product',
@@ -101,7 +32,6 @@ export const productSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getProduct.pending, (state, action) => {
-        console.log('load');
         state.isLoading = true;
       })
       .addCase(getProduct.fulfilled, (state, action) => {
@@ -114,7 +44,6 @@ export const productSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(setProductRating.pending, (state, action) => {
-        console.log('load');
         state.isSettingRating = true;
       })
       .addCase(setProductRating.fulfilled, (state, action) => {
@@ -129,4 +58,3 @@ export const productSlice = createSlice({
   },
 });
 export default productSlice.reducer;
-// export const {cleanState} = authSlice.actions;

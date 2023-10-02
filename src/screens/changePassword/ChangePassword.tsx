@@ -20,9 +20,9 @@ import GenericButton from '../../components/generic/GenericButton/GenericButton'
 import {validatePassword} from '../../helpers/validators';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {changePassword} from '../../redux/slices/authSlice/authSlice';
 import Tick from '../../components/generic/Tick/Tick';
 import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
+import {changePassword} from '../../redux/slices/authSlice/actions';
 
 const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);

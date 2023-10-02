@@ -1,8 +1,6 @@
 import {
   View,
-  Text,
   SafeAreaView,
-  Button,
   ScrollView,
   FlatList,
   TouchableOpacity,
@@ -16,39 +14,32 @@ import Toast from 'react-native-simple-toast';
 
 import {ProductDetailScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {
-  getCategoryList,
-  getProduct,
-} from '../../redux/slices/productSlice/productSlice';
-import {addToCart, getCartList} from '../../redux/slices/cartSlice/cartSlice';
 
 import Loading from '../../components/generic/Loading/Loading';
 import ImageCarousel from '../../components/productDetailComponents/ImageCarousel/ImageCarousel';
 import {styles} from './style';
 import StarRating from '../../components/categoryComponents/starRating/StarRating';
 import GenericText from '../../components/generic/GenericText/GenericText';
-import GenericButton from '../../components/generic/GenericButton/GenericButton';
 import ViewCount from '../../components/productDetailComponents/ViewCount/ViewCount';
 import QuantityControl from '../../components/productDetailComponents/QualityControl/QualityControl';
 import ProductItem from '../../components/categoryComponents/productItem/ProductItem';
 import ReadMore from '@fawazahmed/react-native-read-more';
-import IconButton from '../../components/generic/IconButton/IconButton';
 import {colors} from '../../assets/colors';
-import LottieView from 'lottie-react-native';
-import Tick from '../../components/generic/Tick/Tick';
-import Load from '../../components/generic/Load/Load';
 import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
 import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
-import {set} from 'lodash';
+
 import {useFocusEffect} from '@react-navigation/native';
+import {
+  getCategoryList,
+  getProduct,
+} from '../../redux/slices/productSlice/actions';
+import { addToCart, getCartList } from '../../redux/slices/cartSlice/actions';
 
 const ProductDetail = ({
   navigation,
   route,
 }: ProductDetailScreenNavigationProp) => {
-  console.log(route.params);
   const {product_id, shouldLoadSimilarProducts} = route.params;
-  // const [prod_id, setProdId] = useState(product_id);
   const [dataLoaded, setDataLoaded] = useState(false);
   const [catDataLoaded, setCatDataLoaded] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -79,9 +70,8 @@ const ProductDetail = ({
     item => item.id !== product_id,
   );
 
-  console.log('>>>>>>>>', access_token);
   const cartLoading = useAppSelector(state => state.cart?.isLoading);
-  // console.log('😀', cartStatus);
+ 
 
   useEffect(() => {
     if (shouldLoadSimilarProducts === true) {
@@ -92,7 +82,6 @@ const ProductDetail = ({
       )
         .then(() => {
           setCatDataLoaded(true);
-          // console.error('success');
         })
         .catch(error => {
           console.error(error);
@@ -112,7 +101,6 @@ const ProductDetail = ({
         }),
       ).unwrap();
       setAddedToCart(true);
-      console.log('adddessdsdsdsdsddsds');
       dispatch(getCartList({access_token: access_token}));
       setTimeout(() => {
         setAddedToCart(false);
@@ -122,7 +110,7 @@ const ProductDetail = ({
       Toast.show('Something went wrong, Please try again.', Toast.SHORT);
       setAddedToCart(false);
 
-      // console.error('from detail', error);
+      console.error( error);
     }
   }
 
@@ -183,7 +171,7 @@ const ProductDetail = ({
       <StatusBar barStyle="default" />
       <SafeAreaView style={{flex: 1}}>
         {
-          // prod_id !== productData?.data?.id ||
+          
           isLoading || !dataLoaded || !catDataLoaded ? (
             <Loading />
           ) : isError ? (
@@ -236,9 +224,7 @@ const ProductDetail = ({
                       ₹{productItem?.cost}
                     </GenericText>
                   </View>
-                  {/* <GenericText style={styles.descriptionText}>
-                Details : {productItem.description}
-              </GenericText> */}
+                
                   <ReadMore
                     seeMoreStyle={styles.seeMoreStyle}
                     seeLessStyle={styles.seeLessStyle}
@@ -252,21 +238,7 @@ const ProductDetail = ({
                     onIncrease={increaseQuantity}
                     onDecrease={decreaseQuantity}
                   />
-                  {/* {cartLoading ? (
-                  <Load />
-                ) : !addedToCart ? (
-                  <GenericButton
-                    // disabled={cartLoading}
-                    onPress={handleAddToCart}
-                    title="Add to Cart"
-                    fontSize={26}
-                    fontFamily="Gilroy-Medium"
-                    style={styles.cartButtonStyle}
-                    color="white"
-                  />
-                ) : (
-                  <Tick />
-                )} */}
+                
                   <ButtonAnimated
                     onPress={handleAddToCart}
                     title="Add to Cart"

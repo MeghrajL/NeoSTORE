@@ -70,8 +70,8 @@ export interface IProductRatingData {
     cost: number;
     rating: number;
     view_count: number;
-    created: string; // This should be a valid date string
-    modified: string; // This should be a valid date string
+    created: string;
+    modified: string;
   };
   message: string;
   user_msg: string;

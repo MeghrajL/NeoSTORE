@@ -7,44 +7,43 @@ import {
   View,
 } from 'react-native';
 import React, {useCallback, useState} from 'react';
-import {useAppDispatch, useAppSelector} from '../../../redux/store';
 import debounce from 'lodash.debounce';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {SwipeRow} from 'react-native-swipe-list-view';
+
+import {useAppDispatch, useAppSelector} from '../../../redux/store';
+import {ICartItem} from '../../../redux/slices/cartSlice/type';
 import {
-  deleteCart,
   editCart,
   getCartList,
-} from '../../../redux/slices/cartSlice/cartSlice';
-import Icon from 'react-native-vector-icons/Ionicons';
+  deleteCart,
+} from '../../../redux/slices/cartSlice/actions';
+
 import {colors} from '../../../assets/colors';
-import {SwipeRow} from 'react-native-swipe-list-view';
 import GenericText from '../../generic/GenericText/GenericText';
 import IconButton from '../../generic/IconButton/IconButton';
-import {ICartItem} from '../../../redux/slices/cartSlice/type';
+
 interface ICartItemProps {
   item: ICartItem;
   onPress: Function;
 }
 
 const CartItem = ({item, onPress}: ICartItemProps) => {
-  //   const [quantity, setQuantity] = useState(item.quantity);
   const [newQuantity, setNewQuantity] = useState(item.quantity);
   const dispatch = useAppDispatch();
   const access_token = useAppSelector(
     state => state.auth.user?.data?.access_token,
   );
-  console.log(newQuantity);
-  console.log(item);
 
   const debouncedEditCartItem = useCallback(
     debounce(async (access_token, product_id, quantity) => {
-      // Dispatch the action to edit the cart item
       try {
         await dispatch(editCart({access_token, product_id, quantity})).unwrap();
         dispatch(getCartList({access_token: access_token}));
       } catch (error) {
         console.log(error);
       }
-    }, 500), // Adjust the debounce delay as needed
+    }, 500),
     [dispatch],
   );
 
@@ -79,7 +78,6 @@ const CartItem = ({item, onPress}: ICartItemProps) => {
       disableLeftSwipe={false}
       disableRightSwipe={true}>
       <View style={styles.iconButtonContainer}>
-        {/* <Button title="del" onPress={() => handleDeleteCartItem()} /> */}
         <IconButton
           color={colors.MIDNIGHT}
           onPressCustom={() => handleDeleteCartItem()}
@@ -141,8 +139,6 @@ const CartItem = ({item, onPress}: ICartItemProps) => {
             color={colors.MIDNIGHT}
           />
         </View>
-        {/* <View>
-        </View> */}
       </View>
     </SwipeRow>
   );
@@ -197,7 +193,6 @@ const styles = StyleSheet.create({
     width: '90%',
     resizeMode: 'contain',
     paddingRight: 15,
-    // backgroundColor: 'red',
   },
   nameStyle: {
     fontSize: 16,
@@ -209,7 +204,6 @@ const styles = StyleSheet.create({
   },
   iconButtonContainer: {
     alignItems: 'flex-end',
-    // backgroundColor: 'white',
     paddingRight: 30,
     flex: 1,
     flexDirection: 'column',
@@ -219,13 +213,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '67.5%',
     height: '100%',
-    // backgroundColor: 'red',
     gap: 10,
   },
   imageContainer: {
     width: '50%',
     height: '100%',
-    // backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -235,20 +227,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 10,
     paddingRight: 5,
-    // backgroundColor: 'blue',
   },
   buttonsContainer: {
     width: '30%',
     height: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    // backgroundColor: 'red',
   },
   quantity: {
     width: '85%',
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
-    // backgroundColor: 'red',
   },
 });

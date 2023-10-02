@@ -1,17 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
   View,
-  SafeAreaView,
-  Image,
-  Switch,
-  TouchableOpacity,
-  Touchable,
-  KeyboardAvoidingView,
-  ScrollView,
-  Platform,
   TouchableWithoutFeedback,
-  Pressable,
-  Text,
   Alert,
   Keyboard,
   Vibration,
@@ -24,26 +14,23 @@ import Gender from '../../components/registerComponents/Gender/Gender';
 import Agree from '../../components/registerComponents/Agree/Agree';
 import InputWithError from '../../components/generic/InputWithError/InputWithError';
 import Footer from '../../components/registerComponents/Footer/Footer';
-import GenericButton from '../../components/generic/GenericButton/GenericButton';
 import {
   validateName,
   validateEmail,
   validatePassword,
   validatePhone,
 } from '../../helpers/validators';
-import {registerUser} from '../../redux/slices/authSlice/authSlice';
 
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import Load from '../../components/generic/Load/Load';
-import Tick from '../../components/generic/Tick/Tick';
 import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
+import {registerUser} from '../../redux/slices/authSlice/actions';
 
 const Register = ({navigation}: RegisterScreenNavigationProp) => {
   const [isRegisterDone, setRegisterDone] = useState(false);
 
   const [checkBoxChecked, setCheckBoxChecked] = useState(false);
-  const keyboardVerticalOffset = 10;
+
   const [samePass, setSamePass] = useState(false);
   const [user, setUser] = useState({
     first_name: '',
@@ -58,7 +45,6 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
   const dispatch = useAppDispatch();
 
-  // const status = useAppSelector(state => state.auth.user[0].status);
   const {isLoading} = useAppSelector(state => state.auth);
 
   function fnameHandler(first_name: string) {

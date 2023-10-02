@@ -1,19 +1,9 @@
-import {
-  GestureResponderEvent,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {useState} from 'react';
 import {Rating} from 'react-native-ratings';
 import {Modal, Portal} from 'react-native-paper';
 import {colors} from '../../../assets/colors';
 import GenericText from '../../generic/GenericText/GenericText';
-import GenericButton from '../../generic/GenericButton/GenericButton';
-import {useState} from 'react';
-import Load from '../../generic/Load/Load';
-import Tick from '../../generic/Tick/Tick';
 import ButtonAnimated from '../../generic/ButtonAnimated/ButtonAnimated';
 
 interface CustomModalProps {
@@ -41,10 +31,6 @@ const RatingModal: React.FC<CustomModalProps> = ({
       <Modal visible={isVisible} style={styles.centeredView}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            {/* <Image
-              source={require('../../../assets/images/success.png')}
-              style={styles.imageStyle}
-            /> */}
             <GenericText style={styles.infoText}>Rate Product</GenericText>
 
             <Rating
@@ -52,27 +38,6 @@ const RatingModal: React.FC<CustomModalProps> = ({
               onFinishRating={onFinishRating}
               style={{paddingVertical: 10}}
             />
-            {/* <TouchableOpacity
-              style={styles.closeButton}
-              onPress={() => onRatingSubmit(rating)}>
-              <GenericText textType="medium" style={styles.closeButtonText}>
-                Continue Shopping
-              </GenericText> */}
-            {/* {isSettingRating ? (
-              <Load />
-            ) : !ratingSubmitted ? (
-              <GenericButton
-                // disabled={cartLoading}
-                onPress={() => onRatingSubmit(rating)}
-                title="Submit"
-                fontSize={22}
-                fontFamily="Gilroy-Medium"
-                style={styles.checkoutButtonStyle}
-                color="white"
-              />
-            ) : (
-              <Tick />
-            )} */}
             <ButtonAnimated
               onPress={() => onRatingSubmit(rating)}
               title="Submit"
@@ -80,7 +45,6 @@ const RatingModal: React.FC<CustomModalProps> = ({
               isDone={ratingSubmitted}
               isLoading={isSettingRating}
             />
-            {/* </TouchableOpacity> */}
             <TouchableOpacity onPress={onClose}>
               <GenericText textType="medium" style={styles.orderText}>
                 Close

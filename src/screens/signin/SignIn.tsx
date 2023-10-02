@@ -16,15 +16,14 @@ import InputWithError from '../../components/generic/InputWithError/InputWithErr
 import Footer from '../../components/registerComponents/Footer/Footer';
 import {validateEmail, validatePassword} from '../../helpers/validators';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {signInUser} from '../../redux/slices/authSlice/authSlice';
 import {Button} from 'react-native';
 
 import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
+import {signInUser} from '../../redux/slices/authSlice/actions';
 
 const SignIn = ({navigation}: SignInScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
-  // const [isErr, setIsErr] = useState(false);
   const [user, setUser] = useState({
     email: '',
     password: '',

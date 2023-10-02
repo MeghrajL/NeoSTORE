@@ -1,17 +1,17 @@
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, Vibration} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {OrderDetailScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {getOrderDetails} from '../../redux/slices/orderSlice/orderSlice';
 import GenericText from '../../components/generic/GenericText/GenericText';
 import CartSummaryItem from '../../components/generic/CartSummaryItem/CartSummaryItem';
 import {styles} from './style';
 import DeliveryDetails from '../../components/generic/DeliveryDetails/DeliveryDetails';
 import OrderDetailCard from '../../components/OrderDetailComponents/OrderDetailCard/OrderDetailCard';
 import RatingModal from '../../components/OrderDetailComponents/RatingModal/RatingModal';
-import {setProductRating} from '../../redux/slices/productSlice/productSlice';
 import Loading from '../../components/generic/Loading/Loading';
 import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
+import {getOrderDetails} from '../../redux/slices/orderSlice/actions';
+import {setProductRating} from '../../redux/slices/productSlice/actions';
 
 const OrderDetail = ({navigation, route}: OrderDetailScreenNavigationProp) => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -74,11 +74,9 @@ const OrderDetail = ({navigation, route}: OrderDetailScreenNavigationProp) => {
         setRatingSubmitted(false);
         setModalVisible(false);
       }, 1000);
-      // Vibration.vibrate(1000);
+      Vibration.vibrate(200);
     } catch (error) {
-      // Toast.show('Something went wrong, Please try again.', Toast.SHORT);
-      // setAddedToCart(false);
-      // console.error('from detail', error);
+      console.error(error);
     }
   };
   return (

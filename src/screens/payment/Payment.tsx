@@ -10,8 +10,6 @@ import {
 import React, {useState} from 'react';
 import {PaymentScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {placeOrder} from '../../redux/slices/orderSlice/orderSlice';
-import {getCartList} from '../../redux/slices/cartSlice/cartSlice';
 import {styles} from './style';
 import CheckoutProgress from '../../components/generic/CheckoutProgress/CheckoutProgress';
 import GenericText from '../../components/generic/GenericText/GenericText';
@@ -23,6 +21,8 @@ import {colors} from '../../assets/colors';
 import ContinueModal from '../../components/checkoutComponents/ContinueModal/ContinueModal';
 import Tick from '../../components/generic/Tick/Tick';
 import Load from '../../components/generic/Load/Load';
+import {placeOrder} from '../../redux/slices/orderSlice/actions';
+import { getCartList } from '../../redux/slices/cartSlice/actions';
 
 const Payment = ({navigation, route}: PaymentScreenNavigationProp) => {
   const {id} = route.params;
@@ -34,7 +34,6 @@ const Payment = ({navigation, route}: PaymentScreenNavigationProp) => {
   const userData = useAppSelector(state => state.auth.user?.data);
   const cart = useAppSelector(state => state.cart.cart);
   const isLoading = useAppSelector(state => state.order.isLoading);
-  // const isLoading = false;
   const dispatch = useAppDispatch();
   const [isModalVisible, setModalVisible] = useState(false);
   const [isOrderPlaced, setOrderPlaced] = useState(false);

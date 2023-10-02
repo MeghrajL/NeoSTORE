@@ -21,7 +21,6 @@ import isURL from 'is-url';
 import {androidCameraPermission} from '../../helpers/permission';
 
 import {UpdateDetailsScreenNavigationProp} from '../../navigation/type';
-import {updateDetails} from '../../redux/slices/authSlice/authSlice';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import InputWithError from '../../components/generic/InputWithError/InputWithError';
 import {
@@ -37,6 +36,7 @@ import GenericButton from '../../components/generic/GenericButton/GenericButton'
 import Load from '../../components/generic/Load/Load';
 import Tick from '../../components/generic/Tick/Tick';
 import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
+import {updateDetails} from '../../redux/slices/authSlice/actions';
 
 const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);

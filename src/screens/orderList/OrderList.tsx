@@ -1,14 +1,13 @@
 import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {getOrderList} from '../../redux/slices/orderSlice/orderSlice';
 import {OrderListScreenNavigationProp} from '../../navigation/type';
 import OrderListItem from '../../components/orderListComponents/OrderListItem/OrderListItem';
 import {styles} from './style';
-import GenericText from '../../components/generic/GenericText/GenericText';
 import Nothing from '../../components/generic/nothing/Nothing';
 import Loading from '../../components/generic/Loading/Loading';
 import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
+import {getOrderList} from '../../redux/slices/orderSlice/actions';
 
 const OrderList = ({navigation}: OrderListScreenNavigationProp) => {
   const dispatch = useAppDispatch();
@@ -27,7 +26,7 @@ const OrderList = ({navigation}: OrderListScreenNavigationProp) => {
       });
   }, [dispatch, access_token]);
 
-  const {isError} = useAppSelector(state => state.order);
+  const {isError, isLoading} = useAppSelector(state => state.order);
   const orderList = useAppSelector(state => state.order.orderList?.data);
 
   console.log(orderList);
@@ -37,7 +36,9 @@ const OrderList = ({navigation}: OrderListScreenNavigationProp) => {
 
   return (
     <View style={styles.container}>
-      {orderList?.length === 0 ? (
+      {isLoading ? (
+        <Loading />
+      ) : orderList?.length === 0 ? (
         <Nothing />
       ) : isError ? (
         <ErrorScreen />

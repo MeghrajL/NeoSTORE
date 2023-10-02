@@ -1,19 +1,12 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  SafeAreaView,
-  FlatList,
-  Platform,
-} from 'react-native';
+import {View, SafeAreaView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {SwipeListView} from 'react-native-swipe-list-view';
 
-import {styles} from './style';
-import {CartScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import {getCartList} from '../../redux/slices/cartSlice/cartSlice';
+import {getCartList} from '../../redux/slices/cartSlice/actions';
+import {CartScreenNavigationProp} from '../../navigation/type';
+
+import {styles} from './style';
 import Loading from '../../components/generic/Loading/Loading';
 import CartItem from '../../components/cartComponents/CartItem/CartItem';
 import EmptyCart from '../../components/cartComponents/emptyCart/EmptyCart';
@@ -21,7 +14,6 @@ import GenericText from '../../components/generic/GenericText/GenericText';
 import Load from '../../components/generic/Load/Load';
 import GenericButton from '../../components/generic/GenericButton/GenericButton';
 import Tick from '../../components/generic/Tick/Tick';
-import {placeOrder} from '../../redux/slices/orderSlice/orderSlice';
 import BottomCard from '../../components/generic/BottomCard/BottomCard';
 import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
 
@@ -46,7 +38,6 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
   }, [dispatch, access_token]);
 
   const {cart, isLoading, isError} = useAppSelector(state => state.cart);
-  console.log('+++++++++++++', cart);
 
   useEffect(() => {
     if (cart !== null) {

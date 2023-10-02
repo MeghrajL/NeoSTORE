@@ -1,29 +1,14 @@
 import {View, Text, Image, Alert} from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {styles} from './style';
 import GenericText from '../../components/generic/GenericText/GenericText';
 import MenuItem from '../../components/profileComponents/menuItem/MenuItem';
 import {ProfileScreenNavigationProp} from '../../navigation/type';
-import {persistor, useAppDispatch, useAppSelector} from '../../redux/store';
-import {
-  getUserAccountDetails,
-  logout,
-  logoutAndClearPersistedData,
-} from '../../redux/slices/authSlice/authSlice';
+import {useAppDispatch, useAppSelector} from '../../redux/store';
+import {logoutAndClearPersistedData} from '../../redux/slices/authSlice/actions';
+
 const Profile = ({navigation}: ProfileScreenNavigationProp) => {
   const dispatch = useAppDispatch();
-
-  // const access_token = useAppSelector(
-  //   state => state.auth.user?.data?.access_token,
-  // );
-  // useEffect(() => {
-  //   try {
-  //     dispatch(getUserAccountDetails(access_token));
-  //     console.log('😎dis');
-  //   } catch (error) {
-  //     console.log('some error');
-  //   }
-  // }, [dispatch, access_token]);
 
   const userData = useAppSelector(
     state => state.auth.userAccountDetails?.data?.user_data,
@@ -40,16 +25,6 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
   function onOrderListHandler() {
     navigation.navigate('OrderList');
   }
-  // let imageSource;
-  // if (userData?.profile_pic || userData?.profile_pic !== '') {
-  //   imageSource = {uri: userData?.profile_pic};
-  // } else {
-  //   if (userData?.gender === 'M') {
-  //     imageSource = require('../../assets/images/man.png');
-  //   } else if (userData?.gender === 'F') {
-  //     imageSource = require('../../assets/images/woman.png');
-  //   }
-  // }
 
   let imageSource;
   if (userData?.profile_pic === null || userData?.profile_pic === '') {
@@ -63,13 +38,6 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
   }
 
   const handleLogout = async () => {
-    // navigation.navigate('SignIn');
-    //  const resetAction = NavigationActions.reset({
-    //     index: 0,
-    //     actions: [NavigationActions.navigate({routeName: 'Welcome'})],
-    //     key: null,
-    //   });
-    //   navigation.dispatch(resetAction);
     navigation.reset({
       index: 0,
       routes: [{name: 'SignIn'}],
