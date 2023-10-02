@@ -8,6 +8,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     // paddingTop: '20%',
+    gap: 30,
+  },
+  content: {
+    backgroundColor: 'white',
+    paddingBottom: 50,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 20,
   },
   title: {

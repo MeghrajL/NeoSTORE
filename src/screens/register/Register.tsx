@@ -37,6 +37,7 @@ import {useAppDispatch, useAppSelector} from '../../redux/store';
 import Load from '../../components/generic/Load/Load';
 import Tick from '../../components/generic/Tick/Tick';
 import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
+import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
 
 const Register = ({navigation}: RegisterScreenNavigationProp) => {
   const [isRegisterDone, setRegisterDone] = useState(false);
@@ -140,129 +141,116 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <SafeAreaView style={styles.safeAreaStyle}>
-        {/* <Pressable onPress={() => navigation.navigate('MainNav')}>
-          <Text>nav</Text>
-        </Pressable>
-        */}
-        {/* <Pressable onPress={() => navigation.navigate('Onboarding')}>
-        <Text>ob</Text>
-      </Pressable> */}
+      <KeyboardAvoidingScrollView
+        bounces={false}
+        contentContainerStyle={styles.content}>
+        <Title />
+        <View style={styles.formView}>
+          <InputWithError
+            placeholder={'First Name'}
+            maxLength={20}
+            inputMode={'text'}
+            icon={'human-greeting-variant'}
+            onChangeText={fnameHandler}
+            value={user.first_name}
+            validator={validateName}
+            showErr={showErr}
+            errorText={'Only use alphabets'}
+          />
 
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          // keyboardVerticalOffset={keyboardVerticalOffset}
-          style={styles.containerStyle}>
-          <ScrollView>
-            <Title />
-            <View style={styles.formView}>
-              <InputWithError
-                placeholder={'First Name'}
-                maxLength={20}
-                inputMode={'text'}
-                icon={'human-greeting-variant'}
-                onChangeText={fnameHandler}
-                value={user.first_name}
-                validator={validateName}
-                showErr={showErr}
-                errorText={'Only use alphabets'}
-              />
+          <InputWithError
+            placeholder={'Last Name'}
+            maxLength={20}
+            inputMode={'text'}
+            icon={'human-queue'}
+            onChangeText={lnameHandler}
+            value={user.last_name}
+            validator={validateName}
+            showErr={showErr}
+            errorText={'Only use alphabets'}
+          />
 
-              <InputWithError
-                placeholder={'Last Name'}
-                maxLength={20}
-                inputMode={'text'}
-                icon={'human-queue'}
-                onChangeText={lnameHandler}
-                value={user.last_name}
-                validator={validateName}
-                showErr={showErr}
-                errorText={'Only use alphabets'}
-              />
+          <InputWithError
+            placeholder={'Email'}
+            maxLength={30}
+            inputMode={'email'}
+            icon={'email'}
+            onChangeText={emailHandler}
+            value={user.email}
+            validator={validateEmail}
+            showErr={showErr}
+            errorText={'Please enter email address in correct format'}
+          />
 
-              <InputWithError
-                placeholder={'Email'}
-                maxLength={30}
-                inputMode={'email'}
-                icon={'email'}
-                onChangeText={emailHandler}
-                value={user.email}
-                validator={validateEmail}
-                showErr={showErr}
-                errorText={'Please enter email address in correct format'}
-              />
+          <InputWithError
+            placeholder={'Password'}
+            maxLength={20}
+            inputMode={'text'}
+            icon={'account-lock-open'}
+            onChangeText={passwordHandler}
+            value={user.password}
+            validator={validatePassword}
+            showErr={showErr}
+            errorText={
+              'Your password must be have at least 8 characters long 1 uppercase & 1 lowercase character & 1 number'
+            }
+          />
 
-              <InputWithError
-                placeholder={'Password'}
-                maxLength={20}
-                inputMode={'text'}
-                icon={'account-lock-open'}
-                onChangeText={passwordHandler}
-                value={user.password}
-                validator={validatePassword}
-                showErr={showErr}
-                errorText={
-                  'Your password must be have at least 8 characters long 1 uppercase & 1 lowercase character & 1 number'
-                }
-              />
+          <InputWithError
+            placeholder={'Confirm Password'}
+            maxLength={20}
+            inputMode={'text'}
+            icon={'account-lock'}
+            onChangeText={confirmPasswordHandler}
+            value={user.confirm_password}
+            validator={() => samePass}
+            samePass={samePass}
+            showErr={showErr}
+            errorText={'Both passwords should match'}
+          />
 
-              <InputWithError
-                placeholder={'Confirm Password'}
-                maxLength={20}
-                inputMode={'text'}
-                icon={'account-lock'}
-                onChangeText={confirmPasswordHandler}
-                value={user.confirm_password}
-                validator={() => samePass}
-                samePass={samePass}
-                showErr={showErr}
-                errorText={'Both passwords should match'}
-              />
+          <InputWithError
+            placeholder={'Phone Number'}
+            maxLength={10}
+            inputMode={'numeric'}
+            icon={'phone-classic'}
+            onChangeText={phoneNumberHandler}
+            value={user.phone_no}
+            validator={validatePhone}
+            showErr={showErr}
+            errorText={'Please enter 10 digit phone number'}
+          />
 
-              <InputWithError
-                placeholder={'Phone Number'}
-                maxLength={10}
-                inputMode={'numeric'}
-                icon={'phone-classic'}
-                onChangeText={phoneNumberHandler}
-                value={user.phone_no}
-                validator={validatePhone}
-                showErr={showErr}
-                errorText={'Please enter 10 digit phone number'}
-              />
+          <Gender
+            gender={user.gender}
+            maleHandler={maleHandler}
+            femaleHandler={femaleHandler}
+            showErr={showErr}
+          />
 
-              <Gender
-                gender={user.gender}
-                maleHandler={maleHandler}
-                femaleHandler={femaleHandler}
-                showErr={showErr}
-              />
+          <Agree
+            checkBoxChecked={checkBoxChecked}
+            checkboxHandler={checkboxHandler}
+            showErr={showErr}
+          />
 
-              <Agree
-                checkBoxChecked={checkBoxChecked}
-                checkboxHandler={checkboxHandler}
-                showErr={showErr}
-              />
+          <View style={styles.buttonContainer}>
+            <ButtonAnimated
+              onPress={onRegisterPress}
+              title="Register"
+              fontSize={26}
+              isDone={isRegisterDone}
+              isLoading={isLoading}
+            />
+          </View>
 
-              <View style={styles.buttonContainer}>
-                <ButtonAnimated
-                  onPress={onRegisterPress}
-                  title="Register"
-                  fontSize={26}
-                  isDone={isRegisterDone}
-                  isLoading={isLoading}
-                />
-              </View>
-
-              <Footer
-                dialogueText="Already have an account?"
-                clickText="Sign In"
-                onClickPress={onSignInPress}
-              />
-            </View>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
+          <Footer
+            dialogueText="Already have an account?"
+            clickText="Sign In"
+            onClickPress={onSignInPress}
+          />
+        </View>
+      </KeyboardAvoidingScrollView>
     </TouchableWithoutFeedback>
   );
 };

@@ -21,6 +21,8 @@ import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {forgotPassword} from '../../redux/slices/authSlice/authSlice';
 import Tick from '../../components/generic/Tick/Tick';
 import Load from '../../components/generic/Load/Load';
+import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
+import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
 const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
   const [email, setEmail] = useState('');
@@ -59,10 +61,9 @@ const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <SafeAreaView style={styles.container}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'} // Adjust behavior for iOS or Android
-          style={styles.contentContainer}>
-          {/* <GenericText style={styles.title}>Forgot Password</GenericText> */}
+        <KeyboardAvoidingScrollView
+          bounces={false}
+          contentContainerStyle={styles.content}>
           <Image
             style={styles.imageStyle}
             source={require('../../assets/images/forgotpass.png')}
@@ -88,22 +89,15 @@ const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
           />
 
           <View style={styles.buttonContainer}>
-            {forgotLoading ? (
-              <Load />
-            ) : !emailSubmit ? (
-              <GenericButton
-                onPress={press}
-                title="Submit"
-                fontSize={26}
-                fontFamily="Gilroy-Bold"
-                style={styles.buttonStyle}
-                color="white"
-              />
-            ) : (
-              <Tick />
-            )}
+            <ButtonAnimated
+              onPress={press}
+              title="Submit"
+              fontSize={26}
+              isDone={emailSubmit}
+              isLoading={forgotLoading}
+            />
           </View>
-        </KeyboardAvoidingView>
+        </KeyboardAvoidingScrollView>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );

@@ -10,7 +10,7 @@ const ErrorScreen = () => {
     <View style={styles.container}>
       <Image
         style={styles.imageStyle}
-        source={require('../../../assets/images/cart.jpg')}
+        source={require('../../../assets/images/wrong.png')}
       />
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <GenericText style={styles.textStyle}>Go Back</GenericText>

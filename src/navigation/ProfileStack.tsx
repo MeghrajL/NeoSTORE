@@ -15,7 +15,6 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const ProfileStack = ({navigation}: ProfileStackScreenNavigationProp) => {
   return (
     <>
-      <StatusBar barStyle="light-content" />
       <Stack.Navigator
         screenOptions={{
           headerTitleAlign: 'center',

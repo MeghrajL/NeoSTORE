@@ -8,9 +8,16 @@ import {IProductImage} from '../../../redux/slices/productSlice/type';
 interface IProductImages {
   product_images: IProductImage[] | undefined;
   resizeMode: string;
+  loop: boolean;
+  autoplay: boolean;
 }
 
-const ImageCarousel = ({product_images, resizeMode}: IProductImages) => {
+const ImageCarousel = ({
+  product_images,
+  autoplay,
+  resizeMode,
+  loop,
+}: IProductImages) => {
   const [activeIndex, setActiveIndex] = useState(0);
   // console.log('+++++', product_images);
   const width = Dimensions.get('window').width;
@@ -20,12 +27,12 @@ const ImageCarousel = ({product_images, resizeMode}: IProductImages) => {
   return (
     <View style={styles.container}>
       <Carousel
-        loop={false}
+        loop={loop}
         style={styles.carouselCon}
         width={width}
         pagingEnabled={true}
         // height={400}
-        autoPlay={false}
+        autoPlay={autoplay}
         data={product_images}
         scrollAnimationDuration={1000}
         snapEnabled={true}

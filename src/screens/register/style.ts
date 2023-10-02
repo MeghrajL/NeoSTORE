@@ -12,6 +12,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  content: {
+    backgroundColor: 'white',
+    paddingTop: 15,
+    paddingBottom: 10,
+  },
   buttonStyle: {
     backgroundColor: colors.VIVID_GAMBOGE,
     justifyContent: 'center',

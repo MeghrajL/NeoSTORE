@@ -25,7 +25,6 @@ const CartStack = ({navigation, route}: CartStackScreenNavigationProp) => {
 
   return (
     <>
-      <StatusBar barStyle="light-content" />
       <Stack.Navigator
         screenOptions={{
           headerStyle: {backgroundColor: colors.MIDNIGHT},

@@ -11,6 +11,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  content: {
+    backgroundColor: 'white',
+    paddingTop: 15,
+    paddingBottom: 10,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
   signInStyle: {
     flexDirection: 'row',

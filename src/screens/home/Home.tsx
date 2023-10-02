@@ -58,6 +58,8 @@ const Home = ({navigation}: HomeScreenNavigationProp) => {
             <ImageCarousel
               product_images={product_images}
               resizeMode="stretch"
+              loop={true}
+              autoplay={true}
             />
           </View>
         )}

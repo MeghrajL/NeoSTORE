@@ -34,6 +34,7 @@ function App(): JSX.Element {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <GestureHandlerRootView style={{flex: 1}}>
+          <StatusBar barStyle="light-content" />
           <Navigator />
         </GestureHandlerRootView>
       </PersistGate>

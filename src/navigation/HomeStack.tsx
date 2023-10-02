@@ -10,7 +10,6 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const HomeStack = ({navigation}: HomeStackScreenNavigationProp) => {
   return (
     <>
-      <StatusBar barStyle="light-content" />
       <Stack.Navigator
         screenOptions={{
           headerStyle: {backgroundColor: colors.MIDNIGHT},

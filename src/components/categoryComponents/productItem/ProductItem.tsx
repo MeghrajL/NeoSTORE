@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 2,
     shadowOffset: {height: 5, width: 5},
-    elevation: 4,
+    elevation: 10,
     borderWidth: 0.4,
     borderColor: '#ccc',
   },

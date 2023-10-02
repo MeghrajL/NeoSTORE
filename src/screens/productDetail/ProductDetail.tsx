@@ -166,6 +166,8 @@ const ProductDetail = ({
                 <ImageCarousel
                   product_images={productItem?.product_images}
                   resizeMode="contain"
+                  loop={false}
+                  autoplay={false}
                 />
               </View>
               <View style={styles.infoContainer}>
