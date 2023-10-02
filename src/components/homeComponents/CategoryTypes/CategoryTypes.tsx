@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import GenericText from '../../generic/GenericText/GenericText';
+import GenericText from '../../generic/genericText/GenericText';
 import {colors} from '../../../assets/colors';
 import {RootStackParamList} from '../../../navigation/type';
 import {IProductCategory} from '../../../redux/slices/authSlice/type';

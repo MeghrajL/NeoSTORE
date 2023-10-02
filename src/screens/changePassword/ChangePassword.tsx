@@ -14,14 +14,14 @@ import {
 import React, {useState} from 'react';
 import {ChangePasswordScreenNavigationProp} from '../../navigation/type';
 import {styles} from './style';
-import GenericText from '../../components/generic/GenericText/GenericText';
-import InputWithError from '../../components/generic/InputWithError/InputWithError';
-import GenericButton from '../../components/generic/GenericButton/GenericButton';
+import GenericText from '../../components/generic/genericText/GenericText';
+import InputWithError from '../../components/generic/inputWithError/InputWithError';
+import GenericButton from '../../components/generic/genericButton/GenericButton';
 import {validatePassword} from '../../helpers/validators';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import Tick from '../../components/generic/Tick/Tick';
-import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
+import Tick from '../../components/generic/tick/Tick';
+import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
 import {changePassword} from '../../redux/slices/authSlice/actions';
 
 const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
@@ -91,6 +91,7 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingScrollView
+        scrollEventThrottle={20}
         containerStyle={styles.contentContainer}
         contentContainerStyle={{paddingTop: 15, paddingBottom: 10}}>
         <Image

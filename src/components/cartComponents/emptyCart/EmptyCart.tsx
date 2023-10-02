@@ -1,7 +1,7 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {colors} from '../../../assets/colors';
-import GenericText from '../../generic/GenericText/GenericText';
+import GenericText from '../../generic/genericText/GenericText';
 const EmptyCart = () => {
   return (
     <View style={styles.container}>

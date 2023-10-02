@@ -8,7 +8,7 @@ import ProductDetail from './productDetail/index';
 import ForgotPassword from './forgotPassword/index';
 import ChangePassword from './changePassword/index';
 import UpdateDetails from './updateDeatils/index';
-import Profile from './Profile/index';
+import Profile from './profile/index';
 import OrderList from './orderList/index';
 import OrderDetail from './orderDetail/index';
 import Address from './address/index';

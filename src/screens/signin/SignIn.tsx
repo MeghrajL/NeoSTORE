@@ -10,15 +10,15 @@ import React, {useState} from 'react';
 
 import {SignInScreenNavigationProp} from '../../navigation/type';
 import {styles} from './style';
-import GenericText from '../../components/generic/GenericText/GenericText';
-import Title from '../../components/generic/Title/Title';
-import InputWithError from '../../components/generic/InputWithError/InputWithError';
-import Footer from '../../components/registerComponents/Footer/Footer';
+import GenericText from '../../components/generic/genericText/GenericText';
+import Title from '../../components/generic/title/Title';
+import InputWithError from '../../components/generic/inputWithError/InputWithError';
+import Footer from '../../components/registerComponents/footer/Footer';
 import {validateEmail, validatePassword} from '../../helpers/validators';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {Button} from 'react-native';
 
-import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
+import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
 import {signInUser} from '../../redux/slices/authSlice/actions';
 
@@ -77,6 +77,7 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingScrollView
         bounces={false}
+        scrollEventThrottle={20}
         contentContainerStyle={styles.content}>
         <View style={styles.formView}>
           <Title />

@@ -3,9 +3,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Home, Category, ProductDetail} from '../screens/index';
 import {colors} from '../assets/colors';
 import {StatusBar, Text, TouchableOpacity} from 'react-native';
-import IconButton from '../components/generic/IconButton/IconButton';
+import IconButton from '../components/generic/iconButton/IconButton';
 import {HomeStackScreenNavigationProp, RootStackParamList} from './type';
-import Title from '../components/generic/Title/Title';
+import Title from '../components/generic/title/Title';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const HomeStack = ({navigation}: HomeStackScreenNavigationProp) => {
   return (

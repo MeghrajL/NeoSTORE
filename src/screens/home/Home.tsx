@@ -2,8 +2,8 @@ import {Button, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {HomeScreenNavigationProp} from '../../navigation/type';
 import {useAppSelector, useAppDispatch} from '../../redux/store';
-import CategoryTypes from '../../components/homeComponents/CategoryTypes/CategoryTypes';
-import ImageCarousel from '../../components/productDetailComponents/ImageCarousel/ImageCarousel';
+import CategoryTypes from '../../components/homeComponents/categoryTypes/CategoryTypes';
+import ImageCarousel from '../../components/productDetailComponents/imageCarousel/ImageCarousel';
 import {styles} from './style';
 import {getUserAccountDetails} from '../../redux/slices/authSlice/actions';
 const Home = ({navigation}: HomeScreenNavigationProp) => {

@@ -8,8 +8,7 @@ import {
   UpdateDetails,
 } from '../screens/index';
 import {colors} from '../assets/colors';
-import {StatusBar, Text, TouchableOpacity} from 'react-native';
-import IconButton from '../components/generic/IconButton/IconButton';
+import IconButton from '../components/generic/iconButton/IconButton';
 import {ProfileStackScreenNavigationProp, RootStackParamList} from './type';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const ProfileStack = ({navigation}: ProfileStackScreenNavigationProp) => {

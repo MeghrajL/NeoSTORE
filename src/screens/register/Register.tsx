@@ -9,11 +9,11 @@ import {
 
 import {RegisterScreenNavigationProp} from '../../navigation/type';
 import {styles} from './style';
-import Title from '../../components/generic/Title/Title';
-import Gender from '../../components/registerComponents/Gender/Gender';
-import Agree from '../../components/registerComponents/Agree/Agree';
-import InputWithError from '../../components/generic/InputWithError/InputWithError';
-import Footer from '../../components/registerComponents/Footer/Footer';
+import Title from '../../components/generic/title/Title';
+import Gender from '../../components/registerComponents/gender/Gender';
+import Agree from '../../components/registerComponents/agree/Agree';
+import InputWithError from '../../components/generic/inputWithError/InputWithError';
+import Footer from '../../components/registerComponents/footer/Footer';
 import {
   validateName,
   validateEmail,
@@ -22,7 +22,7 @@ import {
 } from '../../helpers/validators';
 
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
+import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
 import {registerUser} from '../../redux/slices/authSlice/actions';
 
@@ -129,6 +129,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingScrollView
         bounces={false}
+        scrollEventThrottle={20}
         contentContainerStyle={styles.content}>
         <Title />
         <View style={styles.formView}>

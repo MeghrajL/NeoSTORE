@@ -1,7 +1,7 @@
 import {View, Text, Image, Alert} from 'react-native';
 import React from 'react';
 import {styles} from './style';
-import GenericText from '../../components/generic/GenericText/GenericText';
+import GenericText from '../../components/generic/genericText/GenericText';
 import MenuItem from '../../components/profileComponents/menuItem/MenuItem';
 import {ProfileScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';

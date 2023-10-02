@@ -11,18 +11,18 @@ import React, {useState} from 'react';
 import {PaymentScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {styles} from './style';
-import CheckoutProgress from '../../components/generic/CheckoutProgress/CheckoutProgress';
-import GenericText from '../../components/generic/GenericText/GenericText';
-import DeliveryDetails from '../../components/generic/DeliveryDetails/DeliveryDetails';
-import CartSummaryItem from '../../components/generic/CartSummaryItem/CartSummaryItem';
-import BottomCard from '../../components/generic/BottomCard/BottomCard';
+import CheckoutProgress from '../../components/generic/checkoutProgress/CheckoutProgress';
+import GenericText from '../../components/generic/genericText/GenericText';
+import DeliveryDetails from '../../components/generic/deliveryDetails/DeliveryDetails';
+import CartSummaryItem from '../../components/generic/cartSummaryItem/CartSummaryItem';
+import BottomCard from '../../components/generic/bottomCard/BottomCard';
 import SlideButton from 'rn-slide-button';
 import {colors} from '../../assets/colors';
-import ContinueModal from '../../components/checkoutComponents/ContinueModal/ContinueModal';
-import Tick from '../../components/generic/Tick/Tick';
-import Load from '../../components/generic/Load/Load';
+import ContinueModal from '../../components/checkoutComponents/continueModal/ContinueModal';
+import Tick from '../../components/generic/tick/Tick';
+import Load from '../../components/generic/load/Load';
 import {placeOrder} from '../../redux/slices/orderSlice/actions';
-import { getCartList } from '../../redux/slices/cartSlice/actions';
+import {getCartList} from '../../redux/slices/cartSlice/actions';
 
 const Payment = ({navigation, route}: PaymentScreenNavigationProp) => {
   const {id} = route.params;

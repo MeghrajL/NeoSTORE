@@ -14,9 +14,9 @@ import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-
 import RadioGroup, {RadioButtonProps} from 'react-native-radio-buttons-group';
 import Toast from 'react-native-simple-toast';
 
-import InputWithError from '../../components/generic/InputWithError/InputWithError';
-import GenericText from '../../components/generic/GenericText/GenericText';
-import GenericButton from '../../components/generic/GenericButton/GenericButton';
+import InputWithError from '../../components/generic/inputWithError/InputWithError';
+import GenericText from '../../components/generic/genericText/GenericText';
+import GenericButton from '../../components/generic/genericButton/GenericButton';
 import {
   validateAddressLine,
   validateAlpha,
@@ -147,6 +147,7 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingScrollView
+        scrollEventThrottle={20}
         containerStyle={styles.container}
         contentContainerStyle={styles.contentContainer}>
         <View style={styles.imageContainer}>

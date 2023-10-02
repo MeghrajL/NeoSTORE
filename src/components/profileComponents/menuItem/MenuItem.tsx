@@ -8,7 +8,7 @@ import {
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../../../assets/colors';
-import GenericText from '../../generic/GenericText/GenericText';
+import GenericText from '../../generic/genericText/GenericText';
 
 interface IMenuItem {
   icon: string;

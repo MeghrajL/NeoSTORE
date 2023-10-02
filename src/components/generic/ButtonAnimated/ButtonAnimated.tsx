@@ -1,8 +1,8 @@
 import {GestureResponderEvent, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import Load from '../Load/Load';
-import GenericButton from '../GenericButton/GenericButton';
-import Tick from '../Tick/Tick';
+import Load from '../load/Load';
+import GenericButton from '../genericButton/GenericButton';
+import Tick from '../tick/Tick';
 import {colors} from '../../../assets/colors';
 
 interface IButtonAnimated {

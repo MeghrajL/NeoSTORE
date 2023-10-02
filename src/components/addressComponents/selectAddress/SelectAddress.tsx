@@ -2,8 +2,8 @@ import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useMemo, useState} from 'react';
 import {RadioButtonProps, RadioGroup} from 'react-native-radio-buttons-group';
 import {colors} from '../../../assets/colors';
-import GenericText from '../../generic/GenericText/GenericText';
-import IconButton from '../../generic/IconButton/IconButton';
+import GenericText from '../../generic/genericText/GenericText';
+import IconButton from '../../generic/iconButton/IconButton';
 import {IAddressObj} from '../../../redux/slices/authSlice/type';
 
 interface ISelectAddress {

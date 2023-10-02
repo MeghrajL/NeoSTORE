@@ -15,6 +15,12 @@ const initialState: IInitialState = {
   isError: false,
 };
 
+/**
+ * @author Meghraj Vilas Lot
+ * @description This reducer function performs changes redux state for cart slice.
+ * Contains builder cases for cart actions.
+ */
+
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,

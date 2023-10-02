@@ -19,6 +19,13 @@ import {
 } from './type';
 import Toast from 'react-native-simple-toast';
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IRegistrationFormData}
+ * @description performs api call for registeration
+ * @returns user data on success or error
+ */
+
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (user: IRegistrationFormData, thunkAPI) => {
@@ -45,6 +52,13 @@ export const registerUser = createAsyncThunk(
   },
 );
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {ISignInFormData}
+ * @description performs api call for signin
+ * @returns user data on success or error
+ */
+
 export const signInUser = createAsyncThunk(
   'auth/signInUser',
   async (user: ISignInFormData, thunkAPI) => {
@@ -66,6 +80,13 @@ export const signInUser = createAsyncThunk(
     }
   },
 );
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IChangePasswordParams}
+ * @description performs api call for changing password
+ * @returns success response data or error
+ */
 
 export const changePassword = createAsyncThunk(
   'auth/changePassword',
@@ -91,6 +112,13 @@ export const changePassword = createAsyncThunk(
   },
 );
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {email}
+ * @description performs api call for forgot password to get password on mail
+ * @returns success response data or error
+ */
+
 export const forgotPassword = createAsyncThunk(
   'auth/forgotPassword',
   async (email: string, thunkAPI) => {
@@ -107,6 +135,13 @@ export const forgotPassword = createAsyncThunk(
     }
   },
 );
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {access_token}
+ * @description performs api call for fetching user details
+ * @returns user data on success or error
+ */
 
 export const getUserAccountDetails = createAsyncThunk(
   'auth/getUserAccountDetails',
@@ -125,6 +160,13 @@ export const getUserAccountDetails = createAsyncThunk(
     }
   },
 );
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IUpdateDetailsFormData}
+ * @description performs api call for updating user details
+ * @returns user data on success or error
+ */
 
 export const updateDetails = createAsyncThunk(
   'auth/updateDetails',

@@ -13,6 +13,12 @@ const initialState: IInitialState = {
   isSettingRating: false,
 };
 
+/**
+ * @author Meghraj Vilas Lot
+ * @description This reducer function performs changes redux state for product slice.
+ * Contains builder cases for product actions.
+ */
+
 export const productSlice = createSlice({
   name: 'product',
   initialState,

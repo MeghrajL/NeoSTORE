@@ -1,8 +1,8 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Modal, Portal} from 'react-native-paper';
 import {colors} from '../../../assets/colors';
-import GenericText from '../../generic/GenericText/GenericText';
-import GenericButton from '../../generic/GenericButton/GenericButton';
+import GenericText from '../../generic/genericText/GenericText';
+import GenericButton from '../../generic/genericButton/GenericButton';
 
 interface CustomModalProps {
   isVisible: boolean;

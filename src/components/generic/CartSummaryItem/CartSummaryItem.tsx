@@ -8,9 +8,9 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import GenericText from '../GenericText/GenericText';
+import GenericText from '../genericText/GenericText';
 import {colors} from '../../../assets/colors';
-import GenericButton from '../GenericButton/GenericButton';
+import GenericButton from '../genericButton/GenericButton';
 
 interface ICartSummaryItem {
   product_id: number;

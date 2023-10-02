@@ -17,12 +17,12 @@ import {
   deleteAddress,
   selectAddress,
 } from '../../redux/slices/authSlice/authSlice';
-import GenericButton from '../../components/generic/GenericButton/GenericButton';
+import GenericButton from '../../components/generic/genericButton/GenericButton';
 import {styles} from './style';
 import SelectAddress from '../../components/addressComponents/selectAddress/SelectAddress';
-import BottomCard from '../../components/generic/BottomCard/BottomCard';
-import GenericText from '../../components/generic/GenericText/GenericText';
-import CheckoutProgress from '../../components/generic/CheckoutProgress/CheckoutProgress';
+import BottomCard from '../../components/generic/bottomCard/BottomCard';
+import GenericText from '../../components/generic/genericText/GenericText';
+import CheckoutProgress from '../../components/generic/checkoutProgress/CheckoutProgress';
 import EmptyAddress from '../../components/addressComponents/emptyAddress/EmptyAddress';
 
 const Address = ({navigation}: AddressScreenNavigationProp) => {

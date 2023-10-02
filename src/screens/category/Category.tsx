@@ -11,11 +11,11 @@ import {CategoryScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 
 import {styles} from './style';
-import GenericText from '../../components/generic/GenericText/GenericText';
-import Loading from '../../components/generic/Loading/Loading';
+import GenericText from '../../components/generic/genericText/GenericText';
+import Loading from '../../components/generic/loading/Loading';
 import ProductItemHorizontal from '../../components/categoryComponents/productItemHorizontal/productItemHorizontal';
 
-import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
+import ErrorScreen from '../../components/generic/errorScreen/ErrorScreen';
 import {getCategoryList} from '../../redux/slices/productSlice/actions';
 const Category = ({navigation, route}: CategoryScreenNavigationProp) => {
   const {isError, isLoading, category} = useAppSelector(state => state.product);

@@ -22,20 +22,20 @@ import {androidCameraPermission} from '../../helpers/permission';
 
 import {UpdateDetailsScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import InputWithError from '../../components/generic/InputWithError/InputWithError';
+import InputWithError from '../../components/generic/inputWithError/InputWithError';
 import {
   validateName,
   validateEmail,
   validatePhone,
 } from '../../helpers/validators';
 import {styles} from './style';
-import GenericText from '../../components/generic/GenericText/GenericText';
+import GenericText from '../../components/generic/genericText/GenericText';
 import GenericInput from '../../components/generic/GenericInput/GenericInput';
 import {colors} from '../../assets/colors';
-import GenericButton from '../../components/generic/GenericButton/GenericButton';
-import Load from '../../components/generic/Load/Load';
-import Tick from '../../components/generic/Tick/Tick';
-import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
+import GenericButton from '../../components/generic/genericButton/GenericButton';
+import Load from '../../components/generic/load/Load';
+import Tick from '../../components/generic/tick/Tick';
+import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
 import {updateDetails} from '../../redux/slices/authSlice/actions';
 
 const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
@@ -216,6 +216,7 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingScrollView
         containerStyle={styles.container}
+        scrollEventThrottle={20}
         contentContainerStyle={styles.contentContainer}>
         <View style={styles.picContainer}>
           <View style={styles.imageContainer}>

@@ -10,6 +10,12 @@ const initialState: IInitialState = {
   isError: false,
 };
 
+/**
+ * @author Meghraj Vilas Lot
+ * @description This reducer function performs changes redux state for order slice.
+ * Contains builder cases for order actions.
+ */
+
 export const orderSlice = createSlice({
   name: 'order',
   initialState,

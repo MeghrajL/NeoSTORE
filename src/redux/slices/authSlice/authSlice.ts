@@ -21,6 +21,12 @@ const initialState: IInitialState = {
   addressData: {addressList: [], lastSelectedAddressId: ''},
 };
 
+/**
+ * @author Meghraj Vilas Lot
+ * @description This reducer function performs changes redux state for auth slice.
+ * Contains reducers and builder cases for auth actions.
+ */
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,

@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AddAddress, Address, Cart, Payment} from '../screens/index';
 import {colors} from '../assets/colors';
 import {StatusBar, Text, TouchableOpacity} from 'react-native';
-import IconButton from '../components/generic/IconButton/IconButton';
+import IconButton from '../components/generic/iconButton/IconButton';
 import {CartStackScreenNavigationProp, RootStackParamList} from './type';
 import {useEffect, useLayoutEffect} from 'react';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';

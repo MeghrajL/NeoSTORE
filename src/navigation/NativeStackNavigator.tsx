@@ -18,7 +18,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const storage = new MMKV();
 import {useAppSelector} from '../redux/store';
 import {colors} from '../assets/colors';
-import IconButton from '../components/generic/IconButton/IconButton';
+import IconButton from '../components/generic/iconButton/IconButton';
 import {useNavigation} from '@react-navigation/native';
 const NativeStackNavigator = () => {
   const navigation = useNavigation();

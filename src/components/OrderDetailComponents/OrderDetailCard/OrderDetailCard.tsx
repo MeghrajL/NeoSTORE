@@ -3,7 +3,7 @@ import React from 'react';
 import {IAddress, IUserData} from '../../../redux/slices/authSlice/type';
 import {colors} from '../../../assets/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
-import GenericText from '../../generic/GenericText/GenericText';
+import GenericText from '../../generic/genericText/GenericText';
 
 interface IOrderDetailCard {
   order_id: number;

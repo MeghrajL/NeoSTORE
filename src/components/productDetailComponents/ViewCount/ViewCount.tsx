@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'; // Import an eye icon from a suitable icon library
 import {colors} from '../../../assets/colors';
-import GenericText from '../../generic/GenericText/GenericText';
+import GenericText from '../../generic/genericText/GenericText';
 
 interface IViewCount {
   count?: number | undefined;

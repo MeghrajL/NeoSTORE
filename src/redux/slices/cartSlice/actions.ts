@@ -9,6 +9,12 @@ import {
 } from '../../../url';
 import {IGetCartListParams, IAddToCartParams, IDeleteCartParams} from './type';
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IGetCartListParams}
+ * @description performs api call for fetching cart details
+ * @returns cart data on success or error
+ */
 export const getCartList = createAsyncThunk(
   'cart/getCartList',
   async (params: IGetCartListParams, thunkAPI) => {
@@ -27,6 +33,13 @@ export const getCartList = createAsyncThunk(
     }
   },
 );
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IAddToCartParams}
+ * @description performs api call for adding product to cart
+ * @returns success response or error
+ */
 
 export const addToCart = createAsyncThunk(
   'cart/addToCart',
@@ -49,6 +62,13 @@ export const addToCart = createAsyncThunk(
     }
   },
 );
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IAddToCartParams}
+ * @description performs api call for fetching editing cart item
+ * @returns all cart items data on success or error
+ */
 
 export const editCart = createAsyncThunk(
   'cart/editCart',
@@ -75,6 +95,13 @@ export const editCart = createAsyncThunk(
     }
   },
 );
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IDeleteCartParams}
+ * @description performs api call for fetching deleting cart item
+ * @returns all cart items data on success or error
+ */
 
 export const deleteCart = createAsyncThunk(
   'cart/deleteCart',

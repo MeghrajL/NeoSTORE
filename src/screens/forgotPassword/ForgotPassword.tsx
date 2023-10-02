@@ -11,18 +11,18 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import GenericButton from '../../components/generic/GenericButton/GenericButton';
+import GenericButton from '../../components/generic/genericButton/GenericButton';
 import {validateEmail} from '../../helpers/validators';
-import GenericText from '../../components/generic/GenericText/GenericText';
-import InputWithError from '../../components/generic/InputWithError/InputWithError';
+import GenericText from '../../components/generic/genericText/GenericText';
+import InputWithError from '../../components/generic/inputWithError/InputWithError';
 import {styles} from './style';
 import {ForgotPasswordScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import Tick from '../../components/generic/Tick/Tick';
-import Load from '../../components/generic/Load/Load';
+import Tick from '../../components/generic/tick/Tick';
+import Load from '../../components/generic/load/Load';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
-import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
-import { forgotPassword } from '../../redux/slices/authSlice/actions';
+import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
+import {forgotPassword} from '../../redux/slices/authSlice/actions';
 const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
   const [email, setEmail] = useState('');
@@ -63,6 +63,7 @@ const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
       <SafeAreaView style={styles.container}>
         <KeyboardAvoidingScrollView
           bounces={false}
+          scrollEventThrottle={20}
           contentContainerStyle={styles.content}>
           <Image
             style={styles.imageStyle}

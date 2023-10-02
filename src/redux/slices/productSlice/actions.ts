@@ -9,6 +9,13 @@ import {
   ISetProductRatingParams,
 } from './type';
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IGetCategoryListParams}
+ * @description performs api call for fetching products of specific category
+ * @returns category data on success or error
+ */
+
 export const getCategoryList = createAsyncThunk(
   'product/getCategoryList',
   async (params: IGetCategoryListParams, thunkAPI) => {
@@ -30,6 +37,13 @@ export const getCategoryList = createAsyncThunk(
   },
 );
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IGetProductParams}
+ * @description performs api call for fetching details of a specific product
+ * @returns product data on success or error
+ */
+
 export const getProduct = createAsyncThunk(
   'product/getProduct',
   async (params: IGetProductParams, thunkAPI) => {
@@ -43,6 +57,13 @@ export const getProduct = createAsyncThunk(
     }
   },
 );
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {ISetProductRatingParams}
+ * @description performs api call for setting rating of product
+ * @returns product data with updated rating on success or error
+ */
 
 export const setProductRating = createAsyncThunk(
   'product/setProductRating',

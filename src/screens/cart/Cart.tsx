@@ -7,15 +7,15 @@ import {getCartList} from '../../redux/slices/cartSlice/actions';
 import {CartScreenNavigationProp} from '../../navigation/type';
 
 import {styles} from './style';
-import Loading from '../../components/generic/Loading/Loading';
-import CartItem from '../../components/cartComponents/CartItem/CartItem';
+import Loading from '../../components/generic/loading/Loading';
+import CartItem from '../../components/cartComponents/cartItem/CartItem';
 import EmptyCart from '../../components/cartComponents/emptyCart/EmptyCart';
-import GenericText from '../../components/generic/GenericText/GenericText';
-import Load from '../../components/generic/Load/Load';
-import GenericButton from '../../components/generic/GenericButton/GenericButton';
-import Tick from '../../components/generic/Tick/Tick';
-import BottomCard from '../../components/generic/BottomCard/BottomCard';
-import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
+import GenericText from '../../components/generic/genericText/GenericText';
+import Load from '../../components/generic/load/Load';
+import GenericButton from '../../components/generic/genericButton/GenericButton';
+import Tick from '../../components/generic/tick/Tick';
+import BottomCard from '../../components/generic/bottomCard/BottomCard';
+import ErrorScreen from '../../components/generic/errorScreen/ErrorScreen';
 
 const Cart = ({navigation}: CartScreenNavigationProp) => {
   const dispatch = useAppDispatch();
@@ -71,7 +71,9 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
               data={cart?.data}
               contentContainerStyle={styles.swipeView}
               renderItem={({item}) => (
-                <CartItem onPress={navigateToProductDetail} item={item} />
+                <View>
+                  <CartItem onPress={navigateToProductDetail} item={item} />
+                </View>
               )}
               keyExtractor={item => item.id.toString()}
             />

@@ -15,25 +15,25 @@ import Toast from 'react-native-simple-toast';
 import {ProductDetailScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 
-import Loading from '../../components/generic/Loading/Loading';
-import ImageCarousel from '../../components/productDetailComponents/ImageCarousel/ImageCarousel';
+import Loading from '../../components/generic/loading/Loading';
+import ImageCarousel from '../../components/productDetailComponents/imageCarousel/ImageCarousel';
 import {styles} from './style';
 import StarRating from '../../components/categoryComponents/starRating/StarRating';
-import GenericText from '../../components/generic/GenericText/GenericText';
-import ViewCount from '../../components/productDetailComponents/ViewCount/ViewCount';
-import QuantityControl from '../../components/productDetailComponents/QualityControl/QualityControl';
+import GenericText from '../../components/generic/genericText/GenericText';
+import ViewCount from '../../components/productDetailComponents/ViewCount/viewCount';
+import QuantityControl from '../../components/productDetailComponents/quantityControl/quantityControl';
 import ProductItem from '../../components/categoryComponents/productItem/ProductItem';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import {colors} from '../../assets/colors';
-import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
-import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
+import ErrorScreen from '../../components/generic/errorScreen/ErrorScreen';
+import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
 
 import {useFocusEffect} from '@react-navigation/native';
 import {
   getCategoryList,
   getProduct,
 } from '../../redux/slices/productSlice/actions';
-import { addToCart, getCartList } from '../../redux/slices/cartSlice/actions';
+import {addToCart, getCartList} from '../../redux/slices/cartSlice/actions';
 
 const ProductDetail = ({
   navigation,
@@ -71,7 +71,6 @@ const ProductDetail = ({
   );
 
   const cartLoading = useAppSelector(state => state.cart?.isLoading);
- 
 
   useEffect(() => {
     if (shouldLoadSimilarProducts === true) {
@@ -110,7 +109,7 @@ const ProductDetail = ({
       Toast.show('Something went wrong, Please try again.', Toast.SHORT);
       setAddedToCart(false);
 
-      console.error( error);
+      console.error(error);
     }
   }
 
@@ -170,114 +169,109 @@ const ProductDetail = ({
     <>
       <StatusBar barStyle="default" />
       <SafeAreaView style={{flex: 1}}>
-        {
-          
-          isLoading || !dataLoaded || !catDataLoaded ? (
-            <Loading />
-          ) : isError ? (
-            <ErrorScreen />
-          ) : (
-            <ScrollView
-              contentContainerStyle={{paddingBottom: 60}}
-              style={styles.container}>
-              <TouchableOpacity
-                onPress={navigatedToCategory}
-                style={styles.back}>
-                <Icon
-                  name="arrow-back-outline"
-                  color={colors.MIDNIGHT}
-                  size={25}
-                />
-              </TouchableOpacity>
+        {isLoading || !dataLoaded || !catDataLoaded ? (
+          <Loading />
+        ) : isError ? (
+          <ErrorScreen />
+        ) : (
+          <ScrollView
+            contentContainerStyle={{paddingBottom: 60}}
+            style={styles.container}>
+            <TouchableOpacity onPress={navigatedToCategory} style={styles.back}>
+              <Icon
+                name="arrow-back-outline"
+                color={colors.MIDNIGHT}
+                size={25}
+              />
+            </TouchableOpacity>
 
-              <View style={styles.carouselContainer}>
-                <ImageCarousel
-                  product_images={productItem?.product_images}
-                  resizeMode="contain"
-                  loop={false}
-                  autoplay={false}
+            <View style={styles.carouselContainer}>
+              <ImageCarousel
+                product_images={productItem?.product_images}
+                resizeMode="contain"
+                loop={false}
+                autoplay={false}
+              />
+            </View>
+            <View style={styles.infoContainer}>
+              <View style={styles.innerInfo}>
+                <View style={styles.visual}>
+                  <StarRating rating={productItem?.rating} />
+                  <ViewCount count={productItem?.view_count} />
+                </View>
+
+                <View>
+                  <GenericText style={styles.producer}>
+                    {productItem?.producer}
+                  </GenericText>
+                </View>
+                <GenericText textType="medium" style={styles.nameText}>
+                  {productItem?.name}
+                </GenericText>
+                <View style={styles.costView}>
+                  <GenericText style={styles.costText}>
+                    ₹{productItem?.cost}
+                  </GenericText>
+                  <GenericText textType="medium" style={styles.offStyle}>
+                    0% off
+                  </GenericText>
+                  <GenericText style={styles.costStyle}>
+                    ₹{productItem?.cost}
+                  </GenericText>
+                </View>
+
+                <ReadMore
+                  seeMoreStyle={styles.seeMoreStyle}
+                  seeLessStyle={styles.seeLessStyle}
+                  style={styles.descriptionText}>
+                  {productItem?.description}
+                </ReadMore>
+              </View>
+              <View style={styles.buttonsContainer}>
+                <QuantityControl
+                  quantity={quantity}
+                  onIncrease={increaseQuantity}
+                  onDecrease={decreaseQuantity}
+                />
+
+                <ButtonAnimated
+                  onPress={handleAddToCart}
+                  title="Add to Cart"
+                  fontSize={26}
+                  isDone={addedToCart}
+                  isLoading={cartLoading}
                 />
               </View>
-              <View style={styles.infoContainer}>
-                <View style={styles.innerInfo}>
-                  <View style={styles.visual}>
-                    <StarRating rating={productItem?.rating} />
-                    <ViewCount count={productItem?.view_count} />
-                  </View>
+              <View style={styles.similar}>
+                <GenericText textType="medium" style={styles.costText}>
+                  Similar Products
+                </GenericText>
 
-                  <View>
-                    <GenericText style={styles.producer}>
-                      {productItem?.producer}
-                    </GenericText>
-                  </View>
-                  <GenericText textType="medium" style={styles.nameText}>
-                    {productItem?.name}
-                  </GenericText>
-                  <View style={styles.costView}>
-                    <GenericText style={styles.costText}>
-                      ₹{productItem?.cost}
-                    </GenericText>
-                    <GenericText textType="medium" style={styles.offStyle}>
-                      0% off
-                    </GenericText>
-                    <GenericText style={styles.costStyle}>
-                      ₹{productItem?.cost}
-                    </GenericText>
-                  </View>
-                
-                  <ReadMore
-                    seeMoreStyle={styles.seeMoreStyle}
-                    seeLessStyle={styles.seeLessStyle}
-                    style={styles.descriptionText}>
-                    {productItem?.description}
-                  </ReadMore>
-                </View>
-                <View style={styles.buttonsContainer}>
-                  <QuantityControl
-                    quantity={quantity}
-                    onIncrease={increaseQuantity}
-                    onDecrease={decreaseQuantity}
+                <View style={{flex: 1}}>
+                  <FlatList
+                    scrollEnabled={false}
+                    data={updatedCategory}
+                    renderItem={({item}) => (
+                      <ProductItem
+                        item={item}
+                        onPress={() => {
+                          navigation.replace('ProductDetail', {
+                            product_id: item.id,
+                            shouldLoadSimilarProducts: false,
+                          });
+                        }}
+                      />
+                    )}
+                    keyExtractor={item => item.id.toString()}
+                    numColumns={2}
+                    contentContainerStyle={styles.contentStyle}
+                    columnWrapperStyle={styles.wrapperStyle}
                   />
-                
-                  <ButtonAnimated
-                    onPress={handleAddToCart}
-                    title="Add to Cart"
-                    fontSize={26}
-                    isDone={addedToCart}
-                    isLoading={cartLoading}
-                  />
-                </View>
-                <View style={styles.similar}>
-                  <GenericText textType="medium" style={styles.costText}>
-                    Similar Products
-                  </GenericText>
-
-                  <View style={{flex: 1}}>
-                    <FlatList
-                      scrollEnabled={false}
-                      data={updatedCategory}
-                      renderItem={({item}) => (
-                        <ProductItem
-                          item={item}
-                          onPress={() => {
-                            navigation.replace('ProductDetail', {
-                              product_id: item.id,
-                              shouldLoadSimilarProducts: false,
-                            });
-                          }}
-                        />
-                      )}
-                      keyExtractor={item => item.id.toString()}
-                      numColumns={2}
-                      contentContainerStyle={styles.contentStyle}
-                      columnWrapperStyle={styles.wrapperStyle}
-                    />
-                  </View>
                 </View>
               </View>
-            </ScrollView>
-          )
-        }
+            </View>
+          </ScrollView>
+        )}
       </SafeAreaView>
     </>
   );

@@ -2,11 +2,11 @@ import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {OrderListScreenNavigationProp} from '../../navigation/type';
-import OrderListItem from '../../components/orderListComponents/OrderListItem/OrderListItem';
+import OrderListItem from '../../components/orderListComponents/orderListItem/OrderListItem';
 import {styles} from './style';
 import Nothing from '../../components/generic/nothing/Nothing';
-import Loading from '../../components/generic/Loading/Loading';
-import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
+import Loading from '../../components/generic/loading/Loading';
+import ErrorScreen from '../../components/generic/errorScreen/ErrorScreen';
 import {getOrderList} from '../../redux/slices/orderSlice/actions';
 
 const OrderList = ({navigation}: OrderListScreenNavigationProp) => {

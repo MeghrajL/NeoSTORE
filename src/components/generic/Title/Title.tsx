@@ -1,6 +1,6 @@
 import {StyleSheet, Text, TextStyle, View} from 'react-native';
 import React from 'react';
-import GenericText from '../GenericText/GenericText';
+import GenericText from '../genericText/GenericText';
 import {colors} from '../../../assets/colors';
 
 // type ITitle = {
