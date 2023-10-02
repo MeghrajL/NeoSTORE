@@ -2,8 +2,21 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import GenericText from '../../generic/genericText/GenericText';
 import {colors} from '../../../assets/colors';
+import {IOrderItem} from '../../../redux/slices/orderSlice/type';
 
-const OrderListItem = ({item, navigateToOrderDetail}) => {
+interface IOrderListItem {
+  item: IOrderItem;
+  navigateToOrderDetail: Function;
+}
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IOrderListItem}
+ * @description renders id , total, quantity, status and deatils button for each order placed
+ * @returns jsx for order list item
+ */
+
+const OrderListItem = ({item, navigateToOrderDetail}: IOrderListItem) => {
   return (
     <View style={styles.container}>
       <GenericText textType="medium" style={styles.idText}>
@@ -41,7 +54,6 @@ const styles = StyleSheet.create({
     width: '95%',
     backgroundColor: 'white',
     justifyContent: 'space-between',
-    // alignItems: 'center',
     marginHorizontal: '2.5%',
     gap: 8,
     padding: 20,
@@ -55,7 +67,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 0.5,
     borderColor: '#ccc',
-    // overflow: 'hidden',
   },
   idText: {
     fontSize: 25,
@@ -89,15 +100,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-
-    // backgroundColor: 'red',
   },
   rowView2: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // backgroundColor: 'red',
   },
   delivery: {
     color: colors.PLATINUM_GRAY,

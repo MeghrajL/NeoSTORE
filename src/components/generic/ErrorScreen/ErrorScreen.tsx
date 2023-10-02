@@ -4,6 +4,13 @@ import {colors} from '../../../assets/colors';
 import GenericText from '../genericText/GenericText';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @description displayed if any error occurs
+ * @returns jsx for error component
+ */
+
 const ErrorScreen = () => {
   const navigation = useNavigation();
   return (

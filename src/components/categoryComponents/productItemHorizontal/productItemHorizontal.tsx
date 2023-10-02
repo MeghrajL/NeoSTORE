@@ -11,21 +11,25 @@ interface IProductItemHorizontal {
   onPress: Function;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IProductItemHorizontal}
+ * @description component to display product details breifly and in horizontal orientation on category screen
+ * @returns jsx for product item horizontal component
+ */
+
 const ProductItemHorizontal = ({item, onPress}: IProductItemHorizontal) => {
-  //   console.log(item.product_images.toString());
   return (
     <TouchableOpacity onPress={() => onPress(item.id)} style={styles.container}>
       <View style={styles.innerContainer}>
-        {/* <View style={styles.imageContainer}> */}
         <Image
           style={styles.imageStyle}
           source={{
             uri: item.product_images,
           }}
         />
-        {/* </View> */}
+
         <View style={styles.textContainer}>
-          {/* <GenericText>{item.rating}</GenericText> */}
           <GenericText style={styles.producerStyle}>
             {item.producer}
           </GenericText>
@@ -66,9 +70,6 @@ const styles = StyleSheet.create({
     height: 200,
     width: '95%',
     backgroundColor: 'white',
-    // borderRadius: 10,
-    // overflow: Platform === 'android' ? 'hidden' : 'visible',
-
     flexDirection: 'row',
     shadowColor: '#ccc',
     shadowOpacity: 0.5,
@@ -95,7 +96,6 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     paddingRight: 8,
-    // marginVertical: 5,
     gap: 10,
   },
   nameStyle: {
@@ -120,7 +120,6 @@ const styles = StyleSheet.create({
   costView: {
     flexDirection: 'row',
     gap: 6,
-    // justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },
   offStyle: {

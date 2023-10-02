@@ -17,6 +17,13 @@ interface IInputWithError {
   spacesAllowed?: boolean;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IInputWithError}
+ * @description uses generic text component and add error text to it
+ * @returns jsx for input with error
+ */
+
 const InputWithError = ({
   placeholder,
   maxLength,
@@ -88,6 +95,5 @@ const styles = StyleSheet.create({
   errorStyle: {
     color: 'red',
     paddingHorizontal: 5,
-    // marginHorizontal: 10,
   },
 });

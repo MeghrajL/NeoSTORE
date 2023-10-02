@@ -19,6 +19,13 @@ interface IImageData {
   [key: string]: number;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {ICategoryTypes}
+ * @description renders category list item with data from api and image from assets
+ * @returns jsx for category types
+ */
+
 const CategoryTypes = ({product_categories}: ICategoryTypes) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 

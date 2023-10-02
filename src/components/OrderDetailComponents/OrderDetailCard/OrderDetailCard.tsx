@@ -1,6 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {IAddress, IUserData} from '../../../redux/slices/authSlice/type';
 import {colors} from '../../../assets/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import GenericText from '../../generic/genericText/GenericText';
@@ -10,6 +9,13 @@ interface IOrderDetailCard {
   created: string;
   cartTotal: number | undefined;
 }
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IOrderDetailCard}
+ * @description displays order id,total & date
+ * @returns jsx for order detail card
+ */
 
 const OrderDetailCard = ({order_id, created, cartTotal}: IOrderDetailCard) => {
   return (
@@ -44,11 +50,9 @@ export default OrderDetailCard;
 
 const styles = StyleSheet.create({
   container: {
-    // height: 100,
     width: '95%',
     backgroundColor: 'white',
     flexDirection: 'row',
-    // justifyContent: 'flex-start',
     alignItems: 'center',
     marginHorizontal: '2.5%',
     gap: 8,

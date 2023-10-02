@@ -4,6 +4,14 @@ import React from 'react';
 interface IBottomCard {
   children: React.ReactNode;
 }
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IBottomCard}
+ * @description used to show  card on bottom of the screen with its tops rounded
+ * @returns jsx for bottom card
+ */
+
 const BottomCard = ({children}: IBottomCard) => {
   return (
     <View style={styles.container}>
@@ -16,7 +24,6 @@ export default BottomCard;
 
 const styles = StyleSheet.create({
   container: {
-    // overflow: Platform.OS === 'android' ? 'hidden' : 'visible', // This is important to hide the shadow below the rounded top
     borderWidth: 0.5,
     borderColor: '#ccc',
     borderTopLeftRadius: 15,

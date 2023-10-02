@@ -2,6 +2,12 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import GenericText from '../genericText/GenericText';
 import {colors} from '../../../assets/colors';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @returns nothing img component
+ */
+
 const Nothing = () => {
   return (
     <View style={styles.container}>

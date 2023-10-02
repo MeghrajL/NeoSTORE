@@ -23,6 +23,13 @@ interface ICartSummaryItem {
   onRatePress?: Function;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {ICartSummaryItem}
+ * @description renders product order summary details and optionally rate button
+ * @returns jsx for cart summary item
+ */
+
 const CartSummaryItem = ({
   product_id,
   product_images,

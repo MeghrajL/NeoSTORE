@@ -3,6 +3,12 @@ import React from 'react';
 import LottieView from 'lottie-react-native';
 import {colors} from '../../../assets/colors';
 
+/**
+ * @author Meghraj Vilas Lot
+ * @description rendered on success  after button press
+ * @returns tick gif
+ */
+
 const Tick = () => {
   return (
     <View style={styles.ButtonStyle}>

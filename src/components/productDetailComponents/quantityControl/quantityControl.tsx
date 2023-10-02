@@ -16,6 +16,13 @@ interface IQuantityControl {
   onDecrease: (event: GestureResponderEvent) => void;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IQuantityControl}
+ * @description buttons to control quantity number ranging from 1 to 8 and quantity text
+ * @returns jsx for quantity control
+ */
+
 const QuantityControl = ({
   quantity,
   onIncrease,

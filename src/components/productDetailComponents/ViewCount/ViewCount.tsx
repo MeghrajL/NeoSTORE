@@ -8,6 +8,12 @@ interface IViewCount {
   count?: number | undefined;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IViewCount}
+ * @returns jsx for view count with eye icon and rounded up view count
+ */
+
 const ViewCount = ({count = 0}: IViewCount) => {
   const formattedCount =
     count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count.toString();

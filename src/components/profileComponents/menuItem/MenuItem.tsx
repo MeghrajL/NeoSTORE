@@ -17,6 +17,12 @@ interface IMenuItem {
   isLast?: boolean;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IMenuItem}
+ * @returns jsx for clickable menu item with text and icon
+ */
+
 const MenuItem = ({icon, title, onPress, isLast}: IMenuItem) => {
   return (
     <TouchableOpacity
@@ -35,7 +41,6 @@ export default MenuItem;
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: 'red',
     flexDirection: 'row',
     width: '95%',
     height: 70,
@@ -43,7 +48,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 20,
     borderBottomColor: '#ccc',
-    // borderBottomWidth: 0.5,
     paddingHorizontal: 10,
     marginHorizontal: '2.5%',
   },

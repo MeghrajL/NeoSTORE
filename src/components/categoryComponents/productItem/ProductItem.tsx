@@ -16,9 +16,15 @@ interface IProductItem {
   item: IProduct;
   onPress: Function;
 }
-const rupee = '₹';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IProductItem}
+ * @description displayed on product detail screen for similar products
+ * @returns jsx for product item component
+ */
+
 const ProductItem = ({item, onPress}: IProductItem) => {
-  //   console.log(item.product_images.toString());
   return (
     <TouchableOpacity onPress={() => onPress(item.id)} style={styles.container}>
       <View style={styles.innerContainer}>
@@ -31,7 +37,6 @@ const ProductItem = ({item, onPress}: IProductItem) => {
           />
         </View>
         <View style={styles.textContainer}>
-          {/* <GenericText>{item.rating}</GenericText> */}
           <StarRating rating={item.rating} />
           <GenericText numberOfLines={1} style={styles.producerStyle}>
             {item.producer}
@@ -43,7 +48,6 @@ const ProductItem = ({item, onPress}: IProductItem) => {
             {item.name}
           </GenericText>
 
-          {/* <GenericText style={styles.costStyle}>₹{item.cost}</GenericText> */}
           <View style={styles.costView}>
             <GenericText textType="medium" style={styles.discountStyle}>
               ₹{item.cost}
@@ -62,11 +66,9 @@ const styles = StyleSheet.create({
   container: {
     height: 260,
     width: '45%',
-    // marginHorizontal: 10,
     margin: 5,
     backgroundColor: 'white',
     borderRadius: 10,
-    // overflow: Platform === 'android' ? 'hidden' : 'visible',
     shadowColor: '#ccc',
     shadowOpacity: 0.5,
     shadowRadius: 2,
@@ -83,7 +85,6 @@ const styles = StyleSheet.create({
   imageContainer: {
     height: '60%',
     width: '100%',
-    // backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -94,7 +95,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingBottom: 5,
     gap: 10,
-    // backgroundColor: 'red',
   },
   nameStyle: {
     fontSize: 18,
@@ -103,10 +103,6 @@ const styles = StyleSheet.create({
   producerStyle: {
     color: colors.RICH_BLACK,
   },
-  // costStyle: {
-  //   fontSize: 18,
-  //   color: colors.RICH_BLACK,
-  // },
   costStyle: {
     fontSize: 14,
     color: colors.PLATINUM_GRAY,
@@ -117,10 +113,8 @@ const styles = StyleSheet.create({
     color: colors.RICH_BLACK,
   },
   costView: {
-    // paddingHorizontal: 10
     flexDirection: 'row',
     gap: 5,
-    // justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },
   offStyle: {

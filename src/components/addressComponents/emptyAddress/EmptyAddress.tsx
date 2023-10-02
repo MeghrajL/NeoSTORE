@@ -13,6 +13,12 @@ interface IEmptyAddress {
   onPress: (event: GestureResponderEvent) => void;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IEmptyAddress}
+ * @description displayed if address is empty
+ * @returns jsx for empty address component
+ */
 const EmptyAddress = ({onPress}: IEmptyAddress) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>

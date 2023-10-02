@@ -14,6 +14,13 @@ interface ISelectAddress {
   onEditPress: Function;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IEmptyAddress}
+ * @description address list item which is selectable
+ * @returns jsx for empty address component
+ */
+
 const SelectAddress = ({
   item,
   lastSelectedAddressId,
@@ -103,7 +110,6 @@ const styles = StyleSheet.create({
   container: {
     height: 180,
     width: '95%',
-    // backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -119,12 +125,9 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 0.5,
     borderColor: '#ccc',
-    // overflow: 'hidden',
   },
   touchView: {width: '75%'},
   selectView: {
-    // backgroundColor: 'red',
-    // marginVertical: 20,
     flexDirection: 'row',
     width: '100%',
   },
@@ -134,10 +137,7 @@ const styles = StyleSheet.create({
     width: '25%',
     height: '100%',
     gap: 10,
-    // backgroundColor: 'red',
-    // justifyContent: 'space-evenly',
     alignItems: 'center',
-    // marginRight: 5,
   },
   typeText: {
     fontSize: 20,
@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
   },
   content: {
     width: '20%',
-    //   backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
   },

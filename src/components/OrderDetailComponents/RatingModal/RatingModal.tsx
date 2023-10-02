@@ -13,6 +13,12 @@ interface CustomModalProps {
   onClose: () => void;
   onRatingSubmit: Function;
 }
+/**
+ * @author Meghraj Vilas Lot
+ * @param {CustomModalProps}
+ * @description renders modal from rn paper and allows user to set rating
+ * @returns jsx for rating modal
+ */
 
 const RatingModal: React.FC<CustomModalProps> = ({
   isVisible,

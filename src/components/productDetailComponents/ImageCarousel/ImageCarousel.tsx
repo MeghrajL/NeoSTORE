@@ -23,6 +23,12 @@ interface IProductImages {
   autoplay: boolean;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IProductImages|IImage}
+ * @returns image carousel with dots
+ */
+
 const ImageCarousel = ({
   product_images,
   autoplay,
@@ -30,7 +36,7 @@ const ImageCarousel = ({
   loop,
 }: IProductImages) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  // console.log('+++++', product_images);
+
   const width = Dimensions.get('window').width;
   const handleIndex = (index: number) => {
     setActiveIndex(index);
@@ -42,7 +48,6 @@ const ImageCarousel = ({
         style={styles.carouselCon}
         width={width}
         pagingEnabled={true}
-        // height={400}
         autoPlay={autoplay}
         data={product_images}
         scrollAnimationDuration={1000}
@@ -50,19 +55,13 @@ const ImageCarousel = ({
         onProgressChange={(_, absoluteProgress) => {
           handleIndex(Math.round(absoluteProgress));
         }}
-        // onSnapToItem={index => setActiveIndex(index)}
-        // onSnapToItem={index => console.log('current index:', index)}
         renderItem={({item}) => (
-          <View style={styles.item}>
+          <View>
             <Image
               source={{uri: item.image}}
               style={styles.imageStyle}
               resizeMode={resizeMode}
             />
-            {/* <Pagination
-              activeIndex={activeIndex}
-              length={product_images.length}
-            /> */}
           </View>
         )}
       />
@@ -96,21 +95,11 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    // flex: 1,
-    // backgroundColor: 'red',
   },
   carouselCon: {
     height: '100%',
-    // borderRadius: 10,
-    // width: '100%',
   },
-  item: {
-    // flex: 1,
-    // height: '100%',
-    // width: '100%',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-  },
+
   imageStyle: {
     height: '100%',
     width: '100%',

@@ -13,6 +13,13 @@ interface IButtonAnimated {
   fontSize: number;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IButtonAnimated}
+ * @description load gif if displayed if isLoading is true, button is displayed if isDone is false and on success tick gif is displayed
+ * @returns jsx for button animated
+ */
+
 const ButtonAnimated = ({
   isLoading,
   isDone,

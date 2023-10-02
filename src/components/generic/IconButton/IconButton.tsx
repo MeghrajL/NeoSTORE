@@ -13,6 +13,14 @@ interface IIconButtonProps {
   onPressCustom: (event: GestureResponderEvent) => void;
   size: number;
 }
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IIconButtonProps}
+ * @description uses ionicons icons and makes the clickable
+ * @returns jsx for icon button
+ */
+
 export default function IconButton({
   icon,
   color,

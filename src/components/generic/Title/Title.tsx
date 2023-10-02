@@ -3,10 +3,10 @@ import React from 'react';
 import GenericText from '../genericText/GenericText';
 import {colors} from '../../../assets/colors';
 
-// type ITitle = {
-//   //   fontSize: number;
-//   fontSize?: TextStyle | undefined;
-// };
+/**
+ * @author Meghraj Vilas Lot
+ * @returns NeoSTORE title with color theme
+ */
 
 const Title = () => {
   return (

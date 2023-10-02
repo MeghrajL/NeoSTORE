@@ -10,6 +10,13 @@ interface IDeliveryDetails {
   userData: IUserData | null | undefined;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IDeliveryDetails}
+ * @description displayes delivery addres with user name & phn no.
+ * @returns jsx for delivery details
+ */
+
 const DeliveryDetails = ({address, userData}: IDeliveryDetails) => {
   return (
     <>

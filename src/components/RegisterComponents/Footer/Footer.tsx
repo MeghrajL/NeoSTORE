@@ -15,6 +15,12 @@ interface IFooter {
   onClickPress: (event: GestureResponderEvent) => void;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IFooter}
+ * @returns jsx for footer which renders clickable text
+ */
+
 const Footer = ({dialogueText, clickText, onClickPress}: IFooter) => {
   return (
     <View style={styles.footerStyle}>

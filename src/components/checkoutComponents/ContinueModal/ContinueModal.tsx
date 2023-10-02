@@ -2,14 +2,20 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Modal, Portal} from 'react-native-paper';
 import {colors} from '../../../assets/colors';
 import GenericText from '../../generic/genericText/GenericText';
-import GenericButton from '../../generic/genericButton/GenericButton';
 
-interface CustomModalProps {
+interface IContinueModalProps {
   isVisible: boolean;
   onClose: () => void;
 }
 
-const ContinueModal: React.FC<CustomModalProps> = ({isVisible, onClose}) => {
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IContinueModalProps}
+ * @description displayed after order is successfully placed & cannot be forced closed
+ * @returns jsx for continue modal
+ */
+
+const ContinueModal = ({isVisible, onClose}: IContinueModalProps) => {
   return (
     <Portal>
       <Modal visible={isVisible} style={styles.centeredView}>

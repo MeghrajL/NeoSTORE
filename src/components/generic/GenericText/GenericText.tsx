@@ -9,6 +9,13 @@ interface IGenericText {
   numberOfLines?: number;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IGenericText}
+ * @description renders text in Gilroy font
+ * @returns jsx for generic text
+ */
+
 const GenericText = ({
   children,
   textType,

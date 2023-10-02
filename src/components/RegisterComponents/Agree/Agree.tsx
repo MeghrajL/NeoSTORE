@@ -15,6 +15,13 @@ interface IAgree {
   checkboxHandler: (event: GestureResponderEvent) => void;
   showErr: boolean;
 }
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IAgree}
+ * @returns jsx for agree checkbox
+ */
+
 const Agree = ({checkBoxChecked, checkboxHandler, showErr}: IAgree) => {
   return (
     <View style={styles.elementView}>

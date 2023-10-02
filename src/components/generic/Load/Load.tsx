@@ -3,6 +3,11 @@ import React from 'react';
 import LottieView from 'lottie-react-native';
 import {colors} from '../../../assets/colors';
 
+/**
+ * @author Meghraj Vilas Lot
+ * @returns load button gif
+ */
+
 const Load = () => {
   return (
     <View style={styles.ButtonStyle}>

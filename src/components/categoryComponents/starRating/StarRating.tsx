@@ -9,6 +9,13 @@ interface IStarRating {
   color?: string;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IEmptyAddress}
+ * @description displayes colored stars for the number of rating provided
+ * @returns jsx for star rating
+ */
+
 const StarRating = ({
   rating = 0,
   starSize = 20,

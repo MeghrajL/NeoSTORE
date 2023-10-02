@@ -10,6 +10,13 @@ import {
 } from 'react-native';
 import React from 'react';
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IGenericButton}
+ * @description uses react native paper to render button using provided props
+ * @returns jsx for generic button
+ */
+
 interface IGenericButton {
   title: string;
   onPress: (event: GestureResponderEvent) => void;

@@ -14,6 +14,13 @@ interface IGenericInput {
   disabled?: boolean;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IGenericInput}
+ * @description display left icon,text input,optionally right icon,uses react native paper to render input using provided props
+ * @returns jsx for generic text
+ */
+
 export default function GenericInput({
   placeholder,
   maxLength,
@@ -26,11 +33,7 @@ export default function GenericInput({
   const [focus, setFocus] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   return (
-    <View
-      style={[
-        styles.container,
-        // {borderColor: focus ? colors.VIVID_GAMBOGE : colors.RICH_BLACK},
-      ]}>
+    <View style={[styles.container]}>
       <TextInput
         mode="outlined"
         label={
@@ -82,10 +85,8 @@ export default function GenericInput({
 }
 const styles = StyleSheet.create({
   container: {
-    // borderBottomWidth: 1,
     width: '100%',
     height: 60,
-    // paddingHorizontal: 10,
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
@@ -95,7 +96,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     width: '100%',
     color: 'black',
-    // borderWidth: 0.1,
   },
   outline: {
     borderWidth: 0,

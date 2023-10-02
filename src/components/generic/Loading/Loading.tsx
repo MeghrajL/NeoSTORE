@@ -1,13 +1,15 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import LottieView from 'lottie-react-native';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @returns loader gif for screens
+ */
+
 const Loading = () => {
   return (
     <View style={styles.container}>
-      {/* <Image
-        style={styles.imageStyle}
-        source={require('../../../assets/images/Woodworker.png')}
-      /> */}
       <LottieView
         style={styles.imageStyle}
         source={require('../../../assets/gif/hammer2.json')}
@@ -30,6 +32,5 @@ const styles = StyleSheet.create({
   imageStyle: {
     height: '70%',
     width: '70%',
-    // resizeMode: 'center',
   },
 });

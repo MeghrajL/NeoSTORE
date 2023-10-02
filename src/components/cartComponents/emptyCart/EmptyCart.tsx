@@ -2,6 +2,14 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {colors} from '../../../assets/colors';
 import GenericText from '../../generic/genericText/GenericText';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IEmptyAddress}
+ * @description displayed if cart is empty
+ * @returns jsx for empty cart component
+ */
+
 const EmptyCart = () => {
   return (
     <View style={styles.container}>

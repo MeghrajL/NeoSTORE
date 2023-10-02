@@ -17,6 +17,13 @@ interface IGender {
   showErr: boolean;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {IGender}
+ * @description male female images to select gender
+ * @returns jsx for gender selector
+ */
+
 const Gender = ({gender, maleHandler, femaleHandler, showErr}: IGender) => {
   return (
     <View>

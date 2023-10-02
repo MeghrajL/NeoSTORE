@@ -28,6 +28,13 @@ interface ICartItemProps {
   onPress: Function;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {ICartItemProps}
+ * @description swipeable cart list item with quantity control and hidden delete button
+ * @returns jsx for empty address component
+ */
+
 const CartItem = ({item, onPress}: ICartItemProps) => {
   const [newQuantity, setNewQuantity] = useState(item.quantity);
   const dispatch = useAppDispatch();
@@ -54,7 +61,7 @@ const CartItem = ({item, onPress}: ICartItemProps) => {
     }
   };
 
-  async function handleDeleteCartItem() {
+  const handleDeleteCartItem = async () => {
     try {
       await dispatch(
         deleteCart({
@@ -66,7 +73,7 @@ const CartItem = ({item, onPress}: ICartItemProps) => {
     } catch (error) {
       console.log('from detail', error);
     }
-  }
+  };
 
   return (
     <SwipeRow

@@ -8,6 +8,13 @@ interface ICheckoutProgress {
   id: number;
 }
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {ICheckoutProgress}
+ * @description displayes 3 point touchable checkout progress
+ * @returns jsx for checkout progress
+ */
+
 const CheckoutProgress = ({id}: ICheckoutProgress) => {
   const navigation = useNavigation();
   console.log(id);
