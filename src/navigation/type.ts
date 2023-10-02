@@ -9,7 +9,10 @@ export type RootStackParamList = {
   Home: undefined;
   Cart: undefined;
   SignIn: undefined;
-  Category: {product_category_id: number; categoryName: string};
+  Category: {
+    product_category_id: number | undefined;
+    categoryName: string | undefined;
+  };
   ProductDetail: {product_id: number; shouldLoadSimilarProducts: boolean};
   HomeStack: undefined;
   CartStack: undefined;

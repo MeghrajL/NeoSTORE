@@ -6,8 +6,8 @@ import {colors} from '../../../assets/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 interface IDeliveryDetails {
-  address: string;
-  userData: IUserData;
+  address: string | undefined;
+  userData: IUserData | null | undefined;
 }
 
 const DeliveryDetails = ({address, userData}: IDeliveryDetails) => {
@@ -28,11 +28,7 @@ const DeliveryDetails = ({address, userData}: IDeliveryDetails) => {
             {userData?.first_name} {userData?.last_name}
           </GenericText>
           <View>
-            <GenericText style={styles.addressText}>
-              {address}
-              {/* {address.firstLine}, {address.secondLine}, {address.city},{' '}
-              {address.state}, {address.country}, {address.pincode} */}
-            </GenericText>
+            <GenericText style={styles.addressText}>{address}</GenericText>
           </View>
           <GenericText style={styles.addressText} textType="medium">
             {userData?.phone_no}

@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
-import {baseUrl, getList, getDetail, setRating} from '../../../url';
+import {baseUrl, getList, getDetail, setRating} from '../../../constants/url';
 import Toast from 'react-native-simple-toast';
 
 import {

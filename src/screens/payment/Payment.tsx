@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,22 +8,30 @@ import {
   FlatList,
   Vibration,
 } from 'react-native';
-import React, {useState} from 'react';
+import SlideButton from 'rn-slide-button';
+
+import {placeOrder} from '../../redux/slices/orderSlice/actions';
+import {getCartList} from '../../redux/slices/cartSlice/actions';
 import {PaymentScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
+
 import {styles} from './style';
+import {colors} from '../../assets/colors';
 import CheckoutProgress from '../../components/generic/checkoutProgress/CheckoutProgress';
 import GenericText from '../../components/generic/genericText/GenericText';
 import DeliveryDetails from '../../components/generic/deliveryDetails/DeliveryDetails';
 import CartSummaryItem from '../../components/generic/cartSummaryItem/CartSummaryItem';
 import BottomCard from '../../components/generic/bottomCard/BottomCard';
-import SlideButton from 'rn-slide-button';
-import {colors} from '../../assets/colors';
 import ContinueModal from '../../components/checkoutComponents/continueModal/ContinueModal';
 import Tick from '../../components/generic/tick/Tick';
 import Load from '../../components/generic/load/Load';
-import {placeOrder} from '../../redux/slices/orderSlice/actions';
-import {getCartList} from '../../redux/slices/cartSlice/actions';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {PaymentScreenNavigationProp}
+ * @description allows user to place order, display address, cart summary & checkout progress
+ * @returns jsx for payment screen
+ */
 
 const Payment = ({navigation, route}: PaymentScreenNavigationProp) => {
   const {id} = route.params;
@@ -55,16 +64,16 @@ const Payment = ({navigation, route}: PaymentScreenNavigationProp) => {
       }, 2000);
       Vibration.vibrate(200);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
-  function navigateToProductDetail(product_id: number) {
+  const navigateToProductDetail = (product_id: number) => {
     navigation.navigate('ProductDetail', {
       product_id: product_id,
       shouldLoadSimilarProducts: true,
     });
-  }
+  };
 
   const openModal = () => {
     setModalVisible(true);

@@ -26,6 +26,13 @@ import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimat
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
 import {registerUser} from '../../redux/slices/authSlice/actions';
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {ProfileScreenNavigationProp}
+ * @description allows user to register displays user registration form
+ * @returns jsx for register screen
+ */
+
 const Register = ({navigation}: RegisterScreenNavigationProp) => {
   const [isRegisterDone, setRegisterDone] = useState(false);
 
@@ -47,51 +54,51 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
 
   const {isLoading} = useAppSelector(state => state.auth);
 
-  function fnameHandler(first_name: string) {
+  const fnameHandler = (first_name: string) => {
     setUser({...user, first_name});
-  }
+  };
 
-  function lnameHandler(last_name: string) {
+  const lnameHandler = (last_name: string) => {
     setUser({...user, last_name});
-  }
+  };
 
-  function emailHandler(email: string) {
+  const emailHandler = (email: string) => {
     setUser({...user, email: email.toLowerCase()});
-  }
+  };
 
-  function passwordHandler(password: string) {
+  const passwordHandler = (password: string) => {
     setUser({...user, password});
-  }
+  };
 
-  function confirmPasswordHandler(confirm_password: string) {
+  const confirmPasswordHandler = (confirm_password: string) => {
     setUser({...user, confirm_password});
     if (user.password === confirm_password) {
       setSamePass(true);
     } else {
       setSamePass(false);
     }
-  }
+  };
 
-  function phoneNumberHandler(phone_no: string) {
+  const phoneNumberHandler = (phone_no: string) => {
     setUser({...user, phone_no});
-  }
+  };
 
-  function onSignInPress() {
+  const onSignInPress = () => {
     navigation.navigate('SignIn');
-  }
-  function maleHandler() {
+  };
+  const maleHandler = () => {
     setUser({...user, gender: 'M'});
-  }
+  };
 
-  function femaleHandler() {
+  const femaleHandler = () => {
     setUser({...user, gender: 'F'});
-  }
+  };
 
-  function checkboxHandler() {
+  const checkboxHandler = () => {
     setCheckBoxChecked(!checkBoxChecked);
-  }
+  };
 
-  async function onRegisterPress() {
+  const onRegisterPress = async () => {
     setShowErr(true);
     if (
       !samePass ||
@@ -123,7 +130,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
         console.log('some error');
       }
     }
-  }
+  };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

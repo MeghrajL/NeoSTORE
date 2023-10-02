@@ -8,7 +8,7 @@ import {
   forgot,
   getUserData,
   update,
-} from '../../../url';
+} from '../../../constants/url';
 import {persistor} from '../../store';
 import {logout} from './authSlice';
 import {

@@ -64,7 +64,7 @@ const CartItem = ({item, onPress}: ICartItemProps) => {
       ).unwrap();
       dispatch(getCartList({access_token: access_token}));
     } catch (error) {
-      console.error('from detail', error);
+      console.log('from detail', error);
     }
   }
 

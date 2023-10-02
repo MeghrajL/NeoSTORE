@@ -1,11 +1,21 @@
-import {Button, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import React, {useEffect} from 'react';
+import {Button, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+
 import {HomeScreenNavigationProp} from '../../navigation/type';
 import {useAppSelector, useAppDispatch} from '../../redux/store';
+import {getUserAccountDetails} from '../../redux/slices/authSlice/actions';
+
 import CategoryTypes from '../../components/homeComponents/categoryTypes/CategoryTypes';
 import ImageCarousel from '../../components/productDetailComponents/imageCarousel/ImageCarousel';
 import {styles} from './style';
-import {getUserAccountDetails} from '../../redux/slices/authSlice/actions';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {HomeScreenNavigationProp}
+ * @description displays image carousel and category types
+ * @returns jsx for home screen
+ */
+
 const Home = ({navigation}: HomeScreenNavigationProp) => {
   const dispatch = useAppDispatch();
 

@@ -41,17 +41,15 @@ export const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     resizeMode: 'cover',
-    // backgroundColor: 'pink',
   },
   picContainer: {
     alignSelf: 'center',
-    width: 100, // Adjust the width and height as needed
+    width: 100,
     height: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'red', // Background color for the container
-    // borderRadius: 100, // Make it a circle
-    overflow: 'hidden', // Clip child elements to the container's bounds
+
+    overflow: 'hidden',
   },
   cameraIcon: {
     position: 'absolute',
@@ -65,7 +63,6 @@ export const styles = StyleSheet.create({
   imageContainer: {
     backgroundColor: 'white',
     height: 100,
-    // width: 100,
     borderWidth: 0.5,
     borderRadius: 50,
     justifyContent: 'center',

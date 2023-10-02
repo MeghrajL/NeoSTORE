@@ -8,7 +8,7 @@ import GenericText from '../../generic/genericText/GenericText';
 interface IOrderDetailCard {
   order_id: number;
   created: string;
-  cartTotal: number;
+  cartTotal: number | undefined;
 }
 
 const OrderDetailCard = ({order_id, created, cartTotal}: IOrderDetailCard) => {

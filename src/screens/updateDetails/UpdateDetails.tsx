@@ -1,42 +1,43 @@
+import React, {useState} from 'react';
 import {
   View,
-  ScrollView,
-  KeyboardAvoidingView,
   TouchableOpacity,
   Image,
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
-  Dimensions,
-  PermissionsAndroid,
+  Vibration,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
 import DatePicker from 'react-native-date-picker';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
 import ImagePicker from 'react-native-image-crop-picker';
 import RNFetchBlob from 'react-native-fetch-blob';
 import isURL from 'is-url';
-import {androidCameraPermission} from '../../helpers/permission';
 
+import {androidCameraPermission} from '../../helpers/permission';
 import {UpdateDetailsScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
-import InputWithError from '../../components/generic/inputWithError/InputWithError';
+import {updateDetails} from '../../redux/slices/authSlice/actions';
 import {
   validateName,
   validateEmail,
   validatePhone,
 } from '../../helpers/validators';
+
 import {styles} from './style';
+import InputWithError from '../../components/generic/inputWithError/InputWithError';
 import GenericText from '../../components/generic/genericText/GenericText';
-import GenericInput from '../../components/generic/GenericInput/GenericInput';
 import {colors} from '../../assets/colors';
-import GenericButton from '../../components/generic/genericButton/GenericButton';
-import Load from '../../components/generic/load/Load';
-import Tick from '../../components/generic/tick/Tick';
 import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
-import {updateDetails} from '../../redux/slices/authSlice/actions';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {UpdateDetailsScreenNavigationProp}
+ * @description allows user to update details and upload profile picture from gallery or camera
+ * @returns jsx for update details screen
+ */
 
 const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
@@ -54,18 +55,14 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
     profile_pic: userData?.profile_pic,
     phone_no: userData?.phone_no,
   });
-  // useEffect(() => {
-  //   console.log('🥳🥳🥳🥳🥳🥳🥳🥳🥳', user), [user];
-  // });
+
   const access_token = useAppSelector(
     state => state.auth.user?.data?.access_token,
   );
   const isLoading = useAppSelector(state => state.auth.isLoading);
-
-  // console.log('updated', userData);
   const dispatch = useAppDispatch();
 
-  async function press() {
+  const onSubmitPress = async () => {
     if (
       !user.first_name?.trim() ||
       !user.last_name?.trim ||
@@ -77,11 +74,9 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
       !validatePhone(user.phone_no)
     ) {
       setShowErr(true);
-
       Alert.alert('Please enter correct details');
     } else {
       try {
-        // console.log(user);
         await dispatch(updateDetails({...user, access_token})).unwrap();
         console.log('success');
         setUpdated(true);
@@ -89,58 +84,51 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
           setUpdated(false);
           navigation.navigate('Profile');
         }, 2000);
-        // Vibration.vibrate(1000);
+        Vibration.vibrate(200);
       } catch {
         console.log('some error');
       }
     }
-  }
+  };
 
-  function fnameHandler(first_name: string) {
+  const fnameHandler = (first_name: string) => {
     setUser({...user, first_name});
-  }
+  };
 
-  function lnameHandler(last_name: string) {
+  const lnameHandler = (last_name: string) => {
     setUser({...user, last_name});
-  }
+  };
 
-  function emailHandler(email: string) {
+  const emailHandler = (email: string) => {
     setUser({...user, email: email.toLowerCase()});
-  }
-  function phoneNumberHandler(phone_no: string) {
+  };
+  const phoneNumberHandler = (phone_no: string) => {
     setUser({...user, phone_no});
-  }
+  };
 
-  function formatDate(inputDate: Date) {
+  const formatDate = (inputDate: Date) => {
     const date = new Date(inputDate);
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
-
     const dob = `${day}-${month}-${year}`;
-
     setUser({...user, dob: dob});
-    console.log(dob);
-  }
+  };
 
-  async function imageUrlToBase64(imageUrl: any) {
+  const imageUrlToBase64 = async (imageUrl: any) => {
     try {
       const response = await RNFetchBlob.config({
         fileCache: true,
       }).fetch('GET', imageUrl);
-
-      // Get the base64 string from the response
       const base64String = await response.base64();
-
       return base64String;
     } catch (error) {
-      console.error('Error converting image URL to base64:', error);
+      console.log('Error converting image URL to base64:', error);
       return null;
     }
-  }
+  };
 
   let imageSource;
-
   if (user.profile_pic === null || user.profile_pic === '') {
     if (userData?.gender === 'M') {
       imageSource = require('../../assets/images/man.png');
@@ -149,20 +137,14 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
     }
   } else {
     imageSource = {uri: user.profile_pic};
-
     if (isURL(user.profile_pic)) {
-      //convert
-      console.log('is url');
       imageUrlToBase64(user.profile_pic)
         .then(base64String => {
-          // console.log(base64String);
-          const f = 'data:image/jpg;base64,' + base64String;
-          console.log('>>>>>', f);
-          setUser({...user, profile_pic: f});
-          // imageSource = {uri: f};
+          const formattedImage = 'data:image/jpg;base64,' + base64String;
+          setUser({...user, profile_pic: formattedImage});
         })
         .catch(error => {
-          console.error('Error:', error);
+          console.log('Error:', error);
         });
     } else {
       console.log('is base');
@@ -188,7 +170,6 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
       cropping: true,
       compressImageQuality: 0.5,
     }).then(image => {
-      // console.log(image);
       storeImage(image);
     });
   };
@@ -201,16 +182,14 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
       cropping: true,
       compressImageQuality: 0.5,
     }).then(image => {
-      // console.log('selected Image', image);
       storeImage(image);
     });
   };
 
-  function storeImage(imageData: any) {
+  const storeImage = (imageData: any) => {
     const profile_pic = 'data:image/jpg;base64,' + imageData.data;
-    // console.log('🥳🥳🥳🥳🥳🥳🥳🥳🥳', profile_pic);
     setUser({...user, profile_pic});
-  }
+  };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -318,23 +297,8 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
             />
           </View>
           <View style={styles.buttonContainer}>
-            {/* {isLoading ? (
-              <Load />
-            ) : !profileUpdated ? (
-              <GenericButton
-                // disabled={cartLoading}
-                onPress={press}
-                title="Submit"
-                fontSize={26}
-                fontFamily="Gilroy-Medium"
-                style={styles.submitButtonStyle}
-                color="white"
-              />
-            ) : (
-              <Tick />
-            )} */}
             <ButtonAnimated
-              onPress={press}
+              onPress={onSubmitPress}
               title="Submit"
               fontSize={26}
               isDone={profileUpdated}

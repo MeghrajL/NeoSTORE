@@ -1,13 +1,24 @@
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  ImageResizeMode,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import Carousel from 'react-native-reanimated-carousel';
 import AnimatedDotsCarousel from 'react-native-animated-dots-carousel';
 import {colors} from '../../../assets/colors';
 import {IProductImage} from '../../../redux/slices/productSlice/type';
 
+interface IImage {
+  image: string;
+}
+
 interface IProductImages {
-  product_images: IProductImage[] | undefined;
-  resizeMode: string;
+  product_images: IProductImage[] | IImage[];
+  resizeMode: ImageResizeMode;
   loop: boolean;
   autoplay: boolean;
 }

@@ -45,7 +45,7 @@ export interface IProductData {
 }
 
 export interface IGetCategoryListParams {
-  product_category_id: number;
+  product_category_id: number | undefined;
   limit?: Number;
   page?: Number;
 }

@@ -22,6 +22,13 @@ import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimat
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
 import {signInUser} from '../../redux/slices/authSlice/actions';
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {SignInScreenNavigationProp}
+ * @description allows user to sign in using email & password
+ * @returns jsx for signin screen
+ */
+
 const SignIn = ({navigation}: SignInScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
   const [user, setUser] = useState({
@@ -33,23 +40,23 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
   const dispatch = useAppDispatch();
   const {isLoading} = useAppSelector(state => state.auth);
 
-  function emailHandler(email: string) {
+  const emailHandler = (email: string) => {
     setUser({...user, email: email.toLowerCase()});
-  }
+  };
 
-  function passwordHandler(password: string) {
+  const passwordHandler = (password: string) => {
     setUser({...user, password});
-  }
+  };
 
-  function onRegisterPress() {
+  const onRegisterPress = () => {
     navigation.navigate('Register');
-  }
+  };
 
-  function onForgotPress() {
+  const onForgotPress = () => {
     navigation.navigate('ForgotPassword');
-  }
+  };
 
-  async function onSignInPress() {
+  const onSignInPress = async () => {
     console.log(user);
     setShowErr(true);
     if (
@@ -71,7 +78,7 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
         console.log('some error');
       }
     }
-  }
+  };
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

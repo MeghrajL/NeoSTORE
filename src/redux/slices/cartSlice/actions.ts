@@ -6,7 +6,7 @@ import {
   addCart,
   editCartItem,
   deleteCartItem,
-} from '../../../url';
+} from '../../../constants/url';
 import {IGetCartListParams, IAddToCartParams, IDeleteCartParams} from './type';
 
 /**

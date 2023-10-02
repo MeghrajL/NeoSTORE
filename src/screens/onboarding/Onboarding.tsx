@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   View,
   Text,
@@ -7,11 +8,12 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import React from 'react';
+
 import Onboarding from 'react-native-onboarding-swiper';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {colors} from '../../assets/colors';
 import {OnboardingScreenNavigationProp} from '../../navigation/type';
+
+import {styles} from './style';
 
 const NextArrow = ({...props}) => {
   return (
@@ -28,13 +30,18 @@ const Done = ({...props}) => {
     </TouchableOpacity>
   );
 };
-const {height, width} = Dimensions.get('window');
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {ForgotPasswordScreenNavigationProp}
+ * @description has 3 slides for onboarding
+ * @returns jsx for onboarding screen
+ */
 
 const OnboardingContainer = ({navigation}: OnboardingScreenNavigationProp) => {
   return (
     <Onboarding
       onDone={() => navigation.navigate('SignIn')}
-      //   onSkip={() => navigation.navigate('Register')}
       bottomBarColor="white"
       bottomBarHighlight={false}
       transitionAnimationDuration={100}
@@ -85,31 +92,3 @@ const OnboardingContainer = ({navigation}: OnboardingScreenNavigationProp) => {
 };
 
 export default OnboardingContainer;
-
-const styles = StyleSheet.create({
-  buttonStyle: {
-    backgroundColor: colors.VIVID_GAMBOGE,
-    borderRadius: 200,
-    padding: 20,
-    marginRight: '10%',
-  },
-  imageStyle: {
-    height: 350,
-    width: 350,
-    // backgroundColor: 'red',
-    // paddingBottom: 130,
-  },
-  titleStyle: {
-    fontFamily: 'Gilroy-Medium',
-    fontSize: 30,
-    // backgroundColor: 'blue',
-
-    // color: colors.VIVID_GAMBOGE,
-  },
-  subtitleStyle: {
-    fontFamily: 'Gilroy-Regular',
-  },
-  containerStyles: {
-    padding: 15,
-  },
-});

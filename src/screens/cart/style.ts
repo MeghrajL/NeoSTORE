@@ -2,18 +2,6 @@ import {Platform, StyleSheet} from 'react-native';
 import {colors} from '../../assets/colors';
 
 export const styles = StyleSheet.create({
-  checkoutButtonStyle: {
-    backgroundColor: colors.VIVID_GAMBOGE,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30,
-    minHeight: 30,
-    minWidth: 50,
-    maxHeight: 60,
-    maxWidth: 400,
-    height: 50,
-    width: '100%',
-  },
   costText: {
     fontSize: 20,
     color: colors.RICH_BLACK,
@@ -27,12 +15,10 @@ export const styles = StyleSheet.create({
     color: colors.PLATINUM_GRAY,
   },
   container: {
-    // overflow: Platform.OS === 'android' ? 'hidden' : 'visible', // This is important to hide the shadow below the rounded top
     borderWidth: 0.5,
     borderColor: '#ccc',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    // paddingBottom: 60,
   },
   topRounded: {
     borderTopLeftRadius: 15,

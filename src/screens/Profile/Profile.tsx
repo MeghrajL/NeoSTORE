@@ -1,11 +1,20 @@
-import {View, Text, Image, Alert} from 'react-native';
 import React from 'react';
-import {styles} from './style';
-import GenericText from '../../components/generic/genericText/GenericText';
-import MenuItem from '../../components/profileComponents/menuItem/MenuItem';
+import {View, Text, Image, Alert} from 'react-native';
+
 import {ProfileScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {logoutAndClearPersistedData} from '../../redux/slices/authSlice/actions';
+
+import {styles} from './style';
+import GenericText from '../../components/generic/genericText/GenericText';
+import MenuItem from '../../components/profileComponents/menuItem/MenuItem';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {ProfileScreenNavigationProp}
+ * @description displays user profile pic, email and menu for order,change password, update details & logout
+ * @returns jsx for profile screen
+ */
 
 const Profile = ({navigation}: ProfileScreenNavigationProp) => {
   const dispatch = useAppDispatch();
@@ -14,17 +23,17 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
     state => state.auth.userAccountDetails?.data?.user_data,
   );
 
-  function onChangePasswordHandler() {
+  const onChangePasswordHandler = () => {
     navigation.navigate('ChangePassword');
-  }
+  };
 
-  function onUpdateDetailsHandler() {
+  const onUpdateDetailsHandler = () => {
     navigation.navigate('UpdateDetails');
-  }
+  };
 
-  function onOrderListHandler() {
+  const onOrderListHandler = () => {
     navigation.navigate('OrderList');
-  }
+  };
 
   let imageSource;
   if (userData?.profile_pic === null || userData?.profile_pic === '') {

@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
-import {baseUrl, order, orderList, orderDetail} from '../../../url';
+import {baseUrl, order, orderList, orderDetail} from '../../../constants/url';
 import {
   IPlaceOrderParams,
   IGetOrderListParams,
@@ -20,7 +20,7 @@ export const placeOrder = createAsyncThunk(
   async (params: IPlaceOrderParams, thunkAPI) => {
     try {
       const {access_token, address} = params;
-      const formattedAddress = `${address.firstLine}, ${address.secondLine}, ${address.city}, ${address.state}, ${address.pincode}, ${address.country}`;
+      const formattedAddress = `${address?.firstLine}, ${address?.secondLine}, ${address?.city}, ${address?.state}, ${address?.pincode}, ${address?.country}`;
       const formData = new FormData();
       formData.append('address', formattedAddress);
       const headers = {

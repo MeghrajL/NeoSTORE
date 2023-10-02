@@ -2,27 +2,30 @@ import {
   Alert,
   Image,
   Keyboard,
-  KeyboardAvoidingView,
-  Platform,
   SafeAreaView,
-  StyleSheet,
-  Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import GenericButton from '../../components/generic/genericButton/GenericButton';
+import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
+
+import {forgotPassword} from '../../redux/slices/authSlice/actions';
+import {useAppDispatch, useAppSelector} from '../../redux/store';
+import {ForgotPasswordScreenNavigationProp} from '../../navigation/type';
+
 import {validateEmail} from '../../helpers/validators';
+import {styles} from './style';
 import GenericText from '../../components/generic/genericText/GenericText';
 import InputWithError from '../../components/generic/inputWithError/InputWithError';
-import {styles} from './style';
-import {ForgotPasswordScreenNavigationProp} from '../../navigation/type';
-import {useAppDispatch, useAppSelector} from '../../redux/store';
-import Tick from '../../components/generic/tick/Tick';
-import Load from '../../components/generic/load/Load';
-import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
 import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
-import {forgotPassword} from '../../redux/slices/authSlice/actions';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {ForgotPasswordScreenNavigationProp}
+ * @description allows user to see request a email which contains new password
+ * @returns jsx for forgot password screen
+ */
+
 const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
   const [email, setEmail] = useState('');
@@ -31,16 +34,13 @@ const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
 
   const forgotLoading = useAppSelector(state => state.auth.isLoading);
 
-  function emailForgotHandler(emailForgot: string): void {
+  const emailForgotHandler = (emailForgot: string): void => {
     setEmail(emailForgot);
     console.log(emailForgot);
-  }
+  };
 
-  async function press() {
-    //   dis(emailForgot);
+  const onSubmitPress = async () => {
     setShowErr(true);
-    console.log('submit');
-
     if (!email.trim() || !validateEmail(email)) {
       Alert.alert('Please enter correct details');
     } else {
@@ -56,8 +56,8 @@ const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
         console.log('some error');
       }
     }
-  }
-  console.log(emailForgotHandler, email);
+  };
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <SafeAreaView style={styles.container}>
@@ -91,7 +91,7 @@ const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
 
           <View style={styles.buttonContainer}>
             <ButtonAnimated
-              onPress={press}
+              onPress={onSubmitPress}
               title="Submit"
               fontSize={26}
               isDone={emailSubmit}

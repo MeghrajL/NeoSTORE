@@ -1,13 +1,22 @@
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import React, {useEffect} from 'react';
+import {View, FlatList} from 'react-native';
+
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {OrderListScreenNavigationProp} from '../../navigation/type';
-import OrderListItem from '../../components/orderListComponents/orderListItem/OrderListItem';
+import {getOrderList} from '../../redux/slices/orderSlice/actions';
+
 import {styles} from './style';
+import OrderListItem from '../../components/orderListComponents/orderListItem/OrderListItem';
 import Nothing from '../../components/generic/nothing/Nothing';
 import Loading from '../../components/generic/loading/Loading';
 import ErrorScreen from '../../components/generic/errorScreen/ErrorScreen';
-import {getOrderList} from '../../redux/slices/orderSlice/actions';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {OrderListScreenNavigationProp}
+ * @description displays list of all previous order of the user
+ * @returns jsx for order list screen
+ */
 
 const OrderList = ({navigation}: OrderListScreenNavigationProp) => {
   const dispatch = useAppDispatch();
@@ -22,7 +31,7 @@ const OrderList = ({navigation}: OrderListScreenNavigationProp) => {
         console.log('success');
       })
       .catch(error => {
-        console.error(error);
+        console.log(error);
       });
   }, [dispatch, access_token]);
 

@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // paddingTop: '20%',
     gap: 30,
   },
   content: {
@@ -26,20 +25,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     color: colors.MIDNIGHT,
     gap: 5,
-  },
-  buttonStyle: {
-    backgroundColor: colors.VIVID_GAMBOGE,
-    margin: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30,
-    minHeight: 30,
-    minWidth: 50,
-    maxHeight: 60,
-    maxWidth: 400,
-    height: 50,
-    width: '100%',
-    fontFamily: 'Gilroy-Bold',
   },
   imageStyle: {
     height: 200,

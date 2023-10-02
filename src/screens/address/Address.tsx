@@ -1,14 +1,5 @@
-import {
-  View,
-  Text,
-  Button,
-  FlatList,
-  TouchableOpacity,
-  Alert,
-  SafeAreaView,
-  Image,
-} from 'react-native';
 import React, {useMemo} from 'react';
+import {View, FlatList, Alert, SafeAreaView} from 'react-native';
 import Toast from 'react-native-simple-toast';
 
 import {AddressScreenNavigationProp} from '../../navigation/type';
@@ -17,6 +8,7 @@ import {
   deleteAddress,
   selectAddress,
 } from '../../redux/slices/authSlice/authSlice';
+
 import GenericButton from '../../components/generic/genericButton/GenericButton';
 import {styles} from './style';
 import SelectAddress from '../../components/addressComponents/selectAddress/SelectAddress';
@@ -25,10 +17,16 @@ import GenericText from '../../components/generic/genericText/GenericText';
 import CheckoutProgress from '../../components/generic/checkoutProgress/CheckoutProgress';
 import EmptyAddress from '../../components/addressComponents/emptyAddress/EmptyAddress';
 
+/**
+ * @author Meghraj Vilas Lot
+ * @param {AddressScreenNavigationProp}
+ * @description allows user to see saved address list
+ * @returns jsx for address list screen
+ */
+
 const Address = ({navigation}: AddressScreenNavigationProp) => {
   const addressList = useAppSelector(state => state.auth.addressData);
   const total = useAppSelector(state => state.cart.cart?.total);
-  console.log(addressList);
   const dispatch = useAppDispatch();
 
   const handleDelete = (id: string) => {
@@ -96,7 +94,6 @@ const Address = ({navigation}: AddressScreenNavigationProp) => {
                 </View>
               </View>
               <GenericButton
-                // disabled={cartLoading}
                 onPress={onProceedPress}
                 title="Proceed"
                 fontSize={22}
@@ -107,8 +104,6 @@ const Address = ({navigation}: AddressScreenNavigationProp) => {
             </BottomCard>
           </>
         )}
-
-        {/* </View> */}
       </View>
     </SafeAreaView>
   );

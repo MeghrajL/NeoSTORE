@@ -13,6 +13,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Toast from 'react-native-simple-toast';
 
 import {ProductDetailScreenNavigationProp} from '../../navigation/type';
+import {useFocusEffect} from '@react-navigation/native';
+import {
+  getCategoryList,
+  getProduct,
+} from '../../redux/slices/productSlice/actions';
+import {addToCart, getCartList} from '../../redux/slices/cartSlice/actions';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 
 import Loading from '../../components/generic/loading/Loading';
@@ -28,12 +34,12 @@ import {colors} from '../../assets/colors';
 import ErrorScreen from '../../components/generic/errorScreen/ErrorScreen';
 import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
 
-import {useFocusEffect} from '@react-navigation/native';
-import {
-  getCategoryList,
-  getProduct,
-} from '../../redux/slices/productSlice/actions';
-import {addToCart, getCartList} from '../../redux/slices/cartSlice/actions';
+/**
+ * @author Meghraj Vilas Lot
+ * @param {ProductDetailScreenNavigationProp}
+ * @description displays product details with image carousel and similar products list
+ * @returns jsx for product detail screen
+ */
 
 const ProductDetail = ({
   navigation,
@@ -53,7 +59,7 @@ const ProductDetail = ({
         setDataLoaded(true);
       })
       .catch(error => {
-        console.error(error);
+        console.log(error);
       });
   }, [dispatch, dataLoaded, setDataLoaded, product_id]);
 
@@ -83,7 +89,7 @@ const ProductDetail = ({
           setCatDataLoaded(true);
         })
         .catch(error => {
-          console.error(error);
+          console.log(error);
         });
     } else {
       setCatDataLoaded(true);
@@ -109,7 +115,7 @@ const ProductDetail = ({
       Toast.show('Something went wrong, Please try again.', Toast.SHORT);
       setAddedToCart(false);
 
-      console.error(error);
+      console.log(error);
     }
   }
 
@@ -175,7 +181,7 @@ const ProductDetail = ({
           <ErrorScreen />
         ) : (
           <ScrollView
-            contentContainerStyle={{paddingBottom: 60}}
+            contentContainerStyle={styles.content}
             style={styles.container}>
             <TouchableOpacity onPress={navigatedToCategory} style={styles.back}>
               <Icon
@@ -264,7 +270,6 @@ const ProductDetail = ({
                     )}
                     keyExtractor={item => item.id.toString()}
                     numColumns={2}
-                    contentContainerStyle={styles.contentStyle}
                     columnWrapperStyle={styles.wrapperStyle}
                   />
                 </View>

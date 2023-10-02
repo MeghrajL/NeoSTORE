@@ -4,26 +4,13 @@ import {
   TouchableWithoutFeedback,
   Image,
   Alert,
-  Platform,
 } from 'react-native';
 import React, {useMemo, useState} from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
 import CountryPicker from 'react-native-country-picker-modal';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
-// import {RadioButton} from 'react-native-paper';
 import RadioGroup, {RadioButtonProps} from 'react-native-radio-buttons-group';
 import Toast from 'react-native-simple-toast';
 
-import InputWithError from '../../components/generic/inputWithError/InputWithError';
-import GenericText from '../../components/generic/genericText/GenericText';
-import GenericButton from '../../components/generic/genericButton/GenericButton';
-import {
-  validateAddressLine,
-  validateAlpha,
-  validatePincode,
-} from '../../helpers/validators';
-import {styles} from './style';
-import {colors} from '../../assets/colors';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {
   addAddress,
@@ -31,8 +18,25 @@ import {
 } from '../../redux/slices/authSlice/authSlice';
 import {AddAddressScreenNavigationProp} from '../../navigation/type';
 
+import InputWithError from '../../components/generic/inputWithError/InputWithError';
+import GenericText from '../../components/generic/genericText/GenericText';
+import GenericButton from '../../components/generic/genericButton/GenericButton';
+import {validateAddressLine, validatePincode} from '../../helpers/validators';
+import {styles} from './style';
+import {colors} from '../../assets/colors';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {AddAddressScreenNavigationProp}
+ * @description allows user to add adddress by allowing to add details in a address form
+ * @returns jsx for add address screen to create a address item
+ */
+
 const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
   const {id} = route.params;
+  const [showErr, setShowErr] = useState(false);
+  const dispatch = useAppDispatch();
+
   const currAddress = useAppSelector(state =>
     state.auth.addressData.addressList.find(
       (address: {id: string}) => address.id === id,
@@ -49,12 +53,8 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
     type: id === '' ? 'Home' : currAddress?.address.type,
   });
 
-  const [showErr, setShowErr] = useState(false);
-  const dispatch = useAppDispatch();
   const onSelect = (country: any) => {
     setAddress({...address, country: country.name, countryCode: country.cca2});
-    // setAddress({...address, countryCode: country.cca2});
-    console.log(country);
   };
 
   const firstLineHandler = (firstLine: string) => {
@@ -80,11 +80,11 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
   const onAddAddressPress = () => {
     setShowErr(true);
     if (
-      !validateAddressLine(address?.firstLine) ||
-      !validateAddressLine(address?.secondLine) ||
-      !validateAddressLine(address?.city) ||
-      !validateAddressLine(address?.state) ||
-      !validatePincode(address?.pincode) ||
+      !validateAddressLine(address?.firstLine || '') ||
+      !validateAddressLine(address?.secondLine || '') ||
+      !validateAddressLine(address?.city || '') ||
+      !validateAddressLine(address?.state || '') ||
+      !validatePincode(address?.pincode || '') ||
       !address.firstLine?.trim() ||
       !address.city?.trim() ||
       !address.state?.trim() ||
@@ -92,7 +92,6 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
     ) {
       Alert.alert('Please enter all details correctly');
     } else {
-      //dipatch
       if (id === '') {
         dispatch(addAddress(address));
         console.log('>', address);
@@ -107,14 +106,14 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
       }
     }
   };
-  const [selectedId, setSelectedId] = useState<string | undefined>();
+
   const radioButtons: RadioButtonProps[] = useMemo(
     () => [
       {
         borderColor: colors.MIDNIGHT,
         color: colors.VIVID_GAMBOGE,
         borderSize: 1.5,
-        id: 'Home', // acts as primary key, should be unique and non-empty string
+        id: 'Home',
         label: 'Home',
         value: 'Home',
         labelStyle: styles.radioText,
@@ -144,6 +143,7 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
   const onRadioPress = (id: string) => {
     setAddress({...address, type: id});
   };
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingScrollView
@@ -228,7 +228,7 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
               withFilter={true}
               withAlphaFilter={true}
               onSelect={onSelect}
-              countryCode={address.countryCode}
+              countryCode={address.countryCode || 'IN'}
               withCountryNameButton={true}
               withFlagButton={true}
               containerButtonStyle={styles.countryButton}

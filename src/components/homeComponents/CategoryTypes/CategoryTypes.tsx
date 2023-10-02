@@ -1,9 +1,6 @@
 import {
-  FlatList,
-  Image,
   ImageBackground,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -15,7 +12,11 @@ import {RootStackParamList} from '../../../navigation/type';
 import {IProductCategory} from '../../../redux/slices/authSlice/type';
 
 interface ICategoryTypes {
-  product_categories: IProductCategory[];
+  product_categories: IProductCategory[] | undefined;
+}
+
+interface IImageData {
+  [key: string]: number;
 }
 
 const CategoryTypes = ({product_categories}: ICategoryTypes) => {
@@ -31,7 +32,7 @@ const CategoryTypes = ({product_categories}: ICategoryTypes) => {
     });
   };
 
-  const imageData = {
+  const imageData: IImageData = {
     Table: require('../../../assets/images/table.jpg'),
     Chairs: require('../../../assets/images/chair.jpg'),
     Sofa: require('../../../assets/images/sofa.jpeg'),

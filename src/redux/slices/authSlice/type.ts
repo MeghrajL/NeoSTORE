@@ -1,3 +1,4 @@
+import {CountryCode} from 'react-native-country-picker-modal';
 export interface IUserData {
   id: number;
   role_id: number;
@@ -65,8 +66,8 @@ export interface IAddress {
   state: string;
   pincode: string;
   country: string;
-  countryCode: string;
-  type: 'Home' | 'Office' | 'Other';
+  countryCode: CountryCode;
+  type: string;
 }
 
 export interface IAddressObj {
@@ -117,11 +118,12 @@ export interface IForgotPasswordParams {
 }
 
 export interface IUpdateDetailsFormData {
-  first_name: string;
-  last_name: string;
-  email: string;
-  dob: string;
-  profile_pic: string;
-  phone_no: string;
+  first_name: string | undefined;
+  last_name: string | undefined;
+  email: string | undefined;
+  dob: string | null | undefined;
+  profile_pic: string | null | undefined;
+  phone_no: string | undefined;
+
   access_token: string | undefined;
 }

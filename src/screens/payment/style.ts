@@ -35,18 +35,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  checkoutButtonStyle: {
-    backgroundColor: colors.VIVID_GAMBOGE,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30,
-    minHeight: 30,
-    minWidth: 50,
-    maxHeight: 60,
-    maxWidth: 400,
-    height: 50,
-    width: '100%',
-  },
   button: {
     height: 60,
     paddingVertical: 2,

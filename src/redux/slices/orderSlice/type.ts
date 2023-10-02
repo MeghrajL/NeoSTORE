@@ -53,7 +53,7 @@ export interface IInitialState {
 
 export interface IPlaceOrderParams {
   access_token: string | undefined;
-  address: IAddress;
+  address: IAddress | undefined;
 }
 
 export interface IGetOrderListParams {

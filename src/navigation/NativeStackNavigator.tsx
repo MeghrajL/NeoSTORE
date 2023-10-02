@@ -7,10 +7,7 @@ import {MMKV} from 'react-native-mmkv';
 import BottomTabNavigator from './BottomTabNavigator';
 import {useNavigation} from '@react-navigation/native';
 
-import {
-  NativeStackNavigatorScreenNavigationProp,
-  RootStackParamList,
-} from './type';
+import {RootStackParamList} from './type';
 import {
   Register,
   OnboardingContainer,
@@ -48,12 +45,12 @@ const NativeStackNavigator = () => {
       setIsFirstLaunch(1);
     }
   }, []);
-
+  console.log(isFirstLaunch);
   if (isFirstLaunch === -1) {
     return null;
   } else if (isFirstLaunch === 0) {
     routeName = 'Onboarding';
-  } else if (authState.user?.data === null) {
+  } else if (authState.user === null && isFirstLaunch === 1) {
     routeName = 'SignIn';
   } else if (authState.user?.data?.access_token) {
     routeName = 'MainNav';
@@ -63,9 +60,10 @@ const NativeStackNavigator = () => {
     <Stack.Navigator
       initialRouteName={routeName}
       screenOptions={{headerShown: false}}>
+      <Stack.Screen name="SignIn" component={SignIn} />
+
       <Stack.Screen name="Onboarding" component={OnboardingContainer} />
       <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen
         options={{
           headerShown: true,

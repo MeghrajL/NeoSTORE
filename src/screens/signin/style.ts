@@ -32,19 +32,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 30,
     width: '100%',
-    // backgroundColor: 'red',
   },
   elementView: {
     paddingHorizontal: 10,
-  },
-  buttonStyle: {
-    backgroundColor: colors.VIVID_GAMBOGE,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30,
-    height: 50,
-    width: '100%',
-    fontFamily: 'Gilroy-Bold',
   },
   buttonContainer: {width: '90%', paddingTop: 10},
 });

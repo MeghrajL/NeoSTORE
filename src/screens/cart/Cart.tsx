@@ -11,11 +11,16 @@ import Loading from '../../components/generic/loading/Loading';
 import CartItem from '../../components/cartComponents/cartItem/CartItem';
 import EmptyCart from '../../components/cartComponents/emptyCart/EmptyCart';
 import GenericText from '../../components/generic/genericText/GenericText';
-import Load from '../../components/generic/load/Load';
-import GenericButton from '../../components/generic/genericButton/GenericButton';
-import Tick from '../../components/generic/tick/Tick';
 import BottomCard from '../../components/generic/bottomCard/BottomCard';
 import ErrorScreen from '../../components/generic/errorScreen/ErrorScreen';
+import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {CartScreenNavigationProp}
+ * @description allows user to see all items in cart, modify quantity, delete item and proceed
+ * @returns jsx for cart item list screen
+ */
 
 const Cart = ({navigation}: CartScreenNavigationProp) => {
   const dispatch = useAppDispatch();
@@ -33,7 +38,7 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
         console.log('success');
       })
       .catch(error => {
-        console.error(error);
+        console.log(error);
       });
   }, [dispatch, access_token]);
 
@@ -45,16 +50,16 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
     }
   }, [cart]);
 
-  function navigateToProductDetail(product_id: number) {
+  const navigateToProductDetail = (product_id: number) => {
     navigation.navigate('ProductDetail', {
       product_id: product_id,
       shouldLoadSimilarProducts: true,
     });
-  }
+  };
 
-  async function handleCheckOut() {
+  const handleCheckOut = () => {
     navigation.navigate('Address');
-  }
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -96,21 +101,13 @@ const Cart = ({navigation}: CartScreenNavigationProp) => {
                   <GenericText style={styles.freeText}>Free</GenericText>
                 </View>
               </View>
-              {isLoading ? (
-                <Load />
-              ) : !checkedOut ? (
-                <GenericButton
-                  // disabled={cartLoading}
-                  onPress={handleCheckOut}
-                  title="Proceed to Checkout"
-                  fontSize={22}
-                  fontFamily="Gilroy-Medium"
-                  style={styles.checkoutButtonStyle}
-                  color="white"
-                />
-              ) : (
-                <Tick />
-              )}
+              <ButtonAnimated
+                onPress={handleCheckOut}
+                title="Proceed to Checkout"
+                fontSize={22}
+                isDone={checkedOut}
+                isLoading={isLoading}
+              />
             </BottomCard>
           </>
         )}

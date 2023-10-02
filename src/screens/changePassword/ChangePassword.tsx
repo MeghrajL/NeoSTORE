@@ -1,28 +1,29 @@
+import React, {useState} from 'react';
 import {
   View,
-  Text,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  Platform,
   Image,
-  ScrollView,
   Alert,
-  Button,
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
-import React, {useState} from 'react';
+import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
+
+import {changePassword} from '../../redux/slices/authSlice/actions';
+import {useAppDispatch, useAppSelector} from '../../redux/store';
+import {validatePassword} from '../../helpers/validators';
 import {ChangePasswordScreenNavigationProp} from '../../navigation/type';
+
 import {styles} from './style';
 import GenericText from '../../components/generic/genericText/GenericText';
 import InputWithError from '../../components/generic/inputWithError/InputWithError';
-import GenericButton from '../../components/generic/genericButton/GenericButton';
-import {validatePassword} from '../../helpers/validators';
-import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
-import {useAppDispatch, useAppSelector} from '../../redux/store';
-import Tick from '../../components/generic/tick/Tick';
 import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
-import {changePassword} from '../../redux/slices/authSlice/actions';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {ChangePasswordScreenNavigationProp}
+ * @description allows user to see change password by entering old password and creating and confirming new password
+ * @returns jsx for change password screen
+ */
 
 const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
@@ -41,7 +42,7 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
 
   const changeLoading = useAppSelector(state => state.auth.isLoading);
 
-  async function press() {
+  const onSubmitPress = async () => {
     setShowErr(true);
     console.log('submit', pass);
     if (
@@ -70,24 +71,24 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
         console.log('some error');
       }
     }
-  }
+  };
 
-  function old_passwordHandler(old_password: string) {
+  const old_passwordHandler = (old_password: string) => {
     setPass({...pass, old_password});
-  }
+  };
 
-  function passwordHandler(password: string) {
+  const passwordHandler = (password: string) => {
     setPass({...pass, password});
-  }
+  };
 
-  function confirmPasswordHandler(confirm_password: string) {
+  const confirmPasswordHandler = (confirm_password: string) => {
     setPass({...pass, confirm_password});
     if (pass.password === confirm_password) {
       setSamePass(true);
     } else {
       setSamePass(false);
     }
-  }
+  };
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <KeyboardAvoidingScrollView
@@ -145,21 +146,8 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
             errorText={'Both passwords should match'}
           />
           <View style={styles.buttonContainer}>
-            {/* {!passChanged ? (
-              <GenericButton
-                disabled={changeLoading}
-                onPress={press}
-                title="Submit"
-                fontSize={26}
-                fontFamily="Gilroy-Bold"
-                style={styles.buttonStyle}
-                color="white"
-              />
-            ) : (
-              <Tick />
-            )} */}
             <ButtonAnimated
-              onPress={press}
+              onPress={onSubmitPress}
               title="Submit"
               fontSize={26}
               isDone={passChanged}

@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import {baseUrl, getDetail} from '../../../url';
+import {baseUrl, getDetail} from '../../../constants/url';
 
 const ProductWithApi = ({product_id}) => {
   const [product, setProduct] = useState(null);

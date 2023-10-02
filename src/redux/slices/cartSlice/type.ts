@@ -19,6 +19,8 @@ interface ICart {
   data: ICartItem[] | null;
   count: number;
   total: number;
+  message: string;
+  user_msg: string;
 }
 
 export interface IInitialState {

@@ -3,19 +3,16 @@ import {colors} from '../../assets/colors';
 
 export const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: 'white'},
+  content: {paddingBottom: 60},
   carouselContainer: {
     height: 350,
     width: '100%',
     marginTop: 20,
-    // marginBottom: 10,
   },
   infoContainer: {
     height: '40%',
     width: '100%',
-    // paddingTop: 15,
-    // paddingHorizontal: 15,
     gap: 30,
-    // marginTop: 10,
   },
   innerInfo: {
     gap: 10,
@@ -51,27 +48,9 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.PLATINUM_GRAY,
   },
-  cartButtonStyle: {
-    backgroundColor: colors.VIVID_GAMBOGE,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30,
-    minHeight: 30,
-    minWidth: 50,
-    maxHeight: 60,
-    maxWidth: 400,
-    height: 50,
-    width: '100%',
-  },
   buttonsContainer: {
-    // paddingTop: 30,
     paddingHorizontal: 20,
     gap: 15,
-  },
-  contentStyle: {
-    // gap: 20,
-    // paddingVertical: 10,
-    // marginHorizontal: 20,
   },
   wrapperStyle: {
     flex: 1,
@@ -115,7 +94,6 @@ export const styles = StyleSheet.create({
   costView: {
     flexDirection: 'row',
     gap: 8,
-    // justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },
 });
