@@ -7,7 +7,7 @@ import Category from './category/index';
 import ProductDetail from './productDetail/index';
 import ForgotPassword from './forgotPassword/index';
 import ChangePassword from './changePassword/index';
-import UpdateDetails from './updateDeatils/index';
+import UpdateDetails from './updateDetails/index';
 import Profile from './profile/index';
 import OrderList from './orderList/index';
 import OrderDetail from './orderDetail/index';

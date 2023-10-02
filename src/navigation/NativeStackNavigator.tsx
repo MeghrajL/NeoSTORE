@@ -1,5 +1,16 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useEffect, useState} from 'react';
+import {
+  NativeStackNavigationProp,
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
 import {MMKV} from 'react-native-mmkv';
+import BottomTabNavigator from './BottomTabNavigator';
+import {useNavigation} from '@react-navigation/native';
+
+import {
+  NativeStackNavigatorScreenNavigationProp,
+  RootStackParamList,
+} from './type';
 import {
   Register,
   OnboardingContainer,
@@ -7,38 +18,37 @@ import {
   ForgotPassword,
   Address,
 } from '../screens/index';
-import BottomTabNavigator from './BottomTabNavigator';
-import {useEffect, useState} from 'react';
-import {
-  NativeStackNavigatorScreenNavigationProp,
-  RootStackParamList,
-} from './type';
-
-const Stack = createNativeStackNavigator<RootStackParamList>();
-const storage = new MMKV();
 import {useAppSelector} from '../redux/store';
 import {colors} from '../assets/colors';
 import IconButton from '../components/generic/iconButton/IconButton';
-import {useNavigation} from '@react-navigation/native';
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+const storage = new MMKV();
+
+/**
+ * @author Meghraj Vilas Lot
+ * @description native root stack navigation to place different screens over another which also
+ * determines which screen to display initailly based user's state
+ * @returns jsx which contains native root stack navigation
+ */
+
 const NativeStackNavigator = () => {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   let routeName: keyof RootStackParamList = 'Onboarding';
   const [isFirstLaunch, setIsFirstLaunch] = useState(-1);
   const authState = useAppSelector(state => state.auth);
-  // const prod = useAppSelector(state => state);
-  //state.auth.user.data.access_token
   console.log('from native stack', authState);
+
   useEffect(() => {
     if (storage.getBoolean('alreadyLaunched') === undefined) {
       storage.set('alreadyLaunched', true);
       setIsFirstLaunch(0);
-      // routeName = 'Onboarding';
     } else {
       setIsFirstLaunch(1);
     }
   }, []);
 
-  console.log(typeof authState.user?.data);
   if (isFirstLaunch === -1) {
     return null;
   } else if (isFirstLaunch === 0) {

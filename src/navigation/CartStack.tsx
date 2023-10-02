@@ -1,28 +1,20 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
-import {AddAddress, Address, Cart, Payment} from '../screens/index';
-import {colors} from '../assets/colors';
-import {StatusBar, Text, TouchableOpacity} from 'react-native';
-import IconButton from '../components/generic/iconButton/IconButton';
 import {CartStackScreenNavigationProp, RootStackParamList} from './type';
-import {useEffect, useLayoutEffect} from 'react';
-import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
+
+import {colors} from '../assets/colors';
+import {AddAddress, Address, Cart, Payment} from '../screens/index';
+import IconButton from '../components/generic/iconButton/IconButton';
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const CartStack = ({navigation, route}: CartStackScreenNavigationProp) => {
-  // const tabHiddenRoutes = ['Address', 'Payment'];
 
-  // useLayoutEffect(() => {
-  //   if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
-  //     navigation.setOptions({
-  //       tabBarStyle: {display: 'none'},
-  //     });
-  //   } else {
-  //     navigation.setOptions({
-  //       tabBarStyle: {display: 'flex'},
-  //     });
-  //   }
-  // }, [navigation, route]);
+/**
+ * @author Meghraj Vilas Lot
+ *  @param {navigation} props contains navigation object is used to navigate between different available screen.
+ * @description cart stack navigation to place different screens over another
+ * @returns jsx which contains cart stack navigation
+ */
 
+const CartStack = ({navigation}: CartStackScreenNavigationProp) => {
   return (
     <>
       <Stack.Navigator

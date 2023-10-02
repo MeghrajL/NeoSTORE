@@ -1,9 +1,11 @@
-import {
-  NavigationContainer,
-  createNavigationContainerRef,
-} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import NativeStackNavigator from './NativeStackNavigator';
-import {useState} from 'react';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @returns jsx which contains root navigator
+ */
+
 const Navigator = () => {
   return (
     <NavigationContainer>

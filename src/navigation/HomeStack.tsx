@@ -1,12 +1,19 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {HomeStackScreenNavigationProp, RootStackParamList} from './type';
 
 import {Home, Category, ProductDetail} from '../screens/index';
 import {colors} from '../assets/colors';
-import {StatusBar, Text, TouchableOpacity} from 'react-native';
 import IconButton from '../components/generic/iconButton/IconButton';
-import {HomeStackScreenNavigationProp, RootStackParamList} from './type';
-import Title from '../components/generic/title/Title';
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
+/**
+ * @author Meghraj Vilas Lot
+ *  @param {navigation} props contains navigation object is used to navigate between different available screen.
+ * @description home stack navigation to place different screens over another
+ * @returns jsx which contains home stack navigation
+ */
+
 const HomeStack = ({navigation}: HomeStackScreenNavigationProp) => {
   return (
     <>

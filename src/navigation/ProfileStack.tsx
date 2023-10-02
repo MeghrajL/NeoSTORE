@@ -1,4 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {ProfileStackScreenNavigationProp, RootStackParamList} from './type';
 
 import {
   ChangePassword,
@@ -9,8 +10,15 @@ import {
 } from '../screens/index';
 import {colors} from '../assets/colors';
 import IconButton from '../components/generic/iconButton/IconButton';
-import {ProfileStackScreenNavigationProp, RootStackParamList} from './type';
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
+/**
+ * @author Meghraj Vilas Lot
+ * @description profile stack navigation to place different screens over another
+ * @returns jsx which contains profile stack navigation
+ */
+
 const ProfileStack = ({navigation}: ProfileStackScreenNavigationProp) => {
   return (
     <>
