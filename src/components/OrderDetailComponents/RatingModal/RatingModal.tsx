@@ -14,6 +14,7 @@ import GenericButton from '../../generic/GenericButton/GenericButton';
 import {useState} from 'react';
 import Load from '../../generic/Load/Load';
 import Tick from '../../generic/Tick/Tick';
+import ButtonAnimated from '../../generic/ButtonAnimated/ButtonAnimated';
 
 interface CustomModalProps {
   isVisible: boolean;
@@ -57,7 +58,7 @@ const RatingModal: React.FC<CustomModalProps> = ({
               <GenericText textType="medium" style={styles.closeButtonText}>
                 Continue Shopping
               </GenericText> */}
-            {isSettingRating ? (
+            {/* {isSettingRating ? (
               <Load />
             ) : !ratingSubmitted ? (
               <GenericButton
@@ -71,7 +72,14 @@ const RatingModal: React.FC<CustomModalProps> = ({
               />
             ) : (
               <Tick />
-            )}
+            )} */}
+            <ButtonAnimated
+              onPress={() => onRatingSubmit(rating)}
+              title="Submit"
+              fontSize={22}
+              isDone={ratingSubmitted}
+              isLoading={isSettingRating}
+            />
             {/* </TouchableOpacity> */}
             <TouchableOpacity onPress={onClose}>
               <GenericText textType="medium" style={styles.orderText}>

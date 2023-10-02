@@ -22,6 +22,7 @@ import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {changePassword} from '../../redux/slices/authSlice/authSlice';
 import Tick from '../../components/generic/Tick/Tick';
+import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
 
 const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
@@ -143,7 +144,7 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
             errorText={'Both passwords should match'}
           />
           <View style={styles.buttonContainer}>
-            {!passChanged ? (
+            {/* {!passChanged ? (
               <GenericButton
                 disabled={changeLoading}
                 onPress={press}
@@ -155,7 +156,14 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
               />
             ) : (
               <Tick />
-            )}
+            )} */}
+            <ButtonAnimated
+              onPress={press}
+              title="Submit"
+              fontSize={26}
+              isDone={passChanged}
+              isLoading={changeLoading}
+            />
           </View>
         </View>
       </KeyboardAvoidingScrollView>

@@ -82,10 +82,12 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
     if (
       !validateAddressLine(address?.firstLine) ||
       !validateAddressLine(address?.secondLine) ||
-      !validateAlpha(address?.city) ||
-      !validateAlpha(address?.state) ||
+      !validateAddressLine(address?.city) ||
+      !validateAddressLine(address?.state) ||
       !validatePincode(address?.pincode) ||
       !address.firstLine?.trim() ||
+      !address.city?.trim() ||
+      !address.state?.trim() ||
       !address.secondLine?.trim()
     ) {
       Alert.alert('Please enter all details correctly');
@@ -178,6 +180,7 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
             validator={validateAddressLine}
             showErr={showErr}
             errorText={'Required'}
+            spacesAllowed={true}
           />
 
           <InputWithError
@@ -187,9 +190,10 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
             icon={'city'}
             onChangeText={cityHandler}
             value={address.city}
-            validator={validateAlpha}
+            validator={validateAddressLine}
             showErr={showErr}
             errorText={'Required'}
+            spacesAllowed={true}
           />
 
           <InputWithError
@@ -199,9 +203,10 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
             icon={'pine-tree'}
             onChangeText={stateHandler}
             value={address.state}
-            validator={validateAlpha}
+            validator={validateAddressLine}
             showErr={showErr}
             errorText={'Required'}
+            spacesAllowed={true}
           />
 
           <InputWithError

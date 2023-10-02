@@ -37,16 +37,16 @@ const Category = ({navigation, route}: CategoryScreenNavigationProp) => {
   }, [category]);
 
   useEffect(() => {
-    if (category?.data[0].product_category_id !== product_category_id) {
-      dispatch(getCategoryList({product_category_id: product_category_id}))
-        .then(() => {
-          setDataLoaded(true);
-          setInitialDataLoaded(true);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }
+    // if (category?.data[0].product_category_id !== product_category_id) {
+    dispatch(getCategoryList({product_category_id: product_category_id}))
+      .then(() => {
+        setDataLoaded(true);
+        setInitialDataLoaded(true);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    // }
   }, [dispatch, product_category_id]);
 
   function seeMore(page: number) {
@@ -87,29 +87,29 @@ const Category = ({navigation, route}: CategoryScreenNavigationProp) => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      {category?.data[0].product_category_id !== product_category_id ||
-      isLoading ||
-      !dataLoaded ||
-      !initialDataLoaded ? (
-        <Loading />
-      ) : isError ? (
-        <ErrorScreen />
-      ) : (
-        <View style={{flex: 1}}>
-          <FlatList
-            data={category?.data}
-            renderItem={({item}) => (
-              <ProductItemHorizontal
-                item={item}
-                onPress={navigateToProductDetail}
-              />
-            )}
-            keyExtractor={item => item.id.toString()}
-            contentContainerStyle={styles.contentStyle}
-            ListFooterComponent={<Footer />}
-          />
-        </View>
-      )}
+      {
+        // category?.data[0].product_category_id !== product_category_id ||
+        isLoading || !dataLoaded || !initialDataLoaded ? (
+          <Loading />
+        ) : isError ? (
+          <ErrorScreen />
+        ) : (
+          <View style={{flex: 1}}>
+            <FlatList
+              data={category?.data}
+              renderItem={({item}) => (
+                <ProductItemHorizontal
+                  item={item}
+                  onPress={navigateToProductDetail}
+                />
+              )}
+              keyExtractor={item => item.id.toString()}
+              contentContainerStyle={styles.contentStyle}
+              ListFooterComponent={<Footer />}
+            />
+          </View>
+        )
+      }
     </SafeAreaView>
   );
 };

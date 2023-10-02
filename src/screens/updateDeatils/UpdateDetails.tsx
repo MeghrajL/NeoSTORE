@@ -36,6 +36,7 @@ import {colors} from '../../assets/colors';
 import GenericButton from '../../components/generic/GenericButton/GenericButton';
 import Load from '../../components/generic/Load/Load';
 import Tick from '../../components/generic/Tick/Tick';
+import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
 
 const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
@@ -235,7 +236,7 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
             value={user.first_name}
             validator={validateName}
             showErr={showErr}
-            errorText={'Please do not use spaces'}
+            errorText={'Only use alphabets'}
           />
 
           <InputWithError
@@ -247,7 +248,7 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
             value={user.last_name}
             validator={validateName}
             showErr={showErr}
-            errorText={'Please do not use spaces'}
+            errorText={'Only use alphabets'}
           />
 
           <InputWithError
@@ -316,7 +317,7 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
             />
           </View>
           <View style={styles.buttonContainer}>
-            {isLoading ? (
+            {/* {isLoading ? (
               <Load />
             ) : !profileUpdated ? (
               <GenericButton
@@ -330,7 +331,14 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
               />
             ) : (
               <Tick />
-            )}
+            )} */}
+            <ButtonAnimated
+              onPress={press}
+              title="Submit"
+              fontSize={26}
+              isDone={profileUpdated}
+              isLoading={isLoading}
+            />
           </View>
         </View>
       </KeyboardAvoidingScrollView>

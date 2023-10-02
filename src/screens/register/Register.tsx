@@ -36,6 +36,7 @@ import {registerUser} from '../../redux/slices/authSlice/authSlice';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import Load from '../../components/generic/Load/Load';
 import Tick from '../../components/generic/Tick/Tick';
+import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
 
 const Register = ({navigation}: RegisterScreenNavigationProp) => {
   const [isRegisterDone, setRegisterDone] = useState(false);
@@ -164,7 +165,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
                 value={user.first_name}
                 validator={validateName}
                 showErr={showErr}
-                errorText={'Required'}
+                errorText={'Only use alphabets'}
               />
 
               <InputWithError
@@ -176,7 +177,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
                 value={user.last_name}
                 validator={validateName}
                 showErr={showErr}
-                errorText={'Required'}
+                errorText={'Only use alphabets'}
               />
 
               <InputWithError
@@ -244,20 +245,13 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
               />
 
               <View style={styles.buttonContainer}>
-                {isLoading ? (
-                  <Load />
-                ) : !isRegisterDone ? (
-                  <GenericButton
-                    onPress={onRegisterPress}
-                    title="Register"
-                    fontSize={26}
-                    fontFamily="Gilroy-Bold"
-                    style={styles.buttonStyle}
-                    color="white"
-                  />
-                ) : (
-                  <Tick />
-                )}
+                <ButtonAnimated
+                  onPress={onRegisterPress}
+                  title="Register"
+                  fontSize={26}
+                  isDone={isRegisterDone}
+                  isLoading={isLoading}
+                />
               </View>
 
               <Footer

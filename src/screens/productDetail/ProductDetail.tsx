@@ -37,6 +37,7 @@ import LottieView from 'lottie-react-native';
 import Tick from '../../components/generic/Tick/Tick';
 import Load from '../../components/generic/Load/Load';
 import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
+import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
 
 const ProductDetail = ({
   navigation,
@@ -54,17 +55,17 @@ const ProductDetail = ({
 
   useEffect(() => {
     setProdId(product_id);
-    if (prod_id !== productData?.data?.id) {
-      console.log(product_id, prod_id);
+    // if (prod_id !== productData?.data?.id) {
+    console.log(product_id, prod_id);
 
-      dispatch(getProduct({product_id: prod_id}))
-        .then(() => {
-          setDataLoaded(true);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }
+    dispatch(getProduct({product_id: prod_id}))
+      .then(() => {
+        setDataLoaded(true);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    // }
   }, [dispatch, prod_id, setDataLoaded, product_id]);
 
   const access_token = useAppSelector(
@@ -141,76 +142,75 @@ const ProductDetail = ({
     <>
       <StatusBar barStyle="default" />
       <SafeAreaView style={{flex: 1}}>
-        {prod_id !== productData?.data?.id ||
-        isLoading ||
-        !dataLoaded ||
-        !catDataLoaded ? (
-          <Loading />
-        ) : isError ? (
-          <ErrorScreen />
-        ) : (
-          <ScrollView
-            contentContainerStyle={{paddingBottom: 60}}
-            style={styles.container}>
-            <TouchableOpacity
-              onPress={() => navigation.goBack()}
-              style={styles.back}>
-              <Icon
-                name="arrow-back-outline"
-                color={colors.MIDNIGHT}
-                size={25}
-              />
-            </TouchableOpacity>
+        {
+          // prod_id !== productData?.data?.id ||
+          isLoading || !dataLoaded || !catDataLoaded ? (
+            <Loading />
+          ) : isError ? (
+            <ErrorScreen />
+          ) : (
+            <ScrollView
+              contentContainerStyle={{paddingBottom: 60}}
+              style={styles.container}>
+              <TouchableOpacity
+                onPress={() => navigation.goBack()}
+                style={styles.back}>
+                <Icon
+                  name="arrow-back-outline"
+                  color={colors.MIDNIGHT}
+                  size={25}
+                />
+              </TouchableOpacity>
 
-            <View style={styles.carouselContainer}>
-              <ImageCarousel
-                product_images={productItem?.product_images}
-                resizeMode="contain"
-              />
-            </View>
-            <View style={styles.infoContainer}>
-              <View style={styles.innerInfo}>
-                <View style={styles.visual}>
-                  <StarRating rating={productItem?.rating} />
-                  <ViewCount count={productItem?.view_count} />
-                </View>
+              <View style={styles.carouselContainer}>
+                <ImageCarousel
+                  product_images={productItem?.product_images}
+                  resizeMode="contain"
+                />
+              </View>
+              <View style={styles.infoContainer}>
+                <View style={styles.innerInfo}>
+                  <View style={styles.visual}>
+                    <StarRating rating={productItem?.rating} />
+                    <ViewCount count={productItem?.view_count} />
+                  </View>
 
-                <View>
-                  <GenericText style={styles.producer}>
-                    {productItem?.producer}
+                  <View>
+                    <GenericText style={styles.producer}>
+                      {productItem?.producer}
+                    </GenericText>
+                  </View>
+                  <GenericText textType="medium" style={styles.nameText}>
+                    {productItem?.name}
                   </GenericText>
-                </View>
-                <GenericText textType="medium" style={styles.nameText}>
-                  {productItem?.name}
-                </GenericText>
-                <View style={styles.costView}>
-                  <GenericText style={styles.costText}>
-                    ₹{productItem?.cost}
-                  </GenericText>
-                  <GenericText textType="medium" style={styles.offStyle}>
-                    0% off
-                  </GenericText>
-                  <GenericText style={styles.costStyle}>
-                    ₹{productItem?.cost}
-                  </GenericText>
-                </View>
-                {/* <GenericText style={styles.descriptionText}>
+                  <View style={styles.costView}>
+                    <GenericText style={styles.costText}>
+                      ₹{productItem?.cost}
+                    </GenericText>
+                    <GenericText textType="medium" style={styles.offStyle}>
+                      0% off
+                    </GenericText>
+                    <GenericText style={styles.costStyle}>
+                      ₹{productItem?.cost}
+                    </GenericText>
+                  </View>
+                  {/* <GenericText style={styles.descriptionText}>
                 Details : {productItem.description}
               </GenericText> */}
-                <ReadMore
-                  seeMoreStyle={styles.seeMoreStyle}
-                  seeLessStyle={styles.seeLessStyle}
-                  style={styles.descriptionText}>
-                  {productItem?.description}
-                </ReadMore>
-              </View>
-              <View style={styles.buttonsContainer}>
-                <QuantityControl
-                  quantity={quantity}
-                  onIncrease={increaseQuantity}
-                  onDecrease={decreaseQuantity}
-                />
-                {cartLoading ? (
+                  <ReadMore
+                    seeMoreStyle={styles.seeMoreStyle}
+                    seeLessStyle={styles.seeLessStyle}
+                    style={styles.descriptionText}>
+                    {productItem?.description}
+                  </ReadMore>
+                </View>
+                <View style={styles.buttonsContainer}>
+                  <QuantityControl
+                    quantity={quantity}
+                    onIncrease={increaseQuantity}
+                    onDecrease={decreaseQuantity}
+                  />
+                  {/* {cartLoading ? (
                   <Load />
                 ) : !addedToCart ? (
                   <GenericButton
@@ -224,35 +224,43 @@ const ProductDetail = ({
                   />
                 ) : (
                   <Tick />
-                )}
-              </View>
-              <View style={styles.similar}>
-                <GenericText textType="medium" style={styles.costText}>
-                  Similar Products
-                </GenericText>
-
-                <View style={{flex: 1}}>
-                  <FlatList
-                    scrollEnabled={false}
-                    data={updatedCategory}
-                    renderItem={({item}) => (
-                      <ProductItem
-                        item={item}
-                        onPress={() => {
-                          setProdId(item.id);
-                        }}
-                      />
-                    )}
-                    keyExtractor={item => item.id.toString()}
-                    numColumns={2}
-                    contentContainerStyle={styles.contentStyle}
-                    columnWrapperStyle={styles.wrapperStyle}
+                )} */}
+                  <ButtonAnimated
+                    onPress={handleAddToCart}
+                    title="Add to Cart"
+                    fontSize={26}
+                    isDone={addedToCart}
+                    isLoading={cartLoading}
                   />
                 </View>
+                <View style={styles.similar}>
+                  <GenericText textType="medium" style={styles.costText}>
+                    Similar Products
+                  </GenericText>
+
+                  <View style={{flex: 1}}>
+                    <FlatList
+                      scrollEnabled={false}
+                      data={updatedCategory}
+                      renderItem={({item}) => (
+                        <ProductItem
+                          item={item}
+                          onPress={() => {
+                            setProdId(item.id);
+                          }}
+                        />
+                      )}
+                      keyExtractor={item => item.id.toString()}
+                      numColumns={2}
+                      contentContainerStyle={styles.contentStyle}
+                      columnWrapperStyle={styles.wrapperStyle}
+                    />
+                  </View>
+                </View>
               </View>
-            </View>
-          </ScrollView>
-        )}
+            </ScrollView>
+          )
+        }
       </SafeAreaView>
     </>
   );

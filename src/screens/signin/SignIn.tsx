@@ -29,6 +29,7 @@ import BottomNavigationBar from 'react-native-paper/lib/typescript/components/Bo
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import Load from '../../components/generic/Load/Load';
 import Tick from '../../components/generic/Tick/Tick';
+import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
 
 const SignIn = ({navigation}: SignInScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
@@ -115,7 +116,7 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
               errorText={'Please enter correct password'}
             />
             <View style={styles.buttonContainer}>
-              {isLoading ? (
+              {/* {isLoading ? (
                 <Load />
               ) : !isSignInDone ? (
                 <GenericButton
@@ -128,7 +129,14 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
                 />
               ) : (
                 <Tick />
-              )}
+              )} */}
+              <ButtonAnimated
+                onPress={onSignInPress}
+                title="Sign In"
+                fontSize={26}
+                isDone={isSignInDone}
+                isLoading={isLoading}
+              />
             </View>
             <View style={styles.signInStyle}>
               <TouchableOpacity onPress={onForgotPress}>
