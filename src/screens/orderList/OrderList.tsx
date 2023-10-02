@@ -29,6 +29,7 @@ const OrderList = ({navigation}: OrderListScreenNavigationProp) => {
 
   const {isError} = useAppSelector(state => state.order);
   const orderList = useAppSelector(state => state.order.orderList?.data);
+
   console.log(orderList);
   const navigateToOrderDetail = (order_id: number, created: string) => {
     navigation.navigate('OrderDetail', {order_id: order_id, created: created});

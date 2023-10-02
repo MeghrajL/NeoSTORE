@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Vibration,
   StatusBar,
+  BackHandler,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -38,6 +39,8 @@ import Tick from '../../components/generic/Tick/Tick';
 import Load from '../../components/generic/Load/Load';
 import ErrorScreen from '../../components/generic/ErrorScreen/ErrorScreen';
 import ButtonAnimated from '../../components/generic/ButtonAnimated/ButtonAnimated';
+import {set} from 'lodash';
+import {useFocusEffect} from '@react-navigation/native';
 
 const ProductDetail = ({
   navigation,
@@ -45,7 +48,7 @@ const ProductDetail = ({
 }: ProductDetailScreenNavigationProp) => {
   console.log(route.params);
   const {product_id, shouldLoadSimilarProducts} = route.params;
-  const [prod_id, setProdId] = useState(product_id);
+  // const [prod_id, setProdId] = useState(product_id);
   const [dataLoaded, setDataLoaded] = useState(false);
   const [catDataLoaded, setCatDataLoaded] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -54,19 +57,14 @@ const ProductDetail = ({
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setProdId(product_id);
-    // if (prod_id !== productData?.data?.id) {
-    console.log(product_id, prod_id);
-
-    dispatch(getProduct({product_id: prod_id}))
+    dispatch(getProduct({product_id: product_id}))
       .then(() => {
         setDataLoaded(true);
       })
       .catch(error => {
         console.error(error);
       });
-    // }
-  }, [dispatch, prod_id, setDataLoaded, product_id]);
+  }, [dispatch, dataLoaded, setDataLoaded, product_id]);
 
   const access_token = useAppSelector(
     state => state.auth.user?.data?.access_token,
@@ -77,7 +75,9 @@ const ProductDetail = ({
   );
 
   const productItem = productData?.data;
-  const updatedCategory = category?.data?.filter(item => item.id !== prod_id);
+  const updatedCategory = category?.data?.filter(
+    item => item.id !== product_id,
+  );
 
   console.log('>>>>>>>>', access_token);
   const cartLoading = useAppSelector(state => state.cart?.isLoading);
@@ -107,7 +107,7 @@ const ProductDetail = ({
       await dispatch(
         addToCart({
           access_token: access_token,
-          product_id: prod_id,
+          product_id: product_id,
           quantity: quantity,
         }),
       ).unwrap();
@@ -138,6 +138,46 @@ const ProductDetail = ({
     }
   };
 
+  const navigatedToCategory = () => {
+    let categoryName;
+    const product_category_id = category?.data[0].product_category_id;
+    switch (product_category_id) {
+      case 1:
+        categoryName = 'Table';
+        break;
+      case 2:
+        categoryName = 'Chairs';
+        break;
+      case 3:
+        categoryName = 'Sofa';
+        break;
+      case 4:
+        categoryName = 'Beds';
+        break;
+      default:
+        break;
+    }
+    navigation.navigate('Category', {
+      product_category_id: product_category_id,
+      categoryName: categoryName,
+    });
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        navigatedToCategory();
+        return true;
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () => {
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+      };
+    }, [navigatedToCategory]),
+  );
+
   return (
     <>
       <StatusBar barStyle="default" />
@@ -153,7 +193,7 @@ const ProductDetail = ({
               contentContainerStyle={{paddingBottom: 60}}
               style={styles.container}>
               <TouchableOpacity
-                onPress={() => navigation.goBack()}
+                onPress={navigatedToCategory}
                 style={styles.back}>
                 <Icon
                   name="arrow-back-outline"
@@ -248,7 +288,10 @@ const ProductDetail = ({
                         <ProductItem
                           item={item}
                           onPress={() => {
-                            setProdId(item.id);
+                            navigation.replace('ProductDetail', {
+                              product_id: item.id,
+                              shouldLoadSimilarProducts: false,
+                            });
                           }}
                         />
                       )}

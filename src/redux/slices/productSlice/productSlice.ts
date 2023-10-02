@@ -48,7 +48,7 @@ export const getProduct = createAsyncThunk(
     try {
       const url = `${baseUrl}/${getDetail}?product_id=${params.product_id}`;
 
-      // console.log(url);
+      console.log(params.product_id);
       const response = await axios.get(url);
       //   console.log(response.data.data);
       return response.data;
