@@ -164,7 +164,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
                 value={user.first_name}
                 validator={validateName}
                 showErr={showErr}
-                errorText={'Please do not use spaces'}
+                errorText={'Required'}
               />
 
               <InputWithError
@@ -176,7 +176,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
                 value={user.last_name}
                 validator={validateName}
                 showErr={showErr}
-                errorText={'Please do not use spaces'}
+                errorText={'Required'}
               />
 
               <InputWithError
@@ -188,7 +188,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
                 value={user.email}
                 validator={validateEmail}
                 showErr={showErr}
-                errorText={'Please enter correct email address'}
+                errorText={'Please enter email address in correct format'}
               />
 
               <InputWithError
@@ -200,7 +200,9 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
                 value={user.password}
                 validator={validatePassword}
                 showErr={showErr}
-                errorText={'Please enter correct password'}
+                errorText={
+                  'Your password must be have at least 8 characters long 1 uppercase & 1 lowercase character & 1 number'
+                }
               />
 
               <InputWithError
@@ -212,7 +214,7 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
                 value={user.confirm_password}
                 validator={() => samePass}
                 samePass={samePass}
-                showErr={true}
+                showErr={showErr}
                 errorText={'Both passwords should match'}
               />
 

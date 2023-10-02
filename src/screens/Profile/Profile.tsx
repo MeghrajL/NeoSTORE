@@ -63,13 +63,23 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
   }
 
   const handleLogout = async () => {
-    navigation.navigate('SignIn');
+    // navigation.navigate('SignIn');
+    //  const resetAction = NavigationActions.reset({
+    //     index: 0,
+    //     actions: [NavigationActions.navigate({routeName: 'Welcome'})],
+    //     key: null,
+    //   });
+    //   navigation.dispatch(resetAction);
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'SignIn'}],
+    });
     dispatch(logoutAndClearPersistedData());
   };
 
   const onLogoutPress = () => {
     Alert.alert('Do really you want to logout?', '', [
-      {text: 'Yes', onPress: () => handleLogout},
+      {text: 'Yes', onPress: () => handleLogout()},
       {text: 'No', onPress: () => console.log('No Pressed'), style: 'cancel'},
     ]);
   };
