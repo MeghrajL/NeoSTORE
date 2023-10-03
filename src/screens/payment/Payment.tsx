@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import {
   View,
-  Text,
-  Button,
   SafeAreaView,
   ScrollView,
   FlatList,
@@ -17,14 +15,14 @@ import {useAppDispatch, useAppSelector} from '../../redux/store';
 
 import {styles} from './style';
 import {colors} from '../../assets/colors';
-import CheckoutProgress from '../../components/generic/checkoutProgress/CheckoutProgress';
-import GenericText from '../../components/generic/genericText/GenericText';
-import DeliveryDetails from '../../components/generic/deliveryDetails/DeliveryDetails';
-import CartSummaryItem from '../../components/generic/cartSummaryItem/CartSummaryItem';
-import BottomCard from '../../components/generic/bottomCard/BottomCard';
-import ContinueModal from '../../components/checkoutComponents/continueModal/ContinueModal';
-import Tick from '../../components/generic/tick/Tick';
-import Load from '../../components/generic/load/Load';
+import CheckoutProgress from '../../components/Generic/checkoutProgress/CheckoutProgress';
+import GenericText from '../../components/Generic/GenericText/GenericText';
+import DeliveryDetails from '../../components/Generic/DeliveryDetails/DeliveryDetails';
+import CartSummaryItem from '../../components/Generic/CartSummaryItem/CartSummaryItem';
+import BottomCard from '../../components/Generic/BottomCard/BottomCard';
+import ContinueModal from '../../components/CheckoutComponents/ContinueModal/ContinueModal';
+import Tick from '../../components/Generic/Tick/Tick';
+import Load from '../../components/Generic/Load/Load';
 
 /**
  * @author Meghraj Vilas Lot

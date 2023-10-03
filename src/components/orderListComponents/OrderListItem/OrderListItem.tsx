@@ -1,6 +1,6 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import GenericText from '../../generic/genericText/GenericText';
+import GenericText from '../../Generic/GenericText/GenericText';
 import {colors} from '../../../assets/colors';
 import {IOrderItem} from '../../../redux/slices/orderSlice/type';
 

@@ -5,8 +5,8 @@ import {HomeScreenNavigationProp} from '../../navigation/type';
 import {useAppSelector, useAppDispatch} from '../../redux/store';
 import {getUserAccountDetails} from '../../redux/slices/authSlice/actions';
 
-import CategoryTypes from '../../components/homeComponents/categoryTypes/CategoryTypes';
-import ImageCarousel from '../../components/productDetailComponents/imageCarousel/ImageCarousel';
+import CategoryTypes from '../../components/HomeComponents/CategoryTypes/CategoryTypes';
+import ImageCarousel from '../../components/ProductDetailComponents/ImageCarousel/ImageCarousel';
 import {styles} from './style';
 
 /**

@@ -27,10 +27,10 @@ import {
 } from '../../helpers/validators';
 
 import {styles} from './style';
-import InputWithError from '../../components/generic/inputWithError/InputWithError';
-import GenericText from '../../components/generic/genericText/GenericText';
+import InputWithError from '../../components/Generic/InputWithError/InputWithError';
+import GenericText from '../../components/Generic/GenericText/GenericText';
 import {colors} from '../../assets/colors';
-import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
+import ButtonAnimated from '../../components/Generic/ButtonAnimated/ButtonAnimated';
 
 /**
  * @author Meghraj Vilas Lot

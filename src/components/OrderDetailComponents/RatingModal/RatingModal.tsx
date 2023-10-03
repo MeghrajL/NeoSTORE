@@ -3,8 +3,8 @@ import {useState} from 'react';
 import {Rating} from 'react-native-ratings';
 import {Modal, Portal} from 'react-native-paper';
 import {colors} from '../../../assets/colors';
-import GenericText from '../../generic/genericText/GenericText';
-import ButtonAnimated from '../../generic/buttonAnimated/ButtonAnimated';
+import GenericText from '../../Generic/GenericText/GenericText';
+import ButtonAnimated from '../../Generic/ButtonAnimated/ButtonAnimated';
 
 interface CustomModalProps {
   isVisible: boolean;

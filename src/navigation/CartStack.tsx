@@ -3,7 +3,7 @@ import {CartStackScreenNavigationProp, RootStackParamList} from './type';
 
 import {colors} from '../assets/colors';
 import {AddAddress, Address, Cart, Payment} from '../screens/index';
-import IconButton from '../components/generic/iconButton/IconButton';
+import IconButton from '../components/Generic/IconButton/IconButton';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

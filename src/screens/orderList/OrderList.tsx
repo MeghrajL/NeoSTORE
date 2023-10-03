@@ -6,10 +6,10 @@ import {OrderListScreenNavigationProp} from '../../navigation/type';
 import {getOrderList} from '../../redux/slices/orderSlice/actions';
 
 import {styles} from './style';
-import OrderListItem from '../../components/orderListComponents/orderListItem/OrderListItem';
-import Nothing from '../../components/generic/nothing/Nothing';
-import Loading from '../../components/generic/loading/Loading';
-import ErrorScreen from '../../components/generic/errorScreen/ErrorScreen';
+import OrderListItem from '../../components/OrderListComponents/OrderListItem/OrderListItem';
+import Nothing from '../../components/Generic/Nothing/Nothing';
+import Loading from '../../components/Generic/Loading/Loading';
+import ErrorScreen from '../../components/Generic/ErrorScreen/ErrorScreen';
 
 /**
  * @author Meghraj Vilas Lot

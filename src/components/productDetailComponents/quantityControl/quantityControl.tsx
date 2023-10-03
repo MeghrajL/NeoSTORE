@@ -6,9 +6,9 @@ import {
   StyleSheet,
   GestureResponderEvent,
 } from 'react-native';
-import IconButton from '../../generic/iconButton/IconButton';
+import IconButton from '../../Generic/IconButton/IconButton';
 import {colors} from '../../../assets/colors';
-import GenericText from '../../generic/genericText/GenericText';
+import GenericText from '../../Generic/GenericText/GenericText';
 
 interface IQuantityControl {
   quantity: number;

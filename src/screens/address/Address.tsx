@@ -9,14 +9,14 @@ import {
   selectAddress,
 } from '../../redux/slices/authSlice/authSlice';
 
-import GenericButton from '../../components/generic/genericButton/GenericButton';
+import GenericButton from '../../components/Generic/GenericButton/GenericButton';
 import {styles} from './style';
-import SelectAddress from '../../components/addressComponents/selectAddress/SelectAddress';
-import BottomCard from '../../components/generic/bottomCard/BottomCard';
-import GenericText from '../../components/generic/genericText/GenericText';
-import CheckoutProgress from '../../components/generic/checkoutProgress/CheckoutProgress';
-import EmptyAddress from '../../components/addressComponents/emptyAddress/EmptyAddress';
-import OptionModal from '../../components/generic/optionModal/OptionModal';
+import SelectAddress from '../../components/AddressComponents/SelectAddress/SelectAddress';
+import BottomCard from '../../components/Generic/BottomCard/BottomCard';
+import GenericText from '../../components/Generic/GenericText/GenericText';
+import CheckoutProgress from '../../components/Generic/CheckoutProgress/CheckoutProgress';
+import EmptyAddress from '../../components/AddressComponents/EmptyAddress/EmptyAddress';
+import OptionModal from '../../components/Generic/OptionModal/OptionModal';
 
 /**
  * @author Meghraj Vilas Lot

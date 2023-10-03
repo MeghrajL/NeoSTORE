@@ -20,8 +20,8 @@ import {
 } from '../../../redux/slices/cartSlice/actions';
 
 import {colors} from '../../../assets/colors';
-import GenericText from '../../generic/genericText/GenericText';
-import IconButton from '../../generic/iconButton/IconButton';
+import GenericText from '../../Generic/GenericText/GenericText';
+import IconButton from '../../Generic/IconButton/IconButton';
 
 interface ICartItemProps {
   item: ICartItem;

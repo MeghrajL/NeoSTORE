@@ -6,9 +6,9 @@ import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {logoutAndClearPersistedData} from '../../redux/slices/authSlice/actions';
 
 import {styles} from './style';
-import GenericText from '../../components/generic/genericText/GenericText';
-import MenuItem from '../../components/profileComponents/menuItem/MenuItem';
-import OptionModal from '../../components/generic/optionModal/OptionModal';
+import GenericText from '../../components/Generic/GenericText/GenericText';
+import MenuItem from '../../components/ProfileComponents/MenuItem/MenuItem';
+import OptionModal from '../../components/Generic/OptionModal/OptionModal';
 
 /**
  * @author Meghraj Vilas Lot

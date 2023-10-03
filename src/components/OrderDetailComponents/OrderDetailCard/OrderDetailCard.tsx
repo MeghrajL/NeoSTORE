@@ -2,7 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {colors} from '../../../assets/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
-import GenericText from '../../generic/genericText/GenericText';
+import GenericText from '../../Generic/GenericText/GenericText';
 
 interface IOrderDetailCard {
   order_id: number;

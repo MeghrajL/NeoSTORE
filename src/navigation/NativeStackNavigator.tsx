@@ -16,7 +16,7 @@ import {
 } from '../screens/index';
 import {useAppSelector} from '../redux/store';
 import {colors} from '../assets/colors';
-import IconButton from '../components/generic/iconButton/IconButton';
+import IconButton from '../components/Generic/IconButton/IconButton';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const storage = new MMKV();

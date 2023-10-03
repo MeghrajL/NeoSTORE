@@ -6,10 +6,10 @@ import {CategoryScreenNavigationProp} from '../../navigation/type';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 
 import {styles} from './style';
-import GenericText from '../../components/generic/genericText/GenericText';
-import Loading from '../../components/generic/loading/Loading';
-import ProductItemHorizontal from '../../components/categoryComponents/productItemHorizontal/productItemHorizontal';
-import ErrorScreen from '../../components/generic/errorScreen/ErrorScreen';
+import GenericText from '../../components/Generic/GenericText/GenericText';
+import Loading from '../../components/Generic/Loading/Loading';
+import ProductItemHorizontal from '../../components/CategoryComponents/ProductItemHorizontal/productItemHorizontal';
+import ErrorScreen from '../../components/Generic/ErrorScreen/ErrorScreen';
 
 /**
  * @author Meghraj Vilas Lot

@@ -3,7 +3,7 @@ import {HomeStackScreenNavigationProp, RootStackParamList} from './type';
 
 import {Home, Category, ProductDetail} from '../screens/index';
 import {colors} from '../assets/colors';
-import IconButton from '../components/generic/iconButton/IconButton';
+import IconButton from '../components/Generic/IconButton/IconButton';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

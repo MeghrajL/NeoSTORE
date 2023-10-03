@@ -1,9 +1,9 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import GenericText from '../../generic/genericText/GenericText';
+import GenericText from '../../Generic/GenericText/GenericText';
 import {colors} from '../../../assets/colors';
-import StarRating from '../starRating/StarRating';
-import ViewCount from '../../productDetailComponents/ViewCount/viewCount';
+import StarRating from '../StarRating/StarRating';
+import ViewCount from '../../ProductDetailComponents/ViewCount/viewCount';
 import {IProduct} from '../../../redux/slices/productSlice/type';
 
 interface IProductItemHorizontal {

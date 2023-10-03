@@ -10,15 +10,15 @@ import React, {useState} from 'react';
 
 import {SignInScreenNavigationProp} from '../../navigation/type';
 import {styles} from './style';
-import GenericText from '../../components/generic/genericText/GenericText';
-import Title from '../../components/generic/title/Title';
-import InputWithError from '../../components/generic/inputWithError/InputWithError';
-import Footer from '../../components/registerComponents/footer/Footer';
+import GenericText from '../../components/Generic/GenericText/GenericText';
+import Title from '../../components/Generic/Title/Title';
+import InputWithError from '../../components/Generic/InputWithError/InputWithError';
+import Footer from '../../components/RegisterComponents/Footer/Footer';
 import {validateEmail, validatePassword} from '../../helpers/validators';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {Button} from 'react-native';
 
-import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
+import ButtonAnimated from '../../components/Generic/ButtonAnimated/ButtonAnimated';
 import {KeyboardAvoidingScrollView} from 'react-native-keyboard-avoiding-scroll-view';
 import {signInUser} from '../../redux/slices/authSlice/actions';
 

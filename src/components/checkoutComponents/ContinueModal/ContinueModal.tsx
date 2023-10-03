@@ -1,7 +1,7 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Modal, Portal} from 'react-native-paper';
 import {colors} from '../../../assets/colors';
-import GenericText from '../../generic/genericText/GenericText';
+import GenericText from '../../Generic/GenericText/GenericText';
 
 interface IContinueModalProps {
   isVisible: boolean;

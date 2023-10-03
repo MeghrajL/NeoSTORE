@@ -7,13 +7,13 @@ import {getOrderDetails} from '../../redux/slices/orderSlice/actions';
 import {setProductRating} from '../../redux/slices/productSlice/actions';
 
 import {styles} from './style';
-import GenericText from '../../components/generic/genericText/GenericText';
-import CartSummaryItem from '../../components/generic/cartSummaryItem/CartSummaryItem';
-import DeliveryDetails from '../../components/generic/deliveryDetails/DeliveryDetails';
-import OrderDetailCard from '../../components/orderDetailComponents/orderDetailCard/OrderDetailCard';
-import RatingModal from '../../components/orderDetailComponents/ratingModal/RatingModal';
-import Loading from '../../components/generic/loading/Loading';
-import ErrorScreen from '../../components/generic/errorScreen/ErrorScreen';
+import GenericText from '../../components/Generic/GenericText/GenericText';
+import CartSummaryItem from '../../components/Generic/CartSummaryItem/CartSummaryItem';
+import DeliveryDetails from '../../components/Generic/DeliveryDetails/DeliveryDetails';
+import OrderDetailCard from '../../components/OrderDetailComponents/OrderDetailCard/OrderDetailCard';
+import RatingModal from '../../components/OrderDetailComponents/RatingModal/RatingModal';
+import Loading from '../../components/Generic/Loading/Loading';
+import ErrorScreen from '../../components/Generic/ErrorScreen/ErrorScreen';
 
 /**
  * @author Meghraj Vilas Lot

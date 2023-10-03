@@ -21,18 +21,18 @@ import {
 import {addToCart, getCartList} from '../../redux/slices/cartSlice/actions';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 
-import Loading from '../../components/generic/loading/Loading';
-import ImageCarousel from '../../components/productDetailComponents/imageCarousel/ImageCarousel';
+import Loading from '../../components/Generic/Loading/Loading';
+import ImageCarousel from '../../components/ProductDetailComponents/ImageCarousel/ImageCarousel';
 import {styles} from './style';
-import StarRating from '../../components/categoryComponents/starRating/StarRating';
-import GenericText from '../../components/generic/genericText/GenericText';
-import ViewCount from '../../components/productDetailComponents/ViewCount/viewCount';
-import QuantityControl from '../../components/productDetailComponents/quantityControl/quantityControl';
-import ProductItem from '../../components/categoryComponents/productItem/ProductItem';
+import StarRating from '../../components/CategoryComponents/StarRating/StarRating';
+import GenericText from '../../components/Generic/GenericText/GenericText';
+import ViewCount from '../../components/ProductDetailComponents/ViewCount/viewCount';
+import QuantityControl from '../../components/ProductDetailComponents/QuantityControl/quantityControl';
+import ProductItem from '../../components/CategoryComponents/ProductItem/ProductItem';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import {colors} from '../../assets/colors';
-import ErrorScreen from '../../components/generic/errorScreen/ErrorScreen';
-import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
+import ErrorScreen from '../../components/Generic/ErrorScreen/ErrorScreen';
+import ButtonAnimated from '../../components/Generic/ButtonAnimated/ButtonAnimated';
 
 /**
  * @author Meghraj Vilas Lot

@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import IconButton from '../iconButton/IconButton';
+import IconButton from '../IconButton/IconButton';
 import {colors} from '../../../assets/colors';
 import {useNavigation} from '@react-navigation/native';
 

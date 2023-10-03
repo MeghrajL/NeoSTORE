@@ -1,7 +1,7 @@
 import {InputModeOptions, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import GenericInput from '../genericInput/GenericInput';
-import GenericText from '../genericText/GenericText';
+import GenericInput from '../GenericInput/GenericInput';
+import GenericText from '../GenericText/GenericText';
 
 interface IInputWithError {
   placeholder: string;

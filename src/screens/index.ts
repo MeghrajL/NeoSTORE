@@ -1,19 +1,19 @@
-import Home from './home/index';
-import Cart from './cart/index';
-import Register from './register/index';
-import OnboardingContainer from './onboarding/index';
-import SignIn from './signin/index';
-import Category from './category/index';
-import ProductDetail from './productDetail/index';
-import ForgotPassword from './forgotPassword/index';
-import ChangePassword from './changePassword/index';
-import UpdateDetails from './updateDetails/index';
-import Profile from './profile/index';
-import OrderList from './orderList/index';
-import OrderDetail from './orderDetail/index';
-import Address from './address/index';
-import Payment from './payment/index';
-import AddAddress from './addAddress/index';
+import Home from './Home/index';
+import Cart from './Cart/index';
+import Register from './Register/index';
+import OnboardingContainer from './Onboarding/index';
+import SignIn from './Signin/index';
+import Category from './Category/index';
+import ProductDetail from './ProductDetail/index';
+import ForgotPassword from './ForgotPassword/index';
+import ChangePassword from './ChangePassword/index';
+import UpdateDetails from './UpdateDetails/index';
+import Profile from './Profile/index';
+import OrderList from './OrderList/index';
+import OrderDetail from './OrderDetail/index';
+import Address from './Address/index';
+import Payment from './Payment/index';
+import AddAddress from './AddAddress/index';
 
 export {
   Home,

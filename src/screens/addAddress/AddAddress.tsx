@@ -18,9 +18,9 @@ import {
 } from '../../redux/slices/authSlice/authSlice';
 import {AddAddressScreenNavigationProp} from '../../navigation/type';
 
-import InputWithError from '../../components/generic/inputWithError/InputWithError';
-import GenericText from '../../components/generic/genericText/GenericText';
-import GenericButton from '../../components/generic/genericButton/GenericButton';
+import InputWithError from '../../components/Generic/InputWithError/InputWithError';
+import GenericText from '../../components/Generic/GenericText/GenericText';
+import GenericButton from '../../components/Generic/GenericButton/GenericButton';
 import {validateAddressLine, validatePincode} from '../../helpers/validators';
 import {styles} from './style';
 import {colors} from '../../assets/colors';

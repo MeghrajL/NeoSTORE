@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import GenericText from '../genericText/GenericText';
+import GenericText from '../GenericText/GenericText';
 import {IAddress, IUserData} from '../../../redux/slices/authSlice/type';
 import {colors} from '../../../assets/colors';
 import Icon from 'react-native-vector-icons/Ionicons';

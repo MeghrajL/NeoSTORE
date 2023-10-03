@@ -14,9 +14,9 @@ import {validatePassword} from '../../helpers/validators';
 import {ChangePasswordScreenNavigationProp} from '../../navigation/type';
 
 import {styles} from './style';
-import GenericText from '../../components/generic/genericText/GenericText';
-import InputWithError from '../../components/generic/inputWithError/InputWithError';
-import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
+import GenericText from '../../components/Generic/GenericText/GenericText';
+import InputWithError from '../../components/Generic/InputWithError/InputWithError';
+import ButtonAnimated from '../../components/Generic/ButtonAnimated/ButtonAnimated';
 
 /**
  * @author Meghraj Vilas Lot

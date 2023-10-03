@@ -7,13 +7,13 @@ import {getCartList} from '../../redux/slices/cartSlice/actions';
 import {CartScreenNavigationProp} from '../../navigation/type';
 
 import {styles} from './style';
-import Loading from '../../components/generic/loading/Loading';
-import CartItem from '../../components/cartComponents/cartItem/CartItem';
-import EmptyCart from '../../components/cartComponents/emptyCart/EmptyCart';
-import GenericText from '../../components/generic/genericText/GenericText';
-import BottomCard from '../../components/generic/bottomCard/BottomCard';
-import ErrorScreen from '../../components/generic/errorScreen/ErrorScreen';
-import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimated';
+import Loading from '../../components/Generic/Loading/Loading';
+import CartItem from '../../components/CartComponents/CartItem/CartItem';
+import EmptyCart from '../../components/CartComponents/EmptyCart/EmptyCart';
+import GenericText from '../../components/Generic/GenericText/GenericText';
+import BottomCard from '../../components/Generic/BottomCard/BottomCard';
+import ErrorScreen from '../../components/Generic/ErrorScreen/ErrorScreen';
+import ButtonAnimated from '../../components/Generic/ButtonAnimated/ButtonAnimated';
 
 /**
  * @author Meghraj Vilas Lot

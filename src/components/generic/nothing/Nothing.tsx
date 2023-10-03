@@ -1,6 +1,6 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import GenericText from '../genericText/GenericText';
+import GenericText from '../GenericText/GenericText';
 import {colors} from '../../../assets/colors';
 
 /**
