@@ -6,6 +6,8 @@ import {RootStackParamList} from './type';
 import HomeStack from './HomeStack';
 import CartStack from './CartStack';
 import ProfileStack from './ProfileStack';
+import Explore from '../screens/Explore';
+import ExploreStack from './ExploreStack';
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
@@ -40,6 +42,15 @@ const BottomTabNavigator = () => {
         }}
       />
 
+      <Tab.Screen
+        name="ExploreStack"
+        component={ExploreStack}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Icon name="search" size={26} color={color} />
+          ),
+        }}
+      />
       <Tab.Screen
         name="CartStack"
         component={CartStack}

@@ -15,7 +15,7 @@ import {useAppDispatch, useAppSelector} from '../../redux/store';
 
 import {styles} from './style';
 import {colors} from '../../assets/colors';
-import CheckoutProgress from '../../components/Generic/checkoutProgress/CheckoutProgress';
+import CheckoutProgress from '../../components/Generic/CheckoutProgress/CheckoutProgress';
 import GenericText from '../../components/Generic/GenericText/GenericText';
 import DeliveryDetails from '../../components/Generic/DeliveryDetails/DeliveryDetails';
 import CartSummaryItem from '../../components/Generic/CartSummaryItem/CartSummaryItem';

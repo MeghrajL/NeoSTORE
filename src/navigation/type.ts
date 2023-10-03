@@ -26,6 +26,8 @@ export type RootStackParamList = {
   Address: undefined;
   AddAddress: {id: string};
   Payment: {id: string};
+  Explore: undefined;
+  ExploreStack: undefined;
 };
 
 export type OnboardingScreenNavigationProp = NativeStackScreenProps<
@@ -65,6 +67,10 @@ export type CartStackScreenNavigationProp = NativeStackScreenProps<
 export type ProfileStackScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
   'ProfileStack'
+>;
+export type ExploreStackScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'ExploreStack'
 >;
 
 export type HomeScreenNavigationProp = NativeStackScreenProps<
@@ -128,4 +134,8 @@ export type AddAddressScreenNavigationProp = NativeStackScreenProps<
 export type PaymentScreenNavigationProp = NativeStackScreenProps<
   RootStackParamList,
   'Payment'
+>;
+export type ExploreScreenNavigationProp = NativeStackScreenProps<
+  RootStackParamList,
+  'Explore'
 >;

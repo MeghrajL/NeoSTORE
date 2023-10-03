@@ -84,4 +84,5 @@ export interface IInitialState {
   isLoading: boolean;
   isError: boolean;
   isSettingRating: boolean;
+  allCategoriesData: IProduct[] | [];
 }

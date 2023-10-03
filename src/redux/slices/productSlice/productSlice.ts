@@ -2,11 +2,17 @@ import {createSlice} from '@reduxjs/toolkit';
 
 import {IInitialState} from './type';
 
-import {getCategoryList, getProduct, setProductRating} from './actions';
+import {
+  getAllCategoriesData,
+  getCategoryList,
+  getProduct,
+  setProductRating,
+} from './actions';
 
 const initialState: IInitialState = {
   category: null,
   productData: null,
+  allCategoriesData: [],
   rating: null,
   isLoading: false,
   isError: false,
@@ -60,6 +66,18 @@ export const productSlice = createSlice({
       .addCase(setProductRating.rejected, (state, action) => {
         state.isError = true;
         state.isSettingRating = false;
+      })
+      .addCase(getAllCategoriesData.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllCategoriesData.fulfilled, (state, action) => {
+        state.allCategoriesData = action.payload;
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(getAllCategoriesData.rejected, (state, action) => {
+        state.isError = true;
+        state.isLoading = false;
       });
   },
 });

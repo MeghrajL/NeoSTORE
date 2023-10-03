@@ -86,3 +86,23 @@ export const setProductRating = createAsyncThunk(
     }
   },
 );
+
+export const getAllCategoriesData = createAsyncThunk(
+  'product/getAllCategoriesData',
+  async (_, thunkAPI) => {
+    try {
+      const allCategoriesData = [];
+
+      for (let categoryId = 1; categoryId <= 4; categoryId++) {
+        const url = `${baseUrl}/${getList}?product_category_id=${categoryId}`;
+
+        const response = await axios.get(url);
+        allCategoriesData.push(...response.data.data);
+      }
+
+      return allCategoriesData;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);

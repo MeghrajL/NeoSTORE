@@ -5,12 +5,14 @@ import {colors} from '../../../assets/colors';
 
 interface IGenericInput {
   placeholder: string;
-  maxLength: number;
+  maxLength?: number;
   inputMode: InputModeOptions | undefined;
   onChangeText: (text: string) => void;
   icon: string;
   value: string | undefined;
   disabled?: boolean;
+  isSearch?: boolean;
+  onCancelPress?: Function;
 }
 
 /**
@@ -28,6 +30,8 @@ export default function GenericInput({
   icon,
   disabled,
   value,
+  isSearch,
+  onCancelPress,
 }: IGenericInput) {
   const [focus, setFocus] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -52,10 +56,17 @@ export default function GenericInput({
         right={
           placeholder === 'Password' ||
           placeholder === 'Confirm Password' ||
-          placeholder === 'Old Password' ? (
+          placeholder === 'Old Password' ||
+          placeholder === 'Search' ? (
             <TextInput.Icon
-              onPress={() => setIsVisible(!isVisible)}
-              icon={isVisible ? 'eye' : 'eye-off'}
+              onPress={
+                isSearch
+                  ? () => onCancelPress()
+                  : () => setIsVisible(!isVisible)
+              }
+              icon={
+                isSearch ? 'close-box-outline' : isVisible ? 'eye' : 'eye-off'
+              }
               color={colors.MIDNIGHT}
             />
           ) : null
