@@ -23,7 +23,9 @@ const EmptyAddress = ({onPress}: IEmptyAddress) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <GenericText>Your Address List is Empty</GenericText>
-      <GenericText>Please add a Address</GenericText>
+      <GenericText>
+        Please add a Address by clicking anywhere or + button.
+      </GenericText>
       <Image
         source={require('../../../assets/images/address.jpg')}
         style={styles.imageStyle}

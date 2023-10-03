@@ -42,8 +42,12 @@ import ButtonAnimated from '../../components/generic/buttonAnimated/ButtonAnimat
 const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
   const [showErr, setShowErr] = useState(false);
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState(new Date());
   const [profileUpdated, setUpdated] = useState(false);
+
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() - 10);
+  const [date, setDate] = useState(new Date(maxDate));
+
   const userData = useAppSelector(
     state => state.auth.userAccountDetails?.data?.user_data,
   );
@@ -285,6 +289,7 @@ const UpdateDetails = ({navigation}: UpdateDetailsScreenNavigationProp) => {
               open={open}
               mode="date"
               date={date}
+              maximumDate={maxDate}
               onConfirm={date => {
                 setOpen(false);
                 console.log(date);

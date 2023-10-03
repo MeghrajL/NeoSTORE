@@ -135,8 +135,6 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
             onClickPress={onRegisterPress}
           />
         </View>
-
-        <Button title="home" onPress={() => navigation.navigate('Home')} />
       </KeyboardAvoidingScrollView>
     </TouchableWithoutFeedback>
   );

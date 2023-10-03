@@ -44,12 +44,6 @@ const Home = ({navigation}: HomeScreenNavigationProp) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.content}>
-        <Button
-          title="nev"
-          onPress={() => {
-            navigation.navigate('SignIn');
-          }}
-        />
         {product_images && (
           <View style={styles.carouselContainer}>
             <ImageCarousel

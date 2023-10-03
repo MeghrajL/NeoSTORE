@@ -52,11 +52,12 @@ const ProductDetail = ({
   const [addedToCart, setAddedToCart] = useState(false);
 
   const dispatch = useAppDispatch();
-
+  let r = 0;
   useEffect(() => {
+    console.log('r', ++r);
     dispatch(getProduct({product_id: product_id}))
       .then(() => {
-        setDataLoaded(true);
+        // setDataLoaded(true);
       })
       .catch(error => {
         console.log(error);
@@ -175,7 +176,7 @@ const ProductDetail = ({
     <>
       <StatusBar barStyle="default" />
       <SafeAreaView style={{flex: 1}}>
-        {isLoading || !dataLoaded || !catDataLoaded ? (
+        {isLoading || !catDataLoaded ? (
           <Loading />
         ) : isError ? (
           <ErrorScreen />
