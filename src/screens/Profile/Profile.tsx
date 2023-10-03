@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image, Alert} from 'react-native';
 
 import {ProfileScreenNavigationProp} from '../../navigation/type';
@@ -8,6 +8,7 @@ import {logoutAndClearPersistedData} from '../../redux/slices/authSlice/actions'
 import {styles} from './style';
 import GenericText from '../../components/generic/genericText/GenericText';
 import MenuItem from '../../components/profileComponents/menuItem/MenuItem';
+import OptionModal from '../../components/generic/optionModal/OptionModal';
 
 /**
  * @author Meghraj Vilas Lot
@@ -17,6 +18,8 @@ import MenuItem from '../../components/profileComponents/menuItem/MenuItem';
  */
 
 const Profile = ({navigation}: ProfileScreenNavigationProp) => {
+  const [isModalVisible, setModalVisible] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const userData = useAppSelector(
@@ -52,15 +55,16 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
       routes: [{name: 'SignIn'}],
     });
     dispatch(logoutAndClearPersistedData());
+    setModalVisible(false);
   };
 
   const onLogoutPress = () => {
-    Alert.alert('Do really you want to logout?', '', [
-      {text: 'Yes', onPress: () => handleLogout()},
-      {text: 'No', onPress: () => console.log('No Pressed'), style: 'cancel'},
-    ]);
+    setModalVisible(true);
   };
 
+  const closeModal = () => {
+    setModalVisible(false);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
@@ -107,6 +111,11 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
           isLast={true}
         />
       </View>
+      <OptionModal
+        isVisible={isModalVisible}
+        onConfirm={handleLogout}
+        onClose={closeModal}
+      />
     </View>
   );
 };

@@ -1,5 +1,5 @@
-import React, {useMemo} from 'react';
-import {View, FlatList, Alert, SafeAreaView} from 'react-native';
+import React, {useState} from 'react';
+import {View, FlatList, SafeAreaView} from 'react-native';
 import Toast from 'react-native-simple-toast';
 
 import {AddressScreenNavigationProp} from '../../navigation/type';
@@ -16,6 +16,7 @@ import BottomCard from '../../components/generic/bottomCard/BottomCard';
 import GenericText from '../../components/generic/genericText/GenericText';
 import CheckoutProgress from '../../components/generic/checkoutProgress/CheckoutProgress';
 import EmptyAddress from '../../components/addressComponents/emptyAddress/EmptyAddress';
+import OptionModal from '../../components/generic/optionModal/OptionModal';
 
 /**
  * @author Meghraj Vilas Lot
@@ -25,20 +26,21 @@ import EmptyAddress from '../../components/addressComponents/emptyAddress/EmptyA
  */
 
 const Address = ({navigation}: AddressScreenNavigationProp) => {
+  const [isModalVisible, setModalVisible] = useState(false);
   const addressList = useAppSelector(state => state.auth.addressData);
   const total = useAppSelector(state => state.cart.cart?.total);
   const dispatch = useAppDispatch();
+  const [addressId, setAddressId] = useState('');
 
-  const handleDelete = (id: string) => {
-    dispatch(deleteAddress(id));
+  const handleDelete = () => {
+    dispatch(deleteAddress(addressId));
+    setModalVisible(false);
     Toast.show('Address Deleted Successfully', Toast.SHORT);
   };
 
   const onDeletePress = (id: string) => {
-    Alert.alert('Do you want to delete this address?', '', [
-      {text: 'Yes', onPress: () => handleDelete(id)},
-      {text: 'No', onPress: () => console.log('No Pressed'), style: 'cancel'},
-    ]);
+    setModalVisible(true);
+    setAddressId(id);
   };
 
   const onSelectPress = (id: string) => {
@@ -52,6 +54,10 @@ const Address = ({navigation}: AddressScreenNavigationProp) => {
   };
   const onAddPress = () => {
     navigation.navigate('AddAddress', {id: ''});
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
   };
 
   return (
@@ -104,6 +110,11 @@ const Address = ({navigation}: AddressScreenNavigationProp) => {
             </BottomCard>
           </>
         )}
+        <OptionModal
+          isVisible={isModalVisible}
+          onConfirm={handleDelete}
+          onClose={closeModal}
+        />
       </View>
     </SafeAreaView>
   );
