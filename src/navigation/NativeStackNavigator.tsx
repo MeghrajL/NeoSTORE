@@ -13,7 +13,6 @@ import {
   OnboardingContainer,
   SignIn,
   ForgotPassword,
-  Address,
 } from '../screens/index';
 import {useAppSelector} from '../redux/store';
 import {colors} from '../assets/colors';
@@ -35,7 +34,6 @@ const NativeStackNavigator = () => {
   let routeName: keyof RootStackParamList = 'Onboarding';
   const [isFirstLaunch, setIsFirstLaunch] = useState(-1);
   const authState = useAppSelector(state => state.auth);
-  console.log('from native stack', authState);
 
   useEffect(() => {
     if (storage.getBoolean('alreadyLaunched') === undefined) {

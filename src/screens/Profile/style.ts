@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     borderRadius: 90,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '30%',
+    width: 100,
     overflow: 'hidden',
     elevation: 5,
     shadowColor: '#000',
@@ -39,7 +39,8 @@ export const styles = StyleSheet.create({
   },
   infoContainer: {
     gap: 10,
-    width: '70%',
+    flex: 1,
+    // width: '70%',
     paddingLeft: 20,
   },
   nameFont: {

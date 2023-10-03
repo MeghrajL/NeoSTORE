@@ -78,6 +78,9 @@ const Profile = ({navigation}: ProfileScreenNavigationProp) => {
           <GenericText numberOfLines={1} style={styles.emailFont}>
             {userData?.email}
           </GenericText>
+          <GenericText style={styles.emailFont}>
+            {userData?.phone_no}
+          </GenericText>
         </View>
       </View>
       <View style={styles.itemContainer}>
