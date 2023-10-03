@@ -42,6 +42,7 @@ const RatingModal: React.FC<CustomModalProps> = ({
             <Rating
               showRating
               onFinishRating={onFinishRating}
+              startingValue={0}
               style={{paddingVertical: 10}}
             />
             <ButtonAnimated

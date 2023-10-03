@@ -124,9 +124,12 @@ export const forgotPassword = createAsyncThunk(
   async (email: string, thunkAPI) => {
     var formData = new FormData();
     formData.append('email', email);
-
     try {
-      const response = await axios.post(`${baseUrl}/${forgot}`, formData);
+      const response = await axios.post(`${baseUrl}/${forgot}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       Toast.show('A mail has been sent to you', Toast.SHORT);
       return response.data;
     } catch (error: any) {

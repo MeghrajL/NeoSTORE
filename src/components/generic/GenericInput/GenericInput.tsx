@@ -1,7 +1,6 @@
 import {InputModeOptions, StyleSheet, View, Text} from 'react-native';
 import {useState} from 'react';
 import {TextInput} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../../../assets/colors';
 
 interface IGenericInput {
@@ -32,6 +31,7 @@ export default function GenericInput({
 }: IGenericInput) {
   const [focus, setFocus] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+
   return (
     <View style={[styles.container]}>
       <TextInput
@@ -79,6 +79,8 @@ export default function GenericInput({
         autoCapitalize="none"
         value={value}
         disabled={disabled}
+        textColor={colors.MIDNIGHT}
+        theme={{colors: {background: 'white'}}}
       />
     </View>
   );

@@ -36,7 +36,6 @@ const ForgotPassword = ({navigation}: ForgotPasswordScreenNavigationProp) => {
 
   const emailForgotHandler = (emailForgot: string): void => {
     setEmail(emailForgot);
-    console.log(emailForgot);
   };
 
   const onSubmitPress = async () => {
