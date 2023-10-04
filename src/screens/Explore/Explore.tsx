@@ -1,4 +1,4 @@
-import {View, Text, FlatList, TextInput} from 'react-native';
+import {View, Text, FlatList, TextInput, Button} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {getAllCategoriesData} from '../../redux/slices/productSlice/actions';
@@ -9,10 +9,24 @@ import Loading from '../../components/Generic/Loading/Loading';
 import ErrorScreen from '../../components/Generic/ErrorScreen/ErrorScreen';
 import {IProduct} from '../../redux/slices/productSlice/type';
 import GenericInput from '../../components/Generic/GenericInput/GenericInput';
+import RangeSlider from '../../components/RangeSlider/RangeSlider';
+
+/**
+ * @author Meghraj Vilas Lot
+ * @param {ExploreScreenNavigationProp}
+ * @description displays all products and search feature
+ * @returns jsx for explore screen
+ */
+
 const Explore = ({navigation}: ExploreScreenNavigationProp) => {
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [priceFilter, setPriceFilter] = useState({
+    minPrice: '',
+    maxPrice: '99999',
+  });
 
+  const [ratingFilter, setRatingFilter] = useState('');
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -27,8 +41,10 @@ const Explore = ({navigation}: ExploreScreenNavigationProp) => {
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-    const filtered = allCategoriesData.filter(product =>
-      product.name.toLowerCase().includes(query.toLowerCase()),
+    const filtered = allCategoriesData.filter(
+      product =>
+        product.name.toLowerCase().includes(query.toLowerCase()) ||
+        product.producer.toLowerCase().includes(query.toLowerCase()),
     );
     setFilteredProducts(filtered);
   };
@@ -38,6 +54,53 @@ const Explore = ({navigation}: ExploreScreenNavigationProp) => {
     setSearchQuery('');
     setFilteredProducts(allCategoriesData);
   };
+
+  // const handlePriceFilter = () => {
+  //   console.log(priceFilter.minPrice, priceFilter.maxPrice);
+  //   // setPriceFilter({, maxPrice});
+  //   const filtered = allCategoriesData.filter(
+  //     product =>
+  //       product.cost >= Number(priceFilter.minPrice) &&
+  //       product.cost <= Number(priceFilter.maxPrice),
+  //   );
+  //   setFilteredProducts(filtered);
+  //   console.log(filtered);
+  // };
+
+  // const handleRatingFilter = minRating => {
+  //   console.log(minRating);
+  //   const filtered = allCategoriesData.filter(
+  //     product => product.rating >= minRating,
+  //   );
+  //   setFilteredProducts(filtered);
+  //   console.log(filtered);
+  // };
+
+  // const applyOtherFilters = products => {
+  //   // Apply name filter
+  //   const nameFiltered = products.filter(product =>
+  //     product.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  //   );
+
+  //   // Apply producer filter
+  //   const producerFiltered = nameFiltered.filter(product =>
+  //     product.producer.toLowerCase().includes(searchQuery.toLowerCase()),
+  //   );
+
+  //   // Apply price filter
+  //   const priceFiltered = producerFiltered.filter(
+  //     product =>
+  //       product.price >= priceFilter.minPrice &&
+  //       product.price <= priceFilter.maxPrice,
+  //   );
+
+  //   // Apply rating filter
+  //   const ratingFiltered = priceFiltered.filter(
+  //     product => product.rating >= Number(ratingFilter),
+  //   );
+
+  //   setFilteredProducts(ratingFiltered);
+  // };
 
   const onProductPress = (id: number) => {
     navigation.navigate('ProductDetail', {
@@ -54,13 +117,7 @@ const Explore = ({navigation}: ExploreScreenNavigationProp) => {
         <ErrorScreen />
       ) : (
         <>
-          <View
-            style={{
-              width: '100%',
-              height: 50,
-              alignSelf: 'center',
-              marginBottom: 9,
-            }}>
+          <View style={styles.search}>
             <GenericInput
               placeholder="Search"
               inputMode="text"

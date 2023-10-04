@@ -7,11 +7,11 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   content: {
-    // mar: 20,
     paddingBottom: 60,
   },
   container: {
     backgroundColor: 'white',
     flex: 1,
   },
+  search: {width: '100%', height: 50, alignSelf: 'center', marginBottom: 9},
 });

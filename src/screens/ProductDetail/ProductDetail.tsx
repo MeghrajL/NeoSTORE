@@ -172,6 +172,13 @@ const ProductDetail = ({
     }, [navigatedToCategory]),
   );
 
+  const onBackPress = (id: number) => {
+    navigation.replace('ProductDetail', {
+      product_id: id,
+      shouldLoadSimilarProducts: false,
+    });
+  };
+
   return (
     <>
       <StatusBar barStyle="default" />
@@ -261,12 +268,8 @@ const ProductDetail = ({
                     renderItem={({item}) => (
                       <ProductItem
                         item={item}
-                        onPress={() => {
-                          navigation.replace('ProductDetail', {
-                            product_id: item.id,
-                            shouldLoadSimilarProducts: false,
-                          });
-                        }}
+                        onPress={() => onBackPress(item.id)}
+                        // onPress={() => navigation.goBack()}
                       />
                     )}
                     keyExtractor={item => item.id.toString()}
