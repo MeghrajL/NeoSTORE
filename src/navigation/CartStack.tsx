@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 /**
  * @author Meghraj Vilas Lot
- *  @param {navigation} props contains navigation object is used to navigate between different available screen.
+ * @param {navigation} props contains navigation object is used to navigate between different available screen.
  * @description cart stack navigation to place different screens over another
  * @returns jsx which contains cart stack navigation
  */

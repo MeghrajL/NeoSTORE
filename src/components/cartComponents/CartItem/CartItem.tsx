@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import debounce from 'lodash.debounce';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {SwipeRow} from 'react-native-swipe-list-view';
@@ -41,7 +41,10 @@ const CartItem = ({item, onPress}: ICartItemProps) => {
   const access_token = useAppSelector(
     state => state.auth.user?.data?.access_token,
   );
-
+  useEffect(() => {
+    setNewQuantity(item.quantity);
+  }, [item.quantity]);
+  console.log(item.product_id, '>', item.quantity, newQuantity);
   const debouncedEditCartItem = useCallback(
     debounce(async (access_token, product_id, quantity) => {
       try {

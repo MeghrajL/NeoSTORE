@@ -8,6 +8,7 @@ import {getUserAccountDetails} from '../../redux/slices/authSlice/actions';
 import CategoryTypes from '../../components/HomeComponents/CategoryTypes/CategoryTypes';
 import ImageCarousel from '../../components/ProductDetailComponents/ImageCarousel/ImageCarousel';
 import {styles} from './style';
+import {getCartList} from '../../redux/slices/cartSlice/actions';
 
 /**
  * @author Meghraj Vilas Lot
@@ -28,6 +29,7 @@ const Home = ({navigation}: HomeScreenNavigationProp) => {
   useEffect(() => {
     try {
       dispatch(getUserAccountDetails(access_token));
+      dispatch(getCartList({access_token: access_token}));
     } catch (error) {
       console.log('some error');
     }

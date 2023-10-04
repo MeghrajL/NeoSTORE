@@ -11,6 +11,7 @@ import Loading from '../../components/Generic/Loading/Loading';
 import ProductItemHorizontal from '../../components/CategoryComponents/ProductItemHorizontal/productItemHorizontal';
 import ErrorScreen from '../../components/Generic/ErrorScreen/ErrorScreen';
 
+
 /**
  * @author Meghraj Vilas Lot
  * @param {CategoryScreenNavigationProp}

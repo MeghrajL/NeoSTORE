@@ -6,8 +6,8 @@ import {RootStackParamList} from './type';
 import HomeStack from './HomeStack';
 import CartStack from './CartStack';
 import ProfileStack from './ProfileStack';
-import Explore from '../screens/Explore';
 import ExploreStack from './ExploreStack';
+import {useAppSelector} from '../redux/store';
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
@@ -18,9 +18,11 @@ const Tab = createBottomTabNavigator<RootStackParamList>();
  */
 
 const BottomTabNavigator = () => {
+  const total_carts = useAppSelector(state => state.cart.cart?.count);
+  // const total_carts = 0;
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={({route}) => ({
         tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: colors.VIVID_GAMBOGE,
         tabBarInactiveTintColor: '#ccc',
@@ -33,7 +35,7 @@ const BottomTabNavigator = () => {
         },
         headerShown: false,
         tabBarShowLabel: false,
-      }}>
+      })}>
       <Tab.Screen
         name="HomeStack"
         component={HomeStack}
@@ -56,6 +58,12 @@ const BottomTabNavigator = () => {
         component={CartStack}
         options={{
           tabBarIcon: ({color}) => <Icon name="cart" size={26} color={color} />,
+          tabBarBadge: total_carts && total_carts <= 0 ? 0 : total_carts,
+          tabBarBadgeStyle: {
+            display: total_carts <= 0 ? 'none' : 'flex',
+            backgroundColor: 'red',
+            color: 'white',
+          },
         }}
       />
 
