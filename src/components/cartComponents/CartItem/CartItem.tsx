@@ -29,7 +29,7 @@ interface ICartItemProps {
 }
 
 /**
- * @author Meghraj Vilas Lot
+ * @author Meghraj Vilas Lot SE
  * @param {ICartItemProps}
  * @description swipeable cart list item with quantity control and hidden delete button
  * @returns jsx for empty address component

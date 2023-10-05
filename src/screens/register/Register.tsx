@@ -149,7 +149,9 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
             value={user.first_name}
             validator={validateName}
             showErr={showErr}
-            errorText={'Only use alphabets'}
+            errorText={
+              user.first_name === '' ? 'Required' : 'Only use alphabets'
+            }
           />
 
           <InputWithError
@@ -161,7 +163,9 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
             value={user.last_name}
             validator={validateName}
             showErr={showErr}
-            errorText={'Only use alphabets'}
+            errorText={
+              user.last_name === '' ? 'Required' : 'Only use alphabets'
+            }
           />
 
           <InputWithError
@@ -173,7 +177,11 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
             value={user.email}
             validator={validateEmail}
             showErr={showErr}
-            errorText={'Please enter email address in correct format'}
+            errorText={
+              user.email === ''
+                ? 'Required'
+                : 'Please enter email address in correct format'
+            }
           />
 
           <InputWithError
@@ -186,7 +194,9 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
             validator={validatePassword}
             showErr={showErr}
             errorText={
-              'Your password must be have at least 8 characters long 1 uppercase & 1 lowercase character & 1 number'
+              user.password === ''
+                ? 'Required'
+                : 'Your password must be have at least 8 characters long 1 uppercase & 1 lowercase character & 1 number'
             }
           />
 
@@ -200,7 +210,11 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
             validator={() => samePass}
             samePass={samePass}
             showErr={showErr}
-            errorText={'Both passwords should match'}
+            errorText={
+              user.confirm_password === ''
+                ? 'Required'
+                : 'Password & confirm password fields should match'
+            }
           />
 
           <InputWithError
@@ -212,7 +226,11 @@ const Register = ({navigation}: RegisterScreenNavigationProp) => {
             value={user.phone_no}
             validator={validatePhone}
             showErr={showErr}
-            errorText={'Please enter 10 digit phone number'}
+            errorText={
+              user.phone_no === ''
+                ? 'Required'
+                : 'Please enter 10 digit phone number'
+            }
           />
 
           <Gender

@@ -11,9 +11,8 @@ import Loading from '../../components/Generic/Loading/Loading';
 import ProductItemHorizontal from '../../components/CategoryComponents/ProductItemHorizontal/productItemHorizontal';
 import ErrorScreen from '../../components/Generic/ErrorScreen/ErrorScreen';
 
-
 /**
- * @author Meghraj Vilas Lot
+ * @author Meghraj Vilas Lot SE
  * @param {CategoryScreenNavigationProp}
  * @description allows user to see 10 products of the category initially & optionally see more
  * @returns jsx for category screen

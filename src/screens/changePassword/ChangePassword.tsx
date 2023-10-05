@@ -118,7 +118,11 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
             value={pass.old_password}
             validator={validatePassword}
             showErr={showErr}
-            errorText={'Please enter correct old password'}
+            errorText={
+              pass.old_password === ''
+                ? 'Required'
+                : 'Please enter correct old password'
+            }
           />
 
           <InputWithError
@@ -130,7 +134,11 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
             value={pass.password}
             validator={validatePassword}
             showErr={showErr}
-            errorText={'Please enter new password in correct format'}
+            errorText={
+              pass.password === ''
+                ? 'Required'
+                : 'Please enter new password in correct format'
+            }
           />
 
           <InputWithError
@@ -143,7 +151,11 @@ const ChangePassword = ({navigation}: ChangePasswordScreenNavigationProp) => {
             validator={() => samePass}
             samePass={samePass}
             showErr={showErr}
-            errorText={'Both passwords should match'}
+            errorText={
+              pass.confirm_password === ''
+                ? 'Required'
+                : 'Both passwords should match'
+            }
           />
           <View style={styles.buttonContainer}>
             <ButtonAnimated

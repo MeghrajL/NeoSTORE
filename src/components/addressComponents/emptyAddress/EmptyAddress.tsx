@@ -21,16 +21,14 @@ interface IEmptyAddress {
  */
 const EmptyAddress = ({onPress}: IEmptyAddress) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <View style={styles.container}>
       <GenericText>Your Address List is Empty</GenericText>
-      <GenericText>
-        Please add a Address by clicking anywhere or + button.
-      </GenericText>
+      <GenericText>Please add a Address by clicking the + button.</GenericText>
       <Image
         source={require('../../../assets/images/address.jpg')}
         style={styles.imageStyle}
       />
-    </TouchableOpacity>
+    </View>
   );
 };
 

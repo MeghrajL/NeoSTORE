@@ -1,4 +1,4 @@
-import {View, Text, FlatList, TextInput, Button} from 'react-native';
+import {View, Text, FlatList, TextInput, Button, Keyboard} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../redux/store';
 import {getAllCategoriesData} from '../../redux/slices/productSlice/actions';
@@ -9,7 +9,9 @@ import Loading from '../../components/Generic/Loading/Loading';
 import ErrorScreen from '../../components/Generic/ErrorScreen/ErrorScreen';
 import {IProduct} from '../../redux/slices/productSlice/type';
 import GenericInput from '../../components/Generic/GenericInput/GenericInput';
-import RangeSlider from '../../components/RangeSlider/RangeSlider';
+import Slider from '../../components/Slider/Slider';
+import RatingModal from '../../components/ExploreComponents/FilterModal/FilterModal';
+import FilterModal from '../../components/ExploreComponents/FilterModal/FilterModal';
 
 /**
  * @author Meghraj Vilas Lot
@@ -21,12 +23,19 @@ import RangeSlider from '../../components/RangeSlider/RangeSlider';
 const Explore = ({navigation}: ExploreScreenNavigationProp) => {
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  // const [priceFilter, setPriceFilter] = useState({
+  //   minPrice: '',
+  //   maxPrice: '99999',
+  // });
   const [priceFilter, setPriceFilter] = useState({
-    minPrice: '',
-    maxPrice: '99999',
+    minPrice: 0,
+    maxPrice: 99999,
   });
 
   const [ratingFilter, setRatingFilter] = useState('');
+  const [maxPrice, setMaxPrice] = useState(99999);
+  const [minPrice, setMinPrice] = useState(0);
+  const [isModalVisible, setModalVisible] = useState(false);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -53,19 +62,21 @@ const Explore = ({navigation}: ExploreScreenNavigationProp) => {
     console.log('h');
     setSearchQuery('');
     setFilteredProducts(allCategoriesData);
+    Keyboard.dismiss();
+    console.log('><', priceFilter, ratingFilter);
   };
 
-  // const handlePriceFilter = () => {
-  //   console.log(priceFilter.minPrice, priceFilter.maxPrice);
-  //   // setPriceFilter({, maxPrice});
-  //   const filtered = allCategoriesData.filter(
-  //     product =>
-  //       product.cost >= Number(priceFilter.minPrice) &&
-  //       product.cost <= Number(priceFilter.maxPrice),
-  //   );
-  //   setFilteredProducts(filtered);
-  //   console.log(filtered);
-  // };
+  const handlePriceFilter = () => {
+    console.log(priceFilter.minPrice, priceFilter.maxPrice);
+    // setPriceFilter({, maxPrice});
+    const filtered = allCategoriesData.filter(
+      product =>
+        product.cost >= Number(priceFilter.minPrice) &&
+        product.cost <= Number(priceFilter.maxPrice),
+    );
+    setFilteredProducts(filtered);
+    console.log(filtered);
+  };
 
   // const handleRatingFilter = minRating => {
   //   console.log(minRating);
@@ -109,6 +120,16 @@ const Explore = ({navigation}: ExploreScreenNavigationProp) => {
     });
   };
 
+  const setPrice = pf => {
+    setPriceFilter({minPrice: pf.min, maxPrice: pf.max});
+    console.log('exp', pf);
+  };
+
+  const setRating = rating => {
+    setRatingFilter(rating);
+    // console.log('>', ratingFilter);
+  };
+
   return (
     <View style={styles.container}>
       {isLoading ? (
@@ -117,6 +138,8 @@ const Explore = ({navigation}: ExploreScreenNavigationProp) => {
         <ErrorScreen />
       ) : (
         <>
+          <Button title="modal" onPress={() => setModalVisible(true)} />
+
           <View style={styles.search}>
             <GenericInput
               placeholder="Search"
@@ -128,9 +151,15 @@ const Explore = ({navigation}: ExploreScreenNavigationProp) => {
               onCancelPress={clearSearch}
             />
           </View>
-
+          {/* <Slider setPrice={setPrice} /> */}
           <FlatList
-            data={searchQuery === '' ? allCategoriesData : filteredProducts}
+            data={
+              searchQuery === ''
+                ? // priceFilter.minPrice === '' &&
+                  // priceFilter.maxPrice === '99999'
+                  allCategoriesData
+                : filteredProducts
+            }
             renderItem={({item}) => (
               <ProductItem
                 item={item}
@@ -144,6 +173,16 @@ const Explore = ({navigation}: ExploreScreenNavigationProp) => {
           />
         </>
       )}
+
+      <FilterModal
+        isVisible={isModalVisible}
+        onClose={() => {
+          setModalVisible(false);
+          handlePriceFilter();
+        }}
+        setPrice={setPrice}
+        setRating={setRating}
+      />
     </View>
   );
 };

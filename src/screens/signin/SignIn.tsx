@@ -98,7 +98,11 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
             value={user.email}
             validator={validateEmail}
             showErr={showErr}
-            errorText={'Please enter correct email address'}
+            errorText={
+              user.email === ''
+                ? 'Required'
+                : 'Please enter correct email address'
+            }
           />
 
           <InputWithError
@@ -110,7 +114,11 @@ const SignIn = ({navigation}: SignInScreenNavigationProp) => {
             value={user.password}
             validator={validatePassword}
             showErr={showErr}
-            errorText={'Please enter correct password'}
+            errorText={
+              user.password === ''
+                ? 'Required'
+                : 'Please enter correct password'
+            }
           />
           <View style={styles.buttonContainer}>
             <ButtonAnimated

@@ -219,7 +219,9 @@ const AddAddress = ({navigation, route}: AddAddressScreenNavigationProp) => {
             value={address.pincode}
             validator={validatePincode}
             showErr={showErr}
-            errorText={'Required'}
+            errorText={
+              address.pincode === '' ? 'Required' : 'Enter 6 digit pincode'
+            }
           />
           <View style={styles.countryContainer}>
             <GenericText style={styles.conFont}>Select Country : </GenericText>

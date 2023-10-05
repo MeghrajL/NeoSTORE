@@ -1,17 +1,17 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {useState} from 'react';
+import {StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
+import {useRef, useState} from 'react';
 import {Rating} from 'react-native-ratings';
 import {Modal, Portal} from 'react-native-paper';
 import {colors} from '../../../assets/colors';
 import GenericText from '../../Generic/GenericText/GenericText';
 import ButtonAnimated from '../../Generic/ButtonAnimated/ButtonAnimated';
+import {RangeSlider} from '@sharcoux/slider';
 
 interface CustomModalProps {
   isVisible: boolean;
-  isSettingRating: boolean;
-  ratingSubmitted: boolean;
+  setPrice: Function;
+  setRating: Function;
   onClose: () => void;
-  onRatingSubmit: Function;
 }
 /**
  * @author Meghraj Vilas Lot
@@ -20,38 +20,74 @@ interface CustomModalProps {
  * @returns jsx for rating modal
  */
 
-const RatingModal: React.FC<CustomModalProps> = ({
+const FilterModal: React.FC<CustomModalProps> = ({
   isVisible,
   onClose,
-  onRatingSubmit,
-  isSettingRating,
-  ratingSubmitted,
+  setPrice,
+  setRating,
 }) => {
-  const [rating, setRating] = useState(3);
-  const onFinishRating = (rating: number) => {
-    setRating(rating);
+  // const [priceFilter, setPriceFilter] = useState({
+  //   minPrice: '',
+  //   maxPrice: '99999',
+  // });
+
+  // const [priceFilter, setPriceFilter] = useState({
+  //   minPrice: 0,
+  //   maxPrice: 99999,
+  // });
+  const ref = useRef([min, max]);
+  console.log(ref);
+  let min = 0;
+  let max = 99999;
+  const onSlideEnd = value => {
+    min = value[0];
+    max = value[1];
+    ref.current = value;
+    console.log('<><><', min, max);
   };
-  console.log(isSettingRating);
+  const onApply = () => {
+    setPrice({min, max});
+  };
+
   return (
     <Portal>
       <Modal visible={isVisible} style={styles.centeredView}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <GenericText style={styles.infoText}>Rate Product</GenericText>
+            <GenericText style={styles.infoText}>Filters</GenericText>
 
-            <Rating
-              showRating
-              onFinishRating={onFinishRating}
-              startingValue={0}
-              style={{paddingVertical: 10}}
+            {/* <TextInput
+              placeholder="min"
+              onChangeText={text =>
+                setPriceFilter({...priceFilter, minPrice: text})
+              }
             />
-            <ButtonAnimated
-              onPress={() => onRatingSubmit(rating)}
-              title="Submit"
-              fontSize={22}
-              isDone={ratingSubmitted}
-              isLoading={isSettingRating}
+            <TextInput
+              placeholder="max"
+              onChangeText={text =>
+                setPriceFilter({...priceFilter, maxPrice: text})
+              }
+            /> */}
+            {/* <TextInput
+              placeholder="rating"
+              onChangeText={text => setRating(text)}
+            /> */}
+            <RangeSlider
+              range={[ref.current[0], ref.current[1]]}
+              onSlidingStart={value => console.log('start:', value)}
+              onSlidingComplete={value => onSlideEnd(value)}
+              // onValueChange={value => onValueChange(value)}
+              style={{width: '90%', alignSelf: 'center'}}
+              minimumValue={0}
+              maximumValue={99999}
+              step={1000}
             />
+
+            <TouchableOpacity onPress={onApply}>
+              <GenericText textType="medium" style={styles.orderText}>
+                Apply
+              </GenericText>
+            </TouchableOpacity>
             <TouchableOpacity onPress={onClose}>
               <GenericText textType="medium" style={styles.orderText}>
                 Close
@@ -63,7 +99,7 @@ const RatingModal: React.FC<CustomModalProps> = ({
     </Portal>
   );
 };
-export default RatingModal;
+export default FilterModal;
 
 const styles = StyleSheet.create({
   centeredView: {

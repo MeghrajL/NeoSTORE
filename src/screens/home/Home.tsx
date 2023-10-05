@@ -11,7 +11,7 @@ import {styles} from './style';
 import {getCartList} from '../../redux/slices/cartSlice/actions';
 
 /**
- * @author Meghraj Vilas Lot
+ * @author Meghraj Vilas Lot SE
  * @param {HomeScreenNavigationProp}
  * @description displays image carousel and category types
  * @returns jsx for home screen
